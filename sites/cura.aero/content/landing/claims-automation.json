@@ -1,0 +1,169 @@
+{
+  "$schema": "../landing.schema.json",
+  "draft": true,
+  "seo": {
+    "title": "Claims automation for airlines — Cura",
+    "description": "Cura automates passenger compensation claims end-to-end: validation, fraud checks, payouts and authority responses, connected to the systems you already run.",
+    "ogImage": { "src": "/images/landing/claims-automation/mountains.jpg", "alt": "Cura — AI-powered passenger claims resolution for airlines" }
+  },
+  "header": {
+    "nav": [
+      { "label": "How it works", "href": "#how-it-works" },
+      { "label": "FAQ", "href": "#faq" }
+    ],
+    "cta": { "label": "Book a Demo", "href": "/book-demo" }
+  },
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "For airline claims teams",
+      "title": "Resolve claims.<br><span class='orange'>Retain customers.</span>",
+      "sub": "Cura is an AI-powered claims resolution platform for airlines, automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+      "cta": { "label": "Book a Demo", "href": "/book-demo" },
+      "secondary": { "label": "See how it works", "href": "#how-it-works" },
+      "image": { "src": "/images/landing/claims-automation/mountains.jpg", "alt": "Mountains under an evening sky" }
+    },
+    {
+      "type": "tags",
+      "chip": "Today's reality",
+      "title": "Claims are <span class='hi'>slow</span> <span class='hi'>manual</span><br>and <span class='hi'>fragmented</span>",
+      "tags": ["Outsourced vendors", "Internal workarounds", "Legacy systems", "High costs", "Poor experience", "No control"]
+    },
+    {
+      "type": "image-text",
+      "chip": "Insight",
+      "title": "Claims aren't just a cost. They shape the final impression of the journey.",
+      "body": ["When disruption happens, the claims experience becomes the \"end\" of the trip."],
+      "points": [
+        "<span class='text-bold'>Handled poorly</span>: frustration, complaints and lost loyalty",
+        "<span class='text-bold'>Handled well</span>: trust, retention and future revenue"
+      ],
+      "image": { "src": "/images/landing/claims-automation/passenger.webp", "alt": "Airline passenger at the end of a journey" },
+      "imagePosition": "left"
+    },
+    {
+      "type": "cards",
+      "chip": "8 core capabilities",
+      "title": "From intake to closure.",
+      "sub": "Cura handles the full claims lifecycle.",
+      "columns": 4,
+      "numbered": true,
+      "items": [
+        { "icon": "verified", "title": "Automated claim validation &amp; eligibility" },
+        { "icon": "bolt", "title": "AI-assisted workflows for faster claim handling" },
+        { "icon": "document_scanner", "title": "AI receipt &amp; document processing" },
+        { "icon": "gpp_good", "title": "Fraud reduction &amp; duplicate detection" },
+        { "icon": "payments", "title": "Optimised compensation recommendations" },
+        { "icon": "gavel", "title": "Automated authority responses" },
+        { "icon": "touch_app", "title": "Passenger self-service submission" },
+        { "icon": "forum", "title": "Integrated comms &amp; closure flows" }
+      ]
+    },
+    {
+      "type": "steps",
+      "id": "how-it-works",
+      "chip": "How it works",
+      "title": "One claim, start to finish.",
+      "items": [
+        { "title": "Claim submitted", "tag": "Web form, PSS, OPS", "body": "Claims arrive from every channel and are matched to the booking." },
+        { "title": "Fraud detection", "body": "Each claim gets a risk score; anything above the threshold is flagged." },
+        { "title": "Verification", "tag": "Integration + AI", "body": "PNR verification against passengers, flights and dates, and OCR of expense receipts." },
+        { "title": "Payout &amp; closure", "body": "Compensation is paid through your providers and the passenger is told the outcome." }
+      ]
+    },
+    {
+      "type": "compare",
+      "chip": "Authority requests",
+      "title": "The request never reaches your team.",
+      "body": "Same escalation, same authority, same deadline — a completely different week for the people running the operation.",
+      "before": {
+        "tag": "Today",
+        "title": "Evidence is assembled by memory, months late.",
+        "items": [
+          { "icon": "schedule", "text": "Legal emails OCC asking what happened on a flight from three months ago." },
+          { "icon": "folder_off", "text": "NOTAMs, CTOTs and weather have to be reconstructed from whatever was saved on the day." },
+          { "icon": "gavel", "text": "Thin evidence means paying claims the airline should have defended." }
+        ]
+      },
+      "after": {
+        "tag": "With Cura",
+        "title": "Evidence is sealed at the moment of the disruption.",
+        "items": [
+          { "icon": "bolt", "text": "Every source is fetched over an API the moment the request lands — in parallel, in minutes." },
+          { "icon": "notifications_off", "text": "No one in OCC is interrupted. The read-only API is wired up once, at onboarding." },
+          { "icon": "shield", "text": "The airline defends what it can defend, on the record, with a checksum per document." }
+        ]
+      }
+    },
+    {
+      "type": "logos",
+      "label": "Integrations include…",
+      "items": [
+        { "image": { "src": "/images/landing/claims-automation/Revolut_logo.svg", "alt": "Revolut" } },
+        { "image": { "src": "/images/landing/claims-automation/PayPal_logo.svg", "alt": "PayPal" } },
+        { "text": "AIMS" },
+        { "image": { "src": "/images/landing/claims-automation/Stripe_Logo.svg", "alt": "Stripe" } },
+        { "image": { "src": "/images/landing/claims-automation/Wise_Logo.svg", "alt": "Wise" } },
+        { "image": { "src": "/images/landing/claims-automation/Zendesk_logo.svg", "alt": "Zendesk" } }
+      ]
+    },
+    {
+      "type": "statement",
+      "chip": "What we do",
+      "title": "Cura brings control to claims,<br>connecting <span class='hi hi-orange'>operational efficiency</span><br>with <span class='hi hi-orange'>customer care</span>",
+      "cta": { "label": "Book a Demo", "href": "/book-demo" }
+    },
+    {
+      "type": "spotlight",
+      "chip": "Built to connect",
+      "title": "Cura plugs into the systems airlines already run.",
+      "body": "And the partners they pay, message and track with.",
+      "items": [
+        { "icon": "hub", "title": "Operations", "body": "PSS, flight ops, FlightAware, WorldTracer, ATC / NOTAM / EuroControl." },
+        { "icon": "cloud", "title": "Weather", "body": "METAR and TAF reports for the flight in question." },
+        { "icon": "payments", "title": "Payout &amp; CRM", "body": "Payout providers, CRM, omnichannel and social media." }
+      ]
+    },
+    {
+      "type": "stats",
+      "chip": "The AviLabs family",
+      "title": "Built by aviation specialists.",
+      "items": [
+        { "value": "10+ years", "label": "In aviation technology" },
+        { "value": "8", "label": "Core capabilities, intake to closure" },
+        { "value": "4", "label": "Products in the AviLabs family" }
+      ]
+    },
+    {
+      "type": "text",
+      "chip": "Who we are",
+      "title": "The team behind Plan3.",
+      "body": [
+        "<span class='text-bold'>Cura</span> is developed by AviLabs, the same team behind Plan3, trusted by airlines for passenger disruption management. We've spent over a decade building products that work in real airline operations — not around them."
+      ],
+      "align": "center"
+    },
+    {
+      "type": "faq",
+      "id": "faq",
+      "chip": "FAQ",
+      "title": "Common questions.",
+      "items": [
+        { "question": "Do we have to replace our existing systems?", "answer": "No. Cura connects to the systems airlines already run — CRM, payout, PSS, email ingestion, FlightAware, WorldTracer, METAR/TAF weather and more." },
+        { "question": "Does Cura handle authority requests?", "answer": "Yes. Cura pulls the evidence over an API when a request arrives, drafts the response in the authority's own structure and files it." },
+        { "question": "Who builds Cura?", "answer": "AviLabs, the team behind Plan3, with over a decade of aviation technology." }
+      ]
+    },
+    {
+      "type": "cta-band",
+      "title": "Ready to bring <span class='hi hi-white'>control to claims?</span>",
+      "button": { "label": "Book a Demo", "href": "/book-demo" },
+      "photos": [
+        "/images/landing/claims-automation/cta-1.jpg",
+        "/images/landing/claims-automation/cta-2.jpg",
+        "/images/landing/claims-automation/cta-3.jpg",
+        "/images/landing/claims-automation/cta-4.jpg"
+      ]
+    }
+  ]
+}

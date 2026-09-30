@@ -5,6 +5,7 @@ import type { Article } from "@/lib/articles";
 import { formatDate } from "@/lib/articles";
 import { safeImageSrc } from "@/lib/safe-url";
 import { Markdown } from "@/components/news/Markdown";
+import { DraftBanner } from "@/components/shared/DraftBanner";
 import { MarketingTemplate } from "./MarketingTemplate";
 
 export function ArticleTemplate({ content, article }: { content: NewsContent; article: Article }) {
@@ -38,6 +39,7 @@ export function ArticleTemplate({ content, article }: { content: NewsContent; ar
           </div>
         </div>
       </article>
+      {article.draft && <DraftBanner />}
     </MarketingTemplate>
   );
 }

@@ -1,0 +1,489 @@
+/*
+ * Landing pages (app/(site)/[slug] and /landing-catalog). Only loaded there.
+ * Sections reuse the site.css classes; these lp-* rules add what the existing pages don't have.
+ */
+:root {
+	--lp-muted: #6b7a99;
+}
+
+/* ── Shared ── */
+.lp-head {
+	max-width: 720px;
+	margin-bottom: 44px;
+}
+.lp-head h2 {
+	color: var(--navy);
+	margin-bottom: 14px;
+}
+.lp-head p {
+	font-size: 1.02rem;
+	color: var(--lp-muted);
+	line-height: 1.65;
+}
+.lp-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px 22px;
+}
+/* the secondary hero link (same look as .ea-link on evidence-automation) */
+.lp-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--navy);
+	text-decoration: none;
+	border-bottom: 1px solid var(--border);
+	padding-bottom: 2px;
+	transition:
+		border-color 0.18s,
+		color 0.18s;
+}
+.lp-link:hover {
+	color: var(--orange);
+	border-color: var(--orange);
+}
+.lp-link .material-icons-round {
+	font-size: 18px;
+	color: var(--orange);
+}
+.lp-media-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 28px;
+}
+
+/* ── hero ── */
+.lp-hero {
+	padding: 56px 0 88px;
+}
+.lp-hero .hero-text {
+	padding-bottom: 0;
+}
+.lp-hero .hero-sub {
+	margin-bottom: 36px;
+}
+.lp-hero--media .container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 56px;
+	align-items: center;
+}
+.lp-hero--media .hero-text {
+	max-width: none;
+}
+
+/* ── text ── */
+.lp-prose {
+	max-width: 760px;
+}
+.lp-prose h2 {
+	margin-bottom: 22px;
+}
+.lp-prose p {
+	font-size: 1.05rem;
+	color: var(--navy);
+}
+.lp-prose p + p {
+	margin-top: 16px;
+}
+.lp-text--center .lp-prose {
+	margin: 0 auto;
+	text-align: center;
+}
+.lp-text--center .chip {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* ── image ── */
+.lp-figure--narrow {
+	max-width: 760px;
+	margin: 0 auto;
+}
+.lp-figure figcaption {
+	margin-top: 14px;
+	font-size: 0.88rem;
+	color: var(--lp-muted);
+	text-align: center;
+}
+
+/* ── image-text (the .insight grid) ── */
+.lp-split-text h2 {
+	color: var(--navy);
+	margin-bottom: 20px;
+}
+.lp-split-text p {
+	font-size: 1.02rem;
+	color: var(--navy);
+	margin-bottom: 16px;
+}
+.lp-split-text .demo-points {
+	margin: 24px 0 8px;
+}
+.lp-split-text .lp-actions {
+	margin-top: 28px;
+}
+.lp-split--left .lp-split-media {
+	order: -1;
+}
+
+/* ── cards (.caps-grid) ── */
+.lp-cards {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+.lp-cards--2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+.lp-cards--3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.lp-cards .cap-card {
+	width: auto;
+}
+.lp-card-body {
+	font-size: 0.92rem;
+	line-height: 1.55;
+	color: var(--lp-muted);
+	margin-top: -8px;
+}
+
+/* ── stats ── */
+.lp-stats {
+	background: var(--cream);
+}
+.lp-stats-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 32px;
+}
+.lp-stats-row--2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+.lp-stats-row--3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.lp-stat {
+	border-top: 2px solid var(--orange);
+	padding-top: 20px;
+}
+.lp-stat-val {
+	font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+	letter-spacing: -0.03em;
+	line-height: 1.05;
+}
+.lp-stat-label {
+	font-size: 0.95rem;
+	margin-top: 8px;
+}
+
+/* ── logos (the .integrations logo row, on its orange band) ── */
+.lp-logos .integrations-logos {
+	margin-top: 0;
+}
+.lp-logos .integrations-logos-label {
+	color: #fff;
+}
+
+/* ── quote (a .spotlight panel) ── */
+.lp-quote {
+	grid-template-columns: 1fr;
+	margin: 0;
+}
+.lp-quote--image {
+	grid-template-columns: 140px 1fr;
+}
+.lp-quote-photo {
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.lp-quote blockquote p {
+	color: #fff;
+	font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+	font-weight: 600;
+	line-height: 1.4;
+	letter-spacing: -0.01em;
+	max-width: none;
+	margin-bottom: 24px;
+}
+.lp-quote figcaption {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 0.92rem;
+}
+.lp-quote figcaption strong {
+	color: var(--orange);
+	font-weight: 700;
+}
+
+/* ── steps ── */
+.lp-steps {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	max-width: 860px;
+}
+.lp-step {
+	width: auto;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 24px;
+}
+.lp-step .cap-num {
+	opacity: 1;
+	color: var(--orange);
+	font-size: 2rem;
+	min-width: 48px;
+}
+.lp-step-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 14px;
+	margin-bottom: 6px;
+}
+.lp-step h3 {
+	font-size: 1.1rem;
+}
+.lp-step p {
+	font-size: 0.95rem;
+	color: var(--lp-muted);
+}
+.lp-step-tag {
+	font-size: 0.66rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--orange);
+	background: rgba(254, 108, 59, 0.12);
+	border-radius: 100px;
+	padding: 4px 10px;
+}
+
+/* ── faq ── */
+.lp-faq-wrap {
+	max-width: 880px;
+}
+.lp-faq {
+	border-top: 1px solid var(--border);
+}
+.lp-faq-item {
+	border-bottom: 1px solid var(--border);
+}
+.lp-faq-item summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 22px 0;
+	cursor: pointer;
+	list-style: none;
+	font-size: 1.05rem;
+	font-weight: 600;
+	color: var(--navy);
+}
+.lp-faq-item summary::-webkit-details-marker {
+	display: none;
+}
+.lp-faq-item summary .material-icons-round {
+	color: var(--orange);
+	transition: transform 0.2s;
+}
+.lp-faq-item[open] summary .material-icons-round {
+	transform: rotate(180deg);
+}
+.lp-faq-item p {
+	padding: 0 40px 24px 0;
+	color: var(--lp-muted);
+	font-size: 0.98rem;
+}
+
+/* ── book-demo on a landing page: a band, not a full-height page ── */
+.lp-demo {
+	min-height: 0;
+}
+.demo-intro h2 {
+	color: var(--navy);
+	margin-bottom: 20px;
+}
+.demo-intro h2 .orange {
+	color: var(--orange);
+}
+
+/* ── tags (the .problem band) ── */
+.lp-tags .lp-tags-body {
+	color: rgba(255, 255, 255, 0.86);
+	font-size: 1.05rem;
+	max-width: 680px;
+	margin: -40px auto 48px;
+}
+
+/* ── compare (the evidence-automation "now vs Cura" cards) ── */
+.lp-compare {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+.lp-compare-card {
+	border-radius: 20px;
+	padding: 32px 30px 34px;
+}
+.lp-compare-card--before {
+	background: var(--cream);
+}
+.lp-compare-card--after {
+	background: var(--navy);
+}
+.lp-compare-tag {
+	font-size: 0.66rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--lp-muted);
+	margin-bottom: 10px;
+}
+.lp-compare-card--after .lp-compare-tag {
+	color: var(--orange);
+}
+.lp-compare-card h3 {
+	font-size: 1.3rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.25;
+	margin-bottom: 20px;
+}
+.lp-compare-card--after h3 {
+	color: #fff;
+}
+.lp-compare-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 13px;
+}
+.lp-compare-list li {
+	display: flex;
+	gap: 11px;
+	font-size: 0.93rem;
+	line-height: 1.55;
+	color: var(--navy);
+}
+.lp-compare-card--after .lp-compare-list li {
+	color: rgba(255, 255, 255, 0.82);
+}
+.lp-compare-list .material-icons-round {
+	flex-shrink: 0;
+	font-size: 18px;
+	margin-top: 2px;
+	color: var(--lp-muted);
+}
+.lp-compare-card--after .lp-compare-list .material-icons-round {
+	color: var(--orange);
+}
+
+/* ── spotlight (the .spotlight panel in site.css) ── */
+.spotlight .btn {
+	margin-top: -4px;
+}
+
+/* ── /landing-catalog ── */
+.lp-catalog-intro {
+	padding: 48px 0 8px;
+}
+.lp-catalog-intro h1 {
+	font-size: clamp(2rem, 4vw, 2.6rem);
+	margin-bottom: 12px;
+}
+.lp-catalog-intro p {
+	color: var(--lp-muted);
+	max-width: 720px;
+}
+.lp-catalog-label {
+	position: relative;
+	z-index: 2;
+	background: var(--navy);
+	color: #fff;
+	font-size: 0.8rem;
+	padding: 10px 0;
+}
+.lp-catalog-label .container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+.lp-catalog-label code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+	font-weight: 700;
+	color: var(--orange);
+	font-size: 0.9rem;
+}
+.lp-catalog-label span {
+	color: rgba(255, 255, 255, 0.72);
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+	.lp-hero--media .container {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+	.lp-split-media {
+		order: -1;
+	}
+	.lp-cards,
+	.lp-cards--3 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.lp-stats-row,
+	.lp-stats-row--3 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media (max-width: 820px) {
+	.lp-compare {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 700px) {
+	.lp-hero {
+		padding: 28px 0 64px;
+	}
+	.lp-cards,
+	.lp-cards--2,
+	.lp-cards--3 {
+		grid-template-columns: 1fr;
+	}
+	.lp-quote--image {
+		grid-template-columns: 1fr;
+	}
+	.lp-quote-photo {
+		width: 96px;
+		height: 96px;
+	}
+	.lp-step {
+		gap: 16px;
+	}
+	.lp-tags .lp-tags-body {
+		margin: -24px auto 36px;
+	}
+	.lp-catalog-label span {
+		display: none;
+	}
+}
+@media (max-width: 480px) {
+	.lp-stats-row,
+	.lp-stats-row--2,
+	.lp-stats-row--3 {
+		grid-template-columns: 1fr;
+	}
+}

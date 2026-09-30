@@ -1,0 +1,25 @@
+/* "Draft, not live" pill on draft pages (local dev and Vercel previews only). */
+.draft-banner {
+	position: fixed;
+	left: 16px;
+	bottom: 16px;
+	z-index: 1000;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 14px;
+	border-radius: 999px;
+	background: #051457;
+	color: #fff;
+	font: 600 0.78rem/1 "Onest", system-ui, sans-serif;
+	letter-spacing: 0.02em;
+	box-shadow: 0 6px 20px rgba(5, 20, 87, 0.25);
+	pointer-events: none;
+}
+.draft-banner::before {
+	content: "";
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #fe6c3b;
+}

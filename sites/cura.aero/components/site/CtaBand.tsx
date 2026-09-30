@@ -6,13 +6,14 @@ import { SafeLink } from "@/components/shared/SafeLink";
 /** Photo shapes along the strip, in order; the two shape spans sit between them. */
 const PHOTO_SHAPES = ["hs-circle", "hs-leaf", "hs-arch", "hs-circle"];
 
-export function CtaBand({ content }: { content: CtaBandContent }) {
+/** `id` is the anchor for "#book-demo" links on the home page; landing sections may set their own. */
+export function CtaBand({ content, id = "book-demo" }: { content: CtaBandContent; id?: string }) {
   const photo = (i: number) =>
     content.photos[i] ? (
       <Img src={content.photos[i]} alt="" className={`hs-photo ${PHOTO_SHAPES[i]}`} width={440} height={440} />
     ) : null;
   return (
-    <section className="cta-section" id="book-demo">
+    <section className="cta-section" id={id}>
       <div className="cta-content fade-up">
         <h2>
           <Rich text={content.title} />
