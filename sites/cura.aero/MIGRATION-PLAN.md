@@ -466,8 +466,9 @@ If a page's diff can't be brought within threshold, I stop and report instead of
   - book-demo, workflow, update and aha: 0 px difference.
   - evidence-package, value-props and non-connected-value: 5 to 41 px (antialiasing).
   - aireuropa: 0 px in 35 of 36 states, 13 px in one.
-  - home and evidence-automation: identical except the CTA photos, which were still being
-    downloaded, and the re-encoded arrow on home (§13 item 10).
+  - evidence-automation: 0 px at 1440, 13 px at 390 (antialiasing).
+  - home: 286 px at 1440 (the re-encoded arrow, §13 item 10) and 2239 px at 390 (the
+    Omnichannel label in the mobile integrations list, §13 item 9).
 - **Head tags:** only the §13 changes (URLs, robots, favicon) and the viewport spelling.
 - **Redirects, basic auth (including failing closed), the image optimizer block, robots.txt,
   sitemap.xml and GA placement:** all checked against a production build.
