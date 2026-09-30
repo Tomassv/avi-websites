@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body { background: #fff; }
+        .page { padding: 20px 16px 24px; max-width: 100%; }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <article class="chat-bubble chat-bubble-assistant" style="margin-bottom: 10px;">Done. Your flight change is confirmed.</article>
+        <div class="chat-flight-result chat-flight-result-confirmed">
+            <p class="chat-confirmed-banner">Flight confirmed</p>
+            <p class="chat-flight-result-title">Flight change confirmed</p>
+            <p class="chat-flight-result-text">Your new itinerary is confirmed and ready for travel.</p>
+            <div class="chat-result-grid">
+                <p><span class="result-key">Booking ref</span><span class="result-value">AC72P9</span></p>
+                <p><span class="result-key">Flight</span><span class="result-value">JQ 562</span></p>
+                <p><span class="result-key">Route</span><span class="result-value">MEL → BNE</span></p>
+                <p><span class="result-key">Date</span><span class="result-value">12 Jun 2026</span></p>
+                <p><span class="result-key">Departure</span><span class="result-value">11:15</span></p>
+                <p><span class="result-key">Arrival</span><span class="result-value">13:20</span></p>
+            </div>
+            <div class="chat-result-block">
+                <p class="result-block-title">Airport timeline</p>
+                <p class="chat-flight-result-text">Check-in opens: <strong>04:20</strong></p>
+                <p class="chat-flight-result-text">Bag drop closes: <strong>10:40</strong></p>
+                <p class="chat-flight-result-text">Boarding: <strong>10:50</strong> at gate <strong>A22</strong>, terminal <strong>T3</strong></p>
+            </div>
+            <div class="chat-result-block">
+                <p class="result-block-title">Travel information</p>
+                <p class="chat-flight-result-text">Passenger: <strong>Thomas Nielsen</strong></p>
+                <p class="chat-flight-result-text">Baggage: <strong>1 cabin bag + 1 personal item</strong></p>
+            </div>
+        </div>
+        <div style="height: 10px;"></div>
+        <article class="chat-bubble chat-bubble-assistant">We sent your updated flight tickets to thomas@email.com.</article>
+    </main>
+</body>
+</html>

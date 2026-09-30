@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Rebooking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="page">
+        <header class="hero">
+            <p class="eyebrow">Travel support</p>
+            <h1>Your flight was cancelled</h1>
+        </header>
+
+        <section class="section-card top-card" id="flight-card" aria-label="Flight details">
+            <div class="flight-card">
+                <div class="status-row">
+                    <span class="status-tag">Cancelled</span>
+                    <span class="ref">Booking ref: AC72P9</span>
+                </div>
+
+                <div class="route-row">
+                    <div class="airport">
+                        <p class="code">MEL</p>
+                        <p class="city">Melbourne</p>
+                        <p class="time"><s>06:05am</s></p>
+                    </div>
+
+                    <div class="connector" aria-hidden="true">
+                        <span class="line"></span>
+                        <span class="plane"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none">
+                                <g clip-path="url(#clip0_1_11)">
+                                    <path d="M3.19999 5.7L7.79999 5.5L4.79999 -0.300003L6.39999 -0.200003L11 5.4H14.3C14.4 5.4 14.6 5.5 14.7 5.5C15.1 5.7 15.3 6.2 15 6.5C14.9 6.7 14.7 6.8 14.5 6.8L11.1 7L6.59999 12.6H5.19999L7.79999 6.8L3.29999 6.7L2.09999 8.4H0.999994L1.59999 6.2L0.899994 4H1.79999L3.19999 5.7Z" fill="#8D8F92" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1_11">
+                                        <rect width="16" height="14" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="airport right">
+                        <p class="code">BNE</p>
+                        <p class="city">Brisbane</p>
+                        <p class="time"><s>08:20am</s></p>
+                    </div>
+                </div>
+
+                <div class="meta-grid">
+                    <div>
+                        <p class="label">Date</p>
+                        <p class="value">12 June 2026</p>
+                    </div>
+                    <div>
+                        <p class="label">Flight</p>
+                        <p class="value">JQ560</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card chat-section" aria-label="AI support chat">
+            <div id="ai-chat-log" class="chat-log" aria-live="polite">
+                <article class="chat-bubble chat-bubble-typing" id="typing-indicator">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </article>
+                <article class="chat-bubble chat-bubble-assistant hidden" id="intro-bubble"></article>
+                <article class="chat-bubble chat-bubble-assistant hidden" id="intro-followup"></article>
+
+                <div class="chat-options-wrap hidden" aria-label="Rebooking options from assistant" id="chat-options-wrap">
+                    <p class="chat-options-label">Your options:</p>
+                    <div id="rebooking-options" class="chat-options">
+                        <button type="button" class="option-card" aria-label="Go to next available flight proposal" data-chat-option="next-available">
+                            <span class="option-number">1.</span>
+                            <span class="option-title">Next available flight
+                                <span class="option-detail">Move to the first available departure and keep traveling today.</span>
+                            </span>
+                            <span class="option-button">keyboard_arrow_right</span>
+                        </button>
+                        <button type="button" class="option-card" aria-label="Choose a new flight within next 90 days option" data-chat-option="within-90-days">
+                            <span class="option-number">2.</span>
+                            <span class="option-title">New flight within next 90 days
+                                <span class="option-detail">Pick another travel date in the next 90 days with no change fee.</span>
+                            </span>
+                            <span class="option-button">keyboard_arrow_right</span>
+                        </button>
+                        <button type="button" class="option-card" aria-label="Choose cancel flight and full refund option" data-chat-option="full-refund">
+                            <span class="option-number">3.</span>
+                            <span class="option-title">Cancel flight and get 100% refund
+                                <span class="option-detail">Cancel this disrupted trip and receive your full ticket amount back.</span>
+                            </span>
+                            <span class="option-button">keyboard_arrow_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <form id="ai-chat-form" class="chat-form">
+                <div class="chat-form-wrapper">
+                    <input id="ai-chat-input" name="message" type="text" autocomplete="off" placeholder="Ask for details..." aria-label="Write message" required />
+                    <button type="submit" class="chat-send" aria-label="Send message">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="18" height="18">
+                            <path d="M12 4L6 10H10V20H14V10H18L12 4Z" fill="currentColor" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+
+
+    <script>
+        const chatLog = document.getElementById("ai-chat-log");
+        const chatForm = document.getElementById("ai-chat-form");
+        const chatInput = document.getElementById("ai-chat-input");
+        const optionCards = document.querySelectorAll("[data-chat-option]");
+        let passengerEmail = "";
+        let awaitingNextFlightEmail = false;
+        let awaitingCompensationIncident = false;
+        let awaitingCompensationAmount = false;
+        let compensationIncidentDetails = "";
+        let requestedCompensationAmount = 0;
+
+        function deliveryEmailLabel() {
+            return passengerEmail || "your booking email";
+        }
+
+        function isValidEmail(value) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        function showNextAvailableFlightFlow(emailLabel) {
+            if (emailLabel) {
+                const bubble1 = document.createElement("article");
+                bubble1.className = "chat-bubble chat-bubble-assistant";
+                chatLog.appendChild(bubble1);
+                typeWriter(bubble1, `Thanks. We will send the update to ${emailLabel}.`, () => {
+                    const bubble2 = document.createElement("article");
+                    bubble2.className = "chat-bubble chat-bubble-assistant";
+                    chatLog.appendChild(bubble2);
+                    typeWriter(bubble2, "We have also sent a <strong>20 EUR meal voucher</strong> to your email for Melbourne Airport (MEL). You can use it at:<ul class=\"chat-itinerary-list\"><li>Runway Kitchen</li><li>Terminal Grill</li><li>Green Bowl Kitchen</li><li>Pasta Gate</li><li>Skyline Cafe</li></ul>", () => {
+                        const bubble3 = document.createElement("article");
+                        bubble3.className = "chat-bubble chat-bubble-assistant";
+                        chatLog.appendChild(bubble3);
+                        typeWriter(bubble3, "Here is the next available flight for your route:", () => {
+                            scrollToBottom();
+                            appendFlightCard();
+                        });
+                        scrollToBottom();
+                    }, true);
+                    scrollToBottom();
+                });
+                scrollToBottom();
+            } else {
+                const bubble = document.createElement("article");
+                bubble.className = "chat-bubble chat-bubble-assistant";
+                chatLog.appendChild(bubble);
+                typeWriter(bubble, "Great choice! Here is the next available flight for your route:", () => {
+                    scrollToBottom();
+                    appendFlightCard();
+                });
+                scrollToBottom();
+            }
+        }
+
+        // --- intro animation ---
+        const introText = "Hi Thomas, we are really sorry your flight was disrupted and had to be cancelled. We know this is stressful, and we are here to help you all the way through.";
+        const typingEl = document.getElementById("typing-indicator");
+        const introBubble = document.getElementById("intro-bubble");
+        const introFollowup = document.getElementById("intro-followup");
+        const optionsWrap = document.getElementById("chat-options-wrap");
+
+        function typeWriter(el, text, done, isHTML = false) {
+            let i = 0;
+            el.classList.remove('hidden');
+            const interval = setInterval(() => {
+                if (isHTML) {
+                    el.innerHTML = text.slice(0, ++i);
+                } else {
+                    el.textContent = text.slice(0, ++i);
+                }
+                scrollToBottom("auto");
+                if (i === text.length) { clearInterval(interval); done?.(); }
+            }, 22);
+        }
+
+        setTimeout(() => {
+            typingEl.classList.add('hidden');
+            typeWriter(introBubble, introText, () => {
+                typeWriter(introFollowup, "Here below, we prepared some options for you. Please do not hesitate to ask anything at any time.", () => {
+                    optionsWrap.classList.remove('hidden');
+                    scrollToBottom("smooth");
+                    const cards = document.querySelectorAll(".option-card");
+                    cards.forEach((card, i) => {
+                        card.classList.add('animate-in');
+                        setTimeout(() => {
+                            card.classList.add('is-visible');
+                            scrollToBottom("smooth");
+                        }, i * 120);
+                    });
+                });
+            });
+        }, 1400);
+
+        function scrollToBottom(behavior = "smooth") {
+            window.scrollTo({ top: document.body.scrollHeight, behavior });
+        }
+
+        function appendMessage(text, role) {
+            const bubble = document.createElement("article");
+            bubble.className = `chat-bubble ${role === "user" ? "chat-bubble-user" : "chat-bubble-assistant"}`;
+            bubble.textContent = text;
+            chatLog.appendChild(bubble);
+            scrollToBottom();
+            return bubble;
+        }
+
+        function submitUserMessage(message) {
+            const trimmedMessage = message.trim();
+
+            if (!trimmedMessage) {
+                return;
+            }
+
+            appendMessage(trimmedMessage, "user");
+            chatInput.value = "";
+            assistantReply(trimmedMessage);
+        }
+
+        function appendTyping() {
+            const bubble = document.createElement("article");
+            bubble.className = "chat-bubble chat-bubble-typing";
+            bubble.innerHTML = "<span class='dot'></span><span class='dot'></span><span class='dot'></span>";
+            chatLog.appendChild(bubble);
+            scrollToBottom();
+            return bubble;
+        }
+
+        function withTyping(delay, onDone) {
+            const typing = appendTyping();
+            setTimeout(() => {
+                typing.remove();
+                onDone();
+            }, delay);
+        }
+
+        function lockActionGroup(group, selector) {
+            group.dataset.resolved = "true";
+            group.querySelectorAll(selector).forEach((button) => {
+                button.disabled = true;
+                button.classList.add("is-disabled");
+            });
+        }
+
+        function appendFlightCard() {
+            const wrap = document.createElement("div");
+            wrap.className = "chat-flight-card animate-in";
+            wrap.innerHTML = `
+                <div class="chat-flight-header">
+                    <span class="status-tag status-tag-new">New flight</span>
+                    <span class="ref">JQ 562 &middot; 12 Jun 2026</span>
+                </div>
+                <div class="route-row">
+                    <div class="airport">
+                        <p class="code">MEL</p>
+                        <p class="city">Melbourne</p>
+                        <p class="time">11:15</p>
+                    </div>
+                    <div class="connector" aria-hidden="true">
+                        <span class="line"></span>
+                        <span class="plane">✈</span>
+                    </div>
+                    <div class="airport right">
+                        <p class="code">BNE</p>
+                        <p class="city">Brisbane</p>
+                        <p class="time">13:20</p>
+                    </div>
+                </div>
+                <div class="chat-flight-actions">
+                    <button type="button" class="cta cta-sm" data-chat-flight-action="accept">Accept change</button>
+                    <button type="button" class="cta-secondary cta-sm" data-chat-flight-action="reject">Reject</button>
+                </div>
+            `;
+            chatLog.appendChild(wrap);
+            scrollToBottom();
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                wrap.classList.add('is-visible');
+                scrollToBottom();
+            }));
+        }
+
+        function appendFlightResultCard() {
+            const result = document.createElement("div");
+            result.className = "chat-flight-result chat-flight-result-confirmed";
+            result.innerHTML = `
+                <p class="chat-confirmed-banner">Flight confirmed</p>
+                <p class="chat-flight-result-title">Flight change confirmed</p>
+                <p class="chat-flight-result-text">Your new itinerary is confirmed and ready for travel.</p>
+
+                <div class="chat-result-grid" aria-label="Confirmed flight summary">
+                    <p><span class="result-key">Booking ref</span><span class="result-value">AC72P9</span></p>
+                    <p><span class="result-key">Flight</span><span class="result-value">JQ 562</span></p>
+                    <p><span class="result-key">Route</span><span class="result-value">MEL -> BNE</span></p>
+                    <p><span class="result-key">Date</span><span class="result-value">12 Jun 2026</span></p>
+                    <p><span class="result-key">Departure</span><span class="result-value">11:15</span></p>
+                    <p><span class="result-key">Arrival</span><span class="result-value">13:20</span></p>
+                </div>
+
+                <div class="chat-result-block" aria-label="Airport timeline">
+                    <p class="result-block-title">Airport timeline</p>
+                    <p class="chat-flight-result-text">Check-in opens: <strong>04:20</strong></p>
+                    <p class="chat-flight-result-text">Bag drop closes: <strong>10:40</strong></p>
+                    <p class="chat-flight-result-text">Boarding: <strong>10:50</strong> at gate <strong>A22</strong>, terminal <strong>T3</strong></p>
+                </div>
+
+                <div class="chat-result-block" aria-label="Travel information">
+                    <p class="result-block-title">Travel information</p>
+                    <p class="chat-flight-result-text">Passenger: <strong>Thomas Nielsen</strong></p>
+                    <p class="chat-flight-result-text">Baggage: <strong>1 cabin bag + 1 personal item</strong>. Checked baggage unchanged from original ticket.</p>
+                </div>
+            `;
+            chatLog.appendChild(result);
+            scrollToBottom();
+        }
+
+        function appendHotelQuestionMessage() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(question, "Your new flight departs in about 24 hours. Do you need a hotel for tonight?", () => {
+                const buttons = document.createElement("div");
+                buttons.className = "chat-hotel-actions";
+                buttons.setAttribute("data-hotel-action-group", "true");
+                buttons.innerHTML = `
+                    <button type="button" class="chat-hotel-btn" data-chat-hotel-action="yes">Yes, I need a hotel <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-chat-hotel-action="no">No, I do not need one <span class="option-button">keyboard_arrow_right</span></button>
+                `;
+                question.appendChild(buttons);
+                scrollToBottom();
+            });
+            scrollToBottom();
+        }
+
+        function appendHotelOfferCard() {
+            const hotels = [
+                {
+                    name: "Comfort Airport Hotel Melbourne",
+                    area: "Near MEL Airport",
+                    checkIn: "29 Apr 2026, 15:00",
+                    checkOut: "30 Apr 2026, 09:00",
+                    room: "Standard Double",
+                    board: "Breakfast included",
+                    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=640&h=360&fit=crop&auto=format",
+                },
+                {
+                    name: "Skyline Stay MEL",
+                    area: "8 min from terminal",
+                    checkIn: "29 Apr 2026, 14:30",
+                    checkOut: "30 Apr 2026, 10:00",
+                    room: "Twin Room",
+                    board: "Dinner + breakfast",
+                    image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=640&h=360&fit=crop&auto=format",
+                },
+                {
+                    name: "Nordic Harbour Hotel",
+                    area: "Airport district",
+                    checkIn: "29 Apr 2026, 15:00",
+                    checkOut: "30 Apr 2026, 11:00",
+                    room: "Queen Room",
+                    board: "Breakfast included",
+                    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=640&h=360&fit=crop&auto=format",
+                },
+            ];
+
+            const offer = document.createElement("div");
+            offer.className = "chat-hotel-offers-wrap animate-in";
+            offer.innerHTML = `
+                <div class="chat-hotel-offers-row" data-chat-hotel-offer-group="true">
+                    ${hotels
+                    .map(
+                        (hotel) => `
+                        <article class="chat-hotel-offer-card">
+                            <img class="chat-hotel-photo" src="${hotel.image}" alt="${hotel.name}" loading="lazy" decoding="async" />
+                            <div class="chat-flight-header">
+                                <span class="ref">1 night &middot; ${hotel.area}</span>
+                            </div>
+                            <p class="chat-hotel-name">${hotel.name}</p>
+                            <div class="chat-result-grid" aria-label="Hotel offer summary">
+                                <p><span class="result-key">Check-in</span><span class="result-value">${hotel.checkIn}</span></p>
+                                <p><span class="result-key">Check-out</span><span class="result-value">${hotel.checkOut}</span></p>
+                                <p><span class="result-key">Room</span><span class="result-value">${hotel.room}</span></p>
+                                <p><span class="result-key">Board basis</span><span class="result-value">${hotel.board}</span></p>
+                            </div>
+                            <div class="chat-flight-actions">
+                                <button type="button" class="cta cta-xs" data-chat-hotel-offer-action="accept" data-chat-hotel-name="${hotel.name}">Choose this hotel</button>
+                            </div>
+                        </article>
+                    `
+                    )
+                    .join("")}
+                </div>
+                <div class="chat-hotel-offers-footer">
+                    <button type="button" class="cta-secondary cta-sm" data-chat-hotel-offer-action="reject">No hotel needed</button>
+                </div>
+            `;
+            chatLog.appendChild(offer);
+            scrollToBottom();
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                offer.classList.add('is-visible');
+                scrollToBottom();
+            }));
+        }
+
+        function appendHotelConfirmedCard(hotelName) {
+            const result = document.createElement("div");
+            result.className = "chat-flight-result chat-hotel-result-confirmed";
+            result.innerHTML = `
+                <p class="chat-confirmed-banner">Hotel confirmed</p>
+                <p class="chat-flight-result-title">Hotel voucher confirmed</p>
+                <p class="chat-flight-result-text">Your hotel stay is confirmed. The voucher and directions have been sent to <strong>${deliveryEmailLabel()}</strong>.</p>
+
+                <div class="chat-result-grid" aria-label="Confirmed hotel summary">
+                    <p><span class="result-key">Hotel</span><span class="result-value">${hotelName}</span></p>
+                    <p><span class="result-key">Nights</span><span class="result-value">1 night</span></p>
+                    <p><span class="result-key">Check-in</span><span class="result-value">29 Apr 2026, 15:00</span></p>
+                    <p><span class="result-key">Check-out</span><span class="result-value">30 Apr 2026, 09:00</span></p>
+                </div>
+            `;
+            chatLog.appendChild(result);
+            scrollToBottom();
+        }
+
+        function appendClaimInfoCard() {
+            const card = document.createElement("div");
+            card.className = "chat-flight-result chat-passenger-plan";
+            card.innerHTML = `
+                <p class="chat-flight-result-title">About your compensation claim</p>
+                <ul class="chat-itinerary-list">
+                    <li><strong>EU261 eligibility:</strong> This flight is <strong>not eligible</strong> for financial compensation under EU Regulation 261/2004.</li>
+                    <li>The cancellation was caused by <strong>severe weather conditions in Brisbane (BNE)</strong>, which is classified as an extraordinary circumstance outside airline control.</li>
+                    <li><strong>Meal and accommodation reimbursement:</strong> Not applicable for an additional claim, as both a meal voucher and hotel accommodation are already being provided to you directly here.</li>
+                    <li><strong>Right to care:</strong> You are entitled to the rebooking or full refund options already offered above.</li>
+                    <li>If you believe your situation differs or wish to formally register a claim anyway, you can do so below.</li>
+                </ul>
+                <div class="chat-flight-actions">
+                    <button type="button" class="cta-secondary cta-sm" data-claim-start="true">Start your claim</button>
+                </div>
+            `;
+            chatLog.appendChild(card);
+            scrollToBottom();
+        }
+
+        function appendClaimFlightQuestion() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(question, "Is this claim regarding your cancelled flight from MEL to BNE?", () => {
+                const buttons = document.createElement("div");
+                buttons.className = "chat-hotel-actions";
+                buttons.setAttribute("data-claim-flight-group", "true");
+                buttons.innerHTML = `
+                    <button type="button" class="chat-hotel-btn" data-claim-flight="yes">Yes <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-claim-flight="no">No <span class="option-button">keyboard_arrow_right</span></button>
+                `;
+                question.appendChild(buttons);
+                scrollToBottom();
+            });
+            scrollToBottom();
+        }
+
+        function appendClaimTypeQuestion() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(question, "What type of claim would you like to file?", () => {
+                const buttons = document.createElement("div");
+                buttons.className = "chat-hotel-actions";
+                buttons.setAttribute("data-claim-type-group", "true");
+                buttons.innerHTML = `
+                    <button type="button" class="chat-hotel-btn" data-claim-type="flight-issue">Flight issue <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-claim-type="baggage-issue">Baggage issue <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-claim-type="other-issue">Other issue <span class="option-button">keyboard_arrow_right</span></button>
+                `;
+                question.appendChild(buttons);
+                scrollToBottom();
+            });
+            scrollToBottom();
+        }
+
+        function appendClaimRequestQuestion() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(question, "What do you request?", () => {
+                const buttons = document.createElement("div");
+                buttons.className = "chat-hotel-actions";
+                buttons.setAttribute("data-claim-request-group", "true");
+                buttons.innerHTML = `
+                    <button type="button" class="chat-hotel-btn" data-claim-request="feedback">Provide feedback <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-claim-request="ticket-refund">Ticket refund <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-claim-request="compensation">Compensation <span class="option-button">keyboard_arrow_right</span></button>
+                `;
+                question.appendChild(buttons);
+                scrollToBottom();
+            });
+            scrollToBottom();
+        }
+
+        function appendMoneyRefundOptions() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(
+                question,
+                "If you would like a full refund, please confirm below and we will process it within 7 days. Prefer travel credit instead? Select Ask for credit to receive credit plus an extra 30% for your next flight.",
+                () => {
+                    const buttons = document.createElement("div");
+                    buttons.className = "chat-hotel-actions";
+                    buttons.setAttribute("data-money-action-group", "true");
+                    buttons.innerHTML = `
+                        <button type="button" class="chat-hotel-btn" data-money-action="ask-credit"><span class="btn-badge">Most Popular</span> Ask for credit (+30% bonus) <span class="option-button">keyboard_arrow_right</span></button>
+                        <button type="button" class="chat-hotel-btn" data-money-action="confirm-refund">Confirm full refund <span class="option-button">keyboard_arrow_right</span></button>
+                    `;
+                    question.appendChild(buttons);
+                    scrollToBottom();
+                }
+            );
+            scrollToBottom();
+        }
+
+        function appendCompensationChoiceQuestion() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(question, "Under EU regulation, the standard compensation limit in this flow is 200 EUR. Would you like to claim 200 EUR, or continue with a higher amount and upload proof of expenses?", () => {
+                const buttons = document.createElement("div");
+                buttons.className = "chat-hotel-actions";
+                buttons.setAttribute("data-compensation-choice-group", "true");
+                buttons.innerHTML = `
+                    <button type="button" class="chat-hotel-btn" data-compensation-choice="claim-200">Claim 200 EUR <span class="option-button">keyboard_arrow_right</span></button>
+                    <button type="button" class="chat-hotel-btn" data-compensation-choice="claim-higher">Claim higher amount (upload proof) <span class="option-button">keyboard_arrow_right</span></button>
+                `;
+                question.appendChild(buttons);
+                scrollToBottom();
+            });
+            scrollToBottom();
+        }
+
+        function appendPassengerItineraryOverview() {
+            const plan = document.createElement("div");
+            plan.className = "chat-flight-result chat-passenger-plan";
+            plan.innerHTML = `
+                <p class="chat-flight-result-title">Your step-by-step plan</p>
+                <ul class="chat-itinerary-list">
+                    <li>Choose one of these airport restaurants and use your <strong>meal voucher</strong>:</li>
+                    <li><strong>Runway Kitchen</strong> - sandwiches, salads, and hot meals.</li>
+                    <li><strong>Terminal Grill</strong> - burgers, grilled chicken, and quick hot meals.</li>
+                    <li><strong>Green Bowl Kitchen</strong> - salads, vegetarian bowls, and fresh juices.</li>
+                    <li><strong>Pasta Gate</strong> - pasta dishes, pizza slices, and family-friendly options.</li>
+                    <li><strong>Skyline Cafe</strong> - coffee, pastries, breakfast combos, and light snacks.</li>
+                    <li>Go to bus stop <strong>#32</strong> and board the hotel shuttle. It departs every <strong>30 minutes</strong>.</li>
+                    <li>Show your hotel voucher at reception to complete check-in.</li>
+                    <li>Breakfast is available from <strong>06:00 to 10:00</strong>. Reception can prepare takeaway if needed.</li>
+                    <li>Take the shuttle bus back to the airport and leave at least <strong>2.5 hours</strong> before departure.</li>
+                    <li>Check-in opens at <strong>04:20</strong> in terminal <strong>T3</strong> for flight <strong>SK 527</strong>.</li>
+                    <li>Bag drop closes at <strong>10:40</strong>. Keep passport and booking reference <strong>AC72P9</strong> ready.</li>
+                    <li>Boarding starts at <strong>10:50</strong> at gate <strong>A22</strong>. Scheduled departure is <strong>11:20</strong>.</li>
+                </ul>
+            `;
+            chatLog.appendChild(plan);
+            scrollToBottom();
+        }
+
+        function appendDifferentAirlineOffer() {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(
+                question,
+                "Would you like us to rebook you on a different airline? This is a paid service, but you only pay the difference between the price of that new ticket and what you paid for your cancelled flight.",
+                () => {
+                    const buttons = document.createElement("div");
+                    buttons.className = "chat-hotel-actions";
+                    buttons.setAttribute("data-alt-airline-group", "true");
+                    buttons.innerHTML = `
+                        <button type="button" class="chat-hotel-btn" data-alt-airline-action="yes">Yes, show other airlines <span class="option-button">keyboard_arrow_right</span></button>
+                        <button type="button" class="chat-hotel-btn" data-alt-airline-action="no">No, thanks <span class="option-button">keyboard_arrow_right</span></button>
+                    `;
+                    question.appendChild(buttons);
+                    scrollToBottom();
+                }
+            );
+            scrollToBottom();
+        }
+
+        function appendAlternativeAirlineCards() {
+            const airlines = [
+                {
+                    carrier: "Lufthansa",
+                    flight: "LH 2445",
+                    date: "30 Apr 2026",
+                    depart: "12:25",
+                    arrive: "15:10",
+                    from: "MEL",
+                    to: "BNE",
+                    difference: "0 EUR",
+                    baggage: "1 cabin bag",
+                },
+                {
+                    carrier: "Norwegian",
+                    flight: "DY 1308",
+                    date: "30 Apr 2026",
+                    depart: "15:05",
+                    arrive: "16:45",
+                    from: "MEL",
+                    to: "BNE",
+                    difference: "20 EUR",
+                    baggage: "1 cabin bag",
+                },
+                {
+                    carrier: "British Airways",
+                    flight: "BA 811",
+                    date: "30 Apr 2026",
+                    depart: "13:10",
+                    arrive: "14:45",
+                    from: "MEL",
+                    to: "BNE",
+                    difference: "35 EUR",
+                    baggage: "1 cabin bag",
+                },
+            ];
+
+            const offer = document.createElement("div");
+            offer.className = "chat-hotel-offers-wrap animate-in";
+            offer.innerHTML = `
+                <div class="chat-hotel-offers-row" data-alt-airline-offer-group="true">
+                    ${airlines
+                    .map(
+                        (airline) => `
+                        <article class="chat-hotel-offer-card">
+                            <div class="status-row">
+                                <p class="chat-hotel-name">${airline.carrier}</p>
+                                <span class="ref">${airline.flight} &middot; ${airline.date}</span>
+                            </div>
+                            <div class="route-row">
+                                <div class="airport">
+                                    <p class="code">${airline.from}</p>
+                                    <p class="city">Departure</p>
+                                    <p class="time">${airline.depart}</p>
+                                </div>
+                                <div class="connector" aria-hidden="true">
+                                    <span class="line"></span>
+                                    <span class="plane">✈</span>
+                                </div>
+                                <div class="airport right">
+                                    <p class="code">${airline.to}</p>
+                                    <p class="city">Arrival</p>
+                                    <p class="time">${airline.arrive}</p>
+                                </div>
+                            </div>
+                            <div class="chat-result-grid" aria-label="Alternative airline option summary">
+                                <p><span class="result-key">You pay</span><span class="result-value">${airline.difference}</span></p>
+                                <p><span class="result-key">Baggage</span><span class="result-value">${airline.baggage}</span></p>
+                            </div>
+                            <div class="chat-flight-actions">
+                                <button type="button" class="cta cta-xs" data-alt-airline-offer-action="select" data-alt-airline-name="${airline.carrier}" data-alt-airline-flight="${airline.flight}" data-alt-airline-difference="${airline.difference}" data-alt-airline-date="${airline.date}" data-alt-airline-from="${airline.from}" data-alt-airline-to="${airline.to}" data-alt-airline-depart="${airline.depart}" data-alt-airline-arrive="${airline.arrive}">Choose this flight</button>
+                            </div>
+                        </article>
+                    `
+                    )
+                    .join("")}
+                </div>
+                <div class="chat-hotel-offers-footer">
+                    <button type="button" class="cta-secondary cta-sm" data-alt-airline-offer-action="skip">Keep current options</button>
+                </div>
+            `;
+            chatLog.appendChild(offer);
+            scrollToBottom();
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                offer.classList.add('is-visible');
+                scrollToBottom();
+            }));
+        }
+
+        function appendAlternativeAirlinePaymentQuestion(airlineOption) {
+            const question = document.createElement("article");
+            question.className = "chat-bubble chat-bubble-assistant";
+            chatLog.appendChild(question);
+            typeWriter(
+                question,
+                `We can book <strong>${airlineOption.carrier} ${airlineOption.flight}</strong> for you now. The additional fare difference is <strong>${airlineOption.difference}</strong>. Can we charge your stored card and confirm this flight?`,
+                () => {
+                    const buttons = document.createElement("div");
+                    buttons.className = "chat-hotel-actions";
+                    buttons.setAttribute("data-alt-airline-payment-group", "true");
+                    buttons.dataset.altAirlineName = airlineOption.carrier;
+                    buttons.dataset.altAirlineFlight = airlineOption.flight;
+                    buttons.dataset.altAirlineDifference = airlineOption.difference;
+                    buttons.dataset.altAirlineDate = airlineOption.date;
+                    buttons.dataset.altAirlineFrom = airlineOption.from;
+                    buttons.dataset.altAirlineTo = airlineOption.to;
+                    buttons.dataset.altAirlineDepart = airlineOption.depart;
+                    buttons.dataset.altAirlineArrive = airlineOption.arrive;
+                    buttons.innerHTML = `
+                        <button type="button" class="chat-hotel-btn" data-alt-airline-payment-action="confirm">Yes, charge my stored card <span class="option-button">keyboard_arrow_right</span></button>
+                        <button type="button" class="chat-hotel-btn" data-alt-airline-payment-action="decline">No, not now <span class="option-button">keyboard_arrow_right</span></button>
+                    `;
+                    question.appendChild(buttons);
+                    scrollToBottom();
+                },
+                true
+            );
+            scrollToBottom();
+        }
+
+        function appendAlternativeAirlineConfirmedCard(airlineOption) {
+            const result = document.createElement("div");
+            result.className = "chat-flight-result chat-flight-result-confirmed";
+            result.innerHTML = `
+                <p class="chat-confirmed-banner">Flight confirmed</p>
+                <p class="chat-flight-result-title">Alternative airline booking confirmed</p>
+                <p class="chat-flight-result-text">Your new itinerary with <strong>${airlineOption.carrier}</strong> is confirmed and ready for travel.</p>
+
+                <div class="chat-result-grid" aria-label="Confirmed alternative airline summary">
+                    <p><span class="result-key">Flight</span><span class="result-value">${airlineOption.flight}</span></p>
+                    <p><span class="result-key">Date</span><span class="result-value">${airlineOption.date}</span></p>
+                    <p><span class="result-key">Route</span><span class="result-value">${airlineOption.from} -> ${airlineOption.to}</span></p>
+                    <p><span class="result-key">Extra payment</span><span class="result-value">${airlineOption.difference}</span></p>
+                    <p><span class="result-key">Departure</span><span class="result-value">${airlineOption.depart}</span></p>
+                    <p><span class="result-key">Arrival</span><span class="result-value">${airlineOption.arrive}</span></p>
+                </div>
+            `;
+            chatLog.appendChild(result);
+            scrollToBottom();
+        }
+
+        function assistantReply(input) {
+            const rawValue = input.trim();
+            const value = rawValue.toLowerCase();
+
+            if (!value) {
+                return;
+            }
+
+            if (awaitingCompensationIncident) {
+                compensationIncidentDetails = rawValue;
+                awaitingCompensationIncident = false;
+                awaitingCompensationAmount = true;
+                appendMessage("Thanks. How much EUR would you like to be compensated?", "assistant");
+                return;
+            }
+
+            if (awaitingCompensationAmount) {
+                const amountMatch = rawValue.replace(/,/g, ".").match(/\d+(?:\.\d+)?/);
+
+                if (!amountMatch) {
+                    appendMessage("Please enter the amount in EUR as a number, for example 180 or 200.", "assistant");
+                    return;
+                }
+
+                const amount = Number(amountMatch[0]);
+
+                if (!Number.isFinite(amount) || amount <= 0) {
+                    appendMessage("Please enter a valid amount greater than 0 EUR.", "assistant");
+                    return;
+                }
+
+                requestedCompensationAmount = amount;
+                awaitingCompensationAmount = false;
+
+                if (amount > 200) {
+                    appendMessage("Thanks. Because this is above 200 EUR, EU regulation requires additional proof of expenses.", "assistant");
+                    appendCompensationChoiceQuestion();
+                    return;
+                }
+
+                appendMessage(`Your compensation request for ${amount.toFixed(2)} EUR has been submitted for: ${compensationIncidentDetails}. We will review your case and send confirmation to ${deliveryEmailLabel()}.`, "assistant");
+                return;
+            }
+
+            if (awaitingNextFlightEmail) {
+                if (!isValidEmail(rawValue)) {
+                    appendMessage("Please enter a valid email address, for example name@example.com.", "assistant");
+                    return;
+                }
+
+                passengerEmail = rawValue;
+                awaitingNextFlightEmail = false;
+                chatInput.placeholder = "Ask for details...";
+                showNextAvailableFlightFlow(passengerEmail);
+                return;
+            }
+
+            if (value === "1" || value.includes("next") || value.includes("available")) {
+                if (!passengerEmail) {
+                    awaitingNextFlightEmail = true;
+                    chatInput.placeholder = "Eg.: email@email.com";
+                    const bubble = document.createElement("article");
+                    bubble.className = "chat-bubble chat-bubble-assistant";
+                    chatLog.appendChild(bubble);
+                    typeWriter(bubble, "Before we continue, please provide your <strong>email address</strong> below for confirmation.", () => {
+                        scrollToBottom();
+                    }, true);
+                    scrollToBottom();
+                    return;
+                }
+
+                showNextAvailableFlightFlow();
+                return;
+            }
+
+            if (value === "2" || value.includes("90") || value.includes("days")) {
+                appendMessage(
+                    "You can rebook any same-route flight within 90 days with no change fee. Keep your booking reference and we will show eligible departures.",
+                    "assistant"
+                );
+                return;
+            }
+
+            if (value.includes("money")) {
+                appendMoneyRefundOptions();
+                return;
+            }
+
+            if (value === "3" || value.includes("refund") || value.includes("cancel")) {
+                appendMessage(
+                    "A 100% refund returns to your original payment method, usually within 3 to 5 business days. Reply with Confirm refund if you want to start it.",
+                    "assistant"
+                );
+                return;
+            }
+
+            if (value.includes("confirm refund")) {
+                appendMessage(
+                    "Your full refund request is submitted. You will receive a confirmation email shortly.",
+                    "assistant"
+                );
+                return;
+            }
+
+            if (value.includes("claim") || value.includes("compensation") || value.includes("eu261")) {
+                const bubble = document.createElement("article");
+                bubble.className = "chat-bubble chat-bubble-assistant";
+                chatLog.appendChild(bubble);
+                typeWriter(bubble, "I understand. Let me give you a clear overview of what applies to your situation.", () => {
+                    scrollToBottom();
+                    appendClaimInfoCard();
+                });
+                scrollToBottom();
+                return;
+            }
+
+            if (value.includes("baggage") || value.includes("bag")) {
+                appendMessage(
+                    "Your baggage allowance stays the same as the original ticket unless you change cabin class.",
+                    "assistant"
+                );
+                return;
+            }
+
+            appendMessage(
+                "I can help with rebooking or refund. Type 1 for next available flight, 2 for rebooking within 90 days, or 3 for full refund details.",
+                "assistant"
+            );
+        }
+
+        chatForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            submitUserMessage(chatInput.value);
+        });
+
+        optionCards.forEach((card) => {
+            card.addEventListener("click", () => {
+                const optionType = card.dataset.chatOption;
+
+                if (optionType === "next-available") {
+                    appendMessage("Next available flight", "user");
+                    assistantReply("1");
+                }
+
+                if (optionType === "within-90-days") {
+                    appendMessage("New flight within next 90 days", "user");
+                    assistantReply("2");
+                }
+
+                if (optionType === "full-refund") {
+                    appendMessage("Cancel flight and get 100% refund", "user");
+                    assistantReply("money");
+                }
+            });
+        });
+
+        chatLog.addEventListener("click", (event) => {
+            const hotelButton = event.target.closest("[data-chat-hotel-action]");
+
+            if (hotelButton) {
+                const hotelActionGroup = hotelButton.closest("[data-hotel-action-group]");
+
+                if (!hotelActionGroup || hotelActionGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(hotelActionGroup, "[data-chat-hotel-action]");
+
+                const hotelAction = hotelButton.dataset.chatHotelAction;
+
+                if (hotelAction === "yes") {
+                    appendMessage("Yes, I need a hotel", "user");
+                    const bubble = document.createElement("article");
+                    bubble.className = "chat-bubble chat-bubble-assistant";
+                    chatLog.appendChild(bubble);
+                    typeWriter(bubble, "Great, here are 3 hotel options for tonight. Swipe to view all and choose one:", () => {
+                        scrollToBottom();
+                        appendHotelOfferCard();
+                    });
+                    scrollToBottom();
+                    return;
+                }
+
+                appendMessage("No, I do not need one", "user");
+                withTyping(650, () => {
+                    appendMessage("Perfect. You are all set for your new flight tomorrow.", "assistant");
+                });
+                return;
+            }
+
+            const hotelOfferButton = event.target.closest("[data-chat-hotel-offer-action]");
+
+            if (hotelOfferButton) {
+                const hotelOfferGroup = hotelOfferButton.closest("[data-chat-hotel-offer-group]");
+
+                if (!hotelOfferGroup || hotelOfferGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(hotelOfferGroup, "[data-chat-hotel-offer-action]");
+
+                const hotelOfferAction = hotelOfferButton.dataset.chatHotelOfferAction;
+                const selectedHotelName = hotelOfferButton.dataset.chatHotelName || "Airport hotel";
+
+                if (hotelOfferAction === "accept") {
+                    appendMessage(`Choose hotel: ${selectedHotelName}`, "user");
+                    const bubble1 = document.createElement("article");
+                    bubble1.className = "chat-bubble chat-bubble-assistant";
+                    chatLog.appendChild(bubble1);
+                    typeWriter(bubble1, `Perfect. ${selectedHotelName} is now secured for tonight.`, () => {
+                        appendHotelConfirmedCard(selectedHotelName);
+                        const bubble2 = document.createElement("article");
+                        bubble2.className = "chat-bubble chat-bubble-assistant";
+                        chatLog.appendChild(bubble2);
+                        typeWriter(bubble2, `We sent your hotel voucher to ${deliveryEmailLabel()}.`, () => {
+                            const bubble3 = document.createElement("article");
+                            bubble3.className = "chat-bubble chat-bubble-assistant";
+                            chatLog.appendChild(bubble3);
+                            typeWriter(bubble3, "Here is a simple itinerary so you know exactly what to do next:", () => {
+                                scrollToBottom();
+                                appendPassengerItineraryOverview();
+                                const bubble4 = document.createElement("article");
+                                bubble4.className = "chat-bubble chat-bubble-assistant";
+                                chatLog.appendChild(bubble4);
+                                typeWriter(bubble4, "You should be all set. Do you have any questions?", () => {
+                                    scrollToBottom();
+                                });
+                                scrollToBottom();
+                            });
+                            scrollToBottom();
+                        });
+                        scrollToBottom();
+                    });
+                    scrollToBottom();
+                    return;
+                }
+
+                appendMessage("No thanks", "user");
+                const rejectBubble = document.createElement("article");
+                rejectBubble.className = "chat-bubble chat-bubble-assistant";
+                chatLog.appendChild(rejectBubble);
+                typeWriter(rejectBubble, "No problem. We will keep your flight confirmation active. Is there anything else I can help you with?", () => {
+                    scrollToBottom();
+                });
+                scrollToBottom();
+                return;
+            }
+
+            const claimStartButton = event.target.closest("[data-claim-start]");
+
+            if (claimStartButton) {
+                claimStartButton.disabled = true;
+                claimStartButton.classList.add("is-disabled");
+                appendMessage("Start your claim", "user");
+                withTyping(500, () => {
+                    appendClaimFlightQuestion();
+                });
+                return;
+            }
+
+            const claimFlightButton = event.target.closest("[data-claim-flight]");
+
+            if (claimFlightButton) {
+                const claimFlightGroup = claimFlightButton.closest("[data-claim-flight-group]");
+
+                if (!claimFlightGroup || claimFlightGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(claimFlightGroup, "[data-claim-flight]");
+
+                const claimFlight = claimFlightButton.dataset.claimFlight;
+
+                if (claimFlight === "yes") {
+                    appendMessage("Yes", "user");
+                    withTyping(500, () => {
+                        appendClaimTypeQuestion();
+                    });
+                    return;
+                }
+
+                if (claimFlight === "no") {
+                    appendMessage("No", "user");
+                    withTyping(600, () => {
+                        appendMessage("I see. Please contact our customer service team at support@flysas.com with details about your claim, and they will assist you further.", "assistant");
+                    });
+                    return;
+                }
+            }
+
+            const claimTypeButton = event.target.closest("[data-claim-type]");
+
+            if (claimTypeButton) {
+                const claimTypeGroup = claimTypeButton.closest("[data-claim-type-group]");
+
+                if (!claimTypeGroup || claimTypeGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(claimTypeGroup, "[data-claim-type]");
+
+                const claimTypeLabel = claimTypeButton.textContent;
+
+                appendMessage(claimTypeLabel, "user");
+                withTyping(500, () => {
+                    appendClaimRequestQuestion();
+                });
+                return;
+            }
+
+            const claimRequestButton = event.target.closest("[data-claim-request]");
+
+            if (claimRequestButton) {
+                const claimRequestGroup = claimRequestButton.closest("[data-claim-request-group]");
+
+                if (!claimRequestGroup || claimRequestGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(claimRequestGroup, "[data-claim-request]");
+
+                const claimRequest = claimRequestButton.dataset.claimRequest;
+                const claimRequestLabel = claimRequestButton.textContent;
+
+                appendMessage(claimRequestLabel, "user");
+
+                if (claimRequest === "compensation") {
+                    awaitingCompensationIncident = true;
+                    awaitingCompensationAmount = false;
+                    withTyping(500, () => {
+                        appendMessage("Please tell me what happened.", "assistant");
+                    });
+                    return;
+                }
+
+                withTyping(600, () => {
+                    appendMessage(`Your request for "${claimRequestLabel}" has been registered. Your claim has been submitted and we will review it shortly. You will receive a confirmation email at ${deliveryEmailLabel()}.`, "assistant");
+                });
+                return;
+            }
+
+            const compensationChoiceButton = event.target.closest("[data-compensation-choice]");
+
+            if (compensationChoiceButton) {
+                const compensationChoiceGroup = compensationChoiceButton.closest("[data-compensation-choice-group]");
+
+                if (!compensationChoiceGroup || compensationChoiceGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(compensationChoiceGroup, "[data-compensation-choice]");
+
+                const compensationChoice = compensationChoiceButton.dataset.compensationChoice;
+
+                if (compensationChoice === "claim-200") {
+                    appendMessage("Claim 200 EUR", "user");
+                    withTyping(600, () => {
+                        appendMessage("Done. We registered your compensation claim for 200 EUR under EU regulation. Confirmation will be sent by email.", "assistant");
+                    });
+                    return;
+                }
+
+                appendMessage("Claim higher amount (upload proof)", "user");
+                withTyping(650, () => {
+                    appendMessage(`Understood. You requested ${requestedCompensationAmount.toFixed(2)} EUR. To proceed above 200 EUR, please upload proof of expenses (receipts/invoices). Our claims team will email you secure upload instructions at ${deliveryEmailLabel()}.`, "assistant");
+                });
+                return;
+            }
+
+            const moneyActionButton = event.target.closest("[data-money-action]");
+
+            if (moneyActionButton) {
+                const moneyActionGroup = moneyActionButton.closest("[data-money-action-group]");
+
+                if (!moneyActionGroup || moneyActionGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(moneyActionGroup, "[data-money-action]");
+
+                const moneyAction = moneyActionButton.dataset.moneyAction;
+
+                if (moneyAction === "confirm-refund") {
+                    appendMessage("Confirm full refund", "user");
+                    withTyping(550, () => {
+                        appendMessage("Done. Your full refund request is confirmed and will be processed within 7 days.", "assistant");
+                    });
+                    return;
+                }
+
+                appendMessage("Ask for credit", "user");
+                withTyping(600, () => {
+                    appendMessage("Great choice. We can convert your booking value into flight credit with an extra 30% bonus for your next flight. We have sent the credit details to your email.", "assistant");
+                });
+                return;
+            }
+
+            const altAirlineButton = event.target.closest("[data-alt-airline-action]");
+
+            if (altAirlineButton) {
+                const altAirlineGroup = altAirlineButton.closest("[data-alt-airline-group]");
+
+                if (!altAirlineGroup || altAirlineGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(altAirlineGroup, "[data-alt-airline-action]");
+
+                const altAirlineAction = altAirlineButton.dataset.altAirlineAction;
+
+                if (altAirlineAction === "yes") {
+                    appendMessage("Yes, show other airlines", "user");
+                    withTyping(650, () => {
+                        appendMessage(
+                            `Great. We will look for suitable flights with other airlines. This is a paid service, but you only pay the fare difference compared to your cancelled ticket. If the new fare is the same or lower, you pay nothing extra. We will send options to ${deliveryEmailLabel()}.`,
+                            "assistant"
+                        );
+                        appendAlternativeAirlineCards();
+                    });
+                    return;
+                }
+
+                appendMessage("No, thanks", "user");
+                withTyping(550, () => {
+                    appendMessage("Understood. You can still choose refund or other rebooking options anytime.", "assistant");
+                });
+                return;
+            }
+
+            const altAirlineOfferButton = event.target.closest("[data-alt-airline-offer-action]");
+
+            if (altAirlineOfferButton) {
+                const altAirlineOfferGroup = altAirlineOfferButton.closest("[data-alt-airline-offer-group]");
+
+                if (altAirlineOfferGroup && altAirlineOfferGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                if (altAirlineOfferGroup) {
+                    lockActionGroup(altAirlineOfferGroup, "[data-alt-airline-offer-action]");
+                }
+
+                const offerAction = altAirlineOfferButton.dataset.altAirlineOfferAction;
+
+                if (offerAction === "select") {
+                    const airlineOption = {
+                        carrier: altAirlineOfferButton.dataset.altAirlineName || "Alternative airline",
+                        flight: altAirlineOfferButton.dataset.altAirlineFlight || "",
+                        difference: altAirlineOfferButton.dataset.altAirlineDifference || "0 EUR",
+                        date: altAirlineOfferButton.dataset.altAirlineDate || "",
+                        from: altAirlineOfferButton.dataset.altAirlineFrom || "",
+                        to: altAirlineOfferButton.dataset.altAirlineTo || "",
+                        depart: altAirlineOfferButton.dataset.altAirlineDepart || "",
+                        arrive: altAirlineOfferButton.dataset.altAirlineArrive || "",
+                    };
+                    const paymentAmount = Number.parseFloat(airlineOption.difference);
+
+                    appendMessage(`Choose ${airlineOption.carrier} ${airlineOption.flight}`.trim(), "user");
+
+                    if (Number.isFinite(paymentAmount) && paymentAmount > 0) {
+                        withTyping(650, () => {
+                            appendAlternativeAirlinePaymentQuestion(airlineOption);
+                        });
+                        return;
+                    }
+
+                    withTyping(650, () => {
+                        appendMessage(
+                            `Perfect. ${airlineOption.carrier} ${airlineOption.flight} does not require any extra payment, so we can confirm it right away.`,
+                            "assistant"
+                        );
+                        appendAlternativeAirlineConfirmedCard(airlineOption);
+                        appendMessage(`We sent your updated flight details to ${deliveryEmailLabel()}.`, "assistant");
+                    });
+                    return;
+                }
+
+                appendMessage("Keep current options", "user");
+                withTyping(550, () => {
+                    appendMessage("No problem. Your current rebooking and refund options remain available.", "assistant");
+                });
+                return;
+            }
+
+            const altAirlinePaymentButton = event.target.closest("[data-alt-airline-payment-action]");
+
+            if (altAirlinePaymentButton) {
+                const paymentGroup = altAirlinePaymentButton.closest("[data-alt-airline-payment-group]");
+
+                if (!paymentGroup || paymentGroup.dataset.resolved === "true") {
+                    return;
+                }
+
+                lockActionGroup(paymentGroup, "[data-alt-airline-payment-action]");
+
+                const airlineOption = {
+                    carrier: paymentGroup.dataset.altAirlineName || "Alternative airline",
+                    flight: paymentGroup.dataset.altAirlineFlight || "",
+                    difference: paymentGroup.dataset.altAirlineDifference || "0 EUR",
+                    date: paymentGroup.dataset.altAirlineDate || "",
+                    from: paymentGroup.dataset.altAirlineFrom || "",
+                    to: paymentGroup.dataset.altAirlineTo || "",
+                    depart: paymentGroup.dataset.altAirlineDepart || "",
+                    arrive: paymentGroup.dataset.altAirlineArrive || "",
+                };
+                const paymentAction = altAirlinePaymentButton.dataset.altAirlinePaymentAction;
+
+                if (paymentAction === "confirm") {
+                    appendMessage("Yes, charge my stored card", "user");
+                    withTyping(650, () => {
+                        appendMessage(
+                            `Done. We charged your stored card for the additional ${airlineOption.difference} and booked ${airlineOption.carrier} ${airlineOption.flight}.`,
+                            "assistant"
+                        );
+                        appendAlternativeAirlineConfirmedCard(airlineOption);
+                        appendMessage(`We sent your updated flight details to ${deliveryEmailLabel()}.`, "assistant");
+                    });
+                    return;
+                }
+
+                appendMessage("No, not now", "user");
+                withTyping(550, () => {
+                    appendMessage("No problem. We did not charge your card, and your other rebooking and refund options remain available.", "assistant");
+                });
+                return;
+            }
+
+            const actionButton = event.target.closest("[data-chat-flight-action]");
+
+            if (!actionButton) {
+                return;
+            }
+
+            const flightCardEl = actionButton.closest(".chat-flight-card");
+
+            if (!flightCardEl || flightCardEl.dataset.resolved === "true") {
+                return;
+            }
+
+            lockActionGroup(flightCardEl, "[data-chat-flight-action]");
+
+            const action = actionButton.dataset.chatFlightAction;
+
+            if (action === "accept") {
+                appendMessage("Accept change", "user");
+                const bubble1 = document.createElement("article");
+                bubble1.className = "chat-bubble chat-bubble-assistant";
+                chatLog.appendChild(bubble1);
+                typeWriter(bubble1, "Done. Your flight change is confirmed.", () => {
+                    scrollToBottom();
+                    appendFlightResultCard();
+                    const bubble2 = document.createElement("article");
+                    bubble2.className = "chat-bubble chat-bubble-assistant";
+                    chatLog.appendChild(bubble2);
+                    typeWriter(bubble2, `We sent your updated flight tickets to ${deliveryEmailLabel()}.`, () => {
+                        scrollToBottom();
+                        appendHotelQuestionMessage();
+                    });
+                    scrollToBottom();
+                });
+                scrollToBottom();
+                return;
+            }
+
+            appendMessage("Reject change", "user");
+            withTyping(700, () => {
+                appendMessage("No problem. We can also check flights on different airlines.", "assistant");
+                appendDifferentAirlineOffer();
+            });
+        });
+    </script>
+</body>
+
+</html>
