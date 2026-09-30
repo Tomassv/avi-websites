@@ -1,0 +1,192 @@
+{
+  "seo": {
+    "title": "Cura — Passenger Claims, Resolved.",
+    "description": "AI-powered claims resolution for airlines. Automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+    "canonical": "https://cura.aero/",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "author": "AviLabs",
+    "themeColor": "#051457",
+    "openGraph": {
+      "type": "website",
+      "siteName": "Cura",
+      "title": "Cura — Passenger Claims, Resolved.",
+      "description": "AI-powered claims resolution for airlines. Automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+      "url": "https://cura.aero/",
+      "image": "https://cura.aero/images/cura-mountains.jpg",
+      "imageAlt": "Cura — AI-powered passenger claims resolution for airlines",
+      "locale": "en_US"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Cura — Passenger Claims, Resolved.",
+      "description": "AI-powered claims resolution for airlines. Automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+      "image": "https://cura.aero/images/cura-mountains.jpg"
+    },
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://cura.aero/#organization",
+          "name": "Cura",
+          "url": "https://cura.aero/",
+          "logo": "https://cura.aero/images/logo.svg",
+          "description": "AI-powered claims resolution platform for airlines, automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+          "parentOrganization": { "@type": "Organization", "name": "AviLabs", "url": "https://avilabs.is" },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Sóltún 26",
+            "postalCode": "105",
+            "addressLocality": "Reykjavik",
+            "addressCountry": "IS"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://cura.aero/#website",
+          "url": "https://cura.aero/",
+          "name": "Cura",
+          "description": "AI-powered claims resolution for airlines.",
+          "publisher": { "@id": "https://cura.aero/#organization" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://cura.aero/#software",
+          "name": "Cura",
+          "url": "https://cura.aero/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "Cura is an AI-powered claims resolution platform for airlines, automating compensation end-to-end while improving passenger outcomes and controlling cost at scale. It connects to the systems airlines already run — CRM, payout, PSS, email ingestion, FlightAware, WorldTracer, METAR/TAF weather and more — to handle intake, fraud detection, verification and closure.",
+          "publisher": { "@id": "https://cura.aero/#organization" },
+          "offers": { "@type": "Offer", "availability": "https://schema.org/PreOrder", "url": "https://cura.aero/book-demo" }
+        }
+      ]
+    }
+  },
+  "header": {
+    "nav": [],
+    "cta": { "label": "Book a Demo", "href": "/book-demo" }
+  },
+  "hero": {
+    "title": "Resolve Claims.<br><span class='orange'>Retain Customers.</span>",
+    "sub": "Cura is an AI-powered claims resolution platform for airlines, automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+    "cta": { "label": "Book a Demo", "href": "/book-demo" },
+    "workflow": {
+      "nodes": [
+        {
+          "icon": "bolt",
+          "title": "Claim Submitted",
+          "badges": { "done": "Triggered", "prog": "In Progress" },
+          "body": "Input: Web Form, PSS, OPS, …"
+        },
+        {
+          "icon": "account_tree",
+          "title": "Fraud Detection",
+          "badges": { "done": "Completed", "prog": "In Progress" },
+          "body": "Risk score &lt; threshold → Flag"
+        }
+      ],
+      "branch": [
+        [
+          {
+            "icon": "webhook",
+            "title": "<span class='wf-lead'>Integration</span> · PNR Verification",
+            "badges": { "done": "Completed", "prog": "In Progress" },
+            "body": "Passengers + flights + dates hash"
+          }
+        ],
+        [
+          {
+            "icon": "smart_toy",
+            "title": "<span class='wf-lead'>AI</span> · OCR Receipt Verification",
+            "badges": { "done": "Completed", "prog": "In Progress" },
+            "body": "Read and calculate receipt for expenses"
+          }
+        ]
+      ]
+    }
+  },
+  "problem": {
+    "chip": "Today's Reality",
+    "title": "Claims are <span class='hi'>slow</span> <span class='hi'>manual</span><br>and <span class='hi'>fragmented</span>",
+    "tags": ["Outsourced Vendors", "Internal Workarounds", "Legacy Systems", "High Costs", "Poor Experience", "No Control"]
+  },
+  "insight": {
+    "chip": "Insight",
+    "title": "Claims aren't just a cost, they shape the final impression of the journey.",
+    "sub": "When disruption happens, the claims experience becomes the \"end\" of the trip.",
+    "bad": "<span class='text-bold'>Handled poorly</span> — drives frustration, complaints, and loyalty lost.",
+    "good": "<span class='text-bold'>Handled well</span> — builds trust, retention, and future revenue.",
+    "photo": { "src": "/images/cura-girl.jpg", "alt": "Airline passenger at the end of a journey" },
+    "arrow": { "src": "/images/arrow.avif", "alt": "" }
+  },
+  "whatWeDo": {
+    "chip": "What We Do",
+    "title": "Cura brings control to claims,<br>connecting <span class='hi hi-orange'>operational efficiency</span><br>with <span class='hi hi-orange'>customer care</span>",
+    "cta": { "label": "Book a Demo", "href": "/book-demo" }
+  },
+  "capabilities": {
+    "chip": "8 Core Capabilities",
+    "title": "From intake to closure.",
+    "sub": "From intake to closure, Cura handles the full claims lifecycle.",
+    "items": [
+      { "icon": "verified", "title": "Automated claim validation &amp; eligibility" },
+      { "icon": "bolt", "title": "AI-assisted workflows for faster claim handling" },
+      { "icon": "document_scanner", "title": "AI receipt &amp; document processing" },
+      { "icon": "gpp_good", "title": "Fraud reduction &amp; duplicate detection" },
+      { "icon": "payments", "title": "Optimised compensation recommendations" },
+      { "icon": "gavel", "title": "Automated authority responses" },
+      { "icon": "touch_app", "title": "Passenger self-service submission" },
+      { "icon": "forum", "title": "Integrated comms &amp; closure flows" }
+    ]
+  },
+  "integrations": {
+    "chip": "Integrations",
+    "title": "Built to connect.",
+    "sub": "Cura plugs into the systems airlines already run — and the partners they pay, message, and track with.",
+    "hubAriaLabel": "Cura integrates with airline and operational systems",
+    "hubLogo": { "src": "/images/logo-light.svg", "alt": "Cura" },
+    "hubLabels": [
+      "CRM",
+      "Payout",
+      "Omnichannel",
+      "PSS",
+      "Social Media",
+      "ATC / NOTAM / EuroControl",
+      "FlightAware",
+      "WorldTracer",
+      "METAR / TAF Weather",
+      "Flight Ops",
+      "Plan3"
+    ],
+    "logosLabel": "Integrations include…",
+    "logos": [
+      { "image": { "src": "/images/Revolut_logo.svg", "alt": "Revolut" } },
+      { "image": { "src": "/images/PayPal_logo.svg", "alt": "PayPal" } },
+      { "image": { "src": "/images/plan3.svg", "alt": "Plan3" } },
+      { "text": "AIMS" },
+      { "image": { "src": "/images/Stripe_Logo.svg", "alt": "Stripe" } },
+      { "image": { "src": "/images/Wise_Logo.svg", "alt": "Wise" } },
+      { "image": { "src": "/images/Zendesk_logo.svg", "alt": "Zendesk" } }
+    ]
+  },
+  "avilabs": {
+    "chip": "The AviLabs Family",
+    "title": "Built by aviation specialists.",
+    "sub": "Cura is part of the AviLabs family.",
+    "leadLogo": { "src": "/images/avilabs.svg", "alt": "AviLabs" },
+    "body": "<span class='text-bold'>Cura</span> is developed by AviLabs, the same team behind Plan3, trusted by airlines for passenger disruption management. We've spent over a decade building products that work in real airline operations — not around them.",
+    "stat": { "value": "10+ years", "label": "In aviation technology" },
+    "family": [
+      { "src": "/images/plan3.svg", "alt": "Plan3" },
+      { "src": "/images/impax.svg", "alt": "Impax" },
+      { "src": "/images/grounded.svg", "alt": "Grounded" }
+    ]
+  },
+  "cta": {
+    "title": "Ready to bring <span class='hi hi-white'>control to claims?</span>",
+    "button": { "label": "Book a Demo", "href": "/book-demo" },
+    "photos": ["/images/cta/cta-1.jpg", "/images/cta/cta-2.jpg", "/images/cta/cta-3.jpg", "/images/cta/cta-4.jpg"]
+  }
+}
