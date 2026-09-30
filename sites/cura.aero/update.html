@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cura — Update & Next Steps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #051457;
+      --navy-deep: #020c38;
+      --orange:    #FE6C3B;
+      --blue-lt:   #dde9f8;
+      --cream:     #F5EDE8;
+      --white:     #FFFFFF;
+      --muted:     #6b7a99;
+      --border:    #e2e6f0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Onest', -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 36px; }
+
+    /* ── Header ── */
+    .page-header {
+      padding: 36px 0 48px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+    .page-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 14px; }
+    .logo-wrap img { height: 32px; }
+    .header-meta { text-align: right; }
+    .header-meta .doc-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .header-meta .doc-date { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── Page title ── */
+    .page-title { margin-bottom: 56px; }
+    .page-title .chip {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--orange);
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .page-title h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+    .page-title p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+
+    /* ── Phase grid ── */
+    .phases {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+
+    .phase-card {
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    /* Heights create the staircase */
+    .phase-card--1 { background: var(--cream);   min-height: 340px; }
+    .phase-card--2 { background: var(--blue-lt); min-height: 460px; }
+    .phase-card--3 { background: var(--navy);    min-height: 500px; }
+    .phase-card--4 { background: var(--orange);  min-height: 460px; align-self: end; position: relative; overflow: hidden; }
+
+    .phase-card--4-bg {
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .phase-num {
+      font-size: 3.8rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      opacity: 0.18;
+    }
+    .phase-card--3 .phase-num,
+    .phase-card--4 .phase-num { color: #fff; }
+
+    .phase-body { display: flex; flex-direction: column; gap: 18px; }
+
+    .phase-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .phase-card--3 .phase-label,
+    .phase-card--4 .phase-label { color: rgba(255,255,255,0.5); }
+
+    .phase-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .phase-card--3 .phase-title,
+    .phase-card--4 .phase-title { color: #fff; }
+
+    .phase-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .phase-items li {
+      font-size: 0.875rem;
+      color: var(--navy);
+      line-height: 1.55;
+      padding-left: 16px;
+      position: relative;
+    }
+    .phase-items li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+    .phase-card--3 .phase-items li,
+    .phase-card--4 .phase-items li { color: rgba(255,255,255,0.8); }
+    .phase-card--3 .phase-items li::before { background: rgba(255,255,255,0.4); }
+    .phase-card--4 .phase-items li::before { background: rgba(255,255,255,0.5); }
+
+    .phase-timing {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(5,20,87,0.08);
+      color: var(--navy);
+      margin-top: 4px;
+      align-self: flex-start;
+    }
+    .phase-card--3 .phase-timing {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+    .phase-card--4 .phase-timing {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    /* ── Timeline bar ── */
+    .timeline-section { margin-bottom: 80px; }
+    .timeline-header { margin-bottom: 32px; }
+    .timeline-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .timeline-header p { font-size: 0.9rem; color: var(--muted); }
+
+    .timeline-track {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      border-radius: 14px;
+      overflow: hidden;
+      height: 72px;
+    }
+    .timeline-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .timeline-seg--now  { background: var(--navy);    color: rgba(255,255,255,0.9); }
+    .timeline-seg--poc  { background: var(--orange);  color: rgba(255,255,255,0.9); }
+    .timeline-seg--prod { background: var(--blue-lt); color: var(--navy); }
+
+    .timeline-labels {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      margin-top: 10px;
+    }
+    .timeline-labels span { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── Footer ── */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-footer p { font-size: 0.8rem; color: var(--muted); }
+    .page-footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .phases {
+        grid-template-columns: 1fr 1fr;
+      }
+      .phase-card--4 { grid-column: span 2; }
+      .phase-card--1, .phase-card--2, .phase-card--3 { min-height: 300px; }
+      .timeline-track, .timeline-labels { grid-template-columns: 1fr; height: auto; }
+      .timeline-track { height: auto; }
+      .timeline-seg { padding: 16px; justify-content: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .phases { grid-template-columns: 1fr; }
+      .phase-card--4 { grid-column: span 1; }
+      .page-header-inner { flex-direction: column; align-items: flex-start; }
+      .header-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-header-inner">
+        <div class="logo-wrap">
+          <img src="assets/logo-dark.svg" alt="Cura" />
+        </div>
+        <div class="header-meta">
+          <div class="doc-label">Internal Update</div>
+          <div class="doc-date">June 2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Title -->
+    <div class="page-title">
+      <div class="chip">Update</div>
+      <h1>Update &amp; Next Steps</h1>
+      <p>Where we are, what's coming, and how we get to production — a clear-eyed view of the road ahead.</p>
+    </div>
+
+    <!-- Phase cards -->
+    <div class="phases">
+
+      <div class="phase-card phase-card--1">
+        <div class="phase-num">01</div>
+        <div class="phase-body">
+          <div>
+            <div class="phase-label">Now</div>
+            <div class="phase-title">Hardening &amp; Positioning</div>
+            <ul class="phase-items">
+              <li>Real flight, weather data, and PSS ingestion prep in place.</li>
+              <li>Legal groundwork ongoing with our lawyer.</li>
+              <li>Refining branding, sales approach, and pitch strategy.</li>
+            </ul>
+          </div>
+          <span class="phase-timing">Active</span>
+        </div>
+      </div>
+
+      <div class="phase-card phase-card--2">
+        <div class="phase-num">02</div>
+        <div class="phase-body">
+          <div>
+            <div class="phase-label">~2 Months</div>
+            <div class="phase-title">POC Phase</div>
+            <ul class="phase-items">
+              <li>Partner with an airline to refine real-world use cases.</li>
+              <li>Test with UAT data — no live customer data yet.</li>
+              <li>Legal discussions continue. Hosting stays on Supabase / Vercel.</li>
+            </ul>
+          </div>
+          <span class="phase-timing">Upcoming</span>
+        </div>
+      </div>
+
+      <div class="phase-card phase-card--3">
+        <div class="phase-num">03</div>
+        <div class="phase-body">
+          <div>
+            <div class="phase-label">Post-POC</div>
+            <div class="phase-title">Production Preparation</div>
+            <ul class="phase-items">
+              <li>Developers and SREs migrate infrastructure to AWS.</li>
+              <li>Full security and compliance implementation.</li>
+              <li>Legal and commercial terms finalised with partner airline.</li>
+            </ul>
+          </div>
+          <span class="phase-timing">Flexible start</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline bar -->
+    <div class="timeline-section">
+      <div class="timeline-header">
+        <h2>Phase Timeline</h2>
+        <p>Approximate sequencing — not fixed dates.</p>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-seg timeline-seg--now">Now — Hardening</div>
+        <div class="timeline-seg timeline-seg--poc">POC — ~2 months</div>
+        <div class="timeline-seg timeline-seg--prod">Production — post-POC</div>
+      </div>
+      <div class="timeline-labels">
+        <span>Active today</span>
+        <span>Starts with first airline partner</span>
+        <span>Timeline TBD by eng effort</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p>© 2026 AviLabs · <a href="mailto:hello@cura.aero">hello@cura.aero</a></p>
+      <p>Sóltún 26, 105, Reykjavík, Iceland</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    (() => {
+      const isProdHost = window.location.hostname === 'cura.aero' || window.location.hostname === 'www.cura.aero';
+      if (!isProdHost) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = (...args) => { window.dataLayer.push(args); };
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-83QLM5X9DK');
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-83QLM5X9DK';
+      document.head.appendChild(script);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Book a Demo — Cura</title>
+  <meta name="description" content="See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines." />
+  <link rel="canonical" href="https://cura.aero/book-demo.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="AviLabs" />
+  <meta name="theme-color" content="#051457" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Cura" />
+  <meta property="og:title" content="Book a Demo — Cura" />
+  <meta property="og:description" content="See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines." />
+  <meta property="og:url" content="https://cura.aero/book-demo.html" />
+  <meta property="og:image" content="https://cura.aero/assets/cura-mountains.jpg" />
+  <meta property="og:image:alt" content="Cura — AI-powered passenger claims resolution for airlines" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Book a Demo — Cura" />
+  <meta name="twitter:description" content="See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines." />
+  <meta name="twitter:image" content="https://cura.aero/assets/cura-mountains.jpg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://static.hsappstatic.net" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://cura.aero/book-demo.html#webpage",
+        "url": "https://cura.aero/book-demo.html",
+        "name": "Book a Demo — Cura",
+        "description": "See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines.",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://cura.aero/#website" },
+        "about": { "@id": "https://cura.aero/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cura.aero/" },
+          { "@type": "ListItem", "position": 2, "name": "Book a Demo", "item": "https://cura.aero/book-demo.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <header id="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-dark.svg" alt="Cura" />
+      </a>
+      <nav class="header-nav"></nav>
+      <a href="index.html" class="btn btn-primary">Back to site</a>
+    </div>
+  </header>
+
+  <section class="demo">
+    <div class="container demo-inner">
+      <div class="demo-intro fade-up">
+        <div class="chip chip-orange">Book a Demo</div>
+        <h1>See Cura <span class="orange">in action.</span></h1>
+        <p class="demo-sub">Tell us a bit about your team and we'll set up a walkthrough of how Cura resolves passenger claims end-to-end — automating compensation while improving outcomes and controlling cost.</p>
+        <ul class="demo-points">
+          <li><span class="material-icons-round">check</span> A tailored walkthrough for your operation</li>
+          <li><span class="material-icons-round">check</span> See the claims workflow, fraud checks &amp; integrations</li>
+          <li><span class="material-icons-round">check</span> Built by aviation specialists, the team behind Plan3</li>
+        </ul>
+      </div>
+
+      <div class="demo-form-card">
+        <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/nicolecaba/cura-demo-call?embed=true"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <img src="assets/logo.svg" alt="Cura" loading="lazy" decoding="async" />
+        <p class="footer-copy">© 2026 Cura | Part of <a href="#">AviLabs</a><br>Sóltún 26, 105, Reykjavik, Iceland</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    let lastScrollY = scrollY;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = scrollY;
+        header.classList.toggle('hidden', y > lastScrollY && y > 80);
+        lastScrollY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => { io.observe(el); });
+  </script>
+
+</body>
+
+</html>

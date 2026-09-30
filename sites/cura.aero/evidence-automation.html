@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    (() => {
+      const isProdHost = window.location.hostname === 'cura.aero' || window.location.hostname === 'www.cura.aero';
+      if (!isProdHost) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = (...args) => { window.dataLayer.push(args); };
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-83QLM5X9DK');
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-83QLM5X9DK';
+      document.head.appendChild(script);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Cura — Evidence Automation for Airline Operations</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="description" content="When a passenger escalates to a national authority, the evidence request ends up in your OCC. Cura pulls every source over an API — weather, NOTAMs, slot messages, delay codes, booking data — drafts the response and files it. Nobody in operations is asked for anything." />
+  <link rel="canonical" href="https://cura.aero/evidence-automation.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="AviLabs" />
+  <meta name="theme-color" content="#051457" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Cura" />
+  <meta property="og:title" content="Cura — Evidence Automation for Airline Operations" />
+  <meta property="og:description" content="Your OCC stops being the evidence archive. Every source pulled over an API, the response drafted and filed — all operations does is nothing." />
+  <meta property="og:url" content="https://cura.aero/evidence-automation.html" />
+  <meta property="og:image" content="https://cura.aero/assets/cura-mountains.jpg" />
+  <meta property="og:image:alt" content="Cura — evidence automation for airline operations" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cura — Evidence Automation for Airline Operations" />
+  <meta name="twitter:description" content="Your OCC stops being the evidence archive. Every source pulled over an API, the response drafted and filed." />
+  <meta name="twitter:image" content="https://cura.aero/assets/cura-mountains.jpg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root {
+      --navy-deep: #020c38;
+      --blue-lt: #dde9f8;
+      --muted: #6b7a99;
+    }
+
+    /* ── Hero ── */
+    .ea-hero { padding: 56px 0 96px; }
+    .ea-hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .ea-hero h1 { margin-bottom: 20px; }
+    .ea-hero .hero-sub { max-width: 560px; }
+    .ea-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px 22px;
+    }
+    .ea-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .ea-link:hover { color: var(--orange); border-color: var(--orange); }
+    .ea-link .material-icons-round { font-size: 18px; color: var(--orange); }
+
+    .ea-hero-flow { padding: 8px 0 16px; }
+
+    /* ── Section rhythm ── */
+    .ea-section { padding: 88px 0; }
+    .ea-section--tight { padding: 0 0 88px; }
+    .ea-head { margin-bottom: 44px; max-width: 720px; }
+    .ea-head h2 { margin-bottom: 14px; }
+    .ea-head p { font-size: 1.02rem; color: var(--muted); line-height: 1.65; }
+    .ea-head p strong { color: var(--navy); font-weight: 700; }
+
+    /* hairline between the promise and the mechanics */
+    .ea-rule { height: 1px; background: var(--border); }
+
+    /* ── The pain, stated in OCC's own words ── */
+    .ea-pain { background: var(--orange); padding: 88px 0; text-align: center; }
+    .ea-pain h2 { color: #fff; max-width: 900px; margin: 0 auto 18px; line-height: 1.2; }
+    .ea-pain > .container > p {
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto 52px;
+    }
+    .ea-pain-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .ea-pain-tags span { display: flex; align-items: center; gap: 10px; }
+    .ea-pain-tags span::before { content: "\2022"; color: rgba(255, 255, 255, 0.45); }
+    .ea-pain-tags span:first-child::before { display: none; }
+
+    /* ── Today vs. with Cura ── */
+    .ea-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .ea-compare-card {
+      border-radius: 20px;
+      padding: 32px 30px 34px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .ea-compare-card--now { background: var(--cream); border-color: transparent; }
+    .ea-compare-card--cura { background: var(--navy); border-color: transparent; }
+    .ea-compare-tag {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .ea-compare-card--cura .ea-compare-tag { color: var(--orange); }
+    .ea-compare-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .ea-compare-card--cura h3 { color: #fff; }
+    .ea-compare-list { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+    .ea-compare-list li {
+      display: flex;
+      gap: 11px;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .ea-compare-card--cura .ea-compare-list li { color: rgba(255, 255, 255, 0.82); }
+    .ea-compare-list .material-icons-round {
+      flex-shrink: 0;
+      font-size: 18px;
+      margin-top: 2px;
+      color: var(--muted);
+    }
+    .ea-compare-card--cura .ea-compare-list .material-icons-round { color: var(--orange); }
+
+
+    /* ── Flow stages ── */
+    .ea-stage { margin-bottom: 80px; }
+    .ea-stage:last-child { margin-bottom: 0; }
+    .step-tag {
+      display: inline-block;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .wf-section-header h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+    .wf-section-header p { font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
+
+    /* flows size to their column and never enforce a fixed card height */
+    .wf { --wf-h: auto; padding: 8px 0 24px; }
+    .wf-card { min-height: 76px; }
+    .wf-card--head-only { min-height: 0; }
+
+    /* explainer left, flow right */
+    .ev-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    .ev-split .wf-section-header { margin-bottom: 0; position: sticky; top: 110px; }
+    .ev-split-flow .wf {
+      --wf-w: min(340px, 100%);
+      max-width: 340px;
+      margin: 0 0 0 auto;
+      padding-top: 0;
+    }
+    .ev-split-flow--wide .wf { --wf-w: min(440px, 100%); max-width: 440px; }
+
+    .wf .wf-chip { overflow: hidden; }
+    .wf .wf-chip .material-icons-round { line-height: 1; }
+
+    /* actor tag inside the card head — who supplies this step */
+    .wf-card-head { position: relative; }
+    .wf-actor {
+      margin-left: auto;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .wf-actor--cura { color: var(--orange); }
+
+    .wf-src-list {
+      list-style: none;
+      margin: 0;
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .wf-src-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 0.72rem;
+      line-height: 1.35;
+      color: var(--navy);
+    }
+    .wf-src-list li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 5px; height: 5px;
+      margin-top: 5px;
+      border-radius: 50%;
+      background: #cdd3e0;
+      transition: background 0.5s ease;
+    }
+    .wf-node.done .wf-src-list li::before { background: var(--orange); }
+    .wf-node--draft { width: var(--wf-w); }
+    .wf-node--draft .wf-card { height: auto; }
+
+    /* ── Sources at a glance ── */
+    .ev-legend {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .ev-legend-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 24px 28px;
+      background: #fff;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .ev-legend-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(5, 20, 87, 0.08);
+    }
+    .ev-legend-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .ev-legend-card .who {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .ev-legend-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── In practice: a dark panel the two letters sit on ── */
+    .ev-practice {
+      position: relative;
+      background: var(--navy);
+      border-radius: 28px;
+      padding: 60px 52px 64px;
+      overflow: hidden;
+    }
+    .ev-practice::before {
+      content: "";
+      position: absolute;
+      top: -140px; right: -120px;
+      width: 460px; height: 460px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(254, 108, 59, 0.3), transparent 68%);
+      pointer-events: none;
+    }
+    .ev-practice > * { position: relative; }
+    .ev-practice .wf-section-header { max-width: 660px; margin-bottom: 0; }
+    .ev-practice .wf-section-header h2 { color: #fff; font-size: 1.9rem; }
+    .ev-practice .wf-section-header p { color: rgba(255, 255, 255, 0.68); }
+
+    .ev-pair {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+      align-items: stretch;
+      margin-top: 40px;
+    }
+    .ev-pair-arrow { display: flex; align-items: center; justify-content: center; }
+    .ev-pair-arrow span {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .ev-mail {
+      display: flex;
+      flex-direction: column;
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 18px 44px rgba(2, 12, 56, 0.34);
+    }
+    /* the reply is the point of the section — mark it */
+    .ev-mail--out { box-shadow: 0 0 0 1px var(--orange), 0 22px 54px rgba(2, 12, 56, 0.42); }
+
+    .ev-mail-meta {
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfcfe;
+    }
+    .ev-subject {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .ev-fields {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 3px 10px;
+      margin: 0;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+    .ev-fields dt { color: var(--muted); font-weight: 600; }
+    .ev-fields dd { margin: 0; color: var(--navy); }
+
+    .ev-mail-body {
+      flex: 1 1 auto;
+      padding: 18px;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: var(--navy);
+    }
+    .ev-mail-body p { margin-bottom: 12px; }
+    .ev-mail-body p:last-child { margin-bottom: 0; }
+    .ev-mail-body .ev-quiet { color: var(--muted); }
+
+    .ev-mail-list {
+      list-style: none;
+      margin: 0 0 14px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      counter-reset: ev;
+    }
+    .ev-mail-list > li {
+      display: flex;
+      gap: 11px;
+      counter-increment: ev;
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+    .ev-mail-list > li::before {
+      content: counter(ev);
+      flex-shrink: 0;
+      width: 21px; height: 21px;
+      margin-top: 2px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--border);
+      color: var(--navy);
+    }
+    .ev-mail--out .ev-mail-list > li::before { background: var(--orange); color: #fff; }
+    .ev-item { min-width: 0; }
+    .ev-item b { display: block; font-weight: 600; }
+    .ev-item .ev-quiet { display: block; color: var(--muted); font-size: 0.8rem; }
+
+    .ev-sign {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .ev-sign strong { color: var(--navy); font-weight: 600; }
+
+    .ev-mail-foot {
+      border-top: 1px solid var(--border);
+      padding: 13px 18px;
+      background: #fbfcfe;
+    }
+    .ev-attach { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 9px; }
+    .ev-attach span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--cream);
+      border-radius: 5px;
+      padding: 4px 9px;
+    }
+    .ev-attach .material-icons-round { font-size: 13px; color: var(--orange); }
+    .ev-integrity {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.74rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+    .ev-integrity .material-icons-round { font-size: 14px; color: var(--orange); flex-shrink: 0; }
+    .ev-hash {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+      color: var(--navy);
+    }
+
+    /* ── What the system learns: one panel, three signals ── */
+    .lrn-panel {
+      background: var(--blue-lt);
+      border-radius: 28px;
+      padding: 44px 40px 30px;
+    }
+    /* the section heading lives inside the panel, so pull its scale down */
+    .lrn-panel .ea-head { margin-bottom: 30px; max-width: 620px; }
+    .lrn-panel .ea-head h2 { font-size: clamp(1.55rem, 3vw, 2.1rem); }
+    .lrn-panel .ea-head p { font-size: 0.95rem; }
+    .lrn-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    /* hairlines between columns instead of three separate cards */
+    .lrn-card + .lrn-card {
+      border-left: 1px solid rgba(5, 20, 87, 0.1);
+      padding-left: 28px;
+    }
+    .lrn-card-head {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 9px;
+    }
+    .lrn-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .lrn-card p { font-size: 0.86rem; line-height: 1.55; color: var(--navy); }
+    .lrn-card p em { color: var(--muted); font-style: italic; }
+    /* how fast the signal arrives is what separates these three */
+    .lrn-speed {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      border-radius: 100px;
+      padding: 2px 8px 2px 5px;
+      background: rgba(5, 20, 87, 0.08);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .lrn-speed .material-icons-round { font-size: 11px; color: var(--muted); }
+    .lrn-speed--fast { background: rgba(254, 108, 59, 0.16); color: var(--orange-dk); }
+    .lrn-speed--fast .material-icons-round { color: var(--orange); }
+
+    .lrn-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(5, 20, 87, 0.1);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .lrn-note .material-icons-round { font-size: 16px; color: var(--orange); flex-shrink: 0; margin-top: 1px; }
+    .lrn-note strong { color: var(--navy); font-weight: 700; }
+
+    /* this page's closing line is longer than the home page's — let it wrap */
+    .cta-section h2 { white-space: normal; }
+
+    /* ── Responsive ── */
+    @media (max-width: 980px) {
+      .ea-hero .container { grid-template-columns: 1fr; gap: 40px; }
+      .ev-legend { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 820px) {
+      .ea-section { padding: 64px 0; }
+      .ev-split { grid-template-columns: 1fr; gap: 32px; }
+      .ev-split .wf-section-header { position: static; }
+      .ev-split-flow .wf { margin: 0 auto; }
+      .ev-pair { grid-template-columns: 1fr; }
+      .ev-pair-arrow { padding: 16px 0; transform: rotate(90deg); }
+      .ev-practice { padding: 38px 22px 42px; border-radius: 22px; }
+      .ev-practice .wf-section-header h2 { font-size: 1.45rem; }
+      .ea-compare { grid-template-columns: 1fr; }
+      .lrn-panel { padding: 30px 22px 22px; border-radius: 20px; }
+      .lrn-list { grid-template-columns: 1fr; gap: 18px; }
+      .lrn-card + .lrn-card { border-left: 0; padding-left: 0; padding-top: 18px; border-top: 1px solid rgba(5, 20, 87, 0.1); }
+      .ea-pain-tags { font-size: 1rem; }
+    }
+    @media (max-width: 680px) {
+      .ev-legend { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="assets/logo-dark.svg" alt="Cura" />
+      </a>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+      <a href="book-demo.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+  </header>
+
+  <!-- ══ Hero ══ -->
+  <section class="hero ea-hero">
+    <div class="container">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          For OCC and operations leadership
+        </div>
+        <h1>Your OCC stops being<br><span class="orange">the evidence archive.</span></h1>
+        <p class="hero-sub">Months after a disruption, an authority asks for the NOTAMs, the slot messages, the delay codes and the duty manager's notes — and the request lands on your desk. Cura pulls every one of those sources over an API the moment the request arrives, drafts the response in the authority's own structure and files it. <strong>Nobody in operations is asked for anything.</strong></p>
+        <div class="ea-hero-actions">
+          <a href="book-demo.html" class="btn btn-primary">Book a Demo</a>
+          <a href="#how-it-works" class="ea-link">See how it works <span class="material-icons-round">arrow_downward</span></a>
+        </div>
+      </div>
+
+      <div class="ea-hero-flow fade-up">
+        <div class="wf" id="wf-hero">
+
+          <div class="wf-node">
+            <div class="wf-badges">
+              <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Received</span>
+              <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>In Progress</span>
+            </div>
+            <div class="wf-card wf-card--head-only">
+              <div class="wf-card-head">
+                <span class="wf-chip"><span class="material-icons-round">mark_email_unread</span></span>
+                <span class="wf-card-title">Authority request arrives</span>
+                <span class="wf-actor">Authority</span>
+              </div>
+            </div>
+            <span class="wf-port"></span>
+          </div>
+
+          <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+          <div class="wf-node">
+            <div class="wf-badges">
+              <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Collected</span>
+              <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>Pulling</span>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-head">
+                <span class="wf-chip"><span class="material-icons-round">storage</span></span>
+                <span class="wf-card-title">Evidence collected</span>
+                <span class="wf-actor wf-actor--cura">Cura</span>
+              </div>
+              <div class="wf-card-divider"></div>
+              <div class="wf-card-body">Weather, NOTAMs, CTOT, delay codes, booking — pulled in parallel</div>
+            </div>
+            <span class="wf-port"></span>
+          </div>
+
+          <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+          <div class="wf-node">
+            <div class="wf-badges">
+              <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Drafted</span>
+              <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>Drafting</span>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-head">
+                <span class="wf-chip"><span class="material-icons-round">edit_note</span></span>
+                <span class="wf-card-title">Response drafted</span>
+                <span class="wf-actor wf-actor--cura">AI agent</span>
+              </div>
+              <div class="wf-card-divider"></div>
+              <div class="wf-card-body">Cause categorised, delay attributed minute by minute</div>
+            </div>
+            <span class="wf-port"></span>
+          </div>
+
+          <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+          <div class="wf-node">
+            <div class="wf-badges">
+              <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Filed</span>
+              <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>In Review</span>
+            </div>
+            <div class="wf-card wf-card--head-only">
+              <div class="wf-card-head">
+                <span class="wf-chip"><span class="material-icons-round">how_to_reg</span></span>
+                <span class="wf-card-title">Approved and filed</span>
+                <span class="wf-actor">Claims</span>
+              </div>
+            </div>
+            <span class="wf-port"></span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ The pain ══ -->
+  <section class="ea-pain">
+    <div class="container">
+      <h2 class="fade-up">Every escalation ends the same way: someone in operations digging through March.</h2>
+      <p class="fade-up">A national authority writes to the airline eleven weeks after the flight. Legal cannot answer it without you — so the request becomes a favour, then a chase, then a deadline.</p>
+      <div class="ea-pain-tags fade-up d1">
+        <span>NOTAM archives</span>
+        <span>Screenshots of METARs</span>
+        <span>Duty manager notes</span>
+        <span>Delay code disputes</span>
+        <span>Slot messages</span>
+        <span>20 working days</span>
+        <span>A deadline you didn't set</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Today vs. with Cura ══ -->
+  <section class="ea-section">
+    <div class="container">
+      <div class="ea-head fade-up">
+        <div class="chip chip-orange">The change</div>
+        <h2>The request never reaches your team.</h2>
+        <p>Same escalation, same authority, same deadline — a completely different week for the people running the operation.</p>
+      </div>
+
+      <div class="ea-compare fade-up d1">
+        <div class="ea-compare-card ea-compare-card--now">
+          <div class="ea-compare-tag">Today</div>
+          <h3>Evidence is assembled by memory, months late.</h3>
+          <ul class="ea-compare-list">
+            <li><span class="material-icons-round">schedule</span><span>Legal emails OCC asking what happened on a flight from three months ago.</span></li>
+            <li><span class="material-icons-round">folder_off</span><span>NOTAMs, CTOTs and weather have to be reconstructed from whatever was saved on the day.</span></li>
+            <li><span class="material-icons-round">person_search</span><span>The duty manager who worked that shift may not be the one answering.</span></li>
+            <li><span class="material-icons-round">gavel</span><span>Thin evidence means paying claims the airline should have defended.</span></li>
+          </ul>
+        </div>
+
+        <div class="ea-compare-card ea-compare-card--cura">
+          <div class="ea-compare-tag">With Cura</div>
+          <h3>Evidence is sealed at the moment of the disruption.</h3>
+          <ul class="ea-compare-list">
+            <li><span class="material-icons-round">bolt</span><span>Every source is fetched over an API the moment the request lands — in parallel, in minutes.</span></li>
+            <li><span class="material-icons-round">lock_clock</span><span>Weather, minima and NOTAMs are stamped at the time of the disruption, not recalled later.</span></li>
+            <li><span class="material-icons-round">notifications_off</span><span>No one in OCC is interrupted. The read-only API is wired up once, at onboarding.</span></li>
+            <li><span class="material-icons-round">shield</span><span>The airline defends what it can defend, on the record, with a checksum per document.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="ea-rule"></div></div>
+
+  <!-- ══ How it works ══ -->
+  <section class="ea-section" id="how-it-works">
+    <div class="container">
+      <div class="ea-head fade-up">
+        <div class="chip chip-orange">How it works</div>
+        <h2>Data in. Filed package out.</h2>
+        <p>When a passenger escalates to the authority or to court, this is every source that goes into the file, who supplies it, and what happens next. Every source is fetched over an API — the only thing anyone at the airline does is <strong>approve the response for sending</strong>.</p>
+      </div>
+
+      <!-- Stage one -->
+      <div class="ea-stage">
+        <div class="ev-split fade-up">
+          <div class="wf-section-header">
+            <div class="step-tag">Stage one</div>
+            <h2>Intake and collection</h2>
+            <p>A request arrives with a reply deadline. Cura reads it and matches it to the claim — or opens one, if the passenger never claimed with the airline and went straight to the authority. Then every evidence source is pulled at once over an API. Nothing here is a request to a person, and nothing waits on one; the connections below are set up once, at onboarding.</p>
+          </div>
+
+          <div class="ev-split-flow">
+            <div class="wf" id="wf-intake">
+
+              <div class="wf-node">
+                <div class="wf-badges">
+                  <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Received</span>
+                  <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>In Progress</span>
+                </div>
+                <div class="wf-card wf-card--head-only">
+                  <div class="wf-card-head">
+                    <span class="wf-chip"><span class="material-icons-round">mark_email_unread</span></span>
+                    <span class="wf-card-title">Request arrives</span>
+                    <span class="wf-actor">Authority</span>
+                  </div>
+                </div>
+                <span class="wf-port"></span>
+              </div>
+
+              <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+              <div class="wf-node">
+                <div class="wf-badges">
+                  <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Matched</span>
+                  <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>In Progress</span>
+                </div>
+                <div class="wf-card">
+                  <div class="wf-card-head">
+                    <span class="wf-chip"><span class="material-icons-round">smart_toy</span></span>
+                    <span class="wf-card-title">Read and matched</span>
+                    <span class="wf-actor wf-actor--cura">AI</span>
+                  </div>
+                  <div class="wf-card-divider"></div>
+                  <ul class="wf-src-list">
+                    <li>Claim found — matched to the case on file</li>
+                    <li>No claim — new case is opened</li>
+                  </ul>
+                </div>
+                <span class="wf-port"></span>
+              </div>
+
+              <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+              <div class="wf-node">
+                <div class="wf-badges">
+                  <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Collected</span>
+                  <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>In Progress</span>
+                </div>
+                <div class="wf-card">
+                  <div class="wf-card-head">
+                    <span class="wf-chip"><span class="material-icons-round">storage</span></span>
+                    <span class="wf-card-title">Evidence collected</span>
+                    <span class="wf-actor wf-actor--cura">Cura</span>
+                  </div>
+                  <div class="wf-card-divider"></div>
+                  <div class="wf-card-body">Pulled in parallel, gaps flagged</div>
+                </div>
+                <span class="wf-port"></span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Where each source comes from -->
+        <div class="ev-legend fade-up d1" style="margin-top: 44px;">
+          <div class="ev-legend-card">
+            <div class="who">Cura has it</div>
+            <h3>Weather, minima, NOTAMs, flight details</h3>
+            <p>Held continuously and stamped at the time of the disruption, so the record does not depend on anyone remembering to save it on the day.</p>
+          </div>
+          <div class="ev-legend-card">
+            <div class="who">Cura, via granted access</div>
+            <h3>Slot messages, CTOT, Eurocontrol messages</h3>
+            <p>Retrieved on your behalf. This is what turns "ATC delay" from an assertion into something the authority can check.</p>
+          </div>
+          <div class="ev-legend-card">
+            <div class="who">From your API</div>
+            <h3>Booking, check-in, delay codes, ops notes</h3>
+            <p>A read-only API into your systems, wired up once. After that it is pulled automatically on every case and any gap is flagged rather than filled with an assumption.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage two -->
+      <div class="ea-stage">
+        <div class="ev-split fade-up">
+          <div class="wf-section-header">
+            <div class="step-tag">Stage two</div>
+            <h2>Draft, approve, close</h2>
+            <p>The agent writes the response in the authority's structure and hands the handler one screen. Approving it for sending is the only human step on this page — before it and after it, everything runs on its own.</p>
+          </div>
+
+          <div class="ev-split-flow ev-split-flow--wide">
+            <div class="wf" id="wf-close">
+
+              <div class="wf-node wf-node--draft">
+                <div class="wf-badges">
+                  <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Drafted</span>
+                  <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>Drafting</span>
+                </div>
+                <div class="wf-card">
+                  <div class="wf-card-head">
+                    <span class="wf-chip"><span class="material-icons-round">edit_note</span></span>
+                    <span class="wf-card-title">Response drafted</span>
+                    <span class="wf-actor wf-actor--cura">AI agent</span>
+                  </div>
+                  <div class="wf-card-divider"></div>
+                  <ul class="wf-src-list">
+                    <li>Cause categorised and the delay attributed minute by minute</li>
+                    <li>Each requested item answered in turn, in the authority's structure</li>
+                    <li>Annexes indexed, with source and integrity check</li>
+                    <li>Defend-or-settle recommendation for the handler</li>
+                  </ul>
+                </div>
+                <span class="wf-port"></span>
+              </div>
+
+              <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+              <div class="wf-node">
+                <div class="wf-badges">
+                  <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Filed</span>
+                  <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>In Review</span>
+                </div>
+                <div class="wf-card">
+                  <div class="wf-card-head">
+                    <span class="wf-chip wf-chip--cond"><span class="material-icons-round">how_to_reg</span></span>
+                    <span class="wf-card-title">Approved and filed</span>
+                    <span class="wf-actor">Airline <span class="wf-actor--cura">&rarr; Cura</span></span>
+                  </div>
+                  <div class="wf-card-divider"></div>
+                  <div class="wf-card-body">Read and press send — the only human step. Cura files it and stores the receipt.</div>
+                </div>
+                <span class="wf-port"></span>
+              </div>
+
+              <div class="wf-conn"><span class="wf-conn-fill"></span></div>
+
+              <div class="wf-node">
+                <div class="wf-badges">
+                  <span class="wf-badge wf-badge--done"><span class="material-icons-round">check</span>Recorded</span>
+                  <span class="wf-badge wf-badge--prog"><span class="material-icons-round">cached</span>Awaiting</span>
+                </div>
+                <div class="wf-card">
+                  <div class="wf-card-head">
+                    <span class="wf-chip"><span class="material-icons-round">gavel</span></span>
+                    <span class="wf-card-title">Ruling recorded</span>
+                    <span class="wf-actor wf-actor--cura">Cura</span>
+                  </div>
+                  <div class="wf-card-divider"></div>
+                  <div class="wf-card-body">Outcome and reasoning captured — and fed back, so every ruling sharpens the drafting agent and the defend-or-settle recommendation</div>
+                </div>
+                <span class="wf-port"></span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ In practice: request in, package out ══ -->
+  <section class="ea-section ea-section--tight">
+    <div class="container">
+      <div class="ev-practice fade-up">
+        <div class="wf-section-header">
+          <div class="step-tag">In practice</div>
+          <h2>What they ask for, and what goes back</h2>
+          <p>A real request lists its items and expects each one answered. The package mirrors that list item for item, so the case handler on the other side can tick their way down it.</p>
+        </div>
+
+        <div class="ev-pair">
+
+          <!-- Inbound: the authority's request -->
+          <div class="ev-mail ev-mail--in">
+            <div class="ev-mail-meta">
+              <div class="ev-subject">Request for documentation &mdash; case ref. EU-2026-04178</div>
+              <dl class="ev-fields">
+                <dt>From</dt><dd>passengerrights@authority.example</dd>
+                <dt>To</dt><dd>claims@airline.example</dd>
+                <dt>Date</dt><dd>12 March 2026 &middot; reply due 11 April</dd>
+              </dl>
+            </div>
+
+            <div class="ev-mail-body">
+              <p>Dear Sir or Madam,</p>
+              <p>We have received a complaint concerning the diversion and subsequent delay of the above flight. In order to properly progress with this matter, we kindly request that you provide the following documentation:</p>
+              <ol class="ev-mail-list">
+                <li><span class="ev-item">All relevant slot messages, including the original CTOT, any revised CTOTs, and related NOTAMs</span></li>
+                <li><span class="ev-item">All NOTAMs valid at the relevant time for the route, departure airport, destination airport, and alternate/diversion airport</span></li>
+                <li><span class="ev-item">All relevant Eurocontrol messages, communications, or network management notifications that influenced the CTOT allocation, delay, or diversion decision</span></li>
+                <li><span class="ev-item">Any other operational messages, weather reports, or internal communications that may be material to understanding the cause and handling of the diversion and delay</span></li>
+              </ol>
+              <p>Please note that a failure to reply within the period stated above may lead us to determine the matter on the basis of the information already before us.</p>
+              <div class="ev-sign">Yours faithfully,<br /><strong>Case Officer</strong>, Passenger Rights Unit</div>
+            </div>
+          </div>
+
+          <div class="ev-pair-arrow"><span class="material-icons-round">arrow_forward</span></div>
+
+          <!-- Outbound: the reply, with the package attached -->
+          <div class="ev-mail ev-mail--out">
+            <div class="ev-mail-meta">
+              <div class="ev-subject">Re: Request for documentation &mdash; case ref. EU-2026-04178</div>
+              <dl class="ev-fields">
+                <dt>From</dt><dd>claims@airline.example</dd>
+                <dt>To</dt><dd>passengerrights@authority.example</dd>
+                <dt>Date</dt><dd>14 March 2026 &middot; 28 days before the deadline</dd>
+              </dl>
+            </div>
+
+            <div class="ev-mail-body">
+              <p>Dear Case Officer,</p>
+              <p>Further to your request of 12 March, please find our response to each item below, in the order set out in your letter. The supporting documents are attached as Annexes A to D.</p>
+              <ol class="ev-mail-list">
+                <li><span class="ev-item"><b>Slot messages and CTOT history</b><span class="ev-quiet">Original CTOT, both revisions and the related NOTAM &mdash; Annex A</span></span></li>
+                <li><span class="ev-item"><b>NOTAMs valid at the relevant time</b><span class="ev-quiet">Route, departure, destination and alternate aerodrome &mdash; Annex B</span></span></li>
+                <li><span class="ev-item"><b>Eurocontrol and network management messages</b><span class="ev-quiet">The regulation that set the CTOT, with the message log &mdash; Annex C</span></span></li>
+                <li><span class="ev-item"><b>Operational messages and weather reports</b><span class="ev-quiet">METAR and TAF, approach minima and the diversion decision trail &mdash; Annex D</span></span></li>
+              </ol>
+              <p>The cause has been categorised and the delay attributed minute by minute in the covering note at Annex A. We remain at your disposal should any further material be required.</p>
+              <div class="ev-sign">Yours faithfully,<br /><strong>Claims Team</strong>, Airline Claims</div>
+            </div>
+
+            <div class="ev-mail-foot">
+              <div class="ev-attach">
+                <span><span class="material-icons-round">description</span>Annex A</span>
+                <span><span class="material-icons-round">description</span>Annex B</span>
+                <span><span class="material-icons-round">description</span>Annex C</span>
+                <span><span class="material-icons-round">description</span>Annex D</span>
+              </div>
+              <div class="ev-integrity">
+                <span class="material-icons-round">lock</span>
+                <span>Each annex indexed with its source and a checksum &mdash; <span class="ev-hash">sha256:8f3c&hellip;a91d</span></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ What the system learns ══ -->
+  <section class="ea-section">
+    <div class="container">
+      <div class="lrn-panel fade-up">
+        <div class="ea-head">
+          <div class="chip chip-orange">Learning</div>
+          <h2>It gets better with every case.</h2>
+          <p>Three signals feed back into the drafting agent &mdash; two from day one, one when the rulings land.</p>
+        </div>
+
+        <div class="lrn-list">
+
+          <article class="lrn-card">
+            <div class="lrn-card-head">
+              <h3>Edit diffs</h3>
+              <span class="lrn-speed lrn-speed--fast"><span class="material-icons-round">bolt</span>Day one</span>
+            </div>
+            <p>Every paragraph an agent rewrites. Eight rewrites in ten is a template problem &mdash; fixed the same day.</p>
+          </article>
+
+          <article class="lrn-card">
+            <div class="lrn-card-head">
+              <h3>Overrides</h3>
+              <span class="lrn-speed lrn-speed--fast"><span class="material-icons-round">bolt</span>Day one</span>
+            </div>
+            <p>Every time an agent pays against a defend call, with the reason. Expert judgement, months before the verdicts.</p>
+          </article>
+
+          <article class="lrn-card">
+            <div class="lrn-card-head">
+              <h3>Rulings</h3>
+              <span class="lrn-speed"><span class="material-icons-round">hourglass_top</span>Ground truth</span>
+            </div>
+            <p>Parsed argument by argument: <em>dismissed in 11 of 14 cases resting on an operations log alone.</em></p>
+          </article>
+
+        </div>
+
+        <p class="lrn-note">
+          <span class="material-icons-round">functions</span>
+          <span><strong>Counting, not training.</strong> Rates you can inspect, trace to real cases and defend in a dispute &mdash; not a model nobody can explain to a regulator.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══ -->
+  <section class="cta-section" id="book-demo">
+    <div class="cta-content fade-up">
+      <h2>See it run on <span class="hi hi-white">one of your own flights.</span></h2>
+      <a href="book-demo.html" class="btn btn-outline-white btn-demo">Book a Demo</a>
+    </div>
+
+    <div class="cta-strip" aria-hidden="true">
+      <span class="cta-shape cta-shape--half"></span>
+      <img class="hs-photo hs-circle" src="https://images.unsplash.com/photo-1542596594-649edbc13630?w=440&h=440&fit=crop&crop=faces&q=80" alt="" loading="lazy" decoding="async" />
+      <img class="hs-photo hs-leaf" src="https://images.unsplash.com/photo-1548213238-0da7521bd6e0?w=440&h=440&fit=crop&crop=faces&q=80" alt="" loading="lazy" decoding="async" />
+      <span class="cta-shape cta-shape--bar"></span>
+      <img class="hs-photo hs-arch" src="https://images.unsplash.com/photo-1559329373-523c3738f919?w=440&h=440&fit=crop&crop=faces&q=80" alt="" loading="lazy" decoding="async" />
+      <img class="hs-photo hs-circle" src="https://images.unsplash.com/photo-1627923146572-5e3d07f32980?w=440&h=440&fit=crop&crop=faces&q=80" alt="" loading="lazy" decoding="async" />
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <img src="assets/logo.svg" alt="Cura" loading="lazy" decoding="async" />
+        <p class="footer-copy">© 2026 Cura | Part of <a href="https://avilabs.is" target="_blank" rel="noopener noreferrer">AviLabs</a><br>Sóltún 26, 105, Reykjavik, Iceland</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    let lastScrollY = scrollY;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = scrollY;
+        header.classList.toggle('hidden', y > lastScrollY && y > 80);
+        lastScrollY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => { io.observe(el); });
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const STEP = 1150;
+    const WORK = 800;
+
+    // Run one flow: its nodes fire in sequence, each connector filling as its node completes.
+    function runFlow(wf, startDelay) {
+      if (!wf) return;
+      const nodes = [...wf.children].filter(el => el.classList.contains('wf-node'));
+      const conns = [...wf.children].filter(el => el.classList.contains('wf-conn'));
+
+      function settle() {
+        nodes.forEach(n => { n.classList.add('done'); });
+        conns.forEach(c => { c.classList.add('done'); });
+      }
+
+      if (reduceMotion) { settle(); return; }
+
+      function play() {
+        let t = startDelay;
+        nodes.forEach((node, i) => {
+          const conn = conns[i] || null;
+          setTimeout(() => { node.classList.add('running'); }, t);
+          setTimeout(() => {
+            node.classList.remove('running');
+            node.classList.add('done');
+            if (conn) conn.classList.add('done');
+          }, t + WORK);
+          t += STEP;
+        });
+      }
+
+      const startIo = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { setTimeout(play, 300); obs.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      startIo.observe(wf);
+    }
+
+    runFlow(document.getElementById('wf-hero'), 550);
+    runFlow(document.getElementById('wf-intake'), 550);
+    runFlow(document.getElementById('wf-close'), 450);
+  </script>
+
+</body>
+
+</html>

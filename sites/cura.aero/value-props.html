@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cura — Value Propositions</title>
+  <meta name="description" content="Every way Cura helps airlines resolve claims faster, reduce fraud and cost, and keep passengers loyal — from intake to automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #051457;
+      --navy-deep: #020c38;
+      --orange:    #FE6C3B;
+      --blue-lt:   #dde9f8;
+      --cream:     #F5EDE8;
+      --white:     #FFFFFF;
+      --muted:     #6b7a99;
+      --border:    #e2e6f0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Onest', -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 36px; }
+
+    /* ── Header ── */
+    .page-header {
+      padding: 36px 0 48px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+    .page-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 14px; }
+    .logo-wrap img { height: 32px; }
+    .header-meta { text-align: right; }
+    .header-meta .doc-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .header-meta .doc-date { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── Page title ── */
+    .page-title { margin-bottom: 72px; }
+    .page-title .chip {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--orange);
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .page-title h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+    .page-title h1 .orange { color: var(--orange); }
+    .page-title p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    /* ── Category band ── */
+    .vp-cat {
+      border-radius: 20px;
+      padding: 40px 40px;
+      margin-bottom: 40px;
+    }
+    .vp-cat--navy   { background: var(--navy);   color: #fff; }
+    .vp-cat--orange { background: var(--orange); color: #fff; }
+    .vp-cat .cat-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 12px;
+    }
+    .vp-cat h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .vp-cat p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.8);
+      max-width: 640px;
+    }
+
+    /* ── Value prop row ── */
+    .vp-group { margin-bottom: 40px; }
+
+    .vp {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .vp:last-child { border-bottom: none; }
+    .vp--reverse .vp-text  { order: 2; }
+    .vp--reverse .vp-media { order: 1; }
+
+    .vp-index {
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--orange);
+      opacity: 0.22;
+      margin-bottom: 12px;
+    }
+    .vp-text h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 22px;
+    }
+
+    .vp-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .vp-benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .vp-benefit-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .vp-benefit-icon .material-icons-round { font-size: 14px; }
+
+    .vp-body {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .vp-body + .vp-body { margin-top: 14px; }
+
+    /* ── Media placeholder ── */
+    .vp-media-frame {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--cream);
+      padding: 14px;
+    }
+    .vp-media-screen {
+      border-radius: 12px;
+      background: var(--white);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .vp-media-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .vp-media-placeholder .material-icons-round { font-size: 32px; opacity: 0.5; }
+    .vp-media-screen { overflow: hidden; }
+    .vp-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--orange);
+      border-radius: 24px;
+      padding: 64px 40px;
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .btn-demo {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      position: relative;
+    }
+    .btn-demo:hover { background: #fff; color: var(--orange); }
+    .cta-contact {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.9);
+      position: relative;
+    }
+    .cta-contact a { color: #fff; text-decoration: none; font-weight: 600; }
+    .cta-sep { margin: 0 10px; opacity: 0.6; }
+
+    /* ── Footer ── */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-footer p { font-size: 0.8rem; color: var(--muted); }
+    .page-footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+
+    /* ── Scroll reveal ── */
+    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.d1 { transition-delay: 0.08s; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 820px) {
+      .vp { grid-template-columns: 1fr; gap: 32px; }
+      .vp--reverse .vp-text  { order: 1; }
+      .vp--reverse .vp-media { order: 2; }
+      .vp-cat { padding: 32px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 22px; }
+      .page-header-inner { flex-direction: column; align-items: flex-start; }
+      .header-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-header-inner">
+        <div class="logo-wrap">
+          <a href="index3.html"><img src="assets/logo-dark.svg" alt="Cura" /></a>
+        </div>
+        <div class="header-meta">
+          <div class="doc-label">Value Propositions</div>
+          <div class="doc-date">16 ways Cura helps airlines</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Title -->
+    <div class="page-title">
+      <div class="chip">Value Propositions</div>
+      <h1>Everything Cura does, <span class="orange">end to end.</span></h1>
+      <p>From the moment a passenger files a claim to the final payout — and every authority response, insight, and automation in between.</p>
+    </div>
+
+    <!-- ══ CATEGORY 1 — CLAIM INTAKE ══ -->
+    <div class="vp-group">
+      <section class="vp-cat vp-cat--navy fade-up" id="claim-intake">
+        <div class="cat-label">Category 01</div>
+        <h2>Claim Intake</h2>
+        <p>Stop bad claims early, verify who's really filing, and guide passengers toward the right outcome.</p>
+      </section>
+
+      <!-- 1 — PSS integration -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">01</div>
+          <h2>PSS integration option eliminates invalid claims and reduces fraud</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Passenger and booking data are automatically retrieved from the airline's reservation system, eliminating manual entry errors.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Invalid, duplicate, and fraudulent claims are stopped before they enter the compensation workflow.</span></div>
+          </div>
+          <p class="vp-body">By connecting directly to the airline's PSS, passengers no longer need to manually provide critical booking information. This significantly improves claim accuracy, reduces fraud, limits abuse by claim agencies, and creates a faster, simpler filing experience for genuine passengers.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/1.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 2 — Verify every passenger -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">02</div>
+          <h2>Verify every passenger</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Automatic passenger verification through email confirmation or electronic signature.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Reduced fraud, unauthorized claims, and claim-agency abuse.</span></div>
+          </div>
+          <p class="vp-body">Each passenger included in a claim can be required to confirm their participation before the claim proceeds. This creates a clear audit trail, ensures compensation reaches legitimate claimants, and gives airlines full visibility into who is requesting compensation and on whose behalf. Also it gives airlines an opportunity to offer credits/miles before passengers commit to third-party claim agencies.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/2.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 3 — Intelligent claiming -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">03</div>
+          <h2>Intelligent claiming reduces errors and submissions</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Claim types are dynamically enabled or restricted based on known flight and passenger data.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Higher-quality claims, fewer cases, duplicates, and unnecessary investigations.</span></div>
+          </div>
+          <p class="vp-body">By combining flight and booking data with compensation rules, passengers receive instant feedback about their situation while filing a claim. This automatically adapts the process to each traveler and  helps set expectations early, deters ineligible submissions, and significantly reduces the number of claims.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/3.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 4 — Let passengers be heard -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">04</div>
+          <h2>Let passengers be heard</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Passengers have a dedicated space to express their experience, concerns, and frustrations, helping them feel heard throughout the claims process.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Airlines gain valuable feedback and sentiment insights without adding workload to claims teams.</span></div>
+          </div>
+          <p class="vp-body">Every claim includes an optional space for passengers to share their story in their own words. This gives travelers an opportunity to voice their frustrations and feel acknowledged, while providing airlines with direct insight into customer pain points, service failures, and operational issues that may not be captured through structured claim fields alone.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/4.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 5 — Guide toward realistic compensation -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">05</div>
+          <h2>Guide passengers toward realistic compensation</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Passengers receive immediate guidance based on applicable regulations and known flight details.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Fewer disputes, unrealistic requests, and manual clarification efforts for airline teams.</span></div>
+          </div>
+          <p class="vp-body">Our platform helps passengers understand what compensation they may be entitled to before submitting a claim. When requested amounts differ significantly from expected compensation levels, passengers receive guidance about applicable regulations, supporting documentation requirements, and available alternatives, resulting in better-informed submissions and faster claim resolution.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/5.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 6 — Keep passengers informed -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">06</div>
+          <h2>Keep passengers informed without increasing support workload</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Self-service claim tracking provides complete visibility into claim progress.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Reduced inbound contacts and improved passenger satisfaction.</span></div>
+          </div>
+          <p class="vp-body">Our platform automatically communicates next steps, expected processing times, and claim status updates throughout the resolution journey. By giving passengers transparency and self-service access to information, airlines can significantly reduce avoidable customer support interactions while improving the overall claims experience.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/6.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 7 — Smart compensation offers -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">07</div>
+          <h2>Smart compensation offers</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Airlines can offer travel credits, vouchers, or loyalty miles instead of cash compensation at any stage of the claims journey.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Higher passenger value at a lower cost, while increasing customer retention and future bookings.</span></div>
+          </div>
+          <p class="vp-body">Our platform enables personalized compensation offers throughout the claim and payout process. When appropriate, passengers can choose enhanced travel credits, vouchers, or loyalty rewards instead of cash compensation. This creates a win-win outcome, giving passengers greater perceived value while reducing compensation costs and encouraging future engagement with the airline.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/7.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 8 — Goodwill offers -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">08</div>
+          <h2>Retaining loyalty with goodwill offers</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Airlines can provide goodwill gestures even when passengers are not eligible for compensation.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Turn potentially negative experiences into opportunities for retention and future bookings.</span></div>
+          </div>
+          <p class="vp-body">When a claim is not eligible for compensation, airlines can still choose to offer targeted goodwill benefits such as discount codes, travel vouchers, bonus miles, or future flight incentives. This helps preserve customer relationships, reduces dissatisfaction, and demonstrates a commitment to customer care even when regulatory compensation is not applicable.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/8.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 9 — Automated payment information collection -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">09</div>
+          <h2>Automated payment information collection</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Required payment details such as IBAN, bank account information, or alternative payout preferences are collected automatically.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Faster payouts with fewer follow-up requests and reduced administrative effort.</span></div>
+          </div>
+          <p class="vp-body">Our platform automatically requests and validates the payment information needed to process compensation. By collecting payout details at the right stage of the claim journey, airlines can avoid unnecessary back-and-forth communication and reduce processing delays.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/9.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+    </div><!-- /.vp-group -->
+
+    <!-- ══ CATEGORY 2 — AUTOMATION / AGENTS ══ -->
+    <div class="vp-group">
+      <section class="vp-cat vp-cat--orange fade-up" id="automation">
+        <div class="cat-label">Category 02</div>
+        <h2>Automation &amp; Agents</h2>
+        <p>Deterministic workflows and AI assistance that handle the work — while airlines keep control of every decision.</p>
+      </section>
+
+      <!-- 10 — End-to-end automation -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">10</div>
+          <h2>End-to-end claims automation</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Automate any part of the claims process, from individual tasks to complete end-to-end claim handling.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Consistent, regulation-driven decisions through deterministic workflows rather than AI-generated outcomes.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Reduced operational costs, faster processing times, and significantly lower workload for claims teams.</span></div>
+          </div>
+          <p class="vp-body">Cura automates virtually the entire claims journey through configurable workflows tailored to each airline's processes. Airlines can automate end-to-end handling or only selected steps while keeping manual oversight where needed. Because workflows are configurable rather than custom-built, new automations can be introduced quickly.</p>
+          <p class="vp-body">Unlike systems that rely on AI to make decisions, Cura uses deterministic workflows based on airline policies, regulations, and business rules, so every claim is handled consistently, transparently, and compliantly. AI acts as an assistant, supporting tasks such as document reading, fraud detection, communication drafting, and data enrichment. Final decisions always remain governed by the airline.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/10.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 11 — Purpose-built -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">11</div>
+          <h2>Purpose-built for airline claims and flight eligibility</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Single source of truth — Passenger, booking, flight, disruption, communication, and document data available in one platform.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Consistent eligibility decisions — Assess claimability once at the flight level and automatically apply outcomes across related claims.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Faster resolution, lower effort — Reduce system switching, accelerate investigations, and improve agent productivity through automation and AI-assisted workflows.</span></div>
+          </div>
+          <p class="vp-body">Cura brings together passenger, booking, flight, disruption, communication, and document data into a single platform, eliminating the need to switch between PSS, operational systems, and external tools. Agents can investigate and resolve claims faster, while airlines benefit from greater consistency and productivity.</p>
+          <p class="vp-body">The platform also provides a centralized flight workspace where eligibility decisions can be assessed once at the flight level and automatically applied across related claims. By combining operational data, disruption context, decision history, and AI-supported recommendations in one place, Cura enables faster investigations, consistent outcomes, and a complete audit trail while keeping airlines fully in control of final decisions.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/11.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 12 — Regulatory and legal responses -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">12</div>
+          <h2>Automated regulatory and legal responses</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Automatically gather evidence, case history, and supporting documentation for transportation authorities and legal proceedings.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Significantly reduce the time required to prepare regulatory responses and appeals.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Improve consistency, auditability, and response quality across all external investigations.</span></div>
+          </div>
+          <p class="vp-body">When transportation authorities, courts, or legal representatives request information about a claim decision, Cura can automatically identify the request, gather the relevant evidence, and prepare a complete response package.</p>
+          <p class="vp-body">The platform consolidates claim history, passenger communications, operational data, booking information, disruption details, and decision records into a structured case file. Responses can be generated using airline-approved templates, AI-assisted drafting, or fully automated workflows, with optional agent review before submission.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/12.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 13 — AI-powered assistance -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">13</div>
+          <h2>AI-powered claim assistance</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Automates document analysis, fraud detection, communication support, and claim assessment.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Improves operational efficiency while keeping airlines in control of every decision.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Continuously learns from claim outcomes and operational feedback to provide more accurate recommendations over time.</span></div>
+          </div>
+          <p class="vp-body">Rather than making decisions, AI acts as an assistant that helps passengers, agents, and operational teams throughout the claims lifecycle.</p>
+          <p class="vp-body">AI can analyze receipts, invoices, documents, and baggage images, detect potential fraud, generate personalized communications, and provide claim recommendations based on available evidence and airline rules. Combined with configurable workflows, AI helps automate routine tasks while keeping airlines fully in control of decisions, compliance, and customer outcomes.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/13.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 14 — Customer sentiment -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">14</div>
+          <h2>Monitor and act on customer sentiment</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Track airline mentions across social media, review platforms, and public channels from a single workspace.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Identify high-priority customer issues before they escalate into larger PR or customer service problems.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Convert public complaints into actionable claims and customer recovery opportunities.</span></div>
+          </div>
+          <p class="vp-body">Cura monitors social media, review sites, and customer feedback channels to identify passenger concerns, service issues, and emerging reputation risks. AI automatically categorizes mentions, analyzes sentiment, and prioritizes cases based on urgency and impact.</p>
+          <p class="vp-body">Mentions can be linked to existing claims or converted into new ones, giving airlines a unified view of customer feedback and compensation activity. Teams can respond directly from the platform while gaining valuable insight into sentiment trends, disruption impact, and brand perception.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/14.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 15 — Operational insight -->
+      <section class="vp vp--reverse">
+        <div class="vp-text fade-up">
+          <div class="vp-index">15</div>
+          <h2>Turn claims data into operational insight</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Gain complete visibility into compensation costs, disruption trends, operational issues, and claim outcomes.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Identify opportunities to reduce costs, improve passenger satisfaction, and optimize claim workflows.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Transform claims data into actionable recommendations for operations, customer service, and management teams.</span></div>
+          </div>
+          <p class="vp-body">Cura provides airline-specific reporting across claims, operations, customer experience, and compensation costs. By combining the full claims lifecycle with operational and financial data, the platform delivers insights that are difficult to obtain from disconnected systems.</p>
+          <p class="vp-body">Teams can track claim volumes, processing performance, compensation costs, passenger behavior, and disruption trends while identifying opportunities to improve efficiency and reduce costs. AI-powered analytics help uncover patterns, detect anomalies, and recommend areas for operational improvement.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/15.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- 16 — Automated disruption rights outreach -->
+      <section class="vp">
+        <div class="vp-text fade-up">
+          <div class="vp-index">16</div>
+          <h2>Automated disruption rights outreach</h2>
+          <div class="vp-benefits">
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Proactively notify every affected passenger within the EU's new 96-hour window — automatically, with no one added to the ops team.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Each message is matched to the passenger's exact entitlement, with the real disruption reason up front — fewer dead-end claims and disputes.</span></div>
+            <div class="vp-benefit"><span class="vp-benefit-icon"><span class="material-icons-round">check</span></span><span>Add a goodwill gesture for passengers not owed compensation, turning a bad day into retained loyalty.</span></div>
+          </div>
+          <p class="vp-body">The EU's landmark reform of air passenger rights means airlines must reach out first — notifying every affected passenger electronically within 96 hours of a disrupted arrival. Cura's Disruption Rights Outreach turns that obligation into a workflow that runs itself: a daily scan reads each day's flights, identifies who is affected, and sends the right rights email well inside the window.</p>
+          <p class="vp-body">Because Cura reads why each flight was disrupted, every email tells passengers exactly where they stand — including an immediate heads-up when extraordinary circumstances such as weather or ATC mean no compensation is due. For those caught in the disruption but not owed compensation, airlines can attach a goodwill gesture like a discount on their next flight, staying compliant while protecting loyalty.</p>
+        </div>
+        <div class="vp-media fade-up d1">
+          <div class="vp-media-frame"><div class="vp-media-screen"><img class="vp-img" src="values/16.png" alt="" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="vp-media-placeholder"><span class="material-icons-round">image</span><span>Image coming soon</span></div></div></div>
+        </div>
+      </section>
+    </div><!-- /.vp-group -->
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p>© 2026 Cura | Part of the AviLabs Family · <a href="mailto:hello@cura.aero">hello@cura.aero</a></p>
+      <p>Sóltún 26, 105, Reykjavík, Iceland</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Scroll-reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => { io.observe(el); });
+  </script>
+
+</body>
+</html>
