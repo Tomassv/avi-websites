@@ -1,0 +1,132 @@
+# Alerts when main changes without a pull request.
+#
+# main has no branch protection. The avi-websites MCP server only writes mcp/* branches and
+# changes main by merging a PR through the API. This workflow detects anything else: it walks
+# the pushed commits along main's first-parent history and checks that each one is the merge
+# or squash commit of a merged pull request. If one isn't, or if main was force-pushed,
+# recreated or deleted, the run fails and opens an issue "main-guard: unexpected push to main"
+# (or comments on the open one) that mentions the repository owner. GitHub only emails a failed
+# run to whoever triggered it, which can be a bot; the issue reaches the owner either way.
+# Commits a merge commit brings in through its second parent (the PR's own commits) are part
+# of that PR and aren't checked separately. Rebase merging is disabled in the repository
+# settings; a rebase merge would be reported.
+name: main-guard
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write # only for the alert issue
+
+jobs:
+  guard:
+    name: Every commit on main comes from a merged pull request
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check the pushed commits
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+          FORCED: ${{ github.event.forced }}
+          PUSHER: ${{ github.event.pusher.name }}
+          RETRY_SECONDS: "10"
+          REPORT: ${{ runner.temp }}/main-guard-report.md
+        run: |
+          set -eu
+          set -o pipefail
+          ZERO=0000000000000000000000000000000000000000
+          MAX_COMMITS=100
+
+          # Records the finding for the job summary and the alert issue, then fails the step.
+          report() {
+            echo "::error title=main changed without a pull request::$1"
+            printf '%s\n\nPushed by **%s** (`%s` → `%s`).\n\nEvery change to main must come from a merged pull request; the MCP server squash-merges its own changes. Find out who pushed and why, and revert the commits if the push was not intended.\n' \
+              "$1" "$PUSHER" "$BEFORE" "$AFTER" > "$REPORT"
+            if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+              { echo "## main changed without a pull request"; echo; cat "$REPORT"; } >> "$GITHUB_STEP_SUMMARY"
+            fi
+            exit 1
+          }
+
+          [ "$AFTER" = "$ZERO" ] && report "main was deleted."
+          [ "$BEFORE" = "$ZERO" ] && report "main was created or recreated by a push, not by a pull request."
+          [ "$FORCED" = "true" ] && report "main was force-pushed; its history was rewritten."
+
+          # The merged pull request whose merge or squash commit is $1, or nothing. GitHub may take
+          # a few seconds to associate a fresh merge commit with its PR, so retry a few times.
+          merged_pr_of() {
+            for attempt in 1 2 3 4; do
+              pr=$(gh api "repos/$REPO/commits/$1/pulls" | jq -r --arg sha "$1" \
+                '[.[] | select(.merged_at != null and .merge_commit_sha == $sha) | .number][0] // empty')
+              if [ -n "$pr" ]; then echo "$pr"; return 0; fi
+              [ "$attempt" -lt 4 ] && sleep "$RETRY_SECONDS"
+            done
+            return 0
+          }
+
+          sha="$AFTER"
+          count=0
+          offenders=""
+          while [ "$sha" != "$BEFORE" ]; do
+            count=$((count + 1))
+            [ "$count" -gt "$MAX_COMMITS" ] && report "More than $MAX_COMMITS commits were pushed to main at once, or $BEFORE isn't in main's first-parent history."
+            commit=$(gh api "repos/$REPO/commits/$sha")
+            pr=$(merged_pr_of "$sha")
+            if [ -n "$pr" ]; then
+              echo "ok  $sha  merge/squash commit of #$pr"
+            else
+              line=$(echo "$commit" | jq -r '"\(.sha[0:7]) \"\(.commit.message | split("\n")[0])\" by \(.commit.author.name) <\(.commit.author.email)>, committed by \(.commit.committer.name)"')
+              echo "BAD $line"
+              offenders="$offenders
+          - $line"
+            fi
+            sha=$(echo "$commit" | jq -r '.parents[0].sha // empty')
+            [ -z "$sha" ] && report "Reached the first commit without finding $BEFORE; main's history was rewritten."
+          done
+
+          if [ -n "$offenders" ]; then
+            report "These commits on main don't come from a merged pull request:$offenders"
+          fi
+          echo "All $count pushed commit(s) on main come from merged pull requests."
+
+      - name: Open or update the alert issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          PUSHER: ${{ github.event.pusher.name }}
+          AFTER: ${{ github.event.after }}
+          REPORT: ${{ runner.temp }}/main-guard-report.md
+        run: |
+          set -eu
+          set -o pipefail
+          TITLE="main-guard: unexpected push to main"
+
+          # The check step writes its finding to $REPORT. If it failed before that (an API error),
+          # say so: the push is unchecked, which needs a look too.
+          if [ -f "$REPORT" ]; then
+            finding=$(cat "$REPORT")
+          else
+            finding="main-guard couldn't check this push (the check step failed with an error). Pushed by **$PUSHER**, new head \`$AFTER\`. Look at the run log and check the push by hand."
+          fi
+          body=$(printf '@%s main changed without a pull request.\n\n%s\n\nRun: %s\n' "$OWNER" "$finding" "$RUN_URL")
+
+          # An open issue with exactly this title gets a comment; otherwise a new issue is opened.
+          # (The issues API also lists pull requests; those are skipped.)
+          existing=$(gh api "repos/$REPO/issues?state=open&per_page=100" | jq -r --arg t "$TITLE" \
+            '[.[] | select(.pull_request == null and .title == $t) | .number][0] // empty')
+          if [ -n "$existing" ]; then
+            jq -n --arg body "$body" '{body: $body}' | gh api --method POST "repos/$REPO/issues/$existing/comments" --input - > /dev/null
+            echo "Commented on issue #$existing"
+          else
+            jq -n --arg title "$TITLE" --arg body "$body" '{title: $title, body: $body}' | gh api --method POST "repos/$REPO/issues" --input - > /dev/null
+            echo "Opened issue: $TITLE"
+          fi
