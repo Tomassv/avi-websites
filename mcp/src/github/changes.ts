@@ -37,7 +37,7 @@ export type PreviewStatus = {
   state: "queued" | "building" | "ready" | "failed" | "missing";
   url: string | null;
   headSha: string;
-  checks: { name: string; state: CheckState; required: boolean }[];
+  checks: { name: string; state: CheckState }[];
   approval: "required" | "approved" | "not_required";
   files: string[];
   drafts: DraftPage[];
@@ -171,12 +171,8 @@ export function changeService(deps: { cfg: Config; gh: GitHubPort; log: Logger }
     return { changeId: pr.number, branch, prUrl: gh.pullUrl(pr.number), headSha: sha, title: pr.title };
   }
 
-  async function checkList(site: SiteConfig, sha: string): Promise<(CheckInfo & { required: boolean; ownVercel: boolean })[]> {
-    const [checks, required] = await Promise.all([gh.checks(sha), gh.requiredChecks(MAIN)]);
-    const names = new Set(checks.map((c) => c.name));
-    const out = checks.map((c) => ({ ...c, required: required.includes(c.name), ownVercel: c.name === site.vercel.statusContext }));
-    for (const r of required) if (!names.has(r)) out.push({ name: r, state: "pending", description: "not reported yet", required: true, ownVercel: r === site.vercel.statusContext });
-    return out;
+  async function checkList(site: SiteConfig, sha: string): Promise<(CheckInfo & { ownVercel: boolean })[]> {
+    return (await gh.checks(sha)).map((c) => ({ ...c, ownVercel: c.name === site.vercel.statusContext }));
   }
 
   async function approvalOf(pr: PullInfo): Promise<{ required: boolean; approved: boolean }> {
@@ -221,7 +217,7 @@ export function changeService(deps: { cfg: Config; gh: GitHubPort; log: Logger }
       state,
       url: deployment?.url ?? null,
       headSha: pr.headSha,
-      checks: checks.map((c) => ({ name: c.name, state: c.state, required: c.required })),
+      checks: checks.map((c) => ({ name: c.name, state: c.state })),
       approval: approval.required ? (approval.approved ? "approved" : "required") : "not_required",
       files,
       drafts: await draftsIn(site, pr, files),
@@ -267,7 +263,7 @@ export function changeService(deps: { cfg: Config; gh: GitHubPort; log: Logger }
     } catch (e) {
       const code = (e as { status?: number }).status;
       if (code === 409) throw new ToolError("change_moved", "the change was updated while publishing; check the preview again");
-      if (code === 405) throw new ToolError("merge_refused", "GitHub refused the merge (a conflict or a rule on main); nothing was published");
+      if (code === 405) throw new ToolError("merge_refused", "GitHub refused the merge (for example a conflict); nothing was published");
       throw e;
     }
   }

@@ -215,18 +215,6 @@ export function octokitPort(cfg: Config): GitHubPort {
       }));
       return [...statuses, ...checkRuns];
     },
-    async requiredChecks(branch) {
-      try {
-        const rules = await gh.paginate(gh.repos.getBranchRules, { ...r, branch, per_page: 100 });
-        return rules.flatMap((rule: any) =>
-          rule.type === "required_status_checks" ? (rule.parameters?.required_status_checks ?? []).map((c: any) => c.context) : [],
-        );
-      } catch (e) {
-        if (notFound(e) || (e as { status?: number }).status === 403) return [];
-        throw e;
-      }
-    },
-
     async botIdentity() {
       if (bot) return bot;
       const app = new Octokit({ authStrategy: createAppAuth, auth: { appId, privateKey } });

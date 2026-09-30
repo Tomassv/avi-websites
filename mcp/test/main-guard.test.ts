@@ -1,0 +1,148 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { parse } from "yaml";
+
+/**
+ * Runs the script of .github/workflows/main-guard.yml exactly as written, against a fake `gh`
+ * that answers from fixtures (`jq` is used as on GitHub's runners).
+ */
+const workflowPath = path.resolve(import.meta.dirname, "../../.github/workflows/main-guard.yml");
+const workflow = parse(fs.readFileSync(workflowPath, "utf8"));
+const step = workflow.jobs.guard.steps[0];
+
+type Commit = { parents: string[]; message: string; author?: string };
+type Pull = { number: number; merged_at: string | null; merge_commit_sha: string };
+
+const sha = (c: string) => c.repeat(40).slice(0, 40);
+
+function run(p: { before: string; after: string; forced?: boolean; commits: Record<string, Commit>; pulls: Record<string, Pull[]>; failApi?: boolean }) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "main-guard-"));
+  const fixtures = path.join(dir, "fixtures");
+  fs.mkdirSync(fixtures);
+  for (const [s, c] of Object.entries(p.commits)) {
+    const name = c.author ?? "Jane";
+    fs.writeFileSync(
+      path.join(fixtures, `commits_${s}`),
+      JSON.stringify({ sha: s, parents: c.parents.map((x) => ({ sha: x })), commit: { message: c.message, author: { name, email: `${name.toLowerCase()}@avilabs.is` }, committer: { name } } }),
+    );
+    fs.writeFileSync(path.join(fixtures, `pulls_${s}`), JSON.stringify(p.pulls[s] ?? []));
+  }
+  const bin = path.join(dir, "bin");
+  fs.mkdirSync(bin);
+  // gh api repos/<owner>/<repo>/commits/<sha>[/pulls]
+  fs.writeFileSync(
+    path.join(bin, "gh"),
+    `#!/bin/sh
+[ -n "$FAIL_API" ] && { echo "HTTP 502" >&2; exit 1; }
+rest=\${2#repos/*/*/commits/}
+case "$rest" in
+  */pulls) f="$FIXTURES/pulls_\${rest%/pulls}" ;;
+  *) f="$FIXTURES/commits_$rest" ;;
+esac
+[ -f "$f" ] || { echo "HTTP 404: $2" >&2; exit 1; }
+cat "$f"
+`,
+  );
+  fs.chmodSync(path.join(bin, "gh"), 0o755);
+  const summary = path.join(dir, "summary.md");
+  const env = {
+    PATH: `${bin}:${process.env.PATH}`,
+    FIXTURES: fixtures,
+    GITHUB_STEP_SUMMARY: summary,
+    GH_TOKEN: "t",
+    REPO: "avilabs/avi-websites",
+    BEFORE: p.before,
+    AFTER: p.after,
+    FORCED: p.forced ? "true" : "false",
+    PUSHER: "someone",
+    RETRY_SECONDS: "0",
+    ...(p.failApi ? { FAIL_API: "1" } : {}),
+  };
+  assert.deepEqual(Object.keys(step.env).sort(), ["AFTER", "BEFORE", "FORCED", "GH_TOKEN", "PUSHER", "REPO", "RETRY_SECONDS"]);
+  const r = spawnSync("bash", ["-c", step.run], { env, encoding: "utf8" });
+  return { status: r.status, out: r.stdout + r.stderr, summary: fs.existsSync(summary) ? fs.readFileSync(summary, "utf8") : "" };
+}
+
+const merged = (n: number, s: string): Pull => ({ number: n, merged_at: "2026-09-30T12:00:00Z", merge_commit_sha: s });
+const [A, B, C, D, E] = ["a", "b", "c", "d", "e"].map(sha);
+
+test("minimal permissions and the push-to-main trigger", () => {
+  assert.deepEqual(workflow.permissions, { contents: "read", "pull-requests": "read" });
+  assert.deepEqual(workflow.on, { push: { branches: ["main"] } });
+  assert.ok(!/\$\{\{/.test(step.run), "no expressions are interpolated into the script");
+});
+
+test("a squash merge of an MCP change passes", () => {
+  const r = run({ before: A, after: B, commits: { [B]: { parents: [A], message: "[cura.aero] Hero (#7)" } }, pulls: { [B]: [merged(7, B)] } });
+  assert.equal(r.status, 0, r.out);
+  assert.match(r.out, /merge\/squash commit of #7/);
+});
+
+test("a merge commit passes; the PR's own commits (second parent) aren't checked", () => {
+  // A ← M (merge of #3), with the PR's commits C, D on the second parent.
+  const r = run({
+    before: A,
+    after: E,
+    commits: { [E]: { parents: [A, D], message: "Merge pull request #3" }, [D]: { parents: [C], message: "wip" }, [C]: { parents: [A], message: "wip" } },
+    pulls: { [E]: [merged(3, E)], [D]: [merged(3, E)] },
+  });
+  assert.equal(r.status, 0, r.out);
+});
+
+test("several merged PRs in one push pass", () => {
+  const r = run({
+    before: A,
+    after: C,
+    commits: { [C]: { parents: [B], message: "second" }, [B]: { parents: [A], message: "first" } },
+    pulls: { [C]: [merged(9, C)], [B]: [merged(8, B)] },
+  });
+  assert.equal(r.status, 0, r.out);
+  assert.match(r.out, /All 2 pushed commit\(s\)/);
+});
+
+test("a direct push fails and names the commit", () => {
+  const r = run({ before: A, after: B, commits: { [B]: { parents: [A], message: "quick fix\n\nbody", author: "Mallory" } }, pulls: {} });
+  assert.equal(r.status, 1);
+  assert.match(r.out, /::error title=main changed without a pull request::/);
+  assert.match(r.out, /bbbbbbb "quick fix" by Mallory <mallory@avilabs\.is>/);
+  assert.match(r.summary, /Pushed by someone/);
+});
+
+test("a direct commit on top of a merged PR fails", () => {
+  const r = run({
+    before: A,
+    after: C,
+    commits: { [C]: { parents: [B], message: "sneaky" }, [B]: { parents: [A], message: "[cura.aero] ok (#5)" } },
+    pulls: { [B]: [merged(5, B)] },
+  });
+  assert.equal(r.status, 1);
+  assert.match(r.out, /ccccccc "sneaky"/);
+  assert.doesNotMatch(r.out, /bbbbbbb "\[cura/);
+});
+
+test("a PR's branch commit pushed straight to main fails (it isn't the merge commit)", () => {
+  const r = run({ before: A, after: B, commits: { [B]: { parents: [A], message: "from a branch" } }, pulls: { [B]: [{ number: 4, merged_at: null, merge_commit_sha: D }] } });
+  assert.equal(r.status, 1);
+});
+
+test("force pushes, recreating and deleting main fail", () => {
+  const zero = "0".repeat(40);
+  assert.match(run({ before: A, after: B, forced: true, commits: {}, pulls: {} }).out, /force-pushed/);
+  assert.match(run({ before: zero, after: B, commits: {}, pulls: {} }).out, /created or recreated/);
+  assert.match(run({ before: A, after: zero, commits: {}, pulls: {} }).out, /deleted/);
+});
+
+test("history that doesn't lead back to the previous head fails", () => {
+  const r = run({ before: A, after: C, commits: { [C]: { parents: [B], message: "x" }, [B]: { parents: [], message: "root" } }, pulls: { [C]: [merged(1, C)], [B]: [merged(2, B)] } });
+  assert.equal(r.status, 1);
+  assert.match(r.out, /history was rewritten/);
+});
+
+test("an API failure fails the run instead of passing silently", () => {
+  const r = run({ before: A, after: B, commits: { [B]: { parents: [A], message: "x" } }, pulls: { [B]: [merged(7, B)] }, failApi: true });
+  assert.notEqual(r.status, 0);
+});

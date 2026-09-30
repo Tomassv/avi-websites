@@ -95,8 +95,8 @@ Everything below is done once, by hand; the code creates no accounts or resource
    - Deployments: read.
 
    It needs no webhook. Note the App ID and installation ID, and generate a private key.
-2. **Ruleset on `main`:** pull request required, zero approvals, squash merging allowed, and no
-   bypass for the App.
+2. **Repository settings:** allow squash merging. There is **no ruleset or branch protection** on
+   `main`; see [Direct pushes to main](#direct-pushes-to-main).
 3. **Google OAuth client** (Web application), with an Internal consent screen and scopes
    `openid email profile`. Its redirect URI is `<PUBLIC_BASE_URL>/auth/google/callback`.
 4. **Vercel project `avi-websites-mcp`:**
@@ -140,6 +140,29 @@ Before marketers use the server, check the following on one test change:
    `vercel.previewEnvironment` and `vercel.statusContext` in `src/sites/cura-aero/config.ts`.
 3. The squash commit on `main` shows the marketer as co-author.
 4. A content-only commit skips the MCP deployment, and a `sites/cura.aero/lib` change builds it.
+5. The `main-guard` run for the test PR's squash merge passes.
+
+## Direct pushes to main
+
+`main` isn't protected by GitHub. The server protects it in code: it writes only `mcp/*`
+branches, and changes `main` only by merging a PR through the API, pinned to the checked head
+SHA.
+
+Anything else is detected by [`.github/workflows/main-guard.yml`](../.github/workflows/main-guard.yml).
+It runs on every push to `main` and fails when a pushed commit isn't the merge or squash commit
+of a merged pull request. It also fails when `main` is force-pushed, recreated or deleted.
+
+- **A direct push to `main` triggers this alert.** The failed run names each offending commit
+  and the pusher.
+- **GitHub emails a failed run to the person who triggered it,** which is the pusher. A direct
+  push by the repository owner emails the owner. A push by anyone else emails them instead, and
+  shows as a red ✗ on the commit and in the Actions tab. Check that tab after any unexpected
+  change.
+- **The workflow detects; it doesn't prevent.** Undo an unintended push with a revert through a
+  pull request.
+
+Its permissions are `contents: read` and `pull-requests: read`. `mcp/test/main-guard.test.ts`
+runs its script against a fake `gh`.
 
 ## Rotate a preview secret
 

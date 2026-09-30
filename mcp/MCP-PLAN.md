@@ -206,9 +206,13 @@ Every key expires on its own. No content, no change data and no Google tokens ar
     `Mcp-Signature: <hex HMAC-SHA256>`. It's computed over `tree SHA + "\n" + parent SHA + "\n" +
     author email`, keyed with `COMMIT_SIGNING_SECRET`. The publish gate relies on this (§7.6).
     GitHub's own "Verified" mark is welcome but not required.
-- **Never main.** The server only creates or updates refs that match `refs/heads/mcp/`, and it
-  refuses a ref update that isn't a fast-forward. Changes reach `main` only through the PR merge
-  API, in `publish`. Your ruleset on `main` requires a PR with zero approvals.
+- **Never main.** `main` has **no ruleset or branch protection** (no GitHub Pro), so its
+  protection is the server's own code:
+  - the server only creates or updates refs that match `refs/heads/mcp/`;
+  - it refuses a ref update that isn't a fast-forward;
+  - `main` changes only through the PR merge API in `publish`, sent with `sha = headSha`.
+
+  Anything else that changes `main` is **detected** by `.github/workflows/main-guard.yml` (§7.8).
 - **Merge method: squash.** GitHub credits the **PR author** as the author of a squashed commit,
   and the PR author here is the App. So on `main` the commit is authored by the bot. The server
   writes the squash message itself:
@@ -361,13 +365,14 @@ This is shared by `upload_image` and the upload page.
 3. The site's **Vercel preview deployment for the current head SHA** is `success`. It's looked up
    by GitHub deployment environment (config, for example `Preview – cura-aero`), falling back to
    the commit status context (for example `Vercel – cura-aero`).
-4. Every **other check** on the head SHA is `success`, `neutral` or `skipped`: commit statuses and
-   check runs, but not other Vercel projects, which are informational only. Any check that
-   `main`'s ruleset requires must be `success`.
+4. Every **other check** on the head SHA (commit statuses and check runs) is `success`,
+   `neutral` or `skipped`. Other sites' Vercel projects are informational only, so a change to one
+   site never waits for, or fails on, another site's build. There is no list of required checks,
+   because there's no ruleset.
 5. **If `REQUIRE_APPROVAL=true`:** at least one `APPROVED` review whose `commit_id` is the head
    SHA, from a user other than the App, with no later `CHANGES_REQUESTED` from the same reviewer.
-   Otherwise `publish` returns `code: awaiting_approval` with the PR link. The ruleset stays at zero
-   approvals, and this switch is enforced by the server. Default: off.
+   Otherwise `publish` refuses and names the PR. GitHub doesn't enforce reviews (there's no
+   ruleset); this switch is enforced by the server. Default: off.
 6. The squash merge is sent with `sha = headSha`, so a push after the check makes the merge fail
    instead of publishing something unchecked.
 
@@ -384,6 +389,36 @@ the warning is part of its result.
 - **Browser pages** (`/p`, `/upload`, consent) send
   `Content-Security-Policy: default-src 'self'; frame-ancestors 'none'`,
   `Referrer-Policy: no-referrer` and `Cache-Control: no-store`.
+
+### 7.8 Detecting changes to `main` that bypass the server
+
+Without branch protection, anyone with write access could push to `main` directly.
+`.github/workflows/main-guard.yml` is the one file outside `mcp/`, approved for this purpose. It
+makes such a push visible:
+
+- **Trigger and permissions.** It runs on every push to `main`, with `contents: read` and
+  `pull-requests: read` only.
+- **What it checks.** It walks the pushed commits along `main`'s first-parent history, from the
+  new head back to the previous one. For each commit it asks the API
+  (`GET /repos/{repo}/commits/{sha}/pulls`) whether that commit is the **merge or squash commit
+  of a merged PR**. It retries a few times, because GitHub can take seconds to associate a fresh
+  merge commit.
+  - A merge commit's second-parent commits (the PR's own commits) belong to that PR and aren't
+    checked separately.
+  - Rebase merges aren't used here and would be reported.
+- **What fails.** Any other commit fails the run, with an error and a job summary naming each
+  offending commit (SHA, subject, author, committer) and the pusher. So does a force push, `main`
+  being created or deleted by a push, history that doesn't lead back to the previous head, or an
+  API error.
+- **Who is notified.** GitHub emails a failed run to **the user who triggered it**, which for a
+  push is the pusher. A direct push by the repository owner therefore emails the owner. A push by
+  someone else emails that person, and the failure also shows as a red ✗ on the commit and in the
+  Actions tab. Notifying the owner in every case would need `issues: write` (to open an issue),
+  which this workflow deliberately doesn't have.
+- **It detects, it doesn't prevent.** The fix for a bad push is a revert.
+
+The script is tested in `mcp/test/main-guard.test.ts`, which runs it as written against a fake
+`gh`.
 
 ## 8. Previews: the sign-in gateway
 
@@ -598,6 +633,11 @@ GitHub client and an in-memory Redis fake:
   - CIMD: host allowlist, `client_id` self-match and size limit.
   - Stateless DCR round trip.
   - The `state` and cookie binding.
+- **main-guard.** The workflow script, run as written with a fake `gh`. It covers squash and merge
+  commits, several PRs in one push, a direct push, a direct commit on top of a merge, a PR branch
+  commit pushed straight to `main`, force pushes, recreating and deleting `main`, broken history,
+  and API failure. It also checks the permissions and that no `${{ }}` expressions go into the
+  script.
 - **Build script.** `should-build.sh` builds for a change in `mcp/`, in a site's `lib/`, or in a
   site's `landing.schema.json`, and when the base is unknown. It skips for a content-only change.
 - **Logging.** Tokens and base64 never appear in a log line.
@@ -622,8 +662,9 @@ GitHub client and an in-memory Redis fake:
 ## 15. Rollout
 
 1. **Set up the accounts.**
-   - A GitHub App with the permissions in §5, installed on this repo only, and your ruleset on
-     `main` (PR required, zero approvals, squash allowed).
+   - A GitHub App with the permissions in §5, installed on this repo only. `main` gets **no
+     ruleset**. Squash merging must be allowed in the repository settings.
+   - `.github/workflows/main-guard.yml` is merged with this project, so Actions is enabled.
    - A Google OAuth client with an Internal consent screen.
    - The Vercel project `avi-websites-mcp` (root `mcp/`), with Upstash Redis from the Marketplace.
    - The bypass secret "marketing-previews" on cura's Vercel project.
@@ -632,7 +673,8 @@ GitHub client and an in-memory Redis fake:
    - the GitHub deployment environment and status context names Vercel posts for cura (they go
      into the config);
    - the squash commit shows the marketer as co-author;
-   - `should-build.sh` skips on a content-only commit and builds on a `lib/` change.
+   - `should-build.sh` skips on a content-only commit and builds on a `lib/` change;
+   - main-guard passes for the squash merge of the test PR.
 3. **Test with the Inspector** (`DRY_RUN`, then the sandbox), then on the real repo with one
    person.
 4. **Connect Claude.** An Organization Owner adds the connector in claude.ai with the OAuth client
@@ -647,7 +689,7 @@ GitHub client and an in-memory Redis fake:
 - Changes under `sites/`.
 - A `.github/workflows` check running the site's `npm test`. The server already enforces the same
   Rich whitelist check before committing, and the site build is the final gate. It can be added
-  later.
+  later. (`main-guard.yml`, §7.8, is the one approved file outside `mcp/`.)
 - Editing avilabs.is, grounded, impax and plan3.
 
 ## 17. Decisions
@@ -660,7 +702,7 @@ GitHub client and an in-memory Redis fake:
 | Q3 | **`ALLOWED_EMAILS` narrows.** The user must be in `ALLOWED_EMAIL_DOMAIN` **and** on the list; an empty list means the whole domain. |
 | Q4 | **The sign-in gateway**, with the secret dropped from the URL by Vercel's cookie redirect. That is verified in rollout; if it fails I switch to the reverse proxy. Rotation is one README section (§8). |
 | Q5 | **A signed one-time upload link.** Photos are downsized in the browser, then resized and cleaned by the server, and committed to the change's branch (§9). |
-| Q9 | **Your ruleset on `main`** (PR required, zero approvals). **Squash merges**, with the commit on `main` authored by the App and the marketer as co-author (§5). **`REQUIRE_APPROVAL`**, default off, makes `publish` wait for an approving review (§7.6). |
+| Q9 | **No ruleset on `main`** (no GitHub Pro; this replaces the earlier answer). `main` is protected by the server's code, and `main-guard.yml` detects anything else (§5, §7.8). **Squash merges**, with the commit on `main` authored by the App and the marketer as co-author (§5). **`REQUIRE_APPROVAL`**, default off, makes `publish` wait for an approving review (§7.6). |
 | Build | The MCP redeploys when `mcp/`, `sites/*/lib/` or `sites/*/content/landing.schema.json` change. `vercel.json` sets the `ignoreCommand`, and the README documents it (§12). |
 
 **Approval changes (2026-09-30):**
@@ -670,7 +712,7 @@ GitHub client and an in-memory Redis fake:
 | A1 | The GitHub App also has **Checks: read**. Nothing else is needed. Labels and PR comments are covered by Pull requests: write. |
 | A2 | Every server commit carries the **`Mcp-Signature` HMAC trailer**. Gate 2 accepts a commit on a valid trailer; GitHub's "Verified" is optional (§5, §7.6). |
 | A3 | New articles and landing pages default to **`draft: false`**. `get_preview` and `publish` warn about any draft pages in the change (§7.6). |
-| A4 | GitHub Pro and the ruleset on `main` are set up by you before rollout. |
+| A4 | ~~GitHub Pro and a ruleset on `main`~~ **Withdrawn:** there is no ruleset. Publish gate 4 no longer reads "checks required by main's ruleset". Detection is by `.github/workflows/main-guard.yml` (§7.8). |
 
 **My recommended defaults, for the questions you left to me:**
 
@@ -703,4 +745,5 @@ Where the code differs from the plan above, and why:
 | `update_text` | Edits are applied **in place in the JSON text**, so the file keeps its formatting and a one-word edit is a one-line diff. The result is re-parsed and must equal the structurally checked edit. For the whole-file check, a non-landing file checks every tag against the schema's Rich pattern (the site's `rich.test.ts` rule); edited values must match the full pattern. |
 | Tokens | Refresh tokens are `<family>.<jti>.<key id>.<mac>`. The key id lets `TOKEN_SECRETS` rotate. |
 | DRY_RUN | Uses an **in-memory copy of the checkout** as GitHub, so the whole flow (PRs, previews, publish, undo) runs locally. Every tool result is prefixed with a dry-run note. `REDIS=memory` (DEV_MODE only) replaces Redis. |
-| Gate 4 | Checks from other Vercel projects (other sites) are informational unless `main`'s ruleset requires them. |
+| Gate 4 | Checks from other Vercel projects (other sites) are informational. There's no required-checks list, since there's no ruleset. |
+| main-guard | GitHub emails a failed run to the pusher, not always the owner (§7.8). |

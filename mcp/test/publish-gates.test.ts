@@ -25,8 +25,8 @@ function input(over: Partial<PublishInput> = {}): PublishInput {
     commits: [signedCommit(head, "a".repeat(40), "0".repeat(40))],
     preview: { state: "ready", sha: head },
     checks: [
-      { name: "Vercel – cura-aero", state: "success", required: false, ownVercel: true },
-      { name: "Vercel – avilabs-is", state: "failure", required: false, ownVercel: false },
+      { name: "Vercel – cura-aero", state: "success", ownVercel: true },
+      { name: "Vercel – avilabs-is", state: "failure", ownVercel: false },
     ],
     approval: { required: false, approved: false },
     ...over,
@@ -78,13 +78,13 @@ test("gate 3: the preview must be ready for the current head", () => {
   assert.deepEqual(gates(input({ preview: { state: "missing", sha: null } })), [3]);
 });
 
-test("gate 4: other checks; other Vercel projects are informational unless required", () => {
+test("gate 4: every other check must pass; other sites' Vercel builds are informational", () => {
   const base = input().checks;
-  assert.deepEqual(gates(input({ checks: [...base, { name: "lint", state: "failure", required: false, ownVercel: false }] })), [4]);
-  assert.deepEqual(gates(input({ checks: [...base, { name: "lint", state: "pending", required: false, ownVercel: false }] })), [4]);
-  assert.deepEqual(gates(input({ checks: [...base, { name: "lint", state: "neutral", required: false, ownVercel: false }] })), []);
-  assert.deepEqual(gates(input({ checks: [...base, { name: "tests", state: "skipped", required: true, ownVercel: false }] })), [4]);
-  assert.deepEqual(gates(input({ checks: [{ name: "Vercel – avilabs-is", state: "failure", required: true, ownVercel: false }] })), [4]);
+  assert.deepEqual(gates(input({ checks: [...base, { name: "lint", state: "failure", ownVercel: false }] })), [4]);
+  assert.deepEqual(gates(input({ checks: [...base, { name: "lint", state: "pending", ownVercel: false }] })), [4]);
+  assert.deepEqual(gates(input({ checks: [...base, { name: "lint", state: "neutral", ownVercel: false }] })), []);
+  assert.deepEqual(gates(input({ checks: [...base, { name: "tests", state: "skipped", ownVercel: false }] })), []);
+  assert.deepEqual(gates(input({ checks: [{ name: "Vercel – avilabs-is", state: "pending", ownVercel: false }] })), []);
 });
 
 test("gate 5: approval only when required", () => {

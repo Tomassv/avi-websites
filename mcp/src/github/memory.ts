@@ -12,7 +12,6 @@ export type MemoryRepo = GitHubPort & {
   previews: Map<string, DeploymentState>;
   checkResults: Map<string, CheckInfo[]>;
   reviews: Map<number, Review[]>;
-  required: string[];
   pulls: PullInfo[];
   pullBase: Map<number, string>;
   comments: Map<number, string[]>;
@@ -86,7 +85,6 @@ export function memoryRepo(initial: Record<string, string | Buffer> = {}, opts: 
     previews: new Map(),
     checkResults: new Map(),
     reviews: new Map(),
-    required: [],
     pulls,
     pullBase,
     comments,
@@ -246,9 +244,6 @@ export function memoryRepo(initial: Record<string, string | Buffer> = {}, opts: 
     },
     async checks(sha) {
       return repo.checkResults.get(sha) ?? [];
-    },
-    async requiredChecks() {
-      return repo.required;
     },
     async botIdentity() {
       return BOT;

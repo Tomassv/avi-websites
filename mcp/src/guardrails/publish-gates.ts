@@ -22,7 +22,8 @@ export type PublishInput = {
   files: string[];
   commits: (SignedCommit & { verified: boolean })[];
   preview: { state: "ready" | "building" | "queued" | "failed" | "missing"; sha: string | null };
-  checks: { name: string; state: CheckState; required: boolean; ownVercel: boolean }[];
+  /** Commit statuses and check runs on the head. `ownVercel` marks this site's Vercel status. */
+  checks: { name: string; state: CheckState; ownVercel: boolean }[];
   approval: { required: boolean; approved: boolean };
 };
 
@@ -66,12 +67,11 @@ export function evaluatePublish(site: SiteConfig, input: PublishInput, signingSe
     fail(3, why);
   }
 
-  // 4. Every other check passed (other Vercel projects are informational unless required).
+  // 4. Every other check passed. Other Vercel projects (other sites) are informational: a
+  // change to one site doesn't wait for, or fail on, another site's build.
   for (const c of input.checks) {
-    if (c.ownVercel) continue;
-    const okState = c.state === "success" || c.state === "neutral" || c.state === "skipped";
-    if (c.required && c.state !== "success") fail(4, `required check "${c.name}" is ${c.state}`);
-    else if (!c.required && !okState && !/^vercel\b/i.test(c.name)) fail(4, `check "${c.name}" is ${c.state}`);
+    if (c.ownVercel || /^vercel\b/i.test(c.name)) continue;
+    if (c.state !== "success" && c.state !== "neutral" && c.state !== "skipped") fail(4, `check "${c.name}" is ${c.state}`);
   }
 
   // 5. Approval, when REQUIRE_APPROVAL is on.

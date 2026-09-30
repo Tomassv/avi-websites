@@ -78,8 +78,6 @@ export interface GitHubPort {
   deployment(sha: string, environment: string): Promise<DeploymentState | null>;
   /** Commit statuses and check runs on a commit. */
   checks(sha: string): Promise<CheckInfo[]>;
-  /** Status checks required on a branch by rulesets or branch protection. */
-  requiredChecks(branch: string): Promise<string[]>;
 
   /** The App's bot identity, used as committer. */
   botIdentity(): Promise<Person & { login: string }>;
