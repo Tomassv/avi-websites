@@ -1,0 +1,256 @@
+/* Page styles moved verbatim from workflow.html. */
+/* palette additions to match update.html's document look */
+:root {
+  --navy-deep: #020c38;
+  --blue-lt: #dde9f8;
+  --muted: #6b7a99;
+}
+
+/* narrower document container, like update.html */
+.wf-doc.container { max-width: 1100px; padding: 0 36px; }
+
+/* ── Header ── */
+.page-header {
+  padding: 36px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 56px;
+}
+.page-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.logo-wrap { display: flex; align-items: center; gap: 14px; }
+.logo-wrap img { height: 32px; }
+.header-meta { text-align: right; }
+.header-meta .doc-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.header-meta .doc-date { font-size: 0.85rem; color: var(--muted); }
+
+/* ── Page title ── */
+.page-title { margin-bottom: 44px; }
+.page-title .chip {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: #fff;
+  margin-bottom: 18px;
+}
+.page-title h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin-bottom: 16px;
+}
+.page-title p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 660px;
+  line-height: 1.65;
+}
+.page-title p strong { color: var(--navy); font-weight: 700; }
+
+/* ── Fact cards — echo update.html's coloured card palette ── */
+.wf-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 72px;
+}
+.wf-fact {
+  border-radius: 20px;
+  padding: 28px 26px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.wf-fact--1 { background: var(--cream); }
+.wf-fact--2 { background: var(--blue-lt); }
+.wf-fact--3 { background: var(--navy); }
+.wf-fact-tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.wf-fact-num {
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+.wf-fact--3 .wf-fact-num { color: #fff; }
+.wf-fact-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.wf-fact--3 .wf-fact-label { color: rgba(255, 255, 255, 0.72); }
+
+/* ── Workflow section header (document rhythm) ── */
+.wf-section { margin-bottom: 72px; }
+.wf-section-header { margin-bottom: 28px; }
+.wf-section-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.wf-section-header p { font-size: 0.9rem; color: var(--muted); }
+
+/* horizontal scroll shell so the 6-way branch never crushes */
+.wf-scroll {
+  margin-top: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0;
+}
+
+.wf--multi {
+  max-width: 1120px;
+  min-width: 960px;
+}
+
+/* multi-way fork: equal flex cells tile a continuous bar, drops sit on cell centres */
+.wf6-branch {
+  width: 100%;
+}
+
+.wf6-fork {
+  position: relative;
+  display: flex;
+  height: 48px;
+  margin-top: 5px;
+}
+
+.wf6-stem {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 22px;
+  transform: translateX(-1px);
+  background: var(--border);
+  transition: background 0.55s ease;
+}
+
+.wf6-cell {
+  position: relative;
+  flex: 1 1 0;
+}
+
+.wf6-bar {
+  position: absolute;
+  top: 21px;
+  height: 2px;
+  background: var(--border);
+  transition: background 0.55s ease;
+}
+
+.wf6-cell.first .wf6-bar { left: 50%; right: 0; }
+.wf6-cell.last .wf6-bar { left: 0; right: 50%; }
+.wf6-cell.mid .wf6-bar { left: 0; right: 0; }
+
+.wf6-drop {
+  position: absolute;
+  top: 21px;
+  left: 50%;
+  transform: translateX(-1px);
+  width: 2px;
+  height: 27px;
+  background: var(--border);
+  transition: background 0.55s ease;
+}
+
+.wf6-fork.done .wf6-stem,
+.wf6-fork.done .wf6-bar,
+.wf6-fork.done .wf6-drop {
+  background: var(--orange);
+}
+
+.wf6-row {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.wf6-col {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* keep the icon glyph perfectly boxed — no ligature can spill the chip */
+.wf .wf-chip {
+  overflow: hidden;
+}
+.wf .wf-chip .material-icons-round {
+  line-height: 1;
+}
+
+/* decision nodes read orange, action nodes stay navy — a clear visual grammar */
+.wf-chip--cond {
+  background: var(--cream);
+  color: var(--orange);
+}
+
+.wf-cond-label {
+  display: block;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 4px;
+}
+
+.wf-cond .wf-card-body {
+  font-weight: 500;
+}
+
+/* phone-only stacked flow — hidden on larger screens */
+.wf-mobile-flow { display: none; }
+.wf-mobile-flow .wf {
+  --wf-w: min(340px, 84vw);
+  --wf-h: auto;
+  max-width: 360px;
+  padding: 8px 0;
+}
+.wf-mobile-flow .wf-card { height: auto; min-height: 84px; }
+
+@media (max-width: 820px) {
+  .wf-facts { grid-template-columns: 1fr; }
+  .page-header-inner { flex-direction: column; align-items: flex-start; }
+  .header-meta { text-align: left; }
+}
+
+@media (max-width: 720px) {
+  .wf-scroll { margin-top: 28px; }
+}
+
+/* below this width, swap the branching workflow for the stacked one */
+@media (max-width: 600px) {
+  .wf-scroll { display: none; }
+  .wf-mobile-flow { display: block; }
+}
