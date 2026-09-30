@@ -1,0 +1,2 @@
+# Internal reports: contain credentials and customer data. Never commit.
+report/

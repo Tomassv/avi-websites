@@ -1,0 +1,828 @@
+:root {
+	--bg: #f7f7f7;
+	--card: #ffffff;
+	--text: #222222;
+	--muted: #666666;
+	--accent: #ff5a12;
+	--accent-soft: #fff3ed;
+	--accent-hover: #f14f08;
+	--accent-active: #dc4706;
+	--border: #e6e6e6;
+	--border-hover: #c3c4c9;
+	--radius-lg: 24px;
+	--radius-md: 16px;
+
+	/* Font scale */
+	--fs-xs: 14px;
+	--fs-sm: 16px;
+	--fs-lg: 24px;
+	--fs-icon: 20px;
+
+	/* Font weights */
+	--fw-regular: 400;
+	--fw-medium: 500;
+	--fw-bold: 700;
+
+	/* Text shades */
+	--text-subtle: #4d4d4d;
+	--text-dim: #9ca3af;
+	--text-hover: #6b7280;
+	--text-active: #374151;
+	/* Status colors */
+	--delay-text: #8a5200;
+	--error-bg: #ffe8ed;
+	--error-text: #bb3322;
+	--success-bg: #e7f5eb;
+	--success-text: #1d7a38;
+
+	/* User bubble (using accent colors) */
+
+	/* Confirmed state */
+	--confirmed-bg-start: #f4fff7;
+	--confirmed-banner-bg: #e8f6ec;
+	--confirmed-border: #b7e3c3;
+	--confirmed-border-light: #ccead6;
+	--confirmed-text: #1f6f37;
+	--confirmed-title: #15592b;
+	--confirmed-body: #315a3f;
+	--confirmed-label: #2f6b44;
+	--confirmed-value: #133f22;
+	--confirmed-divider: #cfe7d6;
+
+	/* UI elements */
+	--dot-color: #bdbdbd;
+	--photo-border: #d7e1ea;
+	--photo-bg: #e9f2f8;
+	--scrollbar-thumb: #d5dde5;
+	--badge-from: #ff385c;
+	--badge-to: #e31c5f;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: var(--text);
+	background: var(--card);
+	min-height: 100svh;
+}
+
+.page {
+	padding: 0 0 48px;
+	max-width: 402px;
+	margin: 0 auto;
+	background: var(--card);
+}
+
+.top-card {
+	margin-top: -36px;
+	background: var(--card);
+	padding-top: 24px;
+	border-radius: var(--radius-lg);
+}
+
+.hero {
+	background: url('jetstar.png') center/cover no-repeat;
+	height: 180px;
+	padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero h1 {
+	margin: 4px 0 0;
+	font-size: var(--fs-lg);
+	line-height: 1.2;
+	letter-spacing: 0;
+	font-weight: var(--fw-bold);
+	color: var(--card);
+}
+
+.eyebrow {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.9);
+	font-weight: var(--fw-medium);
+	letter-spacing: 0;
+	font-size: var(--fs-xs);
+}
+
+.flight-card {
+	margin: -4px 16px;
+	position: relative;
+	border-radius: 20px;
+	padding: 24px;
+	background: var(--bg);
+}
+
+.status-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+}
+
+.status-tag {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 12px;
+	border-radius: 40px;
+	background: var(--error-bg);
+	color: var(--error-text);
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-medium);
+	letter-spacing: 0;
+}
+
+.status-tag-new {
+	background: var(--success-bg);
+	color: var(--success-text);
+}
+
+.ref {
+	color: var(--muted);
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-regular);
+}
+
+.route-row {
+	margin-top: 16px;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: 16px;
+}
+
+.airport .code {
+	margin: 0;
+	font-size: var(--fs-lg);
+	font-weight: var(--fw-bold);
+	letter-spacing: 0;
+}
+
+.airport .city,
+.airport .time {
+	margin: 0;
+}
+
+.airport .city {
+	color: var(--muted);
+	font-size: var(--fs-sm);
+}
+
+.airport .time {
+	margin-top: 10px;
+	font-weight: var(--fw-medium);
+	font-size: var(--fs-sm);
+}
+
+.airport.right {
+	text-align: right;
+}
+
+.connector {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	min-width: 30px;
+}
+
+.line {
+	display: none;
+}
+
+.plane {
+	font-size: var(--fs-sm);
+	color: var(--text-dim);
+}
+
+.meta-grid {
+	margin-top: 18px;
+	padding-top: 14px;
+	border-top: 1px solid var(--border);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.label {
+	margin: 0;
+	color: var(--muted);
+	font-size: var(--fs-sm);
+	letter-spacing: 0;
+}
+
+.value {
+	margin: 2px 0 0;
+	font-weight: var(--fw-medium);
+	font-size: var(--fs-sm);
+}
+
+/* Shared interactive card base — used by .option-card and .chat-hotel-btn */
+.option-card,
+.chat-hotel-btn {
+	position: relative;
+	width: 100%;
+	text-align: left;
+	border: 1px solid var(--border);
+	background: var(--card);
+	border-radius: 18px;
+	padding: 15px 46px 15px 15px;
+	display: flex;
+	flex-direction: column;
+	font: inherit;
+	color: var(--text);
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.chat-hotel-btn {
+	gap: 6px;
+}
+
+.option-button {
+	position: absolute;
+	right: 14px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 26px;
+	height: 26px;
+	border-radius: 999px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Material Icons", sans-serif;
+	font-size: var(--fs-icon);
+	line-height: 1;
+	font-style: normal;
+	font-weight: var(--fw-regular);
+	color: var(--card);
+	background: var(--accent);
+	flex-shrink: 0;
+}
+
+.option-card:hover,
+.chat-hotel-btn:hover {
+	transform: translateY(-1px);
+	border-color: var(--border-hover);
+}
+
+.option-card:active,
+.chat-hotel-btn:active {
+	transform: translateY(0);
+	background: var(--bg);
+}
+
+.option-card + .option-card {
+	margin-top: 10px;
+}
+
+.option-card:focus-visible {
+	outline: 2px solid var(--text);
+	outline-offset: 2px;
+}
+
+.chat-section {
+	padding: 24px 16px calc(40px + env(safe-area-inset-bottom, 0px));
+	background: var(--card);
+	overflow: visible;
+}
+
+.chat-log {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.chat-bubble {
+	max-width: 100%;
+	padding: 14px 16px;
+	border-radius: 12px;
+	font-size: var(--fs-sm);
+	line-height: 1.3;
+}
+
+.chat-bubble-assistant {
+	align-self: flex-start;
+	background: var(--bg);
+	border: 0;
+	color: var(--text);
+}
+
+.chat-bubble-typing {
+	align-self: flex-start;
+	background: var(--bg);
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 12px 14px;
+}
+
+.dot {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--dot-color);
+	animation: blink 1.2s infinite ease-in-out;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+	0%, 80%, 100% { opacity: 0.25; transform: scale(0.9); }
+	40%            { opacity: 1;    transform: scale(1.1); }
+}
+
+.chat-bubble-user {
+	align-self: flex-end;
+	background: var(--accent-soft);
+	color: var(--accent);
+}
+
+.chat-flight-card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	padding: 14px;
+	margin-top: 6px;
+}
+
+.chat-hotel-offer-card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	padding: 14px;
+	width: min(80vw, 280px);
+	min-width: min(80vw, 280px);
+	margin-top: 0;
+	scroll-snap-align: start;
+}
+
+.chat-hotel-offers-wrap {
+	margin-top: 8px;
+	max-width: 100%;
+}
+
+.chat-hotel-offers-row {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: min(80vw, 280px);
+	gap: 12px;
+	overflow-x: auto;
+	padding: 2px 2px 8px;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+}
+
+.chat-hotel-offers-row::-webkit-scrollbar {
+	height: 8px;
+}
+
+.chat-hotel-offers-row::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-thumb);
+	border-radius: 999px;
+}
+
+.chat-hotel-photo {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	border-radius: 12px;
+	border: 1px solid var(--photo-border);
+	background: var(--photo-bg);
+}
+
+.chat-hotel-offers-footer {
+	margin-top: 10px;
+}
+
+.chat-hotel-name {
+	margin: 10px 0 0;
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-bold);
+	color: var(--text);
+}
+
+.chat-flight-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 2px;
+}
+
+.chat-flight-actions {
+	display: flex;
+	gap: 8px;
+	margin-top: 14px;
+}
+
+.chat-flight-actions .cta-secondary {
+	flex: 1;
+	border-radius: 10px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.chat-flight-actions button {
+	flex: 1;
+	border-radius: 10px;
+}
+
+.chat-flight-actions .is-disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.chat-flight-result {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 8px;
+	padding: 12px;
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	background: var(--bg);
+}
+
+.chat-flight-result-confirmed,
+.chat-hotel-result-confirmed {
+	position: relative;
+	border: 1px solid var(--confirmed-border);
+	border-radius: 16px;
+	overflow: hidden;
+}
+
+.chat-confirmed-banner {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 10px;
+	border-radius: 999px;
+	background: var(--confirmed-banner-bg);
+	border: 1px solid var(--confirmed-border-light);
+	font-size: var(--fs-xs);
+	font-weight: var(--fw-bold);
+	color: var(--confirmed-text);
+}
+
+.chat-flight-result-confirmed .chat-flight-result-title,
+.chat-hotel-result-confirmed .chat-flight-result-title {
+	margin-top: 10px;
+	font-size: var(--fs-sm);
+	color: var(--confirmed-title);
+}
+
+.chat-flight-result-confirmed .chat-flight-result-text,
+.chat-hotel-result-confirmed .chat-flight-result-text {
+	color: var(--confirmed-body);
+}
+
+.chat-flight-result-confirmed .result-value,
+.chat-hotel-result-confirmed .result-value {
+	color: var(--confirmed-value);
+}
+
+.chat-flight-result-confirmed .chat-result-block,
+.chat-hotel-result-confirmed .chat-result-block {
+	border-top-color: var(--confirmed-divider);
+}
+
+.chat-flight-result-confirmed .result-block-title,
+.chat-hotel-result-confirmed .result-block-title {
+	color: var(--confirmed-label);
+}
+
+.chat-flight-result-title {
+	margin: 0;
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-bold);
+	color: var(--text);
+}
+
+.chat-flight-result-text {
+	margin: 6px 0 0;
+	font-size: var(--fs-sm);
+	line-height: 1.4;
+	color: var(--text-subtle);
+}
+
+.chat-passenger-plan {
+	background: var(--card);
+	border: 1px solid var(--border);
+}
+
+.chat-itinerary-list {
+	margin: 10px 0 0;
+	padding-left: 18px;
+	display: grid;
+	gap: 7px;
+	color: var(--text-subtle);
+	font-size: var(--fs-sm);
+	line-height: 1.42;
+}
+
+.chat-result-grid {
+	margin-top: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.chat-result-grid p {
+	margin: 0;
+	padding: 7px 8px;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	background: var(--card);
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.result-key {
+	font-size: var(--fs-xs);
+	color: var(--muted);
+	font-weight: var(--fw-medium);
+}
+
+.result-value {
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-bold);
+	color: var(--text);
+}
+
+.chat-result-block {
+	margin-top: 10px;
+	padding-top: 9px;
+	border-top: 1px dashed var(--border);
+}
+
+.chat-hotel-actions {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.result-block-title {
+	margin: 0;
+	font-size: var(--fs-xs);
+	font-weight: var(--fw-bold);
+	letter-spacing: 0.01em;
+	color: var(--text-subtle);
+}
+
+.chat-options-wrap {
+	padding: 8px 0 0;
+}
+
+.chat-options-label {
+	margin: 8px 0 12px;
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-bold);
+	letter-spacing: 0;
+	color: var(--text);
+}
+
+.chat-options {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 8px;
+}
+
+.chat-options .option-card {
+	display: grid;
+	grid-template-columns: 0fr auto;
+	align-items: baseline;
+	padding: 16px;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	background: var(--card);
+	gap: 4px;
+}
+
+.chat-options .option-card:hover {
+	transform: none;
+	border-color: var(--border);
+	background: var(--bg);
+}
+
+.chat-options .option-card:active {
+	transform: none;
+	background: var(--bg);
+}
+
+.chat-options .option-number {
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-medium);
+	line-height: 1.25;
+	color: var(--text);
+}
+
+.chat-options .option-title {
+	font-size: var(--fs-sm);
+	font-weight: var(--fw-medium);
+	line-height: 1.25;
+	color: var(--text);
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.chat-options .option-detail {
+	grid-column: 1;
+	font-weight: var(--fw-regular);
+	font-size: var(--fs-xs);
+	color: var(--muted);
+	padding-right: 32px;
+}
+
+.chat-form {
+	display: block;
+	position: fixed;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-50%);
+	width: min(100%, 402px);
+	background: var(--card);
+	padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+	z-index: 40;
+}
+
+.chat-form-wrapper {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	background: var(--card);
+	padding: 8px;
+}
+
+.chat-form-wrapper:focus-within {
+	border-color: var(--text-dim);
+}
+
+.chat-form input {
+	flex: 1;
+	border: none;
+	outline: none;
+	font: inherit;
+	font-size: var(--fs-sm);
+	color: var(--text);
+	background: transparent;
+	line-height: 1.5;
+}
+
+.chat-form input::placeholder {
+	color: var(--text-dim);
+}
+
+.chat-form input:focus-visible,
+.chat-send:focus-visible {
+	outline: none;
+}
+
+.chat-send {
+	border: none;
+	padding: 0;
+	font: inherit;
+	background: transparent;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.2s ease;
+}
+
+.chat-send:hover {
+	color: var(--text-hover);
+}
+
+.chat-send:active {
+	color: var(--text-active);
+}
+
+.chat-send {
+	width: 36px;
+	height: 36px;
+	border-radius: 999px;
+	color: var(--card);
+	background: var(--accent);
+}
+
+.chat-send svg {
+	width: 18px;
+	height: 18px;
+}
+
+.chat-send:hover {
+	background: var(--accent-hover);
+	color: var(--card);
+}
+
+.chat-send:active {
+	background: var(--accent-active);
+	color: var(--card);
+}
+
+.btn-badge {
+	display: inline-block;
+	background: linear-gradient(135deg, var(--badge-from), var(--badge-to));
+	width: 94px;
+	color: var(--card);
+	font-size: var(--fs-xs);
+	font-weight: var(--fw-bold);
+	padding: 3px 8px;
+	border-radius: 4px;
+	margin-right: 6px;
+	letter-spacing: 0.5px;
+}
+
+.cta {
+	width: 100%;
+	border: 0;
+	border-radius: 999px;
+	padding: 14px 16px;
+	font: inherit;
+	font-weight: var(--fw-bold);
+	font-size: var(--fs-sm);
+	letter-spacing: 0.01em;
+	color: var(--card);
+	background: var(--accent);
+}
+
+.cta-secondary {
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	padding: 14px 16px;
+	font: inherit;
+	font-weight: var(--fw-bold);
+	font-size: var(--fs-sm);
+	letter-spacing: 0.01em;
+	color: var(--text);
+	background: var(--card);
+	text-decoration: none;
+}
+
+.cta-sm {
+	font-size: var(--fs-sm);
+	padding: 10px 14px;
+}
+
+.cta-xs {
+	font-size: var(--fs-sm);
+	padding: 10px 12px;
+}
+
+.hidden {
+	display: none;
+}
+
+.animate-in {
+	opacity: 0;
+	transform: translateY(8px);
+	transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.animate-in.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.chat-flight-card .route-row { margin-top: 12px; }
+.chat-hotel-offer-card .route-row { margin-top: 10px; }
+.chat-hotel-offer-card .chat-flight-header { margin-top: 10px; }
+.chat-hotel-offer-card .chat-flight-actions { margin-top: 10px; }
+.chat-hotel-offer-card .status-row { margin-bottom: 8px; }
+.chat-hotel-offer-card .chat-hotel-name { margin: 0; }
+.chat-passenger-plan .chat-flight-actions { margin-top: 12px; }
+
+/* Desktop screens */
+@media (min-width: 768px) {
+	.page {
+		max-width: 600px;
+	}
+
+	.chat-form {
+		width: min(100%, 600px);
+	}
+}

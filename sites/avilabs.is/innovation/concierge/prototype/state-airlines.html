@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Other airlines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body { background: #fff; }
+        .page { padding: 20px 16px 24px; max-width: 100%; }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <article class="chat-bubble chat-bubble-user" style="margin-bottom: 10px;">Reject change</article>
+        <article class="chat-bubble chat-bubble-assistant" style="margin-bottom: 10px;">No problem. We can also check flights on different airlines.</article>
+        <article class="chat-bubble chat-bubble-assistant" style="margin-bottom: 10px;">Would you like us to rebook you on a different airline? You only pay the difference between the new ticket price and what you paid for your cancelled flight.</article>
+        <div class="chat-hotel-offers-wrap">
+            <div class="chat-hotel-offers-row" style="grid-auto-columns: min(80vw, 260px);">
+                <article class="chat-hotel-offer-card"  style="max-width: 250px;min-width: 250px;">
+                    <div class="status-row">
+                        <p class="chat-hotel-name" style="margin: 0;">Lufthansa</p>
+                        <span class="ref">LH 2445 · 12 Jun</span>
+                    </div>
+                    <div class="route-row">
+                        <div class="airport">
+                            <p class="code">MEL</p>
+                            <p class="time">12:25</p>
+                        </div>
+                        <div class="connector" aria-hidden="true">
+                            <span class="line"></span>
+                            <span class="plane">✈</span>
+                        </div>
+                        <div class="airport right">
+                            <p class="code">BNE</p>
+                            <p class="time">15:10</p>
+                        </div>
+                    </div>
+                    <div class="chat-result-grid">
+                        <p><span class="result-key">You pay</span><span class="result-value" style="color: #1d7a38;">0 EUR</span></p>
+                        <p><span class="result-key">Baggage</span><span class="result-value">1 cabin bag</span></p>
+                    </div>
+                    <div class="chat-flight-actions">
+                        <button type="button" class="cta cta-xs">Choose this flight</button>
+                    </div>
+                </article>
+                <article class="chat-hotel-offer-card" style="max-width: 250px;min-width: 250px;">
+                    <div class="status-row">
+                        <p class="chat-hotel-name" style="margin: 0;">Norwegian</p>
+                        <span class="ref">DY 1308 · 12 Jun</span>
+                    </div>
+                    <div class="route-row">
+                        <div class="airport">
+                            <p class="code">MEL</p>
+                            <p class="time">15:05</p>
+                        </div>
+                        <div class="connector" aria-hidden="true">
+                            <span class="line"></span>
+                            <span class="plane">✈</span>
+                        </div>
+                        <div class="airport right">
+                            <p class="code">BNE</p>
+                            <p class="time">16:45</p>
+                        </div>
+                    </div>
+                    <div class="chat-result-grid">
+                        <p><span class="result-key">You pay</span><span class="result-value">20 EUR</span></p>
+                        <p><span class="result-key">Baggage</span><span class="result-value">1 cabin bag</span></p>
+                    </div>
+                    <div class="chat-flight-actions">
+                        <button type="button" class="cta cta-xs">Choose this flight</button>
+                    </div>
+                </article>
+                <article class="chat-hotel-offer-card">
+                    <div class="status-row">
+                        <p class="chat-hotel-name" style="margin: 0;">British Airways</p>
+                        <span class="ref">BA 811 · 12 Jun</span>
+                    </div>
+                    <div class="route-row">
+                        <div class="airport">
+                            <p class="code">MEL</p>
+                            <p class="time">13:10</p>
+                        </div>
+                        <div class="connector" aria-hidden="true">
+                            <span class="line"></span>
+                            <span class="plane">✈</span>
+                        </div>
+                        <div class="airport right">
+                            <p class="code">BNE</p>
+                            <p class="time">14:45</p>
+                        </div>
+                    </div>
+                    <div class="chat-result-grid">
+                        <p><span class="result-key">You pay</span><span class="result-value">35 EUR</span></p>
+                        <p><span class="result-key">Baggage</span><span class="result-value">1 cabin bag</span></p>
+                    </div>
+                    <div class="chat-flight-actions">
+                        <button type="button" class="cta cta-xs">Choose this flight</button>
+                    </div>
+                </article>
+            </div>
+            <div class="chat-hotel-offers-footer">
+                <button type="button" class="cta-secondary cta-sm">Keep current options</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

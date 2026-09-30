@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personalised greeting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body { background: #fff; }
+        .page { padding: 0 0 24px; max-width: 100%; }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="hero">
+            <p class="eyebrow">Travel support</p>
+            <h1>Your flight was cancelled</h1>
+        </header>
+
+        <section class="section-card top-card">
+            <div class="flight-card">
+                <div class="status-row">
+                    <span class="status-tag">Cancelled</span>
+                    <span class="ref">Booking ref: AC72P9</span>
+                </div>
+                <div class="route-row">
+                    <div class="airport">
+                        <p class="code">MEL</p>
+                        <p class="city">Melbourne</p>
+                        <p class="time"><s>06:05am</s></p>
+                    </div>
+                    <div class="connector" aria-hidden="true">
+                        <span class="line"></span>
+                        <span class="plane"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none"><g clip-path="url(#clip0_1_11)"><path d="M3.19999 5.7L7.79999 5.5L4.79999 -0.300003L6.39999 -0.200003L11 5.4H14.3C14.4 5.4 14.6 5.5 14.7 5.5C15.1 5.7 15.3 6.2 15 6.5C14.9 6.7 14.7 6.8 14.5 6.8L11.1 7L6.59999 12.6H5.19999L7.79999 6.8L3.29999 6.7L2.09999 8.4H0.999994L1.59999 6.2L0.899994 4H1.79999L3.19999 5.7Z" fill="#8D8F92"/></g><defs><clipPath id="clip0_1_11"><rect width="16" height="14" fill="white"/></clipPath></defs></svg></span>
+                    </div>
+                    <div class="airport right">
+                        <p class="code">BNE</p>
+                        <p class="city">Brisbane</p>
+                        <p class="time"><s>08:20am</s></p>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div>
+                        <p class="label">Passenger</p>
+                        <p class="value">Thomas Nielsen</p>
+                    </div>
+                    <div>
+                        <p class="label">Flight</p>
+                        <p class="value">JQ560 · 12 June 2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card chat-section" style="padding-bottom: 24px;">
+            <div class="chat-log">
+                <article class="chat-bubble chat-bubble-assistant">Hi Thomas, we are really sorry your flight was disrupted and had to be cancelled. We know this is stressful, and we are here to help you all the way through.</article>
+                <article class="chat-bubble chat-bubble-assistant">Here below, we prepared some options for you. Please do not hesitate to ask anything at any time.</article>
+                <article class="chat-bubble chat-bubble-typing">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
