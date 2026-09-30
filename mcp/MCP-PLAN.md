@@ -689,3 +689,18 @@ GitHub client and an in-memory Redis fake:
 | Q16 | Local testing starts with `DRY_RUN=1`. A sandbox repo (`avi-websites-sandbox`, same App installed) is recommended for end-to-end tests once you create it. |
 | Q17 | cura.aero is the only site for now; the config shape is designed for the others. |
 | Q18 | No site-test workflow in `.github/` (it's outside `mcp/`); the server does the whitelist check (§16). |
+
+## 18. Implementation notes
+
+Where the code differs from the plan above, and why:
+
+| Area | Difference |
+|---|---|
+| Tools | A 16th tool, **`check_upload(upload_id)`**. An upload link can be made before a change exists (images come before the landing page that uses them), so the first upload creates the change. `check_upload` tells Claude which change it went into. |
+| Tests | **`node:test`** instead of vitest, as in the sites. A vitest dependency (`source-map-js`) returned 404 from the registry at install time, and Node 22 runs TypeScript directly. |
+| Build | The build writes **Vercel's Build Output API** itself (`scripts/build.mjs`): an esbuild bundle plus sharp's runtime packages. This keeps control over how the site's rule files resolve their dependencies. The site rules are bundled by `scripts/gen-rules.mjs`, which forces `ajv`/`yaml` to resolve from `mcp/node_modules`. |
+| Paths | Writable paths must be **lowercase** (`[a-z0-9._-]` per segment). Otherwise `content/Landing.schema.json` would be a different file on Linux, but would collide with the real schema on a case-insensitive (macOS) checkout. |
+| `update_text` | Edits are applied **in place in the JSON text**, so the file keeps its formatting and a one-word edit is a one-line diff. The result is re-parsed and must equal the structurally checked edit. For the whole-file check, a non-landing file checks every tag against the schema's Rich pattern (the site's `rich.test.ts` rule); edited values must match the full pattern. |
+| Tokens | Refresh tokens are `<family>.<jti>.<key id>.<mac>`. The key id lets `TOKEN_SECRETS` rotate. |
+| DRY_RUN | Uses an **in-memory copy of the checkout** as GitHub, so the whole flow (PRs, previews, publish, undo) runs locally. Every tool result is prefixed with a dry-run note. `REDIS=memory` (DEV_MODE only) replaces Redis. |
+| Gate 4 | Checks from other Vercel projects (other sites) are informational unless `main`'s ruleset requires them. |

@@ -49,6 +49,10 @@ export function buildServer(base: Omit<ToolContext, "user">, user: User): McpSer
     try {
       await limit(kind);
       const result = await fn();
+      if (ctx.cfg.dryRun) {
+        const [first, ...rest] = result.content;
+        if (first?.type === "text") result.content = [{ ...first, text: `[DRY RUN: nothing is written to GitHub or published]\n${first.text}` }, ...rest];
+      }
       const s = result.structuredContent as Record<string, unknown> | undefined;
       ctx.log({ ...entry, changeId: s?.change_id ?? entry.changeId, files: s?.file ? [s.file] : s?.files, outcome: "ok", durationMs: Date.now() - started });
       return result;
