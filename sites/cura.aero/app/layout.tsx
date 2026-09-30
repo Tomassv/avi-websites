@@ -1,6 +1,7 @@
+import "@/styles/next-image.css";
 import type { Metadata } from "next";
 import Script from "next/script";
-import site from "@/content/site.json";
+import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

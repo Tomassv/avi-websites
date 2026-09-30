@@ -1,5 +1,15 @@
 {
   "name": "Cura",
   "url": "https://cura.aero",
-  "gaId": "G-83QLM5X9DK"
+  "gaId": "G-83QLM5X9DK",
+  "header": {
+    "logo": { "src": "/images/logo-dark.svg", "alt": "Cura" },
+    "logoHref": "/"
+  },
+  "footer": {
+    "logo": { "src": "/images/logo.svg", "alt": "Cura" },
+    "copyright": "© 2026 Cura | Part of",
+    "parent": { "label": "AviLabs", "href": "https://avilabs.is", "newTab": true },
+    "address": "Sóltún 26, 105, Reykjavik, Iceland"
+  }
 }

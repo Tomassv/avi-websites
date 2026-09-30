@@ -2,6 +2,7 @@
   "name": "cura-aero",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Landing page for Cura claims system",
   "engines": {
     "node": ">=22.18"

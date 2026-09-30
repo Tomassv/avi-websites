@@ -1,5 +1,5 @@
 import "@/styles/site.css";
-import site from "@/content/site.json";
+import { site } from "@/lib/content";
 import { Analytics } from "@/components/site/Analytics";
 import { FadeUpObserver } from "@/components/shared/FadeUpObserver";
 

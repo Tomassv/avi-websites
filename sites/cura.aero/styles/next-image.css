@@ -1,0 +1,10 @@
+/*
+ * next/image always writes width/height attributes. The old pages used plain <img> tags without
+ * them, and some rules set only one dimension (e.g. `.logo-wrap img { height: 32px }`), which
+ * would otherwise take the other dimension from the attribute. This zero-specificity rule
+ * restores plain-<img> sizing; any real rule in the page CSS still wins.
+ */
+:where(img[data-nimg]) {
+  width: auto;
+  height: auto;
+}
