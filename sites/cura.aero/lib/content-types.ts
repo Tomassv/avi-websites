@@ -358,3 +358,12 @@ export type DeckContent = {
   nav: { back: string; next: string; slide: string; logo: string };
   slides: DeckSlide[];
 };
+
+// ── News ──
+
+export type NewsContent = {
+  seo: Seo;
+  header: HeaderContent;
+  list: { chip: Rich; title: Rich; empty: Rich };
+  article: { back: string; by: string; titleSuffix: string };
+};

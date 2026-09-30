@@ -1,0 +1,23 @@
+{
+  "seo": {
+    "title": "News — Cura",
+    "description": "News and articles from Cura, the AI-powered claims resolution platform for airlines.",
+    "robots": "noindex, nofollow",
+    "author": "AviLabs",
+    "themeColor": "#051457"
+  },
+  "header": {
+    "nav": [],
+    "cta": { "label": "Book a Demo", "href": "/book-demo" }
+  },
+  "list": {
+    "chip": "News",
+    "title": "News &amp; articles",
+    "empty": "No articles yet."
+  },
+  "article": {
+    "back": "← All news",
+    "by": "By",
+    "titleSuffix": " — Cura"
+  }
+}
