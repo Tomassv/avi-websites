@@ -200,3 +200,50 @@ export type EvidenceAutomationContent = {
   };
   cta: CtaBandContent;
 };
+
+// ── Internal documents ──
+
+export type DocHeaderContent = {
+  label: Rich;
+  date: Rich;
+  /** Where the logo links to, if anywhere. */
+  logoHref?: string;
+};
+
+export type DocTitleContent = { chip: Rich; title: Rich; body?: Rich };
+
+export type FactCard = { tag: Rich; title: Rich; body: Rich };
+
+export type DocFooterContent = { left: Rich; right: Rich; email?: Link };
+
+export type EvidencePackageContent = {
+  seo: Seo;
+  docHeader: DocHeaderContent;
+  /** The lead paragraph is the shared evidence intro. */
+  title: DocTitleContent;
+  facts: FactCard[];
+  intakeFlow: Workflow;
+  reference: {
+    tag: Rich;
+    title: Rich;
+    body: Rich;
+    steps: {
+      title: Rich;
+      tag?: Rich;
+      /** A plain item, or one with a muted source note after it. */
+      items: (Rich | { text: Rich; source: Rich })[];
+    }[];
+  };
+};
+
+export type WorkflowPageContent = {
+  seo: Seo;
+  docHeader: DocHeaderContent;
+  title: DocTitleContent;
+  facts: FactCard[];
+  section: { title: Rich; body: Rich };
+  /** Spine plus one column per condition (shown from 600px up). */
+  flow: Workflow;
+  /** The stacked version shown on phones. */
+  mobileFlow: Workflow;
+};

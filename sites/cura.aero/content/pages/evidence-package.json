@@ -1,0 +1,228 @@
+{
+  "seo": {
+    "title": "Cura — Evidence Package Builder",
+    "description": "When a passenger escalates to the authority or to court, Cura's Evidence Package Builder pulls every source over an API — weather, NOTAMs, slot messages, delay codes and booking data — drafts the response and files it. All the airline does is approve it for sending.",
+    "robots": "noindex, nofollow",
+    "themeColor": "#051457"
+  },
+  "docHeader": {
+    "label": "Automated Workflow",
+    "date": "Evidence Package Builder · 2026"
+  },
+  "title": {
+    "chip": "Escalations &amp; Litigation",
+    "title": "Data in. Filed package out."
+  },
+  "facts": [
+    {
+      "tag": "What goes in",
+      "title": "Every source, pulled in parallel",
+      "body": "Weather, NOTAMs, slot messages, delay codes, booking data — every source fetched over an API the moment the request lands. Gaps are flagged, never left out quietly."
+    },
+    {
+      "tag": "What you do",
+      "title": "Approve it. That's the whole job.",
+      "body": "The agent categorises the cause, attributes the delay, answers every item in the authority's structure and recommends defend or settle. Nobody collects, chases or writes anything. The handler reads it and presses send."
+    },
+    {
+      "tag": "What comes back",
+      "title": "Every ruling makes the next one better",
+      "body": "Every ruling is stored with its reasoning and fed back into the drafting agent. Next quarter's package is built on what the authority actually decided this one."
+    }
+  ],
+  "intakeFlow": {
+    "nodes": [
+      {
+        "icon": "mail",
+        "title": "Request arrives",
+        "actor": "Authority",
+        "headOnly": true,
+        "badges": { "done": "Received", "prog": "In Progress" }
+      },
+      {
+        "icon": "smart_toy",
+        "title": "Read and matched",
+        "actor": "AI",
+        "actorCura": true,
+        "badges": { "done": "Matched", "prog": "In Progress" },
+        "list": ["Claim found — matched to the case on file", "No claim — new case is opened"]
+      },
+      {
+        "icon": "database",
+        "title": "Evidence collected",
+        "actor": "Cura",
+        "actorCura": true,
+        "badges": { "done": "Collected", "prog": "In Progress" },
+        "body": "Pulled in parallel, gaps flagged"
+      }
+    ]
+  },
+  "reference": {
+    "tag": "Reference",
+    "title": "Legal response engine — data &amp; flow list",
+    "body": "The complete step-by-step data and flow list behind the engine above: every trigger, source, computation and human checkpoint, end to end.",
+    "steps": [
+      {
+        "title": "Request arrives → workflow trigger",
+        "tag": "workflows",
+        "items": [
+          "Inbound email to a monitored address (NEB, airline legal, court)",
+          "Full message + attachments stored raw before any processing",
+          "Trigger fires one journey run per message"
+        ]
+      },
+      {
+        "title": "Read and understand the request",
+        "tag": "workflows, AI agent",
+        "items": [
+          "Extract: booking reference, passenger names, flight number and date, claim type, what the authority is asking for",
+          "Read attachments too (passenger's complaint, authority's form, prior correspondence)",
+          "Confidence score per extracted field — anything below threshold goes to a human before a record is touched"
+        ]
+      },
+      {
+        "title": "Match to a claim in Cura",
+        "tag": "Cura database",
+        "items": [
+          "<strong>Exists</strong> → load everything: claim record, airline's original decision and decision letter, evidence sealed at decision time, correspondence history",
+          "<strong>Doesn't exist</strong> → create the claim from the extracted PNR and flight, flagged <em>escalation-first</em> (evidence will have to be assembled retroactively)",
+          "Match confirmed by a person if the PNR or passenger name is uncertain"
+        ]
+      },
+      {
+        "title": "Classify the request and start the clock",
+        "tag": "workflows, AI agent + rules",
+        "items": [
+          "Requester type: NEB (AESA, LBA, DGAC…) vs. airline's own lawyer vs. court",
+          "Authority file reference → idempotency key (reminders and duplicates don't create a second case)",
+          "Deadline rule from a <strong>jurisdiction table in Cura</strong> (AESA = 20 working days), reminders at 25/50/75%",
+          "Exactly what was asked for — itemised, kept verbatim in the case"
+        ]
+      },
+      {
+        "title": "Flight &amp; rotation facts",
+        "tag": "Cura pulls — FlightAware AeroAPI",
+        "items": [
+          "STD/ATD/STA/ATA, gate and runway times, actual routing, holds, diversions, alternate used",
+          "Inbound aircraft rotation (previous 2 legs, same tail) — for chain-of-delay defences",
+          "Aircraft registration, type, operating carrier"
+        ]
+      },
+      {
+        "title": "Weather",
+        "tag": "Cura pulls — public METAR/TAF/SPECI archive",
+        "items": [
+          "Observations for departure, arrival and alternate, window = ETD −3h to ATA +1h",
+          "Published approach minima for the runway in use (AIP / Jeppesen)",
+          "Computed: did conditions sit below minima, and for how long"
+        ]
+      },
+      {
+        "title": "Airspace and ATFM",
+        "tag": "mixed",
+        "items": [
+          { "text": "NOTAMs for all airports involved — reliable only from the airline's crew briefing pack months later", "source": "[Airline API]" },
+          { "text": "ATFM regulation / flow restriction, CTOT and slot messages", "source": "[Eurocontrol — airline's operator credentials, approval-gated]" },
+          { "text": "Strike and closure notices", "source": "[Public]" }
+        ]
+      },
+      {
+        "title": "Airline operational data",
+        "tag": "live API — day one",
+        "items": [
+          "PNR, ticket numbers, passengers, fare class, booking date and channel",
+          "Check-in and boarding acceptance record, door-opening time",
+          "IATA delay codes (primary + sub), OCC/duty manager notes, crew duty limits if relevant",
+          "Maintenance record if technical cause claimed (AOG log, defect, MEL reference)"
+        ]
+      },
+      {
+        "title": "Passenger-side evidence",
+        "tag": "Cura + Plan3",
+        "items": [
+          "Every notification sent: channel, timestamp, content, delivery receipt",
+          "Rebooking offered vs. accepted, alternative transport including ground",
+          "Duty of care provided: meals, vouchers, hotel, transfer",
+          "Claim history: what was filed, what was decided, decision letter, correspondence"
+        ]
+      },
+      {
+        "title": "Compute the facts — deterministic, versioned code, never AI",
+        "items": [
+          "Arrival delay at destination in minutes, great-circle distance, EU261 compensation band",
+          "Notice period for cancellations (14-day rule), rerouting thresholds",
+          "Output = signed facts object, with source + timestamp + checksum per field"
+        ]
+      },
+      {
+        "title": "Gap check → tell the agent what's missing",
+        "items": [
+          "Each requested item marked <strong>have / partial / missing</strong>",
+          "Missing items surface in the Cura agent view as a short task list: who supplies it, by when",
+          "Deadline recalculated against the gap; case flagged red if a mandatory item is unobtainable"
+        ]
+      },
+      {
+        "title": "Fight-or-pay recommendation",
+        "tag": "AI scores, rules guard",
+        "items": [
+          "Inputs: facts object, cause category, evidence completeness score, claim value, historical outcomes for this cause + this authority",
+          "Hard rules override the AI both ways — technical fault with no extraordinary-circumstance basis → <strong>pay</strong>; evidence below threshold → <strong>pay</strong> or request extension",
+          "Output: recommendation, confidence, the 3 facts driving it, estimated exposure (compensation + care + authority cost)"
+        ]
+      },
+      {
+        "title": "Assemble the response",
+        "tag": "AI drafts prose only, from computed facts",
+        "items": [
+          "Cover letter in the authority's language, matching their itemised request",
+          "Statement of facts, legal position with case law references, annex index",
+          "Annexes as PDFs with a per-document provenance page"
+        ]
+      },
+      {
+        "title": "Agent review in Cura",
+        "tag": "the only human step",
+        "items": [
+          "Read the compiled file, edit any field or paragraph, override the recommendation with a mandatory reason",
+          "Every edit stored as a diff against the AI draft — this is training data",
+          "Approve → locked version, named approver, timestamp"
+        ]
+      },
+      {
+        "title": "Send and record",
+        "tag": "workflows sends, Cura stores",
+        "items": [
+          "Submission to the authority's portal or by email, receipt stored",
+          "Status → <em>Filed</em>, pack version archived immutable"
+        ]
+      },
+      {
+        "title": "Follow-ups before judgment",
+        "items": [
+          "Passenger's hearing response (10 working days in Spain) → new inbound event, re-enters step 2",
+          "Authority's additional questions → same path, incremental pack version"
+        ]
+      },
+      {
+        "title": "Judgment received",
+        "tag": "inbound → AI parse → structured record",
+        "items": [
+          "Outcome: upheld / partially upheld / rejected, amount ordered, reasoning text",
+          "Which of our arguments were accepted and which dismissed — extracted as tagged reasons",
+          "Compliance branch: pay via Cura settlement, or appeal → new case linked to the parent"
+        ]
+      },
+      {
+        "title": "The learning store",
+        "tag": "Cura database — the asset",
+        "items": [
+          "One outcome record per case: cause category, authority, country, evidence items present, our recommendation, the agent's decision, actual outcome, argument-level accept/reject",
+          "Feeds three things: the scoring model in step 12, the evidence checklist in step 11, the draft templates in step 13",
+          "Aggregate view per authority: win rate by cause, time to decision, arguments that NEB never accepts",
+          "Recalibration is a scheduled batch job with a versioned model — never silent, always reviewable"
+        ]
+      }
+    ]
+  }
+}
