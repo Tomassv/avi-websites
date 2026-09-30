@@ -1,0 +1,63 @@
+{
+  "seo": {
+    "title": "Book a Demo — Cura",
+    "description": "See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines.",
+    "canonical": "https://cura.aero/book-demo",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "author": "AviLabs",
+    "themeColor": "#051457",
+    "openGraph": {
+      "type": "website",
+      "siteName": "Cura",
+      "title": "Book a Demo — Cura",
+      "description": "See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines.",
+      "url": "https://cura.aero/book-demo",
+      "image": "https://cura.aero/images/cura-mountains.jpg",
+      "imageAlt": "Cura — AI-powered passenger claims resolution for airlines",
+      "locale": "en_US"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Book a Demo — Cura",
+      "description": "See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines.",
+      "image": "https://cura.aero/images/cura-mountains.jpg"
+    },
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://cura.aero/book-demo#webpage",
+          "url": "https://cura.aero/book-demo",
+          "name": "Book a Demo — Cura",
+          "description": "See Cura in action. Book a walkthrough of our AI-powered claims resolution platform for airlines.",
+          "inLanguage": "en",
+          "isPartOf": { "@id": "https://cura.aero/#website" },
+          "about": { "@id": "https://cura.aero/#organization" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cura.aero/" },
+            { "@type": "ListItem", "position": 2, "name": "Book a Demo", "item": "https://cura.aero/book-demo" }
+          ]
+        }
+      ]
+    }
+  },
+  "header": {
+    "nav": [],
+    "cta": { "label": "Back to site", "href": "/" }
+  },
+  "intro": {
+    "chip": "Book a Demo",
+    "title": "See Cura <span class='orange'>in action.</span>",
+    "sub": "Tell us a bit about your team and we'll set up a walkthrough of how Cura resolves passenger claims end-to-end — automating compensation while improving outcomes and controlling cost.",
+    "points": [
+      "A tailored walkthrough for your operation",
+      "See the claims workflow, fraud checks &amp; integrations",
+      "Built by aviation specialists, the team behind Plan3"
+    ]
+  },
+  "hubspotMeetingUrl": "https://meetings.hubspot.com/nicolecaba/cura-demo-call?embed=true"
+}

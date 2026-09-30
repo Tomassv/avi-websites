@@ -1,0 +1,163 @@
+{
+  "seo": {
+    "title": "Cura — Standalone Value Propositions",
+    "description": "Full Cura value with zero integration. Live in weeks on public flight data and what passengers submit — no PSS, no OCC, no IT project.",
+    "robots": "noindex, nofollow"
+  },
+  "docHeader": {
+    "label": "Value Propositions · Standalone Cura",
+    "date": "Prepared for Riyadh Air",
+    "logoHref": "/"
+  },
+  "title": {
+    "chip": "Standalone Cura",
+    "title": "Full Cura value. <span class='orange'>Zero integration.</span>",
+    "body": "Live in weeks on public flight data and what passengers submit. No PSS, no OCC, no IT project."
+  },
+  "covers": {
+    "label": "Covers",
+    "regulations": [
+      "EU261",
+      "UK261",
+      "GACA",
+      "Montreal Convention"
+    ]
+  },
+  "categories": [
+    {
+      "id": "fewer-better-claims",
+      "label": "Category 01",
+      "title": "Fewer, better claims",
+      "cards": [
+        {
+          "title": "Smart intake",
+          "body": "Passengers see their actual flight times and the rules that apply, so they understand when a claim is not worth filing."
+        },
+        {
+          "title": "Realistic expectations",
+          "body": "Passengers who ask for more than the regulated maximum are told the cap and asked for evidence of the extra cost."
+        },
+        {
+          "title": "Verify every passenger",
+          "body": "Co-passengers confirm by email or e-signature. Full audit trail, no unauthorised claims."
+        }
+      ]
+    },
+    {
+      "id": "keep-the-passenger",
+      "label": "Category 02",
+      "title": "Keep the passenger, keep the cash",
+      "cards": [
+        {
+          "title": "Credits over cash",
+          "body": "Enhanced credits, vouchers or miles offered at any stage, before claim agencies step in."
+        },
+        {
+          "title": "Goodwill offers",
+          "body": "Not eligible? A voucher or discount turns a rejection into a rebooking."
+        },
+        {
+          "title": "Let passengers be heard",
+          "body": "A space for their story, and direct service feedback for Riyadh Air."
+        },
+        {
+          "title": "Self-service tracking",
+          "body": "Automatic status updates. Fewer “where’s my claim?” contacts."
+        }
+      ],
+      "blue": true
+    },
+    {
+      "id": "faster-handling",
+      "label": "Category 03",
+      "title": "Faster handling, AI-assisted",
+      "cards": [
+        {
+          "title": "AI document reading",
+          "body": "Receipts, boarding passes, invoices and baggage photos read and fraud-checked."
+        },
+        {
+          "title": "AI recommendations",
+          "body": "Suggested decisions from the evidence and your rules. Agents make the call."
+        },
+        {
+          "title": "Decide once per flight",
+          "body": "Set the disruption cause once; it applies to every claim on that flight."
+        },
+        {
+          "title": "Rule-based automation",
+          "body": "Deterministic workflows run routine steps. Payout details collected up front."
+        }
+      ],
+      "blue": true
+    },
+    {
+      "id": "protect-and-learn",
+      "label": "Category 04",
+      "title": "Protect and learn",
+      "cards": [
+        {
+          "title": "Authority and legal packs",
+          "body": "Evidence files for GACA and EU authorities, assembled automatically. Every ruling feeds back into Cura, so future decisions and packs get stronger."
+        },
+        {
+          "title": "Sentiment monitoring",
+          "body": "Social and review mentions turned into claims or recovery offers."
+        },
+        {
+          "title": "Claims insight",
+          "body": "Volume, cost and hotspots by route and flight, in one view."
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "ariaLabel": "How standalone Cura works",
+    "title": "How standalone Cura <span class='orange'>works.</span>",
+    "labels": {
+      "inputs": "Inputs",
+      "core": "Standalone Cura",
+      "outputs": "Airline gets"
+    },
+    "inputs": [
+      {
+        "title": "Passenger claim",
+        "body": "Form and documents"
+      },
+      {
+        "title": "Public flight data",
+        "body": "Flight times, delays"
+      }
+    ],
+    "core": {
+      "brand": "Cura",
+      "steps": [
+        "Check eligibility",
+        "Read documents with AI",
+        "Recommend decision"
+      ]
+    },
+    "outputs": [
+      "Fewer, cleaner claims",
+      "Faster handling",
+      "Cost savings"
+    ],
+    "regulations": "EU261 · UK261 · GACA · Montreal",
+    "unlocks": {
+      "title": "Unlocks when connected later",
+      "chips": [
+        "PSS booking validation",
+        "OCC disruption causes",
+        "Full automation"
+      ]
+    }
+  },
+  "footer": {
+    "left": "© 2026 Cura | Part of the AviLabs Family ·",
+    "email": {
+      "label": "hello@cura.aero",
+      "href": "mailto:hello@cura.aero"
+    },
+    "right": "Sóltún 26, 105, Reykjavík, Iceland"
+  }
+}

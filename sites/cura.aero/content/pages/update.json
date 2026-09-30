@@ -1,0 +1,58 @@
+{
+  "seo": {
+    "title": "Cura — Update & Next Steps",
+    "robots": "noindex, nofollow"
+  },
+  "docHeader": { "label": "Internal Update", "date": "June 2026" },
+  "title": {
+    "chip": "Update",
+    "title": "Update &amp; Next Steps",
+    "body": "Where we are, what's coming, and how we get to production — a clear-eyed view of the road ahead."
+  },
+  "phases": [
+    {
+      "label": "Now",
+      "title": "Hardening &amp; Positioning",
+      "items": [
+        "Real flight, weather data, and PSS ingestion prep in place.",
+        "Legal groundwork ongoing with our lawyer.",
+        "Refining branding, sales approach, and pitch strategy."
+      ],
+      "timing": "Active"
+    },
+    {
+      "label": "~2 Months",
+      "title": "POC Phase",
+      "items": [
+        "Partner with an airline to refine real-world use cases.",
+        "Test with UAT data — no live customer data yet.",
+        "Legal discussions continue. Hosting stays on Supabase / Vercel."
+      ],
+      "timing": "Upcoming"
+    },
+    {
+      "label": "Post-POC",
+      "title": "Production Preparation",
+      "items": [
+        "Developers and SREs migrate infrastructure to AWS.",
+        "Full security and compliance implementation.",
+        "Legal and commercial terms finalised with partner airline."
+      ],
+      "timing": "Flexible start"
+    }
+  ],
+  "timeline": {
+    "title": "Phase Timeline",
+    "body": "Approximate sequencing — not fixed dates.",
+    "segments": [
+      { "label": "Now — Hardening", "note": "Active today" },
+      { "label": "POC — ~2 months", "note": "Starts with first airline partner" },
+      { "label": "Production — post-POC", "note": "Timeline TBD by eng effort" }
+    ]
+  },
+  "footer": {
+    "left": "© 2026 AviLabs ·",
+    "email": { "label": "hello@cura.aero", "href": "mailto:hello@cura.aero" },
+    "right": "Sóltún 26, 105, Reykjavík, Iceland"
+  }
+}

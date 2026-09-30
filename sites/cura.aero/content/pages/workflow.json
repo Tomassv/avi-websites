@@ -1,0 +1,158 @@
+{
+  "seo": {
+    "title": "Cura — Ready for the new EU Air Passenger Rights",
+    "description": "The EU's landmark air passenger rights reform means airlines must notify passengers electronically within 96 hours of a disrupted arrival and reply to claims within 30 days. Cura's Disruption Rights Outreach automates it — scanning each day's flights and reaching every affected passenger, on time.",
+    "robots": "noindex, nofollow",
+    "themeColor": "#051457"
+  },
+  "docHeader": {
+    "label": "Automated Workflow",
+    "date": "EU Air Passenger Rights · 2026"
+  },
+  "title": {
+    "chip": "New EU Passenger Rights",
+    "title": "Notify every passenger within 96 hours — automatically",
+    "body": "The EU's landmark reform of air passenger rights changes what airlines must do when a flight is disrupted. Cura's <strong>Disruption Rights Outreach</strong> turns those new obligations into a workflow that runs itself — so you stay compliant without adding headcount."
+  },
+  "facts": [
+    {
+      "tag": "What's changing",
+      "title": "Proactive 96-hour outreach",
+      "body": "Airlines will now have to reach out first — notifying every affected passenger within 96 hours. Cura scans each day's flights and sends the outreach automatically, well inside the window, with no one added to the ops team."
+    },
+    {
+      "tag": "Honest, in context",
+      "title": "The real reason, up front",
+      "body": "Cura reads why each flight was disrupted and tells passengers exactly where they stand — including an immediate heads-up when extraordinary circumstances, like weather or ATC, mean no compensation is due. Fewer dead-end claims, fewer disputes."
+    },
+    {
+      "tag": "How Cura helps",
+      "title": "The right message, every time",
+      "body": "Every email is matched to the passenger's exact entitlement. And for those caught in the disruption but not owed compensation, Cura can add a goodwill gesture — like 10% off their next flight — turning a bad day into retained loyalty."
+    }
+  ],
+  "section": {
+    "title": "How the outreach runs",
+    "body": "A daily scan fans every disrupted flight into the right rights email — each enriched with the disruption reason."
+  },
+  "flow": {
+    "nodes": [
+      {
+        "icon": "schedule",
+        "title": "Daily flight status scan",
+        "badges": {
+          "done": "Triggered",
+          "prog": "In Progress"
+        },
+        "body": "Pick delayed or cancelled flights"
+      },
+      {
+        "icon": "groups",
+        "title": "Identify affected passengers",
+        "badges": {
+          "done": "Completed",
+          "prog": "In Progress"
+        },
+        "body": "Collect impacted passengers"
+      }
+    ],
+    "branch": [
+      [
+        {
+          "icon": "rule",
+          "cond": true,
+          "title": "Condition",
+          "body": "Flight status = Cancelled"
+        },
+        {
+          "icon": "fact_check",
+          "title": "Check disruption reason",
+          "body": "Update email based on disruption details"
+        },
+        {
+          "icon": "forward_to_inbox",
+          "title": "Send rights email",
+          "body": "Cancelled flight: rights info + app access"
+        }
+      ],
+      [
+        {
+          "icon": "rule",
+          "cond": true,
+          "title": "Condition",
+          "body": "Flight delay ≥ 1 hour"
+        },
+        {
+          "icon": "fact_check",
+          "title": "Check disruption reason",
+          "body": "Update email based on disruption details"
+        },
+        {
+          "icon": "forward_to_inbox",
+          "title": "Send rights email",
+          "body": "Small delay: rights info + app access"
+        }
+      ],
+      [
+        {
+          "icon": "rule",
+          "cond": true,
+          "title": "Condition",
+          "body": "Flight delay ≥ 3 hours"
+        },
+        {
+          "icon": "fact_check",
+          "title": "Check disruption reason",
+          "body": "Update email based on disruption details"
+        },
+        {
+          "icon": "forward_to_inbox",
+          "title": "Send rights email",
+          "body": "EC261 delay: rights info + app access"
+        }
+      ],
+      [
+        {
+          "icon": "rule",
+          "cond": true,
+          "title": "Condition",
+          "body": "Passenger missed connection"
+        },
+        {
+          "icon": "fact_check",
+          "title": "Check disruption reason",
+          "body": "Update email based on disruption details"
+        },
+        {
+          "icon": "forward_to_inbox",
+          "title": "Send rights email",
+          "body": "Missed conn: rights info + app access"
+        }
+      ]
+    ]
+  },
+  "mobileFlow": {
+    "nodes": [
+      {
+        "icon": "schedule",
+        "title": "Daily flight status scan",
+        "body": "Pick delayed or cancelled flights"
+      },
+      {
+        "icon": "groups",
+        "title": "Identify passengers",
+        "body": "Collect impacted passengers"
+      },
+      {
+        "icon": "fact_check",
+        "title": "Check disruption",
+        "body": "Add reason &amp; extraordinary-circumstances status"
+      },
+      {
+        "icon": "forward_to_inbox",
+        "title": "Send communication",
+        "body": "Rights, next steps or goodwill — matched to each passenger"
+      }
+    ]
+  }
+}

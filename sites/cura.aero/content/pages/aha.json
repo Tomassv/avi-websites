@@ -1,0 +1,218 @@
+{
+  "seo": {
+    "title": "Cura — Value Propositions",
+    "robots": "noindex, nofollow"
+  },
+  "header": {
+    "badge": "Internal",
+    "label": "Value Propositions"
+  },
+  "hero": {
+    "eyebrow": "Product Overview",
+    "title": "Value Propositions",
+    "body": "A complete view of what Cura delivers — from first claim intake to final payout and operational insight."
+  },
+  "sections": [
+    {
+      "chip": "Claim Experience",
+      "chipTone": "orange",
+      "title": "Passenger-facing<br>touchpoints &amp; intake",
+      "intro": "Nine capabilities that shape how passengers file, experience, and resolve their claim.",
+      "count": "9 value propositions",
+      "cards": [
+        {
+          "icon": "link",
+          "tone": "orange",
+          "featured": true,
+          "title": "Claim Intake — PSS Integration",
+          "benefits": [
+            "Eliminates invalid claims",
+            "Reduces fraud",
+            "No manual entry"
+          ],
+          "body": "Passenger and booking data are automatically retrieved from the airline's reservation system, eliminating manual entry errors. Invalid, duplicate, and fraudulent claims are stopped before they enter the compensation workflow — reducing abuse by claim agencies and creating a faster filing experience for genuine passengers."
+        },
+        {
+          "icon": "shield-check",
+          "tone": "plain",
+          "iconTone": "orange",
+          "title": "Verify Every Passenger",
+          "benefits": [
+            "Email confirmation",
+            "e-signature",
+            "Audit trail"
+          ],
+          "body": "Each passenger in a claim must confirm their participation before it proceeds. Reduces unauthorized claims and agency abuse — and gives airlines an early window to offer credits before passengers turn to third parties."
+        },
+        {
+          "icon": "bolt",
+          "tone": "cream",
+          "iconTone": "orange",
+          "title": "Intelligent Claiming",
+          "benefits": [
+            "Dynamic claim types",
+            "Fewer duplicates",
+            "Instant feedback"
+          ],
+          "body": "Claim types are dynamically enabled or restricted based on known flight and passenger data. Passengers receive instant feedback while filing — deterring ineligible submissions and reducing total claim volume before cases even open."
+        },
+        {
+          "icon": "message",
+          "tone": "plain",
+          "iconTone": "orange",
+          "title": "Let Passengers Be Heard",
+          "benefits": [
+            "Free-form input",
+            "Sentiment capture",
+            "Zero agent workload"
+          ],
+          "body": "Every claim includes an optional space for passengers to share their story. Airlines gain direct insight into pain points and service failures — without adding workload to claims teams."
+        },
+        {
+          "icon": "compass",
+          "tone": "plain",
+          "iconTone": "orange",
+          "title": "Guide Toward Realistic Compensation",
+          "benefits": [
+            "Regulation-based guidance",
+            "Fewer disputes"
+          ],
+          "body": "When requested amounts differ significantly from expected compensation, passengers receive clear guidance about applicable regulations and available alternatives — resulting in better-informed submissions and faster resolution."
+        },
+        {
+          "icon": "bell",
+          "tone": "navy",
+          "featured": true,
+          "title": "Keep Passengers Informed",
+          "benefits": [
+            "Self-service tracking",
+            "Automated updates",
+            "Fewer inbound contacts"
+          ],
+          "body": "Automatically communicates next steps, expected processing times, and claim status updates throughout the resolution journey. Giving passengers transparency and self-service access significantly reduces avoidable customer support interactions while improving the overall experience."
+        },
+        {
+          "icon": "star",
+          "tone": "bluelt",
+          "iconTone": "navy",
+          "title": "Smart Compensation Offers",
+          "benefits": [
+            "Credits &amp; miles",
+            "Higher perceived value",
+            "Lower cash cost"
+          ],
+          "body": "Airlines can offer travel credits, vouchers, or loyalty miles instead of cash at any stage. A win-win: passengers receive greater perceived value while airlines reduce compensation costs and increase future bookings."
+        },
+        {
+          "icon": "heart",
+          "tone": "plain",
+          "iconTone": "orange",
+          "title": "Retaining Loyalty with Goodwill",
+          "benefits": [
+            "Ineligible claims",
+            "Discount codes",
+            "Retention tool"
+          ],
+          "body": "When a claim isn't eligible for compensation, airlines can still offer discount codes, travel vouchers, or bonus miles — turning a potentially negative experience into a retention and future booking opportunity."
+        },
+        {
+          "icon": "card",
+          "tone": "plain",
+          "iconTone": "orange",
+          "title": "Automated Payment Collection",
+          "benefits": [
+            "IBAN &amp; bank details",
+            "Fewer follow-ups",
+            "Faster payouts"
+          ],
+          "body": "Required payment details are collected and validated automatically at the right stage of the journey — eliminating back-and-forth and reducing processing delays on the final payout."
+        }
+      ]
+    },
+    {
+      "chip": "Automation &amp; Intelligence",
+      "chipTone": "navy",
+      "title": "Back-office power<br>&amp; operational insight",
+      "intro": "Six capabilities that automate operations, ensure compliance, and surface actionable data.",
+      "count": "6 value propositions",
+      "cards": [
+        {
+          "icon": "gear",
+          "tone": "orange",
+          "featured": true,
+          "title": "End-to-End Claims Automation",
+          "benefits": [
+            "Any step or full workflow",
+            "Deterministic rules",
+            "AI as assistant only"
+          ],
+          "body": "Airlines can automate end-to-end handling or only selected steps while keeping manual oversight where needed. Unlike systems that rely on AI to make decisions, Cura uses deterministic workflows based on airline policies, regulations, and business rules — so every claim is handled consistently, transparently, and compliantly."
+        },
+        {
+          "icon": "layers",
+          "tone": "plain",
+          "iconTone": "navy",
+          "title": "Purpose-Built for Airline Claims",
+          "benefits": [
+            "Single source of truth",
+            "Flight-level eligibility",
+            "Full audit trail"
+          ],
+          "body": "Passenger, booking, flight, disruption, communication, and document data in one platform. Eligibility can be assessed once at the flight level and automatically applied across all related claims — eliminating system switching and reducing investigation time."
+        },
+        {
+          "icon": "file-check",
+          "tone": "cream",
+          "iconTone": "navy",
+          "title": "Automated Regulatory &amp; Legal Responses",
+          "benefits": [
+            "NEB &amp; court responses",
+            "Evidence packages",
+            "AI-assisted drafting"
+          ],
+          "body": "When transportation authorities or legal representatives request information, Cura can automatically gather evidence, consolidate case history, and prepare a complete response package — with optional agent review before submission."
+        },
+        {
+          "icon": "sparkle",
+          "tone": "bluelt",
+          "iconTone": "navy",
+          "title": "AI-Powered Claim Assistance",
+          "benefits": [
+            "Document analysis",
+            "Fraud detection",
+            "Airlines stay in control"
+          ],
+          "body": "AI analyzes receipts, invoices, and baggage images, detects fraud, drafts communications, and recommends actions — while keeping airlines fully in control of decisions, compliance, and customer outcomes."
+        },
+        {
+          "icon": "eye",
+          "tone": "plain",
+          "iconTone": "navy",
+          "title": "Monitor &amp; Act on Customer Sentiment",
+          "benefits": [
+            "Social &amp; review tracking",
+            "AI categorization",
+            "Convert to claims"
+          ],
+          "body": "Monitors social media and review platforms to identify passenger concerns and reputation risks. AI categorizes mentions, analyzes sentiment, and enables teams to convert public complaints into actionable claims — directly from the platform."
+        },
+        {
+          "icon": "bar-chart",
+          "tone": "navy",
+          "featured": true,
+          "title": "Turn Claims Data into Operational Insight",
+          "benefits": [
+            "Compensation cost visibility",
+            "Disruption trends",
+            "AI-powered analytics"
+          ],
+          "body": "Airline-specific reporting across claims, operations, customer experience, and compensation costs. Teams can track claim volumes, processing performance, and disruption trends — while AI-powered analytics uncover patterns, detect anomalies, and recommend areas for operational improvement. Data that is impossible to get from disconnected systems."
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "left": "© 2026 AviLabs",
+    "right": "Internal document — not for external distribution."
+  }
+}
