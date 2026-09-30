@@ -12,10 +12,12 @@ type Props = {
   /** Header logos load eagerly, as they did before; everything else is lazy. */
   eager?: boolean;
   unoptimized?: boolean;
+  /** Rendered width hint, for images far larger than they are shown. */
+  sizes?: string;
 };
 
 /** next/image for a content image path. Paths outside /images/ render nothing. */
-export function Img({ src, alt, className, width, height, eager, unoptimized }: Props) {
+export function Img({ src, alt, className, width, height, eager, unoptimized, sizes }: Props) {
   const safe = safeImageSrc(src);
   if (!safe) return null;
   const size = width && height ? { width, height } : imageSize(safe);
@@ -28,6 +30,7 @@ export function Img({ src, alt, className, width, height, eager, unoptimized }: 
       className={className}
       loading={eager ? "eager" : "lazy"}
       unoptimized={unoptimized}
+      sizes={sizes}
     />
   );
 }

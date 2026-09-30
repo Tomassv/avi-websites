@@ -1,0 +1,115 @@
+{
+  "intro": "When a passenger escalates to the authority or to court, this is every source that goes into the file, who supplies it, and what happens next. Every source is fetched over an API — the only thing anyone at the airline does is <strong>approve the response for sending</strong>.",
+  "stageOne": {
+    "tag": "Stage one",
+    "title": "Intake and collection",
+    "body": "A request arrives with a reply deadline. Cura reads it and matches it to the claim — or opens one, if the passenger never claimed with the airline and went straight to the authority. Then every evidence source is pulled at once over an API. Nothing here is a request to a person, and nothing waits on one; the connections below are set up once, at onboarding."
+  },
+  "legend": [
+    {
+      "who": "Cura has it",
+      "title": "Weather, minima, NOTAMs, flight details",
+      "body": "Held continuously and stamped at the time of the disruption, so the record does not depend on anyone remembering to save it on the day."
+    },
+    {
+      "who": "Cura, via granted access",
+      "title": "Slot messages, CTOT, Eurocontrol messages",
+      "body": "Retrieved on your behalf. This is what turns \"ATC delay\" from an assertion into something the authority can check."
+    },
+    {
+      "who": "From your API",
+      "title": "Booking, check-in, delay codes, ops notes",
+      "body": "A read-only API into your systems, wired up once. After that it is pulled automatically on every case and any gap is flagged rather than filled with an assumption."
+    }
+  ],
+  "stageTwo": {
+    "tag": "Stage two",
+    "title": "Draft, approve, close",
+    "body": "The agent writes the response in the authority's structure and hands the handler one screen. Approving it for sending is the only human step on this page — before it and after it, everything runs on its own.",
+    "flow": {
+      "nodes": [
+        {
+          "icon": "edit_note",
+          "title": "Response drafted",
+          "actor": "AI agent",
+          "actorCura": true,
+          "badges": { "done": "Drafted", "prog": "Drafting" },
+          "list": [
+            "Cause categorised and the delay attributed minute by minute",
+            "Each requested item answered in turn, in the authority's structure",
+            "Annexes indexed, with source and integrity check",
+            "Defend-or-settle recommendation for the handler"
+          ]
+        },
+        {
+          "icon": "how_to_reg",
+          "cond": true,
+          "title": "Approved and filed",
+          "actor": "Airline",
+          "actorHandoff": "→ Cura",
+          "badges": { "done": "Filed", "prog": "In Review" },
+          "body": "Read and press send — the only human step. Cura files it and stores the receipt."
+        },
+        {
+          "icon": "gavel",
+          "title": "Ruling recorded",
+          "actor": "Cura",
+          "actorCura": true,
+          "badges": { "done": "Recorded", "prog": "Awaiting" },
+          "body": "Outcome and reasoning captured — and fed back, so every ruling sharpens the drafting agent and the defend-or-settle recommendation"
+        }
+      ]
+    }
+  },
+  "practice": {
+    "tag": "In practice",
+    "title": "What they ask for, and what goes back",
+    "body": "A real request lists its items and expects each one answered. The package mirrors that list item for item, so the case handler on the other side can tick their way down it.",
+    "request": {
+      "subject": "Request for documentation — case ref. EU-2026-04178",
+      "fields": [
+        { "label": "From", "value": "passengerrights@authority.example" },
+        { "label": "To", "value": "claims@airline.example" },
+        { "label": "Date", "value": "12 March 2026 · reply due 11 April" }
+      ],
+      "before": [
+        "Dear Sir or Madam,",
+        "We have received a complaint concerning the diversion and subsequent delay of the above flight. In order to properly progress with this matter, we kindly request that you provide the following documentation:"
+      ],
+      "items": [
+        { "text": "All relevant slot messages, including the original CTOT, any revised CTOTs, and related NOTAMs" },
+        { "text": "All NOTAMs valid at the relevant time for the route, departure airport, destination airport, and alternate/diversion airport" },
+        { "text": "All relevant Eurocontrol messages, communications, or network management notifications that influenced the CTOT allocation, delay, or diversion decision" },
+        { "text": "Any other operational messages, weather reports, or internal communications that may be material to understanding the cause and handling of the diversion and delay" }
+      ],
+      "after": [
+        "Please note that a failure to reply within the period stated above may lead us to determine the matter on the basis of the information already before us."
+      ],
+      "sign": "Yours faithfully,<br><strong>Case Officer</strong>, Passenger Rights Unit"
+    },
+    "reply": {
+      "subject": "Re: Request for documentation — case ref. EU-2026-04178",
+      "fields": [
+        { "label": "From", "value": "claims@airline.example" },
+        { "label": "To", "value": "passengerrights@authority.example" },
+        { "label": "Date", "value": "14 March 2026 · 28 days before the deadline" }
+      ],
+      "before": [
+        "Dear Case Officer,",
+        "Further to your request of 12 March, please find our response to each item below, in the order set out in your letter. The supporting documents are attached as Annexes A to D."
+      ],
+      "items": [
+        { "title": "Slot messages and CTOT history", "note": "Original CTOT, both revisions and the related NOTAM — Annex A" },
+        { "title": "NOTAMs valid at the relevant time", "note": "Route, departure, destination and alternate aerodrome — Annex B" },
+        { "title": "Eurocontrol and network management messages", "note": "The regulation that set the CTOT, with the message log — Annex C" },
+        { "title": "Operational messages and weather reports", "note": "METAR and TAF, approach minima and the diversion decision trail — Annex D" }
+      ],
+      "after": [
+        "The cause has been categorised and the delay attributed minute by minute in the covering note at Annex A. We remain at your disposal should any further material be required."
+      ],
+      "sign": "Yours faithfully,<br><strong>Claims Team</strong>, Airline Claims",
+      "attachments": ["Annex A", "Annex B", "Annex C", "Annex D"],
+      "integrity": { "text": "Each annex indexed with its source and a checksum —", "hash": "sha256:8f3c…a91d" }
+    }
+  }
+}

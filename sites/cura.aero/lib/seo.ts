@@ -1,14 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import type { Seo } from "./content-types";
 
-/** Metadata API object for a page's seo block. Values are copied as written in content. */
+/**
+ * Metadata API object for a page's seo block. Values are copied as written in content.
+ * canonical and og:url are rendered by <SeoLinks> instead: the Metadata API normalises
+ * "https://cura.aero/" to "https://cura.aero", and these must stay exactly as written.
+ */
 export function buildMetadata(seo: Seo): Metadata {
   const og = seo.openGraph;
   const tw = seo.twitter;
   return {
     title: seo.title,
     description: seo.description,
-    alternates: seo.canonical ? { canonical: seo.canonical } : undefined,
     robots: seo.robots,
     authors: seo.author ? [{ name: seo.author }] : undefined,
     openGraph: og
@@ -17,7 +20,6 @@ export function buildMetadata(seo: Seo): Metadata {
           siteName: og.siteName,
           title: og.title,
           description: og.description,
-          url: og.url,
           images: [{ url: og.image, alt: og.imageAlt }],
           locale: og.locale,
         }
