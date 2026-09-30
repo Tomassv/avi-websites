@@ -8,6 +8,7 @@ import { DocTemplate } from "@/templates/DocTemplate";
 import { DocTitle, FactCards } from "@/components/docs/Doc";
 import { MailPair, SectionHeader, SourceLegend, StageSplit } from "@/components/evidence/Evidence";
 import { StepList } from "@/components/evidence/StepList";
+import { MaterialIcons } from "@/components/shared/MaterialIcons";
 import { Rich } from "@/components/shared/Rich";
 import { Workflow } from "@/components/workflow/Workflow";
 import { FlowAnimation } from "@/components/workflow/FlowAnimation";
@@ -21,6 +22,7 @@ export default function EvidencePackagePage() {
   const ref = page.reference;
   return (
     <DocTemplate header={page.docHeader} wide>
+      <MaterialIcons />
       <DocTitle content={page.title} body={shared.intro} fade />
       <FactCards facts={page.facts} />
 

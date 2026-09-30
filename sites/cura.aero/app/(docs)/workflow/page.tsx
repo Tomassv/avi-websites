@@ -5,6 +5,7 @@ import content from "@/content/pages/workflow.json";
 import { buildMetadata, buildViewport } from "@/lib/seo";
 import { DocTemplate } from "@/templates/DocTemplate";
 import { DocTitle, FactCards } from "@/components/docs/Doc";
+import { MaterialIcons } from "@/components/shared/MaterialIcons";
 import { Rich } from "@/components/shared/Rich";
 import { Workflow } from "@/components/workflow/Workflow";
 import { FlowAnimation } from "@/components/workflow/FlowAnimation";
@@ -17,6 +18,7 @@ export const viewport = buildViewport(page.seo);
 export default function WorkflowPage() {
   return (
     <DocTemplate header={page.docHeader} wide>
+      <MaterialIcons />
       <DocTitle content={page.title} fade />
       <FactCards facts={page.facts} />
 
