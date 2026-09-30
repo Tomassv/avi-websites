@@ -314,5 +314,12 @@ export function changeService(deps: { cfg: Config; gh: GitHubPort; log: Logger }
       .slice(0, p.limit);
   }
 
-  return { branchState, mainState, write, status, gates, publish, undo, discard, list, checkDrift, pullUrl: gh.pullUrl };
+  /** The site id a change belongs to (from its `site:` label), or null. */
+  async function siteIdOf(changeId: number): Promise<string | null> {
+    const pr = await gh.getPull(changeId);
+    if (!pr || !pr.labels.includes("mcp")) return null;
+    return pr.labels.find((l) => l.startsWith("site:"))?.slice(5) ?? null;
+  }
+
+  return { branchState, mainState, write, status, gates, publish, undo, discard, list, checkDrift, siteIdOf, pullUrl: gh.pullUrl, gh };
 }

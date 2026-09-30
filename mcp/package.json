@@ -9,13 +9,12 @@
   },
   "scripts": {
     "gen:rules": "node scripts/gen-rules.mjs",
-    "build": "npm run gen:rules && tsc --noEmit",
-    "dev": "npm run gen:rules && tsx watch src/dev.ts",
-    "dev:token": "tsx scripts/dev-token.ts",
-    "revoke": "tsx scripts/revoke.ts",
-    "typecheck": "tsc --noEmit",
-    "pretest": "npm run gen:rules",
-    "test": "vitest run"
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/gen-rules.mjs && node --env-file=.env.local --watch src/dev.ts",
+    "dev:token": "node --env-file=.env.local scripts/dev-token.ts",
+    "revoke": "node --env-file-if-exists=.env.local scripts/revoke.ts",
+    "typecheck": "node scripts/gen-rules.mjs && tsc --noEmit",
+    "test": "node scripts/gen-rules.mjs && node --test test/*.test.ts"
   },
   "dependencies": {
     "@hono/node-server": "2.1.3",
