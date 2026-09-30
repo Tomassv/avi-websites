@@ -247,3 +247,76 @@ export type WorkflowPageContent = {
   /** The stacked version shown on phones. */
   mobileFlow: Workflow;
 };
+
+export type UpdateContent = {
+  seo: Seo;
+  docHeader: DocHeaderContent;
+  title: DocTitleContent;
+  phases: { label: Rich; title: Rich; items: Rich[]; timing: Rich }[];
+  timeline: { title: Rich; body: Rich; segments: { label: Rich; note: Rich }[] };
+  footer: DocFooterContent;
+};
+
+export type ValuePropsContent = {
+  seo: Seo;
+  docHeader: DocHeaderContent;
+  title: DocTitleContent;
+  /** Shown in each image frame until its screenshot loads. */
+  placeholder: Rich;
+  categories: {
+    id: string;
+    label: Rich;
+    title: Rich;
+    intro: Rich;
+    items: { title: Rich; benefits: Rich[]; body: Rich[]; image: ImageRef }[];
+  }[];
+  footer: DocFooterContent;
+};
+
+export type AhaCard = {
+  /** An icon name from components/docs/VpIcon.tsx. */
+  icon: string;
+  /** plain | orange | navy | cream | bluelt (checked when rendered). */
+  tone: string;
+  featured?: boolean;
+  /** Icon colour on light cards: orange (default) | navy. Dark cards always use white. */
+  iconTone?: string;
+  title: Rich;
+  benefits: Rich[];
+  body: Rich;
+};
+
+export type AhaContent = {
+  seo: Seo;
+  header: { badge: Rich; label: Rich };
+  hero: { eyebrow: Rich; title: Rich; body: Rich };
+  sections: {
+    chip: Rich;
+    /** orange | navy */
+    chipTone: string;
+    title: Rich;
+    intro: Rich;
+    count: Rich;
+    cards: AhaCard[];
+  }[];
+  footer: { left: Rich; right: Rich };
+};
+
+export type StandaloneContent = {
+  seo: Seo;
+  docHeader: DocHeaderContent;
+  title: DocTitleContent;
+  covers: { label: Rich; regulations: Rich[] };
+  categories: { id: string; label: Rich; title: Rich; blue?: boolean; cards: { title: Rich; body: Rich }[] }[];
+  flow: {
+    ariaLabel: string;
+    title: Rich;
+    labels: { inputs: Rich; core: Rich; outputs: Rich };
+    inputs: { title: Rich; body: Rich }[];
+    core: { brand: Rich; steps: Rich[] };
+    outputs: Rich[];
+    regulations: Rich;
+    unlocks: { title: Rich; chips: Rich[] };
+  };
+  footer: DocFooterContent;
+};

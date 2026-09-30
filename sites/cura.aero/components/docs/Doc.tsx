@@ -1,4 +1,4 @@
-import type { DocHeaderContent, DocTitleContent, FactCard } from "@/lib/content-types";
+import type { DocFooterContent, DocHeaderContent, DocTitleContent, FactCard } from "@/lib/content-types";
 import { site } from "@/lib/content";
 import { Img } from "@/components/shared/Img";
 import { Rich } from "@/components/shared/Rich";
@@ -74,5 +74,26 @@ export function FactCards({ facts }: { facts: FactCard[] }) {
         </div>
       ))}
     </div>
+  );
+}
+
+export function DocFooter({ content }: { content: DocFooterContent }) {
+  return (
+    <footer className="page-footer">
+      <p>
+        <Rich text={content.left} />
+        {content.email && (
+          <>
+            {" "}
+            <SafeLink href={content.email.href}>
+              <Rich text={content.email.label} />
+            </SafeLink>
+          </>
+        )}
+      </p>
+      <p>
+        <Rich text={content.right} />
+      </p>
+    </footer>
   );
 }
