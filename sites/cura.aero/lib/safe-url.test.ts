@@ -66,3 +66,9 @@ test("jsonLdString cannot close the script element", () => {
   assert.ok(!out.includes(" ") && !out.includes(" "));
   assert.deepEqual(JSON.parse(out), { name: "</script><script>alert(1)</script>", x: "a&b  " });
 });
+
+test("safeId only allows plain anchor ids", async () => {
+  const { safeId } = await import("./safe-url.ts");
+  assert.equal(safeId("claim-intake"), "claim-intake");
+  for (const bad of ['x" onmouseover="y', "Claim", "1abc", "a b", ""]) assert.equal(safeId(bad), undefined, bad);
+});

@@ -89,3 +89,8 @@ export function jsonLdString(data: unknown): string {
     .replace(new RegExp(String.fromCharCode(0x2028), "g"), "\\u2028")
     .replace(new RegExp(String.fromCharCode(0x2029), "g"), "\\u2029");
 }
+
+/** Element ids (anchor targets) from content. */
+export function safeId(value: unknown): string | undefined {
+  return typeof value === "string" && /^[a-z][a-z0-9-]{0,59}$/.test(value) ? value : undefined;
+}

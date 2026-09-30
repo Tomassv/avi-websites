@@ -1,0 +1,282 @@
+{
+  "seo": {
+    "title": "Cura — Value Propositions",
+    "description": "Every way Cura helps airlines resolve claims faster, reduce fraud and cost, and keep passengers loyal — from intake to automation.",
+    "robots": "noindex, nofollow"
+  },
+  "docHeader": {
+    "label": "Value Propositions",
+    "date": "16 ways Cura helps airlines",
+    "logoHref": "/"
+  },
+  "title": {
+    "chip": "Value Propositions",
+    "title": "Everything Cura does, <span class='orange'>end to end.</span>",
+    "body": "From the moment a passenger files a claim to the final payout — and every authority response, insight, and automation in between."
+  },
+  "placeholder": "Image coming soon",
+  "categories": [
+    {
+      "id": "claim-intake",
+      "label": "Category 01",
+      "title": "Claim Intake",
+      "intro": "Stop bad claims early, verify who's really filing, and guide passengers toward the right outcome.",
+      "items": [
+        {
+          "title": "PSS integration option eliminates invalid claims and reduces fraud",
+          "benefits": [
+            "Passenger and booking data are automatically retrieved from the airline's reservation system, eliminating manual entry errors.",
+            "Invalid, duplicate, and fraudulent claims are stopped before they enter the compensation workflow."
+          ],
+          "body": [
+            "By connecting directly to the airline's PSS, passengers no longer need to manually provide critical booking information. This significantly improves claim accuracy, reduces fraud, limits abuse by claim agencies, and creates a faster, simpler filing experience for genuine passengers."
+          ],
+          "image": {
+            "src": "/images/values/1.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Verify every passenger",
+          "benefits": [
+            "Automatic passenger verification through email confirmation or electronic signature.",
+            "Reduced fraud, unauthorized claims, and claim-agency abuse."
+          ],
+          "body": [
+            "Each passenger included in a claim can be required to confirm their participation before the claim proceeds. This creates a clear audit trail, ensures compensation reaches legitimate claimants, and gives airlines full visibility into who is requesting compensation and on whose behalf. Also it gives airlines an opportunity to offer credits/miles before passengers commit to third-party claim agencies."
+          ],
+          "image": {
+            "src": "/images/values/2.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Intelligent claiming reduces errors and submissions",
+          "benefits": [
+            "Claim types are dynamically enabled or restricted based on known flight and passenger data.",
+            "Higher-quality claims, fewer cases, duplicates, and unnecessary investigations."
+          ],
+          "body": [
+            "By combining flight and booking data with compensation rules, passengers receive instant feedback about their situation while filing a claim. This automatically adapts the process to each traveler and helps set expectations early, deters ineligible submissions, and significantly reduces the number of claims."
+          ],
+          "image": {
+            "src": "/images/values/3.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Let passengers be heard",
+          "benefits": [
+            "Passengers have a dedicated space to express their experience, concerns, and frustrations, helping them feel heard throughout the claims process.",
+            "Airlines gain valuable feedback and sentiment insights without adding workload to claims teams."
+          ],
+          "body": [
+            "Every claim includes an optional space for passengers to share their story in their own words. This gives travelers an opportunity to voice their frustrations and feel acknowledged, while providing airlines with direct insight into customer pain points, service failures, and operational issues that may not be captured through structured claim fields alone."
+          ],
+          "image": {
+            "src": "/images/values/4.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Guide passengers toward realistic compensation",
+          "benefits": [
+            "Passengers receive immediate guidance based on applicable regulations and known flight details.",
+            "Fewer disputes, unrealistic requests, and manual clarification efforts for airline teams."
+          ],
+          "body": [
+            "Our platform helps passengers understand what compensation they may be entitled to before submitting a claim. When requested amounts differ significantly from expected compensation levels, passengers receive guidance about applicable regulations, supporting documentation requirements, and available alternatives, resulting in better-informed submissions and faster claim resolution."
+          ],
+          "image": {
+            "src": "/images/values/5.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Keep passengers informed without increasing support workload",
+          "benefits": [
+            "Self-service claim tracking provides complete visibility into claim progress.",
+            "Reduced inbound contacts and improved passenger satisfaction."
+          ],
+          "body": [
+            "Our platform automatically communicates next steps, expected processing times, and claim status updates throughout the resolution journey. By giving passengers transparency and self-service access to information, airlines can significantly reduce avoidable customer support interactions while improving the overall claims experience."
+          ],
+          "image": {
+            "src": "/images/values/6.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Smart compensation offers",
+          "benefits": [
+            "Airlines can offer travel credits, vouchers, or loyalty miles instead of cash compensation at any stage of the claims journey.",
+            "Higher passenger value at a lower cost, while increasing customer retention and future bookings."
+          ],
+          "body": [
+            "Our platform enables personalized compensation offers throughout the claim and payout process. When appropriate, passengers can choose enhanced travel credits, vouchers, or loyalty rewards instead of cash compensation. This creates a win-win outcome, giving passengers greater perceived value while reducing compensation costs and encouraging future engagement with the airline."
+          ],
+          "image": {
+            "src": "/images/values/7.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Retaining loyalty with goodwill offers",
+          "benefits": [
+            "Airlines can provide goodwill gestures even when passengers are not eligible for compensation.",
+            "Turn potentially negative experiences into opportunities for retention and future bookings."
+          ],
+          "body": [
+            "When a claim is not eligible for compensation, airlines can still choose to offer targeted goodwill benefits such as discount codes, travel vouchers, bonus miles, or future flight incentives. This helps preserve customer relationships, reduces dissatisfaction, and demonstrates a commitment to customer care even when regulatory compensation is not applicable."
+          ],
+          "image": {
+            "src": "/images/values/8.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Automated payment information collection",
+          "benefits": [
+            "Required payment details such as IBAN, bank account information, or alternative payout preferences are collected automatically.",
+            "Faster payouts with fewer follow-up requests and reduced administrative effort."
+          ],
+          "body": [
+            "Our platform automatically requests and validates the payment information needed to process compensation. By collecting payout details at the right stage of the claim journey, airlines can avoid unnecessary back-and-forth communication and reduce processing delays."
+          ],
+          "image": {
+            "src": "/images/values/9.png",
+            "alt": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "automation",
+      "label": "Category 02",
+      "title": "Automation &amp; Agents",
+      "intro": "Deterministic workflows and AI assistance that handle the work — while airlines keep control of every decision.",
+      "items": [
+        {
+          "title": "End-to-end claims automation",
+          "benefits": [
+            "Automate any part of the claims process, from individual tasks to complete end-to-end claim handling.",
+            "Consistent, regulation-driven decisions through deterministic workflows rather than AI-generated outcomes.",
+            "Reduced operational costs, faster processing times, and significantly lower workload for claims teams."
+          ],
+          "body": [
+            "Cura automates virtually the entire claims journey through configurable workflows tailored to each airline's processes. Airlines can automate end-to-end handling or only selected steps while keeping manual oversight where needed. Because workflows are configurable rather than custom-built, new automations can be introduced quickly.",
+            "Unlike systems that rely on AI to make decisions, Cura uses deterministic workflows based on airline policies, regulations, and business rules, so every claim is handled consistently, transparently, and compliantly. AI acts as an assistant, supporting tasks such as document reading, fraud detection, communication drafting, and data enrichment. Final decisions always remain governed by the airline."
+          ],
+          "image": {
+            "src": "/images/values/10.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Purpose-built for airline claims and flight eligibility",
+          "benefits": [
+            "Single source of truth — Passenger, booking, flight, disruption, communication, and document data available in one platform.",
+            "Consistent eligibility decisions — Assess claimability once at the flight level and automatically apply outcomes across related claims.",
+            "Faster resolution, lower effort — Reduce system switching, accelerate investigations, and improve agent productivity through automation and AI-assisted workflows."
+          ],
+          "body": [
+            "Cura brings together passenger, booking, flight, disruption, communication, and document data into a single platform, eliminating the need to switch between PSS, operational systems, and external tools. Agents can investigate and resolve claims faster, while airlines benefit from greater consistency and productivity.",
+            "The platform also provides a centralized flight workspace where eligibility decisions can be assessed once at the flight level and automatically applied across related claims. By combining operational data, disruption context, decision history, and AI-supported recommendations in one place, Cura enables faster investigations, consistent outcomes, and a complete audit trail while keeping airlines fully in control of final decisions."
+          ],
+          "image": {
+            "src": "/images/values/11.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Automated regulatory and legal responses",
+          "benefits": [
+            "Automatically gather evidence, case history, and supporting documentation for transportation authorities and legal proceedings.",
+            "Significantly reduce the time required to prepare regulatory responses and appeals.",
+            "Improve consistency, auditability, and response quality across all external investigations."
+          ],
+          "body": [
+            "When transportation authorities, courts, or legal representatives request information about a claim decision, Cura can automatically identify the request, gather the relevant evidence, and prepare a complete response package.",
+            "The platform consolidates claim history, passenger communications, operational data, booking information, disruption details, and decision records into a structured case file. Responses can be generated using airline-approved templates, AI-assisted drafting, or fully automated workflows, with optional agent review before submission."
+          ],
+          "image": {
+            "src": "/images/values/12.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "AI-powered claim assistance",
+          "benefits": [
+            "Automates document analysis, fraud detection, communication support, and claim assessment.",
+            "Improves operational efficiency while keeping airlines in control of every decision.",
+            "Continuously learns from claim outcomes and operational feedback to provide more accurate recommendations over time."
+          ],
+          "body": [
+            "Rather than making decisions, AI acts as an assistant that helps passengers, agents, and operational teams throughout the claims lifecycle.",
+            "AI can analyze receipts, invoices, documents, and baggage images, detect potential fraud, generate personalized communications, and provide claim recommendations based on available evidence and airline rules. Combined with configurable workflows, AI helps automate routine tasks while keeping airlines fully in control of decisions, compliance, and customer outcomes."
+          ],
+          "image": {
+            "src": "/images/values/13.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Monitor and act on customer sentiment",
+          "benefits": [
+            "Track airline mentions across social media, review platforms, and public channels from a single workspace.",
+            "Identify high-priority customer issues before they escalate into larger PR or customer service problems.",
+            "Convert public complaints into actionable claims and customer recovery opportunities."
+          ],
+          "body": [
+            "Cura monitors social media, review sites, and customer feedback channels to identify passenger concerns, service issues, and emerging reputation risks. AI automatically categorizes mentions, analyzes sentiment, and prioritizes cases based on urgency and impact.",
+            "Mentions can be linked to existing claims or converted into new ones, giving airlines a unified view of customer feedback and compensation activity. Teams can respond directly from the platform while gaining valuable insight into sentiment trends, disruption impact, and brand perception."
+          ],
+          "image": {
+            "src": "/images/values/14.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Turn claims data into operational insight",
+          "benefits": [
+            "Gain complete visibility into compensation costs, disruption trends, operational issues, and claim outcomes.",
+            "Identify opportunities to reduce costs, improve passenger satisfaction, and optimize claim workflows.",
+            "Transform claims data into actionable recommendations for operations, customer service, and management teams."
+          ],
+          "body": [
+            "Cura provides airline-specific reporting across claims, operations, customer experience, and compensation costs. By combining the full claims lifecycle with operational and financial data, the platform delivers insights that are difficult to obtain from disconnected systems.",
+            "Teams can track claim volumes, processing performance, compensation costs, passenger behavior, and disruption trends while identifying opportunities to improve efficiency and reduce costs. AI-powered analytics help uncover patterns, detect anomalies, and recommend areas for operational improvement."
+          ],
+          "image": {
+            "src": "/images/values/15.png",
+            "alt": ""
+          }
+        },
+        {
+          "title": "Automated disruption rights outreach",
+          "benefits": [
+            "Proactively notify every affected passenger within the EU's new 96-hour window — automatically, with no one added to the ops team.",
+            "Each message is matched to the passenger's exact entitlement, with the real disruption reason up front — fewer dead-end claims and disputes.",
+            "Add a goodwill gesture for passengers not owed compensation, turning a bad day into retained loyalty."
+          ],
+          "body": [
+            "The EU's landmark reform of air passenger rights means airlines must reach out first — notifying every affected passenger electronically within 96 hours of a disrupted arrival. Cura's Disruption Rights Outreach turns that obligation into a workflow that runs itself: a daily scan reads each day's flights, identifies who is affected, and sends the right rights email well inside the window.",
+            "Because Cura reads why each flight was disrupted, every email tells passengers exactly where they stand — including an immediate heads-up when extraordinary circumstances such as weather or ATC mean no compensation is due. For those caught in the disruption but not owed compensation, airlines can attach a goodwill gesture like a discount on their next flight, staying compliant while protecting loyalty."
+          ],
+          "image": {
+            "src": "/images/values/16.png",
+            "alt": ""
+          }
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "left": "© 2026 Cura | Part of the AviLabs Family ·",
+    "email": {
+      "label": "hello@cura.aero",
+      "href": "mailto:hello@cura.aero"
+    },
+    "right": "Sóltún 26, 105, Reykjavík, Iceland"
+  }
+}
