@@ -13,13 +13,28 @@ import { parse } from "yaml";
 const workflowPath = path.resolve(import.meta.dirname, "../../.github/workflows/main-guard.yml");
 const workflow = parse(fs.readFileSync(workflowPath, "utf8"));
 const step = workflow.jobs.guard.steps[0];
+const issueStep = workflow.jobs.guard.steps[1];
 
 type Commit = { parents: string[]; message: string; author?: string };
 type Pull = { number: number; merged_at: string | null; merge_commit_sha: string };
 
 const sha = (c: string) => c.repeat(40).slice(0, 40);
 
-function run(p: { before: string; after: string; forced?: boolean; commits: Record<string, Commit>; pulls: Record<string, Pull[]>; failApi?: boolean }) {
+type Issue = { number: number; title: string; pull_request?: object };
+
+function run(p: {
+  before: string;
+  after: string;
+  forced?: boolean;
+  commits: Record<string, Commit>;
+  pulls: Record<string, Pull[]>;
+  failApi?: boolean;
+  issues?: Issue[];
+  /** Run the alert step after the check, as `if: failure()` does. */
+  withIssueStep?: boolean;
+  /** Run only the alert step, as after a check that crashed before writing its report. */
+  onlyIssueStep?: boolean;
+}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "main-guard-"));
   const fixtures = path.join(dir, "fixtures");
   fs.mkdirSync(fixtures);
@@ -33,17 +48,32 @@ function run(p: { before: string; after: string; forced?: boolean; commits: Reco
   }
   const bin = path.join(dir, "bin");
   fs.mkdirSync(bin);
-  // gh api repos/<owner>/<repo>/commits/<sha>[/pulls]
+  fs.writeFileSync(path.join(fixtures, "issues"), JSON.stringify(p.issues ?? []));
+  const calls = path.join(dir, "calls.log");
+  // gh api [--method POST] <path> [--input -]. GETs answer from fixtures; POSTs are recorded
+  // with their JSON body in calls.log.
   fs.writeFileSync(
     path.join(bin, "gh"),
     `#!/bin/sh
 [ -n "$FAIL_API" ] && { echo "HTTP 502" >&2; exit 1; }
-rest=\${2#repos/*/*/commits/}
+shift
+method=GET
+[ "$1" = "--method" ] && { method="$2"; shift 2; }
+api="$1"
+if [ "$method" = POST ]; then
+  printf '%s %s %s\\n' "$method" "$api" "$(jq -c .)" >> "$CALLS"
+  echo '{}'
+  exit 0
+fi
+case "$api" in
+  repos/*/*/issues\\?*) cat "$FIXTURES/issues"; exit 0 ;;
+esac
+rest=\${api#repos/*/*/commits/}
 case "$rest" in
   */pulls) f="$FIXTURES/pulls_\${rest%/pulls}" ;;
   *) f="$FIXTURES/commits_$rest" ;;
 esac
-[ -f "$f" ] || { echo "HTTP 404: $2" >&2; exit 1; }
+[ -f "$f" ] || { echo "HTTP 404: $api" >&2; exit 1; }
 cat "$f"
 `,
   );
@@ -52,6 +82,10 @@ cat "$f"
   const env = {
     PATH: `${bin}:${process.env.PATH}`,
     FIXTURES: fixtures,
+    CALLS: calls,
+    REPORT: path.join(dir, "main-guard-report.md"),
+    OWNER: "Tomassv",
+    RUN_URL: "https://github.com/avilabs/avi-websites/actions/runs/42",
     GITHUB_STEP_SUMMARY: summary,
     GH_TOKEN: "t",
     REPO: "avilabs/avi-websites",
@@ -62,18 +96,31 @@ cat "$f"
     RETRY_SECONDS: "0",
     ...(p.failApi ? { FAIL_API: "1" } : {}),
   };
-  assert.deepEqual(Object.keys(step.env).sort(), ["AFTER", "BEFORE", "FORCED", "GH_TOKEN", "PUSHER", "REPO", "RETRY_SECONDS"]);
-  const r = spawnSync("bash", ["-c", step.run], { env, encoding: "utf8" });
-  return { status: r.status, out: r.stdout + r.stderr, summary: fs.existsSync(summary) ? fs.readFileSync(summary, "utf8") : "" };
+  assert.deepEqual(Object.keys(step.env).sort(), ["AFTER", "BEFORE", "FORCED", "GH_TOKEN", "PUSHER", "REPO", "REPORT", "RETRY_SECONDS"]);
+  assert.deepEqual(Object.keys(issueStep.env).sort(), ["AFTER", "GH_TOKEN", "OWNER", "PUSHER", "REPO", "REPORT", "RUN_URL"]);
+  const r = p.onlyIssueStep ? { status: 1, stdout: "", stderr: "" } : spawnSync("bash", ["-c", step.run], { env, encoding: "utf8" });
+  let issue: { status: number | null; out: string } | null = null;
+  if ((p.withIssueStep || p.onlyIssueStep) && r.status !== 0) {
+    const i = spawnSync("bash", ["-c", issueStep.run], { env, encoding: "utf8" });
+    issue = { status: i.status, out: i.stdout + i.stderr };
+  }
+  const posts = fs.existsSync(calls)
+    ? fs.readFileSync(calls, "utf8").trim().split("\n").map((line) => {
+        const [method, api, ...body] = line.split(" ");
+        return { method, api, body: JSON.parse(body.join(" ")) as { title?: string; body: string } };
+      })
+    : [];
+  return { status: r.status, out: r.stdout + r.stderr, summary: fs.existsSync(summary) ? fs.readFileSync(summary, "utf8") : "", issue, posts };
 }
 
 const merged = (n: number, s: string): Pull => ({ number: n, merged_at: "2026-09-30T12:00:00Z", merge_commit_sha: s });
 const [A, B, C, D, E] = ["a", "b", "c", "d", "e"].map(sha);
 
-test("minimal permissions and the push-to-main trigger", () => {
-  assert.deepEqual(workflow.permissions, { contents: "read", "pull-requests": "read" });
+test("permissions, the push-to-main trigger, and the alert step only on failure", () => {
+  assert.deepEqual(workflow.permissions, { contents: "read", "pull-requests": "read", issues: "write" });
   assert.deepEqual(workflow.on, { push: { branches: ["main"] } });
-  assert.ok(!/\$\{\{/.test(step.run), "no expressions are interpolated into the script");
+  assert.equal(issueStep.if, "failure()");
+  for (const s of [step, issueStep]) assert.ok(!/\$\{\{/.test(s.run), "no expressions are interpolated into the scripts");
 });
 
 test("a squash merge of an MCP change passes", () => {
@@ -109,7 +156,7 @@ test("a direct push fails and names the commit", () => {
   assert.equal(r.status, 1);
   assert.match(r.out, /::error title=main changed without a pull request::/);
   assert.match(r.out, /bbbbbbb "quick fix" by Mallory <mallory@avilabs\.is>/);
-  assert.match(r.summary, /Pushed by someone/);
+  assert.match(r.summary, /Pushed by \*\*someone\*\*/);
 });
 
 test("a direct commit on top of a merged PR fails", () => {
@@ -145,4 +192,55 @@ test("history that doesn't lead back to the previous head fails", () => {
 test("an API failure fails the run instead of passing silently", () => {
   const r = run({ before: A, after: B, commits: { [B]: { parents: [A], message: "x" } }, pulls: { [B]: [merged(7, B)] }, failApi: true });
   assert.notEqual(r.status, 0);
+});
+
+// ── The alert issue ──
+
+const TITLE = "main-guard: unexpected push to main";
+const directPush = { before: A, after: B, commits: { [B]: { parents: [A], message: "quick fix", author: "Mallory" } }, pulls: {} };
+
+test("a bad push opens an issue that mentions the owner and lists the commits and the pusher", () => {
+  const r = run({ ...directPush, withIssueStep: true });
+  assert.equal(r.status, 1);
+  assert.equal(r.issue!.status, 0, r.issue!.out);
+  assert.equal(r.posts.length, 1);
+  const [post] = r.posts;
+  assert.deepEqual([post.method, post.api, post.body.title], ["POST", "repos/avilabs/avi-websites/issues", TITLE]);
+  assert.match(post.body.body, /^@Tomassv main changed without a pull request\./);
+  assert.match(post.body.body, /- bbbbbbb "quick fix" by Mallory <mallory@avilabs\.is>/);
+  assert.match(post.body.body, /Pushed by \*\*someone\*\*/);
+  assert.match(post.body.body, /Run: https:\/\/github\.com\/avilabs\/avi-websites\/actions\/runs\/42/);
+});
+
+test("an open alert issue gets a comment instead of a second issue", () => {
+  const r = run({ ...directPush, withIssueStep: true, issues: [{ number: 12, title: "something else" }, { number: 31, title: TITLE }] });
+  assert.equal(r.posts.length, 1);
+  assert.equal(r.posts[0].api, "repos/avilabs/avi-websites/issues/31/comments");
+  assert.equal(r.posts[0].body.title, undefined);
+  assert.match(r.posts[0].body.body, /bbbbbbb "quick fix"/);
+  assert.match(r.issue!.out, /Commented on issue #31/);
+});
+
+test("a pull request with the same title isn't taken for the alert issue", () => {
+  const r = run({ ...directPush, withIssueStep: true, issues: [{ number: 5, title: TITLE, pull_request: {} }] });
+  assert.equal(r.posts[0].api, "repos/avilabs/avi-websites/issues");
+});
+
+test("force pushes and deleted main are reported in the issue too", () => {
+  const r = run({ before: A, after: B, forced: true, commits: {}, pulls: {}, withIssueStep: true });
+  assert.match(r.posts[0].body.body, /force-pushed/);
+});
+
+test("a check that crashed before writing its report still opens an issue", () => {
+  const r = run({ ...directPush, onlyIssueStep: true });
+  assert.equal(r.issue!.status, 0, r.issue!.out);
+  assert.match(r.posts[0].body.body, /couldn't check this push/);
+  assert.match(r.posts[0].body.body, /Pushed by \*\*someone\*\*, new head `bbbbbbb/);
+});
+
+test("a clean push opens nothing", () => {
+  const r = run({ before: A, after: B, commits: { [B]: { parents: [A], message: "ok" } }, pulls: { [B]: [merged(7, B)] }, withIssueStep: true });
+  assert.equal(r.status, 0);
+  assert.equal(r.issue, null);
+  assert.equal(r.posts.length, 0);
 });

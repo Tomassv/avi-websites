@@ -154,15 +154,17 @@ of a merged pull request. It also fails when `main` is force-pushed, recreated o
 
 - **A direct push to `main` triggers this alert.** The failed run names each offending commit
   and the pusher.
-- **GitHub emails a failed run to the person who triggered it,** which is the pusher. A direct
-  push by the repository owner emails the owner. A push by anyone else emails them instead, and
-  shows as a red ✗ on the commit and in the Actions tab. Check that tab after any unexpected
-  change.
+- **It opens an issue.** The issue is titled **"main-guard: unexpected push to main"**, lists the
+  commits, the pusher and the run, and mentions the repository owner, so the owner is notified
+  even when the pusher is a bot. If that issue is already open, it gets a comment instead.
+  GitHub's own failure email only goes to whoever pushed.
+- **Close the issue once the push is dealt with.** The next alert then opens a fresh one.
 - **The workflow detects; it doesn't prevent.** Undo an unintended push with a revert through a
-  pull request.
+  pull request. Rebase merging is disabled in the repository settings, because a rebase merge
+  would also be reported.
 
-Its permissions are `contents: read` and `pull-requests: read`. `mcp/test/main-guard.test.ts`
-runs its script against a fake `gh`.
+Its permissions are `contents: read`, `pull-requests: read` and `issues: write` (for the alert
+issue only). `mcp/test/main-guard.test.ts` runs both steps against a fake `gh`.
 
 ## Rotate a preview secret
 

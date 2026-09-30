@@ -396,8 +396,8 @@ Without branch protection, anyone with write access could push to `main` directl
 `.github/workflows/main-guard.yml` is the one file outside `mcp/`, approved for this purpose. It
 makes such a push visible:
 
-- **Trigger and permissions.** It runs on every push to `main`, with `contents: read` and
-  `pull-requests: read` only.
+- **Trigger and permissions.** It runs on every push to `main`, with `contents: read`,
+  `pull-requests: read`, and `issues: write`. The last is only for the alert issue.
 - **What it checks.** It walks the pushed commits along `main`'s first-parent history, from the
   new head back to the previous one. For each commit it asks the API
   (`GET /repos/{repo}/commits/{sha}/pulls`) whether that commit is the **merge or squash commit
@@ -405,20 +405,24 @@ makes such a push visible:
   merge commit.
   - A merge commit's second-parent commits (the PR's own commits) belong to that PR and aren't
     checked separately.
-  - Rebase merges aren't used here and would be reported.
+  - Rebase merging is disabled in the repository settings; a rebase merge would be reported.
 - **What fails.** Any other commit fails the run, with an error and a job summary naming each
   offending commit (SHA, subject, author, committer) and the pusher. So does a force push, `main`
   being created or deleted by a push, history that doesn't lead back to the previous head, or an
   API error.
-- **Who is notified.** GitHub emails a failed run to **the user who triggered it**, which for a
-  push is the pusher. A direct push by the repository owner therefore emails the owner. A push by
-  someone else emails that person, and the failure also shows as a red ✗ on the commit and in the
-  Actions tab. Notifying the owner in every case would need `issues: write` (to open an issue),
-  which this workflow deliberately doesn't have.
+- **Who is notified.** GitHub emails a failed run only to **the user who triggered it**, which is
+  the pusher, and that can be a bot. So a second step, `if: failure()`, opens an issue titled
+  **"main-guard: unexpected push to main"**. If one with that exact title is already open, it
+  comments on it instead.
+  - The issue mentions the repository owner (`@<owner>`), so the owner is notified whoever
+    pushed.
+  - It lists the bad commits, the pusher and the run link.
+  - If the check itself crashed (for example an API error) before writing its findings, the
+    issue says the push couldn't be checked and needs a look by hand.
 - **It detects, it doesn't prevent.** The fix for a bad push is a revert.
 
-The script is tested in `mcp/test/main-guard.test.ts`, which runs it as written against a fake
-`gh`.
+Both steps are tested in `mcp/test/main-guard.test.ts`, which runs their scripts as written
+against a fake `gh`.
 
 ## 8. Previews: the sign-in gateway
 
@@ -633,11 +637,15 @@ GitHub client and an in-memory Redis fake:
   - CIMD: host allowlist, `client_id` self-match and size limit.
   - Stateless DCR round trip.
   - The `state` and cookie binding.
-- **main-guard.** The workflow script, run as written with a fake `gh`. It covers squash and merge
-  commits, several PRs in one push, a direct push, a direct commit on top of a merge, a PR branch
-  commit pushed straight to `main`, force pushes, recreating and deleting `main`, broken history,
-  and API failure. It also checks the permissions and that no `${{ }}` expressions go into the
-  script.
+- **main-guard.** Both workflow steps, run as written with a fake `gh`.
+  - The check: squash and merge commits, several PRs in one push, a direct push, a direct commit
+    on top of a merge, a PR branch commit pushed straight to `main`, force pushes, recreating and
+    deleting `main`, broken history, and API failure.
+  - The alert issue: a new issue that mentions the owner and lists the commits and the pusher; a
+    comment on an already-open alert issue; a pull request with the same title being ignored; the
+    report missing after a crashed check; nothing opened for a clean push.
+  - It also checks the permissions, `if: failure()`, and that no `${{ }}` expressions go into the
+    scripts.
 - **Build script.** `should-build.sh` builds for a change in `mcp/`, in a site's `lib/`, or in a
   site's `landing.schema.json`, and when the base is unknown. It skips for a content-only change.
 - **Logging.** Tokens and base64 never appear in a log line.
@@ -746,4 +754,4 @@ Where the code differs from the plan above, and why:
 | Tokens | Refresh tokens are `<family>.<jti>.<key id>.<mac>`. The key id lets `TOKEN_SECRETS` rotate. |
 | DRY_RUN | Uses an **in-memory copy of the checkout** as GitHub, so the whole flow (PRs, previews, publish, undo) runs locally. Every tool result is prefixed with a dry-run note. `REDIS=memory` (DEV_MODE only) replaces Redis. |
 | Gate 4 | Checks from other Vercel projects (other sites) are informational. There's no required-checks list, since there's no ruleset. |
-| main-guard | GitHub emails a failed run to the pusher, not always the owner (§7.8). |
+| main-guard | GitHub emails a failed run only to the pusher, so the workflow also opens (or comments on) an alert issue that mentions the owner. This needs `issues: write` (§7.8). |
