@@ -70,7 +70,7 @@
   },
   "hero": {
     "title": "Resolve Claims.<br><span class='orange'>Retain Customers.</span>",
-    "sub": "Cura is an AI-powered claims resolution platform for airlines, automating compensation end-to-end while improving passenger outcomes and controlling cost at scale.",
+    "sub": "Cura is an AI-powered claims resolution platform for airlines, automating compensation end-to-end while improving passenger outcomes and trolling cost at scale.",
     "cta": { "label": "Book a Demo", "href": "/book-demo" },
     "workflow": {
       "nodes": [
