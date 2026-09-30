@@ -1,0 +1,171 @@
+{
+  "seo": {
+    "title": "Cura — Evidence Automation for Airline Operations",
+    "description": "When a passenger escalates to a national authority, the evidence request ends up in your OCC. Cura pulls every source over an API — weather, NOTAMs, slot messages, delay codes, booking data — drafts the response and files it. Nobody in operations is asked for anything.",
+    "canonical": "https://cura.aero/evidence-automation",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+    "author": "AviLabs",
+    "themeColor": "#051457",
+    "openGraph": {
+      "type": "website",
+      "siteName": "Cura",
+      "title": "Cura — Evidence Automation for Airline Operations",
+      "description": "Your OCC stops being the evidence archive. Every source pulled over an API, the response drafted and filed — all operations does is nothing.",
+      "url": "https://cura.aero/evidence-automation",
+      "image": "https://cura.aero/images/cura-mountains.jpg",
+      "imageAlt": "Cura — evidence automation for airline operations",
+      "locale": "en_US"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Cura — Evidence Automation for Airline Operations",
+      "description": "Your OCC stops being the evidence archive. Every source pulled over an API, the response drafted and filed.",
+      "image": "https://cura.aero/images/cura-mountains.jpg"
+    }
+  },
+  "header": {
+    "nav": [
+      { "label": "Home", "href": "/" },
+      { "label": "How it works", "href": "#how-it-works" }
+    ],
+    "cta": { "label": "Book a Demo", "href": "/book-demo" }
+  },
+  "hero": {
+    "eyebrow": "For OCC and operations leadership",
+    "title": "Your OCC stops being<br><span class='orange'>the evidence archive.</span>",
+    "sub": "Months after a disruption, an authority asks for the NOTAMs, the slot messages, the delay codes and the duty manager's notes — and the request lands on your desk. Cura pulls every one of those sources over an API the moment the request arrives, drafts the response in the authority's own structure and files it. <strong>Nobody in operations is asked for anything.</strong>",
+    "cta": { "label": "Book a Demo", "href": "/book-demo" },
+    "secondary": { "label": "See how it works", "href": "#how-it-works" },
+    "workflow": {
+      "nodes": [
+        {
+          "icon": "mark_email_unread",
+          "title": "Authority request arrives",
+          "actor": "Authority",
+          "headOnly": true,
+          "badges": { "done": "Received", "prog": "In Progress" }
+        },
+        {
+          "icon": "storage",
+          "title": "Evidence collected",
+          "actor": "Cura",
+          "actorCura": true,
+          "badges": { "done": "Collected", "prog": "Pulling" },
+          "body": "Weather, NOTAMs, CTOT, delay codes, booking — pulled in parallel"
+        },
+        {
+          "icon": "edit_note",
+          "title": "Response drafted",
+          "actor": "AI agent",
+          "actorCura": true,
+          "badges": { "done": "Drafted", "prog": "Drafting" },
+          "body": "Cause categorised, delay attributed minute by minute"
+        },
+        {
+          "icon": "how_to_reg",
+          "title": "Approved and filed",
+          "actor": "Claims",
+          "headOnly": true,
+          "badges": { "done": "Filed", "prog": "In Review" }
+        }
+      ]
+    }
+  },
+  "pain": {
+    "title": "Every escalation ends the same way: someone in operations digging through March.",
+    "body": "A national authority writes to the airline eleven weeks after the flight. Legal cannot answer it without you — so the request becomes a favour, then a chase, then a deadline.",
+    "tags": [
+      "NOTAM archives",
+      "Screenshots of METARs",
+      "Duty manager notes",
+      "Delay code disputes",
+      "Slot messages",
+      "20 working days",
+      "A deadline you didn't set"
+    ]
+  },
+  "compare": {
+    "chip": "The change",
+    "title": "The request never reaches your team.",
+    "body": "Same escalation, same authority, same deadline — a completely different week for the people running the operation.",
+    "now": {
+      "tag": "Today",
+      "title": "Evidence is assembled by memory, months late.",
+      "items": [
+        { "icon": "schedule", "text": "Legal emails OCC asking what happened on a flight from three months ago." },
+        { "icon": "folder_off", "text": "NOTAMs, CTOTs and weather have to be reconstructed from whatever was saved on the day." },
+        { "icon": "person_search", "text": "The duty manager who worked that shift may not be the one answering." },
+        { "icon": "gavel", "text": "Thin evidence means paying claims the airline should have defended." }
+      ]
+    },
+    "cura": {
+      "tag": "With Cura",
+      "title": "Evidence is sealed at the moment of the disruption.",
+      "items": [
+        { "icon": "bolt", "text": "Every source is fetched over an API the moment the request lands — in parallel, in minutes." },
+        { "icon": "lock_clock", "text": "Weather, minima and NOTAMs are stamped at the time of the disruption, not recalled later." },
+        { "icon": "notifications_off", "text": "No one in OCC is interrupted. The read-only API is wired up once, at onboarding." },
+        { "icon": "shield", "text": "The airline defends what it can defend, on the record, with a checksum per document." }
+      ]
+    }
+  },
+  "howItWorks": {
+    "chip": "How it works",
+    "title": "Data in. Filed package out.",
+    "intakeFlow": {
+      "nodes": [
+        {
+          "icon": "mark_email_unread",
+          "title": "Request arrives",
+          "actor": "Authority",
+          "headOnly": true,
+          "badges": { "done": "Received", "prog": "In Progress" }
+        },
+        {
+          "icon": "smart_toy",
+          "title": "Read and matched",
+          "actor": "AI",
+          "actorCura": true,
+          "badges": { "done": "Matched", "prog": "In Progress" },
+          "list": ["Claim found — matched to the case on file", "No claim — new case is opened"]
+        },
+        {
+          "icon": "storage",
+          "title": "Evidence collected",
+          "actor": "Cura",
+          "actorCura": true,
+          "badges": { "done": "Collected", "prog": "In Progress" },
+          "body": "Pulled in parallel, gaps flagged"
+        }
+      ]
+    }
+  },
+  "learning": {
+    "chip": "Learning",
+    "title": "It gets better with every case.",
+    "body": "Three signals feed back into the drafting agent — two from day one, one when the rulings land.",
+    "cards": [
+      {
+        "title": "Edit diffs",
+        "speed": { "icon": "bolt", "label": "Day one", "fast": true },
+        "body": "Every paragraph an agent rewrites. Eight rewrites in ten is a template problem — fixed the same day."
+      },
+      {
+        "title": "Overrides",
+        "speed": { "icon": "bolt", "label": "Day one", "fast": true },
+        "body": "Every time an agent pays against a defend call, with the reason. Expert judgement, months before the verdicts."
+      },
+      {
+        "title": "Rulings",
+        "speed": { "icon": "hourglass_top", "label": "Ground truth", "fast": false },
+        "body": "Parsed argument by argument: <em>dismissed in 11 of 14 cases resting on an operations log alone.</em>"
+      }
+    ],
+    "note": { "icon": "functions", "text": "<strong>Counting, not training.</strong> Rates you can inspect, trace to real cases and defend in a dispute — not a model nobody can explain to a regulator." }
+  },
+  "cta": {
+    "title": "See it run on <span class='hi hi-white'>one of your own flights.</span>",
+    "button": { "label": "Book a Demo", "href": "/book-demo" },
+    "photos": ["/images/cta/cta-1.jpg", "/images/cta/cta-2.jpg", "/images/cta/cta-3.jpg", "/images/cta/cta-4.jpg"]
+  }
+}
