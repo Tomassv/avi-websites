@@ -320,3 +320,41 @@ export type StandaloneContent = {
   };
   footer: DocFooterContent;
 };
+
+// ── Decks ──
+
+/**
+ * One slide. JSON can't carry a checked discriminant, so every field but `type` is optional
+ * here and lib/deck.ts validates each slide against its type when the page is built.
+ */
+export type DeckSlide = {
+  /** title | stats | silos | flow | table | pack | mono | cards | learning | list | quote */
+  type: string;
+  eyebrow?: Rich;
+  title?: Rich;
+  lead?: Rich;
+  body?: Rich;
+  stats?: { value: Rich; text: Rich }[];
+  silos?: { tag: Rich; text: Rich }[];
+  byhand?: { title: Rich; text: Rich };
+  /** Flow steps. kind: api | ai | det | hum. */
+  steps?: { kind: string; tag: Rich; title: Rich; detail: string }[];
+  head?: Rich[];
+  rows?: { label: Rich; cells: { text: Rich; tone: string }[] }[] | { from: Rich; was: Rich; now: Rich; next: Rich }[];
+  doc?: { to: Rich; ref: Rich; title: Rich; sections: Rich[]; sign: Rich };
+  annex?: { title: Rich; count: Rich; rows: { id: Rich; text: Rich; source: Rich }[]; seal: Rich };
+  /** Monospace block; newlines and spacing are kept. */
+  mono?: string;
+  /** tint: priv | cura */
+  cards?: { tint?: string; title: Rich; text: Rich }[];
+  sources?: { title: Rich; text: Rich }[];
+  out?: Rich;
+  items?: { lead: Rich; text: Rich }[];
+  quote?: Rich;
+};
+
+export type DeckContent = {
+  seo: Seo;
+  nav: { back: string; next: string; slide: string; logo: string };
+  slides: DeckSlide[];
+};

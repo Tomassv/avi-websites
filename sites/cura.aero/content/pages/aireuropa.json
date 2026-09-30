@@ -1,0 +1,174 @@
+{
+  "seo": {
+    "title": "Cura — authority response automation",
+    "robots": "noindex, nofollow"
+  },
+  "nav": { "back": "Back", "next": "Next", "slide": "Slide", "logo": "Cura" },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Stop assembling<br>regulator files by hand",
+      "lead": "When a passenger escalates to AESA, you have thirty days to answer with evidence. Cura assembles that file, recommends whether to defend or pay, and learns from every ruling so the next case is argued better."
+    },
+    {
+      "type": "stats",
+      "eyebrow": "Today",
+      "title": "What a single escalation costs you",
+      "stats": [
+        { "value": "30", "text": "days to respond, from the moment AESA writes" },
+        { "value": "8", "text": "separate items of evidence typically requested" },
+        { "value": "5+", "text": "systems a specialist has to search by hand" },
+        { "value": "€250", "text": "the compensation usually in dispute" }
+      ],
+      "body": "Hours of specialist or legal time, against a deadline, on a claim worth a few hundred euros. Miss the deadline and the authority decides on the record as it stands."
+    },
+    {
+      "type": "silos",
+      "eyebrow": "The gap",
+      "title": "This work sits between your systems",
+      "silos": [
+        { "tag": "CRM", "text": "The claim, …" },
+        { "tag": "Operations", "text": "Delay codes, OCC log, …" },
+        { "tag": "Third party", "text": "Movement times, weather, …" }
+      ],
+      "byhand": { "title": "A person, by hand", "text": "Every case · 30-day deadline · from €250 at stake" },
+      "body": "No system owns this work, because it sits between all of them."
+    },
+    {
+      "type": "flow",
+      "eyebrow": "What Cura does",
+      "title": "Five steps, one human decision",
+      "steps": [
+        { "kind": "api", "tag": "Data", "title": "Request in", "detail": "The authority's email arrives from your mailbox or your CRM. Stored raw, before anything reads it." },
+        { "kind": "ai", "tag": "AI", "title": "Read &amp; match", "detail": "AI reads the request and works out which booking, flight and claim it concerns. Low confidence goes to a person." },
+        { "kind": "api", "tag": "Data", "title": "Gather", "detail": "Four sources, called in parallel. A source that fails marks a gap and the run continues." },
+        { "kind": "det", "tag": "Code", "title": "Compute facts", "detail": "Versioned code, no AI. Same inputs produce the same number every time — which is what makes it defensible." },
+        { "kind": "ai", "tag": "AI", "title": "Draft", "detail": "AI writes the prose from the computed facts. It never produces a number, a date or a citation of its own." },
+        { "kind": "hum", "tag": "Human", "title": "Approve", "detail": "Your agent reviews, edits and approves. Every change is recorded against the draft, with their name on it." }
+      ]
+    },
+    {
+      "type": "table",
+      "eyebrow": "Your systems",
+      "title": "Nothing you do today needs to change",
+      "head": [" ", "Your systems", "Cura"],
+      "rows": [
+        { "label": "Passenger claim intake", "cells": [{ "text": "Unchanged", "tone": "y" }, { "text": "Cura can, if you want it", "tone": "opt" }] },
+        { "label": "Claim handling and decision", "cells": [{ "text": "Unchanged", "tone": "y" }, { "text": "Cura can, if you want it", "tone": "opt" }] },
+        { "label": "Authority case and deadline", "cells": [{ "text": "—", "tone": "n" }, { "text": "Cura", "tone": "y" }] },
+        { "label": "Evidence, sealed and provable", "cells": [{ "text": "—", "tone": "n" }, { "text": "Cura", "tone": "y" }] },
+        { "label": "The response package", "cells": [{ "text": "—", "tone": "n" }, { "text": "Cura", "tone": "y" }] },
+        { "label": "Outcome and reporting", "cells": [{ "text": "Written back", "tone": "y" }, { "text": "Retained", "tone": "y" }] }
+      ]
+    },
+    {
+      "type": "stats",
+      "eyebrow": "Working example",
+      "title": "UX6071, Barcelona to Palma",
+      "stats": [
+        { "value": "4h 33", "text": "arrival delay, 9 September" },
+        { "value": "2", "text": "rotation legs traced back to Orly" },
+        { "value": "3", "text": "sealed evidence records with checksums" },
+        { "value": "€250", "text": "entitlement per passenger, band (a)" }
+      ],
+      "body": "The aircraft arrived into Barcelona 171 minutes late that morning, having overnighted at Palma after arriving 18 minutes late from Paris — so the cause began that morning, and that is exactly the question a regulator would press."
+    },
+    {
+      "type": "pack",
+      "eyebrow": "The deliverable",
+      "title": "What AESA receives",
+      "doc": {
+        "to": "Agencia Estatal de Seguridad Aérea",
+        "ref": "AESA/261/2026/05512 · UX6071 · 09.09.2026",
+        "title": "Alegaciones y documentación acreditativa",
+        "sections": [
+          "Objeto y alcance del requerimiento",
+          "Hechos, tramo a tramo, con horarios reales",
+          "Circunstancia extraordinaria y nexo causal",
+          "Medidas razonables adoptadas",
+          "Información y asistencia a los pasajeros",
+          "Conclusión y solicitud"
+        ],
+        "sign": "Approved by a named handler · version 2 · 18.09.2026<br>Every figure traceable to an annex below"
+      },
+      "annex": {
+        "title": "Anexos",
+        "count": "9",
+        "rows": [
+          { "id": "A1", "text": "Reserva y billetes", "source": "airline" },
+          { "id": "A2", "text": "Presentación al embarque", "source": "airline" },
+          { "id": "A3", "text": "Horarios reales, 3 tramos", "source": "AeroAPI" },
+          { "id": "A4", "text": "Rotación EC-LVR, 08–09.09", "source": "AeroAPI" },
+          { "id": "A5", "text": "METAR LEBL y LEPA", "source": "public" },
+          { "id": "A6", "text": "Regulación ATFM", "source": "Eurocontrol" },
+          { "id": "A7", "text": "Registro OCC", "source": "airline" },
+          { "id": "A8", "text": "Comunicaciones con acuse", "source": "Plan3" },
+          { "id": "A9", "text": "Asistencia artículo 9", "source": "Plan3" }
+        ],
+        "seal": "each annex carries<br>source · observed · retrieved · sha256"
+      },
+      "body": "One letter in their language, answering their items in their order, with every assertion resting on an annex that can be verified independently."
+    },
+    {
+      "type": "mono",
+      "eyebrow": "The core of it",
+      "title": "Every line traces to a source",
+      "mono": "Anexo A5 · METAR LEBL 17:00Z\n\nLEBL 091700Z 20012KT 9999 FEW030 27/19 Q1015\nvisibility 10 km · no cloud below 3000 ft · VFR\n\nSource       Iowa Environmental Mesonet — ASOS/AWOS archive\nReference    station LEBL · observation cycle 2026-09-09 17:00Z\nEndpoint     mesonet.agron.iastate.edu/request/download.phtml\nRetrieved    2026-09-18 16:42Z\nChecksum     sha256:0e4a7b91c62df308…",
+      "body": "Named precisely enough that AESA can pull the same record themselves — including the ones that do not help us."
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Decision support",
+      "title": "Defend, or pay",
+      "cards": [
+        { "tint": "priv", "title": "A recommendation", "text": "Scored on the evidence, the cause and how this authority has ruled before. It shows what argues against it too." },
+        { "title": "Your agent decides", "text": "Going against it requires a reason. That disagreement is the earliest signal we get." }
+      ],
+      "body": "Internal. Never part of what the authority receives."
+    },
+    {
+      "type": "learning",
+      "eyebrow": "Learning",
+      "title": "Every case teaches the next one",
+      "sources": [
+        { "title": "Every agent edit", "text": "what was drafted, what you kept" },
+        { "title": "Every ruling received", "text": "which arguments held, which failed" }
+      ],
+      "head": ["From", "What happened", "So the next draft"],
+      "rows": [
+        { "from": "edit", "was": "drafted &ldquo;…un retraso de 96 minutos&rdquo;", "now": "you filed &ldquo;…regulación MADR11, 96 minutos&rdquo;", "next": "names the ATFM regulation, not only the minutes" },
+        { "from": "edit", "was": "drafted &ldquo;Estimado/a Sr./Sra.&rdquo;", "now": "you filed &ldquo;Estimados señores&rdquo;", "next": "opens the way AESA filings open" },
+        { "from": "ruling", "was": "we argued reasonable measures from the OCC log", "now": "AESA dismissed it", "next": "adds the spare-aircraft check and the rebooking offer" },
+        { "from": "ruling", "was": "we argued weather with NOTAM and METAR together", "now": "AESA accepted it", "next": "leads with that evidence again" }
+      ],
+      "out": "The next draft is written against this table — arguing the way that has won before"
+    },
+    {
+      "type": "list",
+      "eyebrow": "Honest constraints",
+      "title": "What we need from you",
+      "items": [
+        { "lead": "Booking and boarding records", "text": "— the first two items AESA asks for. Without them there is no filing." },
+        { "lead": "Delay codes and the operations log", "text": "— the cause, and the evidence of reasonable measures" },
+        { "lead": "Maintenance records", "text": "— only where a technical cause is claimed" },
+        { "lead": "Eurocontrol operator credentials", "text": "— slot and flow messages, which only you can authorise" },
+        { "lead": "A named approver", "text": "— one person who signs off a filing" }
+      ],
+      "body": "This is the longest lead time in the project and it is unaffected by anything else. We would rather raise it in the first meeting than the third."
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Getting started",
+      "title": "A three-month pilot",
+      "cards": [
+        { "tint": "cura", "title": "Weeks 1–6", "text": "One real escalation, end to end. Compared against the same case assembled by hand — hours and quality, side by side." },
+        { "title": "Weeks 6–12", "text": "Your team reviews and files live cases in the screen. Go or no-go on the basis of what they think of it." },
+        { "title": "After", "text": "Automated intake, filing, outcome capture. The learning loop begins accumulating." }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "Where the file assembles itself, tells your agent whether to defend or pay, and argues a little better every time a ruling comes back."
+    }
+  ]
+}
