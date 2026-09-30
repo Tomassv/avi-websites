@@ -429,3 +429,50 @@ If a page's diff can't be brought within threshold, I stop and report instead of
 - **Integrations hub:** the SVG geometry is tuned to the current label widths. Longer labels in `home.json` also need a pill-width change in `IntegrationsHub`.
 - **Basic auth UX:** browsers cache basic-auth credentials per session, and there is no logout. That's fine for internal viewers. Sharing a deck with an external airline means sharing the credentials, so consider per-audience credentials later.
 - **New internal pages:** adding one means adding its route to `proxy.ts`. The internal-routes test fails the build if that step is missed.
+
+---
+
+## Implementation notes (where the build differs from the plan)
+
+- **TypeScript 6.0.3**, not 7.x: 7.0 is the new native compiler and was released days before this
+  work. 6.0.3 is the last release of the JavaScript compiler, which Next's build-time type check uses.
+- **Content loading:** each page imports and types its own JSON file. `lib/content.ts` holds only
+  the shared files (`site.json`, `shared/evidence-sources.json`), so each page can be committed on
+  its own.
+- **Enum-like fields** (card tones, slide types, flow kinds) are typed as `string`, because JSON
+  imports widen string literals. They are checked when rendered (unknown values render nothing).
+  Deck slides are also validated at build time (`lib/deck.ts`), so a malformed deck fails the build.
+- **Content classes kept out of the whitelist:** instead of adding `ev-hash`, `ev-quiet-inline` and
+  `wf-actor--cura` to the Rich whitelist, those pieces are structured fields: `integrity.hash`, a
+  step item's `source`, and a workflow node's `actorHandoff`.
+- **canonical and og:url** are rendered as plain `<link>`/`<meta>` tags (`SeoLinks`), because the
+  Metadata API normalises `https://cura.aero/` to `https://cura.aero`.
+- **next/image sizing:** `styles/next-image.css` has one zero-specificity rule,
+  `:where(img[data-nimg]) { width: auto; height: auto }`. next/image always writes width/height
+  attributes, which would distort images where the old CSS set only one dimension. Intrinsic
+  sizes are read from the files at build time (`lib/image-size.ts`, no dependency).
+- **Material Icons** loads only on the pages that used it before. update, aha and
+  non-connected-value never loaded it.
+- **The `js` class** that gates the fade-up reveal is set by a `beforeInteractive` script in the
+  root layout, so it is in `<head>` as before. It now runs on every page, which has no visual effect
+  where no CSS uses it.
+- **Viewport meta** is `initial-scale=1` (Next's default) instead of `1.0`. They mean the same thing.
+- **`/assets`** on its own also redirects, to `/images`, which is a 404.
+- **`next dev`** writes `AGENTS.md` and `CLAUDE.md` into this folder. They are not part of the site.
+
+### Verification results
+
+- **Screenshots** (1440px and 390px, reduced motion, every deck slide and flow sub-step):
+  - book-demo, workflow, update and aha: 0 px difference.
+  - evidence-package, value-props and non-connected-value: 5 to 41 px (antialiasing).
+  - aireuropa: 0 px in 35 of 36 states, 13 px in one.
+  - home and evidence-automation: identical except the CTA photos, which were still being
+    downloaded, and the re-encoded arrow on home (§13 item 10).
+- **Head tags:** only the §13 changes (URLs, robots, favicon) and the viewport spelling.
+- **Redirects, basic auth (including failing closed), the image optimizer block, robots.txt,
+  sitemap.xml and GA placement:** all checked against a production build.
+- **Hostile content:** checked in built HTML, then reverted:
+  - XSS strings seeded into a JSON content file;
+  - a hostile Markdown article.
+
+  They rendered as escaped text or were stripped.
