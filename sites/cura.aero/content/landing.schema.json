@@ -1,0 +1,506 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cura.aero/schemas/landing.schema.json",
+  "title": "Cura landing page",
+  "description": "A landing page: content/landing/SLUG.json, served at /SLUG. Every image lives in public/images/landing/SLUG/. Rich strings may use the inline tags br, strong, b, em and span with the classes orange, hi, hi-orange, hi-white, text-bold, wf-lead, ev-quiet; write a literal less-than or greater-than sign as &lt; or &gt;. Length limits count markup too.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["draft", "seo", "header", "sections"],
+  "properties": {
+    "$schema": { "enum": ["../landing.schema.json", "./landing.schema.json"] },
+    "draft": {
+      "type": "boolean",
+      "description": "true: shown in local development and on Vercel previews only, never on the live site."
+    },
+    "seo": { "$ref": "#/$defs/seo" },
+    "header": { "$ref": "#/$defs/header" },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 30,
+      "items": { "$ref": "#/$defs/section" },
+      "allOf": [
+        {
+          "description": "At most one cta-band per page.",
+          "contains": { "type": "object", "required": ["type"], "properties": { "type": { "const": "cta-band" } } },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "description": "At most one book-demo per page.",
+          "contains": { "type": "object", "required": ["type"], "properties": { "type": { "const": "book-demo" } } },
+          "minContains": 0,
+          "maxContains": 1
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "rich": {
+      "description": "Text that may contain the whitelisted inline markup.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?:[^\\x3C>]|\\x3Cbr ?/?>|\\x3C/?(?:strong|b|em)>|\\x3C/span>|\\x3Cspan class='(?:orange|hi|hi-orange|hi-white|text-bold|wf-lead|ev-quiet)(?: (?:orange|hi|hi-orange|hi-white|text-bold|wf-lead|ev-quiet))*'>|\\x3Cspan class=\"(?:orange|hi|hi-orange|hi-white|text-bold|wf-lead|ev-quiet)(?: (?:orange|hi|hi-orange|hi-white|text-bold|wf-lead|ev-quiet))*\">)*$"
+    },
+    "text": {
+      "description": "Plain text, no markup.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\x3C>]*$"
+    },
+    "href": {
+      "description": "A site path (/...), an anchor on this page (#id), an https:// URL or a mailto: address.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^(?:/(?!/)[A-Za-z0-9\\-._~/%?#=&+]*|#[A-Za-z0-9_\\-]*|https://[^\\s\\\\@/]+(?:/[^\\s\\\\]*)?|mailto:[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,})$"
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "href"],
+      "properties": {
+        "label": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 40 },
+        "href": { "$ref": "#/$defs/href" },
+        "newTab": { "type": "boolean" }
+      }
+    },
+    "imageSrc": {
+      "description": "A file in public/images/landing/SLUG/, where SLUG is this page's file name.",
+      "type": "string",
+      "maxLength": 200,
+      "pattern": "^/images/landing/[a-z0-9]+(?:-[a-z0-9]+)*/[A-Za-z0-9_\\-]+(?:\\.[A-Za-z0-9_\\-]+)*\\.(?:jpg|jpeg|png|webp|avif|svg)$"
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["src", "alt"],
+      "properties": {
+        "src": { "$ref": "#/$defs/imageSrc" },
+        "alt": {
+          "description": "Describes the image; empty for a purely decorative one.",
+          "type": "string",
+          "maxLength": 200,
+          "pattern": "^[^\\x3C>]*$"
+        }
+      }
+    },
+    "icon": {
+      "description": "A Material Icons Round name, e.g. verified, bolt, payments.",
+      "type": "string",
+      "pattern": "^[a-z0-9_]{1,40}$"
+    },
+    "anchorId": {
+      "description": "Anchor target for links like #faq. Lowercase letters, digits and hyphens, starting with a letter. Unique within the page.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,59}$"
+    },
+    "chip": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 40 },
+    "title": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 120 },
+    "sub": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 400 },
+    "paragraph": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 1200 },
+    "cardTitle": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 80 },
+    "cardBody": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 300 },
+    "point": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 160 },
+
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "ogImage"],
+      "properties": {
+        "title": { "type": "string", "$ref": "#/$defs/text", "minLength": 10, "maxLength": 70 },
+        "description": { "type": "string", "$ref": "#/$defs/text", "minLength": 50, "maxLength": 160 },
+        "ogImage": { "$ref": "#/$defs/image" },
+        "noindex": {
+          "description": "true: the page is published but asks search engines not to index it, and is left out of the sitemap.",
+          "type": "boolean"
+        }
+      }
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nav", "cta"],
+      "properties": {
+        "nav": { "type": "array", "maxItems": 6, "items": { "$ref": "#/$defs/link" } },
+        "cta": { "$ref": "#/$defs/link" }
+      }
+    },
+
+    "section": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "type": "string" } },
+      "discriminator": { "propertyName": "type" },
+      "oneOf": [
+        { "$ref": "#/$defs/section-hero" },
+        { "$ref": "#/$defs/section-text" },
+        { "$ref": "#/$defs/section-image" },
+        { "$ref": "#/$defs/section-image-text" },
+        { "$ref": "#/$defs/section-cards" },
+        { "$ref": "#/$defs/section-stats" },
+        { "$ref": "#/$defs/section-logos" },
+        { "$ref": "#/$defs/section-quote" },
+        { "$ref": "#/$defs/section-steps" },
+        { "$ref": "#/$defs/section-faq" },
+        { "$ref": "#/$defs/section-cta-band" },
+        { "$ref": "#/$defs/section-book-demo" },
+        { "$ref": "#/$defs/section-tags" },
+        { "$ref": "#/$defs/section-statement" },
+        { "$ref": "#/$defs/section-compare" },
+        { "$ref": "#/$defs/section-spotlight" }
+      ]
+    },
+
+    "section-hero": {
+      "description": "Page opener: optional eyebrow, the page's h1, a sub line, buttons and an optional image on the right. Use it once, first.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title"],
+      "properties": {
+        "type": { "const": "hero" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "eyebrow": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 60 },
+        "title": { "$ref": "#/$defs/title" },
+        "sub": { "$ref": "#/$defs/sub" },
+        "cta": { "$ref": "#/$defs/link" },
+        "secondary": { "$ref": "#/$defs/link" },
+        "image": { "$ref": "#/$defs/image" }
+      }
+    },
+    "section-text": {
+      "description": "Heading and paragraphs.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "body"],
+      "properties": {
+        "type": { "const": "text" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "body": { "type": "array", "minItems": 1, "maxItems": 8, "items": { "$ref": "#/$defs/paragraph" } },
+        "align": { "enum": ["left", "center"] }
+      }
+    },
+    "section-image": {
+      "description": "One wide image with an optional caption.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "image"],
+      "properties": {
+        "type": { "const": "image" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "image": { "$ref": "#/$defs/image" },
+        "caption": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 200 },
+        "size": { "enum": ["container", "narrow"] }
+      }
+    },
+    "section-image-text": {
+      "description": "An image beside a heading, paragraphs, an optional check list and button.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title", "body", "image", "imagePosition"],
+      "properties": {
+        "type": { "const": "image-text" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "body": { "type": "array", "minItems": 1, "maxItems": 4, "items": { "$ref": "#/$defs/paragraph" } },
+        "points": { "type": "array", "minItems": 1, "maxItems": 6, "items": { "$ref": "#/$defs/point" } },
+        "cta": { "$ref": "#/$defs/link" },
+        "image": { "$ref": "#/$defs/image" },
+        "imagePosition": { "enum": ["left", "right"] }
+      }
+    },
+    "section-cards": {
+      "description": "A grid of 2 to 12 cards in 2, 3 or 4 columns, each with an optional icon.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "columns", "items"],
+      "properties": {
+        "type": { "const": "cards" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "sub": { "$ref": "#/$defs/sub" },
+        "columns": { "enum": [2, 3, 4] },
+        "numbered": { "type": "boolean", "description": "Show 01, 02, ... in the card corner." },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title"],
+            "properties": {
+              "icon": { "$ref": "#/$defs/icon" },
+              "title": { "$ref": "#/$defs/cardTitle" },
+              "body": { "$ref": "#/$defs/cardBody" }
+            }
+          }
+        }
+      }
+    },
+    "section-stats": {
+      "description": "2 to 4 large figures with labels.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "stats" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "label"],
+            "properties": {
+              "value": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 20 },
+              "label": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 60 }
+            }
+          }
+        }
+      }
+    },
+    "section-logos": {
+      "description": "A row of partner or customer logos (or plain names).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "logos" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "label": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 60 },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["image"],
+                "properties": { "image": { "$ref": "#/$defs/image" } }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["text"],
+                "properties": { "text": { "type": "string", "$ref": "#/$defs/text", "maxLength": 30 } }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "section-quote": {
+      "description": "A customer quote on a navy panel.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "quote", "name"],
+      "properties": {
+        "type": { "const": "quote" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "quote": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 400 },
+        "name": { "type": "string", "$ref": "#/$defs/text", "maxLength": 60 },
+        "role": { "type": "string", "$ref": "#/$defs/text", "maxLength": 80 },
+        "company": { "type": "string", "$ref": "#/$defs/text", "maxLength": 60 },
+        "image": { "$ref": "#/$defs/image" }
+      }
+    },
+    "section-steps": {
+      "description": "A numbered sequence of 2 to 8 steps.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "steps" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "sub": { "$ref": "#/$defs/sub" },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title"],
+            "properties": {
+              "title": { "$ref": "#/$defs/cardTitle" },
+              "body": { "$ref": "#/$defs/cardBody" },
+              "tag": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 30 }
+            }
+          }
+        }
+      }
+    },
+    "section-faq": {
+      "description": "Questions that open to show their answer. Also published as FAQPage structured data.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "faq" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["question", "answer"],
+            "properties": {
+              "question": { "type": "string", "$ref": "#/$defs/text", "maxLength": 160 },
+              "answer": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 1500 }
+            }
+          }
+        }
+      }
+    },
+    "section-cta-band": {
+      "description": "The orange call-to-action band with a strip of four photos. At most one per page.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title", "button", "photos"],
+      "properties": {
+        "type": { "const": "cta-band" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "title": { "$ref": "#/$defs/title" },
+        "button": { "$ref": "#/$defs/link" },
+        "photos": {
+          "description": "Four photos, filling the circle, leaf, arch and circle shapes in order.",
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/imageSrc" }
+        }
+      }
+    },
+    "section-book-demo": {
+      "description": "The book-a-demo block with the HubSpot meeting scheduler. At most one per page.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "chip", "title", "sub", "points"],
+      "properties": {
+        "type": { "const": "book-demo" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "sub": { "$ref": "#/$defs/sub" },
+        "points": { "type": "array", "minItems": 1, "maxItems": 6, "items": { "$ref": "#/$defs/point" } },
+        "hubspotMeetingUrl": {
+          "description": "Defaults to the meeting link used on /book-demo.",
+          "type": "string",
+          "maxLength": 300,
+          "pattern": "^https://meetings\\.hubspot\\.com/[A-Za-z0-9\\-._~/%?=&+]+$"
+        }
+      }
+    },
+    "section-tags": {
+      "description": "A dark band with a heading and a row of short tags (the home page's Today's Reality band).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title", "tags"],
+      "properties": {
+        "type": { "const": "tags" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "body": { "$ref": "#/$defs/sub" },
+        "tags": { "type": "array", "minItems": 2, "maxItems": 8, "items": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 40 } }
+      }
+    },
+    "section-statement": {
+      "description": "A navy band with one large statement and an optional button (the home page's What We Do band).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title"],
+      "properties": {
+        "type": { "const": "statement" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 240 },
+        "cta": { "$ref": "#/$defs/link" }
+      }
+    },
+    "compareSide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tag", "title", "items"],
+      "properties": {
+        "tag": { "type": "string", "$ref": "#/$defs/rich", "maxLength": 30 },
+        "title": { "$ref": "#/$defs/cardTitle" },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["icon", "text"],
+            "properties": {
+              "icon": { "$ref": "#/$defs/icon" },
+              "text": { "$ref": "#/$defs/cardBody" }
+            }
+          }
+        }
+      }
+    },
+    "section-compare": {
+      "description": "Two cards side by side: the current way (before) and the Cura way (after, highlighted).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "before", "after"],
+      "properties": {
+        "type": { "const": "compare" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "body": { "$ref": "#/$defs/sub" },
+        "before": { "$ref": "#/$defs/compareSide" },
+        "after": { "$ref": "#/$defs/compareSide" }
+      }
+    },
+    "section-spotlight": {
+      "description": "A navy panel: heading and text on the left, a list of icon items on the right.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title", "items"],
+      "properties": {
+        "type": { "const": "spotlight" },
+        "id": { "$ref": "#/$defs/anchorId" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "title": { "$ref": "#/$defs/title" },
+        "body": { "$ref": "#/$defs/sub" },
+        "cta": { "$ref": "#/$defs/link" },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["icon", "title", "body"],
+            "properties": {
+              "icon": { "$ref": "#/$defs/icon" },
+              "title": { "$ref": "#/$defs/cardTitle" },
+              "body": { "$ref": "#/$defs/cardBody" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

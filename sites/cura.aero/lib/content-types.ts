@@ -367,3 +367,102 @@ export type NewsContent = {
   list: { chip: Rich; title: Rich; empty: Rich };
   article: { back: string; by: string; titleSuffix: string };
 };
+
+// ── Landing pages ──
+// content/landing/<slug>.json, checked against content/landing.schema.json by lib/landing.ts
+// (so, unlike the files above, these shapes are enforced at build time, not by tsc).
+
+export type LandingSeo = {
+  title: string;
+  description: string;
+  ogImage: ImageRef;
+  noindex?: boolean;
+};
+
+type SectionBase = { id?: string };
+type Heading = { chip?: Rich; title?: Rich };
+
+export type HeroSection = SectionBase & {
+  type: "hero";
+  eyebrow?: Rich;
+  title: Rich;
+  sub?: Rich;
+  cta?: Link;
+  secondary?: Link;
+  image?: ImageRef;
+};
+export type TextSection = SectionBase & Heading & { type: "text"; body: Rich[]; align?: "left" | "center" };
+export type ImageSection = SectionBase & { type: "image"; image: ImageRef; caption?: Rich; size?: "container" | "narrow" };
+export type ImageTextSection = SectionBase & {
+  type: "image-text";
+  chip?: Rich;
+  title: Rich;
+  body: Rich[];
+  points?: Rich[];
+  cta?: Link;
+  image: ImageRef;
+  imagePosition: "left" | "right";
+};
+export type CardsSection = SectionBase &
+  Heading & {
+    type: "cards";
+    sub?: Rich;
+    columns: 2 | 3 | 4;
+    numbered?: boolean;
+    items: { icon?: string; title: Rich; body?: Rich }[];
+  };
+export type StatsSection = SectionBase & Heading & { type: "stats"; items: { value: Rich; label: Rich }[] };
+export type LogosSection = SectionBase & { type: "logos"; label?: Rich; items: ({ image: ImageRef } | { text: string })[] };
+export type QuoteSection = SectionBase & {
+  type: "quote";
+  quote: Rich;
+  name: string;
+  role?: string;
+  company?: string;
+  image?: ImageRef;
+};
+export type StepsSection = SectionBase &
+  Heading & { type: "steps"; sub?: Rich; items: { title: Rich; body?: Rich; tag?: Rich }[] };
+export type FaqSection = SectionBase & Heading & { type: "faq"; items: { question: string; answer: Rich }[] };
+export type CtaBandSection = SectionBase & { type: "cta-band" } & CtaBandContent;
+export type BookDemoSection = SectionBase & {
+  type: "book-demo";
+  hubspotMeetingUrl?: string;
+} & BookDemoContent["intro"];
+export type TagsSection = SectionBase & { type: "tags"; chip?: Rich; title: Rich; body?: Rich; tags: Rich[] };
+export type StatementSection = SectionBase & { type: "statement"; chip?: Rich; title: Rich; cta?: Link };
+export type CompareSide = { tag: Rich; title: Rich; items: IconItem[] };
+export type CompareSection = SectionBase & Heading & { type: "compare"; body?: Rich; before: CompareSide; after: CompareSide };
+export type SpotlightSection = SectionBase & {
+  type: "spotlight";
+  chip?: Rich;
+  title: Rich;
+  body?: Rich;
+  cta?: Link;
+  items: { icon: string; title: Rich; body: Rich }[];
+};
+
+export type LandingSection =
+  | HeroSection
+  | TextSection
+  | ImageSection
+  | ImageTextSection
+  | CardsSection
+  | StatsSection
+  | LogosSection
+  | QuoteSection
+  | StepsSection
+  | FaqSection
+  | CtaBandSection
+  | BookDemoSection
+  | TagsSection
+  | StatementSection
+  | CompareSection
+  | SpotlightSection;
+
+export type LandingContent = {
+  draft: boolean;
+  seo: LandingSeo;
+  header: HeaderContent;
+  sections: LandingSection[];
+};

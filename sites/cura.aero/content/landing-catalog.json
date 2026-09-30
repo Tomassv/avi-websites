@@ -1,0 +1,184 @@
+{
+  "$schema": "./landing.schema.json",
+  "draft": true,
+  "seo": {
+    "title": "Landing section catalog — Cura",
+    "description": "Every section a Cura landing page can use, with sample content. Internal reference; not published on the live site.",
+    "ogImage": { "src": "/images/landing/landing-catalog/mountains.jpg", "alt": "Mountains at dusk" },
+    "noindex": true
+  },
+  "header": {
+    "nav": [
+      { "label": "Steps", "href": "#steps" },
+      { "label": "FAQ", "href": "#faq" }
+    ],
+    "cta": { "label": "Book a Demo", "href": "/book-demo" }
+  },
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "For airline claims teams",
+      "title": "Close claims in days,<br><span class='orange'>not months.</span>",
+      "sub": "Cura automates EU261 and UK261 compensation end-to-end: intake, verification, fraud checks, payout and the authority response.",
+      "cta": { "label": "Book a Demo", "href": "/book-demo" },
+      "secondary": { "label": "See how it works", "href": "#steps" },
+      "image": { "src": "/images/landing/landing-catalog/mountains.jpg", "alt": "Mountains at dusk" }
+    },
+    {
+      "type": "text",
+      "chip": "Why now",
+      "title": "Claims volumes keep rising. Headcount doesn't.",
+      "body": [
+        "Disruption claims arrive by web form, email, social media and claims agencies. Each one needs the booking, the flight record, the weather and the right regulation before anyone can decide.",
+        "Cura gathers all of that automatically, so your team spends its time on the <strong>cases that need judgement</strong>."
+      ]
+    },
+    {
+      "type": "image",
+      "image": { "src": "/images/landing/landing-catalog/mountains.jpg", "alt": "Mountains at dusk" },
+      "caption": "A caption sits under the image, centred.",
+      "size": "narrow"
+    },
+    {
+      "type": "image-text",
+      "chip": "Passenger experience",
+      "title": "The claim is the last thing a passenger remembers.",
+      "body": ["A fast, fair answer turns a disrupted trip into a reason to book again."],
+      "points": ["Status updates at every step", "Payout to card, bank or wallet", "Plain-language decisions"],
+      "cta": { "label": "Book a Demo", "href": "/book-demo" },
+      "image": { "src": "/images/landing/landing-catalog/passenger.webp", "alt": "Airline passenger at the end of a journey" },
+      "imagePosition": "right"
+    },
+    {
+      "type": "cards",
+      "chip": "Capabilities",
+      "title": "From intake to closure.",
+      "sub": "Cards come in 2, 3 or 4 columns, with an optional icon and number.",
+      "columns": 3,
+      "numbered": true,
+      "items": [
+        { "icon": "verified", "title": "Eligibility checks", "body": "Regulation, distance and delay worked out from flight data." },
+        { "icon": "gpp_good", "title": "Fraud &amp; duplicates", "body": "Risk scores and duplicate detection across every channel." },
+        { "icon": "payments", "title": "Payouts", "body": "Compensation and expenses paid through your existing providers." }
+      ]
+    },
+    {
+      "type": "stats",
+      "chip": "Results",
+      "title": "Two to four figures in a row.",
+      "items": [
+        { "value": "00%", "label": "Sample figure: a short label" },
+        { "value": "0 days", "label": "Sample figure: a short label" },
+        { "value": "10+ years", "label": "In aviation technology" }
+      ]
+    },
+    {
+      "type": "logos",
+      "label": "Integrations include…",
+      "items": [
+        { "image": { "src": "/images/landing/landing-catalog/Revolut_logo.svg", "alt": "Revolut" } },
+        { "image": { "src": "/images/landing/landing-catalog/PayPal_logo.svg", "alt": "PayPal" } },
+        { "text": "AIMS" },
+        { "image": { "src": "/images/landing/landing-catalog/Stripe_Logo.svg", "alt": "Stripe" } },
+        { "image": { "src": "/images/landing/landing-catalog/Wise_Logo.svg", "alt": "Wise" } },
+        { "image": { "src": "/images/landing/landing-catalog/Zendesk_logo.svg", "alt": "Zendesk" } }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "Sample quote. A customer's words go here, with their name, role and company below.",
+      "name": "Sample Name",
+      "role": "Head of Customer Care",
+      "company": "Example Air",
+      "image": { "src": "/images/landing/landing-catalog/cta-2.jpg", "alt": "" }
+    },
+    {
+      "type": "steps",
+      "id": "steps",
+      "chip": "How it works",
+      "title": "Four steps, one system.",
+      "items": [
+        { "title": "Intake", "tag": "Automatic", "body": "Claims arrive from every channel and are matched to a booking." },
+        { "title": "Verification", "tag": "Automatic", "body": "Flight, weather and ATC data decide eligibility." },
+        { "title": "Review", "tag": "Your team", "body": "Only unclear cases reach a person, with the evidence attached." },
+        { "title": "Payout &amp; closure", "body": "The passenger is paid and the case is closed with a record." }
+      ]
+    },
+    {
+      "type": "faq",
+      "id": "faq",
+      "chip": "FAQ",
+      "title": "Common questions.",
+      "items": [
+        { "question": "Which regulations does Cura cover?", "answer": "EU261, UK261 and the Montreal Convention, with more added as rules change." },
+        { "question": "Do we have to replace our CRM?", "answer": "No. Cura connects to the systems you already run and writes the result back to them." },
+        { "question": "How long does it take to go live?", "answer": "Most airlines start with one channel in a few weeks, then add the rest." }
+      ]
+    },
+    {
+      "type": "tags",
+      "chip": "Today's reality",
+      "title": "Claims are <span class='hi'>slow</span> and <span class='hi'>manual</span>",
+      "body": "An optional line under the heading.",
+      "tags": ["Outsourced vendors", "Legacy systems", "High costs", "No control"]
+    },
+    {
+      "type": "statement",
+      "chip": "What we do",
+      "title": "Cura brings control to claims,<br>connecting <span class='hi hi-orange'>efficiency</span><br>with <span class='hi hi-orange'>customer care</span>",
+      "cta": { "label": "Book a Demo", "href": "/book-demo" }
+    },
+    {
+      "type": "compare",
+      "chip": "Before and after",
+      "title": "The same claim, two ways.",
+      "body": "The left card is the current way, the right one the Cura way.",
+      "before": {
+        "tag": "Today",
+        "title": "Manual handling",
+        "items": [
+          { "icon": "schedule", "text": "Weeks in a shared inbox" },
+          { "icon": "content_paste", "text": "Flight data copied by hand" }
+        ]
+      },
+      "after": {
+        "tag": "With Cura",
+        "title": "Automated resolution",
+        "items": [
+          { "icon": "bolt", "text": "Decided the same day" },
+          { "icon": "sync", "text": "Data pulled from source systems" }
+        ]
+      }
+    },
+    {
+      "type": "spotlight",
+      "chip": "Evidence",
+      "title": "Every decision comes with its evidence.",
+      "body": "When an authority asks, the answer is already written.",
+      "cta": { "label": "Book a Demo", "href": "/book-demo" },
+      "items": [
+        { "icon": "flight", "title": "Flight record", "body": "Times, delay and cause from operational systems." },
+        { "icon": "cloud", "title": "Weather", "body": "METAR and TAF reports for both airports." },
+        { "icon": "description", "title": "Response letter", "body": "Drafted from the evidence, ready to send." }
+      ]
+    },
+    {
+      "type": "cta-band",
+      "title": "Ready to bring <span class='hi hi-white'>control to claims?</span>",
+      "button": { "label": "Book a Demo", "href": "/book-demo" },
+      "photos": [
+        "/images/landing/landing-catalog/cta-1.jpg",
+        "/images/landing/landing-catalog/cta-2.jpg",
+        "/images/landing/landing-catalog/cta-3.jpg",
+        "/images/landing/landing-catalog/cta-4.jpg"
+      ]
+    },
+    {
+      "type": "book-demo",
+      "chip": "Book a Demo",
+      "title": "See Cura <span class='orange'>in action.</span>",
+      "sub": "The same scheduler as /book-demo, as a section. The meeting link defaults to the one on /book-demo.",
+      "points": ["A tailored walkthrough for your operation", "See the claims workflow, fraud checks &amp; integrations"]
+    }
+  ]
+}

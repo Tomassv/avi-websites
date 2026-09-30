@@ -1,12 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { parse as parseYaml } from "yaml";
+import { showDrafts } from "./env.ts";
 import { safeImageSrc } from "./safe-url.ts";
 
 /**
  * Articles: content/articles/<slug>.md, YAML frontmatter plus a plain Markdown body.
  * Frontmatter is validated strictly; an invalid article fails the build, naming the file and
- * field. Drafts are left out of production builds.
+ * field. Drafts are left out of the live site (see showDrafts in lib/env.ts).
  */
 
 export type ArticleMeta = {
@@ -78,10 +79,6 @@ export function parseArticle(source: string, slug: string, file = `${slug}.md`):
 
 const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
 
-function includeDrafts(): boolean {
-  return process.env.NODE_ENV !== "production";
-}
-
 /** Every article that should be published in this build, newest first. */
 export function getArticles(): Article[] {
   if (!fs.existsSync(ARTICLES_DIR)) return [];
@@ -89,7 +86,7 @@ export function getArticles(): Article[] {
     .readdirSync(ARTICLES_DIR)
     .filter((f) => f.endsWith(".md"))
     .map((f) => parseArticle(fs.readFileSync(path.join(ARTICLES_DIR, f), "utf8"), f.slice(0, -3), `content/articles/${f}`))
-    .filter((a) => includeDrafts() || !a.draft)
+    .filter((a) => showDrafts() || !a.draft)
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug.localeCompare(b.slug)));
 }
 
