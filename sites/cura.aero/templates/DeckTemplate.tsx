@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { DeckContent } from "@/lib/content-types";
 import { validateDeck } from "@/lib/deck";
 import { CuraLogoSymbol } from "@/components/deck/CuraLogo";
@@ -12,7 +13,9 @@ import { slideBody } from "@/components/deck/Slides";
 export function DeckTemplate({ content, file }: { content: DeckContent; file: string }) {
   validateDeck(content.slides, file);
   const flowIndex = content.slides.findIndex((s) => s.type === "flow");
-  const bodies = content.slides.map((slide, i) => (i === flowIndex ? null : slideBody(slide, content.nav.logo)));
+  const bodies = content.slides.map((slide, i) =>
+    i === flowIndex ? null : <Fragment key={i}>{slideBody(slide, content.nav.logo)}</Fragment>,
+  );
   return (
     <>
       <CuraLogoSymbol />
