@@ -1,8 +1,12 @@
 # AviLabs — https://avilabs.is
 # Search engines and AI assistants are welcome to crawl and cite this site.
+# Internal tools and prototypes (/innovation/, /cdn/, /report/) are excluded.
 
 User-agent: *
 Allow: /
+Disallow: /innovation/
+Disallow: /cdn/
+Disallow: /report/
 
 # AI search and assistant crawlers
 User-agent: GPTBot
@@ -23,5 +27,8 @@ User-agent: Amazonbot
 User-agent: DuckAssistBot
 User-agent: MistralAI-User
 Allow: /
+Disallow: /innovation/
+Disallow: /cdn/
+Disallow: /report/
 
 Sitemap: https://avilabs.is/sitemap.xml
