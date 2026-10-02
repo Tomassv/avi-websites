@@ -47,8 +47,7 @@
                     "url": "https://avilabs.is/logo/avilabslightbg.png"
                 },
                 "description": "AviLabs is revolutionizing how airlines handle disruptions. By combining industry expertise with cutting-edge, passenger-first solutions, we empower airlines to reduce disruptions, enhance the customer experience, and optimize operations.",
-                "email": "careers@avilabs.is",
-                "sameAs": [
+                        "sameAs": [
                     "https://www.linkedin.com/company/avilabs/"
                 ],
                 "knowsAbout": [
@@ -216,19 +215,6 @@
         </section>
     </div>
 
-    <div class="careers">
-        <div class="container">
-            <section class="careers-grid fade-in" id="careers" aria-labelledby="careers-title">
-                <div>
-                    <h2 id="careers-title">Careers</h2>
-                    <p class="large">We are now open for general applications</p>
-                    <p>Send your CV to <a href="mailto:careers@avilabs.is">careers@avilabs.is</a> or connect with us on <a href="https://www.linkedin.com/company/avilabs/" target="_blank" rel="noopener">LinkedIn</a>.</p>
-                    <p class="small">By applying you agree to the AviLabs <a href="employmentapplicationprivacypolicy.html" target="_blank" rel="noopener">Employment Application Privacy Policy</a>.</p>
-                </div>
-                <img src="img/team.jpg" alt="AviLabs team" width="2000" height="1333" loading="lazy" decoding="async">
-            </section>
-        </div>
-    </div>
 
     </main>
 
@@ -284,9 +270,13 @@
                     }
                 });
             }, { rootMargin: '0px 0px -10% 0px' });
-            fadeElements.forEach(element => observer.observe(element));
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
         } else {
-            fadeElements.forEach(element => element.classList.add('visible'));
+            fadeElements.forEach(element => {
+                element.classList.add('visible');
+            });
         }
 
         document.getElementById("year").textContent = new Date().getFullYear();

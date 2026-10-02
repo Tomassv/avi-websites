@@ -15,7 +15,6 @@ AviLabs focuses on passenger disruption management for airlines. Its products co
 
 - [Website](https://avilabs.is/)
 - [LinkedIn](https://www.linkedin.com/company/avilabs/)
-- Careers: open for general applications. Send your CV to careers@avilabs.is.
 - Security & compliance: ISO/IEC 27001, SOC 2 Type II.
 
 ## Policies
