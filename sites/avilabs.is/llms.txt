@@ -1,0 +1,25 @@
+# AviLabs
+
+> AviLabs is revolutionizing how airlines handle disruptions with industry expertise and passenger-first solutions. Our products help airlines reduce disruptions, enhance customer experiences, optimize operations, and foster industry collaboration to solve key challenges.
+
+AviLabs focuses on passenger disruption management for airlines. Its products cover disruption handling and passenger self-service (Plan3), compensation claims automation (Cura), industry research on delays and cancellations (ImPax) and an industry summit (Grounded).
+
+## Products
+
+- [Plan3](https://www.plan3.aero): Passenger disruption management system for airlines, offering automated communication and recovery options like rebooking, hotels, and meal vouchers, allowing passengers to self-serve.
+- [Cura](https://www.cura.aero): AI-powered platform that automates airline passenger compensation claims from submission through resolution, with automated validation, fraud detection, and receipt verification. It integrates with existing airline systems to centralize claims workflows and give passengers self-service options.
+- [ImPax](https://impax.aero): The Airline ImPax Report, monthly research that analyses airline delays and cancellations for the top 290 airlines and the impact on the passenger experience, with airline benchmarks and passenger estimates across tier, class and region.
+- [Grounded](https://www.grounded.aero): The only airline summit dedicated to passenger disruption management. 150 airline leaders gather in Iceland for two days of interactive panels, workshops, and networking.
+
+## Company
+
+- [Website](https://avilabs.is/)
+- [LinkedIn](https://www.linkedin.com/company/avilabs/)
+- Careers: open for general applications. Send your CV to careers@avilabs.is.
+- Security & compliance: ISO/IEC 27001, SOC 2 Type II.
+
+## Policies
+
+- [Privacy Policy](https://avilabs.is/privacypolicy.html)
+- [Cookies](https://avilabs.is/cookies.html)
+- [Employment Application Privacy Policy](https://avilabs.is/employmentapplicationprivacypolicy.html)
