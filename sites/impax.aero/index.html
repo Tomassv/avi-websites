@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Airline ImPax report is here to help airlines identify which disruptions impact the passenger experience most. This will enable airlines to prioritise solutions to mitigate the negative effect on the passenger experience.">
+
+    <link rel="stylesheet" href="src/style10.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    <title>Airline ImPax Report</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <section class="topMenu">
+            <div class="flex">
+                <div class="col">
+                    <a class="home" href="index.html"><img style="height: 40px;width: auto;" src="img/impaxLogo.svg" alt=""></a>
+                </div>
+                <div class="col topMenuMenu">
+                    <a href="whyImpax.html">Why&nbsp;ImPax?</a>
+                    <a href="methodology.html">Methodology</a>
+                    <a class="button" href="intro.html">Subscribe</a>
+                </div>
+                <div class="menuIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                        <path d="M160-240q-17 0-28.5-11.5T120-280q0-17 11.5-28.5T160-320h640q17 0 28.5 11.5T840-280q0 17-11.5 28.5T800-240H160Zm0-200q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-200q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h640q17 0 28.5 11.5T840-680q0 17-11.5 28.5T800-640H160Z" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="bgWideHero mainHero">
+        <div class="container herocontainer">
+            <section class="hero">
+                <div class="flex">
+                    <div class="col"><img class="heroImage" src="img/cover.png" alt=""></div>
+                    <div class="col">
+                        <div class="quoteHere">
+                            <div class="stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#1005B2">
+                                    <path d="m343-283 137-104 137 104-55-173 126-82H537l-57-173-57 173H272l126 82-55 173Zm137-25L307-176q-9 7-18 6t-17-6q-8-5-11.5-13.5T260-209l66-215-170-122q-9-6-11.5-15.5t.5-17.5q3-8 10-14.5t18-6.5h211l67-224q3-11 11.5-16.5T480-846q9 0 17.5 5.5T509-824l67 224h211q11 0 18 6.5t10 14.5q3 8 .5 17.5T804-546L634-424l66 215q3 11-.5 19.5T688-176q-8 5-17 6t-18-6L480-308Zm0-189Z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#1005B2">
+                                    <path d="m343-283 137-104 137 104-55-173 126-82H537l-57-173-57 173H272l126 82-55 173Zm137-25L307-176q-9 7-18 6t-17-6q-8-5-11.5-13.5T260-209l66-215-170-122q-9-6-11.5-15.5t.5-17.5q3-8 10-14.5t18-6.5h211l67-224q3-11 11.5-16.5T480-846q9 0 17.5 5.5T509-824l67 224h211q11 0 18 6.5t10 14.5q3 8 .5 17.5T804-546L634-424l66 215q3 11-.5 19.5T688-176q-8 5-17 6t-18-6L480-308Zm0-189Z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#1005B2">
+                                    <path d="m343-283 137-104 137 104-55-173 126-82H537l-57-173-57 173H272l126 82-55 173Zm137-25L307-176q-9 7-18 6t-17-6q-8-5-11.5-13.5T260-209l66-215-170-122q-9-6-11.5-15.5t.5-17.5q3-8 10-14.5t18-6.5h211l67-224q3-11 11.5-16.5T480-846q9 0 17.5 5.5T509-824l67 224h211q11 0 18 6.5t10 14.5q3 8 .5 17.5T804-546L634-424l66 215q3 11-.5 19.5T688-176q-8 5-17 6t-18-6L480-308Zm0-189Z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#1005B2">
+                                    <path d="m343-283 137-104 137 104-55-173 126-82H537l-57-173-57 173H272l126 82-55 173Zm137-25L307-176q-9 7-18 6t-17-6q-8-5-11.5-13.5T260-209l66-215-170-122q-9-6-11.5-15.5t.5-17.5q3-8 10-14.5t18-6.5h211l67-224q3-11 11.5-16.5T480-846q9 0 17.5 5.5T509-824l67 224h211q11 0 18 6.5t10 14.5q3 8 .5 17.5T804-546L634-424l66 215q3 11-.5 19.5T688-176q-8 5-17 6t-18-6L480-308Zm0-189Z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#1005B2">
+                                    <path d="m343-283 137-104 137 104-55-173 126-82H537l-57-173-57 173H272l126 82-55 173Zm137-25L307-176q-9 7-18 6t-17-6q-8-5-11.5-13.5T260-209l66-215-170-122q-9-6-11.5-15.5t.5-17.5q3-8 10-14.5t18-6.5h211l67-224q3-11 11.5-16.5T480-846q9 0 17.5 5.5T509-824l67 224h211q11 0 18 6.5t10 14.5q3 8 .5 17.5T804-546L634-424l66 215q3 11-.5 19.5T688-176q-8 5-17 6t-18-6L480-308Zm0-189Z" />
+                                </svg>
+                            </div>
+                            <p>“The methodology of the Airline ImPax Report is sound and the data comprehensive. Delays are organised using logical segmentation, which humanises the scope of the disruption data, making it highly useful and actionable for the aviation industry.”</p>
+                            <span>Henry Harteveldt, President, Atmosphere Research Group</span>
+                        </div>
+                        <div class="textHero">
+                            <h3>Latest: September 2026</h3>
+                            <p>This month's report analyses the disruption data of 248 airlines totalling 587,740 disrupted flights, across 2,766,769 planned flights, globally.</p>
+                            <p>September saw global aviation move beyond the summer peak, with flight volumes easing by almost 10% as seasonal demand began to fall. Disruption remained widespread, however, driven by a varied mix of operational pressures. Europe faced significant ATC disruption, industrial action and volcanic activity, while severe weather impacted networks across North America and APAC. LATAM also experienced weather-related disruption, including significant thunderstorms affecting Mexico City operations. Typhoon activity caused further disruption across Asia, while geopolitical instability continued to affect the Middle East. Rather than one defining event, September was characterised by multiple, overlapping sources of disruption across the global network.</p>
+                            <a href="report.html" class="button">View Report</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="latestReports">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="2026">Reports&nbsp;2026</button>
+                <button class="tab-button" data-tab="2025">Reports&nbsp;2025</button>
+                <button class="tab-button" data-tab="2024">Reports&nbsp;2024</button>
+            </div>
+            <div class="tab-content">
+                <div class="tab-panel active" id="2026">
+                    <div class="reportLink">
+                        <div class="month">September 2026</div>
+                        <div class="intro">
+                            Flight volumes eased after the summer peak, but ATC failures, strikes, volcanic activity, severe weather and Middle East instability kept disruption widespread across every region.
+                        </div>
+                        <a href="report.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">August 2026</div>
+                        <div class="intro">
+                            Peak summer demand met typhoons across Asia-Pacific, storms and volcanic activity in Europe, and lingering Middle East instability, though global capacity still grew 2.6% year-on-year.
+                        </div>
+                        <a href="august26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">July 2026</div>
+                        <div class="intro">
+                            Severe summer weather across Europe and North America, and disproportionate Tier 1 strain, drove disruption higher despite improving resilience in Asia-Pacific and the Middle East.
+                        </div>
+                        <a href="july26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">June 2026</div>
+                        <div class="intro">
+                            Geopolitical tensions, weather, ATC disruption, and constrained airspace sharply increased major delays and cancellations at the start of peak summer travel.
+                        </div>
+                        <a href="june26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">May 2026</div>
+                        <div class="intro">
+                            Elevated fuel costs, labour actions, weather, and ATC constraints increased delays and cancellations ahead of peak summer travel.
+                        </div>
+                        <a href="may26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">April 2026</div>
+                        <div class="intro">
+                            Fuel shocks, airspace closures, and strikes triggered broad network instability and global capacity cuts.
+                        </div>
+                        <a href="april26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">March 2026</div>
+                        <div class="intro">
+                            Stable demand masked concentrated disruption from Gulf airspace constraints, fuel costs, and staffing pressure.
+                        </div>
+                        <a href="march26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">February 2026</div>
+                        <div class="intro">
+                            Winter weather and Gulf airspace disruption drove delays, while cancellations eased as operations recovered.
+                        </div>
+                        <a href="february26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">January 2026</div>
+                        <div class="intro">
+                            Seasonal softening reduced volumes, and resilience improved despite weather, ATC, and supply chain pressure.
+                        </div>
+                        <a href="january26.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                </div>
+                <div class="tab-panel" id="2025">
+                    <div class="reportLink">
+                        <div class="month">December 2025</div>
+                        <div class="intro">
+                            Holiday demand surge intensified disruption, with winter weather and strikes pushing delays and cancellations higher.
+                        </div>
+                        <a href="december25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">November 2025</div>
+                        <div class="intro">
+                            A320 groundings, U.S. shutdown impacts, and regional shocks caused high-impact disruptions on fewer flights.
+                        </div>
+                        <a href="november25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">October 2025</div>
+                        <div class="intro">
+                            FAA staffing strain, weather events, and regional ops issues lifted delays despite fewer cancellations.
+                        </div>
+                        <a href="october25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">September 2025</div>
+                        <div class="intro">
+                            Capacity pullback improved reliability, but cyber, staffing, and geopolitical risks still pressured operations.
+                        </div>
+                        <a href="september25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">August 2025</div>
+                        <div class="intro">
+                            Major outages, strikes, and weather disruptions continued, but delays and cancellations improved month on month.
+                        </div>
+                        <a href="august25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">July 2025</div>
+                        <div class="intro">
+                            Widespread strikes, weather, and airspace conflict made July one of the year’s most disruptive months.
+                        </div>
+                        <a href="july25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">June 2025</div>
+                        <div class="intro">
+                            Geopolitical closures, storms, and ATC strain triggered heavy rerouting and broad passenger disruption.
+                        </div>
+                        <a href="june25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">May 2025</div>
+                        <div class="intro">Strikes, U.S. operational outages, severe weather, and security concerns caused broad cross-region disruption.</div>
+                        <a href="may25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">April 2025</div>
+                        <div class="intro">Iberian and Newark outages plus India Pakistan tensions drove disruption, despite steady global flight volumes.</div>
+                        <a href="april25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">March 2025</div>
+                        <div class="intro">Heathrow fire, ATC strikes, and weather shifted disruption toward high-volume carriers and more affected passengers.</div>
+                        <a href="march25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">February 2025</div>
+                        <div class="intro">Labor action and incidents persisted, but passengers impacted by major disruption declined significantly.</div>
+                        <a href="february25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">January 2025</div>
+                        <div class="intro">Holiday spillover kept volumes steady, but cancellation impacts rose sharply for passengers.</div>
+                        <a href="january25.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="2024">
+                    <div class="reportLink">
+                        <div class="month">December 2024</div>
+                        <div class="intro">Holiday demand lifted volumes and disruptions, with more passengers affected by cancellations.</div>
+                        <a href="december24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">November 2024</div>
+                        <div class="intro">Flight and disruption volumes fell, though passenger impact eased more gradually month on month.</div>
+                        <a href="november24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">October 2024</div>
+                        <div class="intro">Storm activity persisted, but disruption rates and impacted passengers declined versus September.</div>
+                        <a href="october24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">September 2024</div>
+                        <div class="intro">Post-peak demand softened, reducing disrupted flights and cutting impacted passengers substantially.</div>
+                        <a href="september24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">August 2024</div>
+                        <div class="intro">Flight volumes held up, while medium and major disruption affected far fewer passengers.</div>
+                        <a href="august24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">July 2024</div>
+                        <div class="intro">A global systems outage grounded flights worldwide and drove a sharp month-on-month disruption spike.</div>
+                        <a href="july24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">June 2024</div>
+                        <div class="intro">ATC and pilot strikes, especially in Europe, pushed disruptions above prior month levels.</div>
+                        <a href="june24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">May 2024</div>
+                        <div class="intro">Pre-summer demand in North America and Europe lifted both flight volume and disruption levels.</div>
+                        <a href="may24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">April 2024</div>
+                        <div class="intro">Flight volumes stayed steady while disruptions began rising with seasonal shifts.</div>
+                        <a href="april24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">March 2024</div>
+                        <div class="intro">Disruption levels were stable as flight volumes increased across all regions.</div>
+                        <a href="march24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">February 2024</div>
+                        <div class="intro">Lower February flight volume coincided with reduced disruption across all markets.</div>
+                        <a href="february24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                    <div class="reportLink">
+                        <div class="month">January 2024</div>
+                        <div class="intro">Holiday peak eased in the north, but weather and southern summer demand sustained disruption risk.</div>
+                        <a href="january24.html">View Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z" />
+                            </svg></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section class="ad">
+            <a aria-label="Read more about Plan3 - Passenger Disruption Management" href="https://www.plan3.aero/request-demo" target="_blank">
+                <img src="img/plan3ad.svg" alt="">
+            </a>
+        </section>
+    </div>
+
+    <div class="container">
+        <section class="footer">
+            &copy; 2026 AviLabs | All Rights Reserved
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const panels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => { t.classList.remove('active'); });
+                    panels.forEach(panel => { panel.classList.remove('active'); });
+
+                    tab.classList.add('active');
+                    const target = document.getElementById(tab.getAttribute('data-tab'));
+                    target.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2W8LE0HJV4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(...args) { dataLayer.push(args); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W8LE0HJV4');
+    </script>
+
+</body>
+
+</html>

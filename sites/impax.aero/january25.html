@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Airline ImPax report is here to help airlines identify which disruptions impact the passenger experience most. This will enable airlines to prioritise solutions to mitigate the negative effect on the passenger experience.">
+    <link rel="stylesheet" href="src/style10.css">
+    <link rel="stylesheet" media="print" href="src/print.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    <title>Airline ImPax Report</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <section class="topMenu">
+            <div class="flex">
+                <div class="col">
+                    <a class="home" href="index.html"><img src="img/impaxLogo.svg" alt=""></a>
+                </div>
+                <div class="col topMenuMenu">
+                    <a href="index.html">All&nbsp;Reports</a>
+                    <a href="whyImpax.html">Why&nbsp;ImPax?</a>
+                    <a href="methodology.html">Methodology</a>
+                    <a class="button" href="intro.html">Subscribe</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="bgWideHero">
+        <div class="container herocontainer">
+            <section class="hero">
+                <div class="flex">
+                    <div class="col">
+                        <div class="tag">New Research</div>
+                        <h1>Airline ImPax Report </h1>
+                        <h2>Analysing Airline IROPS and the Impact on the Passenger Experience</h2>
+                        <div class="date">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-40q0-17 11.5-28.5T280-880q17 0 28.5 11.5T320-840v40h320v-40q0-17 11.5-28.5T680-880q17 0 28.5 11.5T720-840v40h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
+                            </svg> January 2025
+                        </div>
+
+                        <a class="button" href="#report">Go to Report <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                                <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+                            </svg></a>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="introduction">
+            <video width="500" autoplay muted loop>
+                <source src="img/impax.mp4" type="video/mp4">
+            </video>
+            <br><br>
+            <div class="flex">
+                <div class="col">
+                    <h4>Do You Know Your Airline's ImPax Percentage?</h4>
+                    <p>Passengers that experience cancellations, or medium and major delays without a quick resolution, produce almost 100% of an airline’s negative media that leads to customer churn.</p>
+                    <p>This small percentage of passengers is an airline’s ImPax Percentage.</p>
+                    <p>An airline’s ImPax Percentage is calculated as:</p>
+                    <br>
+                    <img src="img/impax.svg" alt="">
+                </div>
+                <div class="col">
+                    <p>On average, an airline’s ImPax Percentage accounts for less than 1 in 13 flights (< 8%).</p>
+                            <p style="font-size: 24px; padding: 16px 0 32px;" class="bold">The Lower an Airline’s ImPax %, the Better.</p>
+                            <p>The aim of this report is to help airlines <span class="bold">focus their recovery operations</span> by better understanding their ImPax Percentage in the context of:</p>
+                            <ul>
+                                <li>Passenger estimates</li>
+                                <li>Competitor airlines</li>
+                                <li>Region, Tier, and Class</li>
+                                <li>Sentiment analysis of monthly reviews</li>
+                            </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section class="ad">
+            <a aria-label="Read more about Plan3 - Passenger Disruption Management"
+               href="https://www.plan3.aero/request-demo" target="_blank">
+                <img src="img/plan3ad.svg" alt="">
+            </a>
+        </section>
+    </div>
+
+    <div class="quickInsights">
+        <div class="container">
+            <section id="report" class="sectionNopad">
+                <h3>January 2025</h3>
+                <br>
+                <h4>Quick Insights</h4>
+                <div class="flex">
+                    <div class="col">
+                        <span class="bold">Global</span> The 10 largest airlines account for >27% of the world’s flight volumes but 41% of all cancelled flights which is a 15 point increase compared to December. This resulted in 1.9m passengers impacted by a cancellation in January.
+                        <span class="bold">Low Cost Carriers</span> LCCs make up 54% of the top 290 airlines, account for 49% of flight volumes and 35% of flights impacted by cancellations worldwide, resulting in 1.4m disrupted passengers in January 2025.
+                        <span class="bold">Europe</span> 1.1m passengers qualified for compensation due to EU261, this month. +12% increase compared to November.
+                    </div>
+                    <div class="col">
+                        <span class="bold">North America</span> Approx. 1.6m more passengers experienced a cancellation compared to last month. This is a 65% increase, largely due to performance issues by Tier 1 carriers.
+                        <span class="bold">APAC</span> 14% increase in flights disrupted by major delays (3hr+) and cancellations resulted in 400K MORE disrupted passengers compared to December.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <section>
+            <div class="globalChart">
+                <h4>Average ImPax Percentage</h4>
+                <p>Trending month-on-month view. Filter by selecting Tiers and Regions:</p>
+                <div id="chart111"></div>
+            </div>
+            <div class="mainTable breakMe">
+                <h4 class="top10">Top 10 Airlines | January 2025</h4>
+                <p>Per volume of flights, these are the Top 10 Airlines ranked by ImPax Percentage, including the percentage disruption each accounted for, globally.</p>
+                <table class="data-table-10 nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>% of Global Disruptions</th>
+                            <th>Rank by Size</th>
+                        </tr>
+                    </thead>
+                    <tbody><tr><td>1</td><td>THY</td><td>Turkish Airlines</td><td>FSC</td><td>Europe</td><td>2.9%</td><td>0.9%</td><td>10</td></tr><tr><td>2</td><td>CSN</td><td>China Southern Airlines</td><td>FSC</td><td>APAC</td><td>5.2%</td><td>1.9%</td><td>6</td></tr><tr><td>3</td><td>IGO</td><td>IndiGO</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>2.7%</td><td>7</td></tr><tr><td>4</td><td>CES</td><td>China Eastern</td><td>LCC</td><td>APAC</td><td>5.8%</td><td>2.7%</td><td>5</td></tr><tr><td>5</td><td>CCA</td><td>Air China</td><td>FSC</td><td>APAC</td><td>6.5%</td><td>1.6%</td><td>9</td></tr><tr><td>6</td><td>RYR</td><td>Ryanair</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>2.9%</td><td>8</td></tr><tr><td>7</td><td>SWA</td><td>Southwest</td><td>LCC</td><td>North America</td><td>6.8%</td><td>3.4%</td><td>1</td></tr><tr><td>8</td><td>UAL</td><td>United</td><td>FSC</td><td>North America</td><td>8.2%</td><td>2.8%</td><td>4</td></tr><tr><td>9</td><td>AAL</td><td>American Airlines</td><td>FSC</td><td>North America</td><td>9.5%</td><td>3.5%</td><td>2</td></tr><tr><td>10</td><td>DAL</td><td>Delta</td><td>FSC</td><td>North America</td><td>9.7%</td><td>3.3%</td><td>3</td></tr></tbody></table>
+            </div>
+        </section>
+    </div>
+
+    <div class="regionsMenu" id="stickyDiv">
+        <div class="container">
+            <div class="flex">
+                <a class="regionMenu" href="#global">Global&nbsp;Overview</a>
+                <a class="regionMenu" href="#apac">Asia&nbsp;Pacific</a>
+                <a class="regionMenu" id="menuEurope" href="#europe">Europe</a>
+                <a class="regionMenu" href="#northamerica">North&nbsp;America</a>
+                <a class="regionMenu" href="#middleeastandafrica">Middle&nbsp;East&nbsp;and&nbsp;Africa</a>
+                <a class="regionMenu" href="#latinaamerica">Latin&nbsp;America</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="region" id="global">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <div>
+                            <h3><span class="bold">Global Disruptions</span> Overview</h3>
+                            <p>This month’s report analyses the disruption data of 292 airlines totalling 592,591 disrupted flights, across 2,765,897 planned flights, globally.</p>
+                            <p>January is a big month as it is a hangover of northern hemisphere holiday travel, southern hemisphere seasonal travel, and it leads into Chinese New Year. While flight volumes and disrupted flights remained steady (MoM). There was a 38% increase in passengers impacted by a cancelled flight.</p>
+                        </div>
+                        <p class="airlines">292 Airlines | 158 LCC | 134 FSC</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="global">
+            <div class="rewglobal">
+                <div class="stats">
+                    <div class="statsBoxes globalStats">
+                        <div class="statsBox">
+                            <div class="wisdom">
+                                <div class="wicon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                        <path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm2 160q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm4-172q25 0 43.5 16t18.5 40q0 22-13.5 39T502-525q-23 20-40.5 44T444-427q0 14 10.5 23.5T479-394q15 0 25.5-10t13.5-25q4-21 18-37.5t30-31.5q23-22 39.5-48t16.5-58q0-51-41.5-83.5T484-720q-38 0-72.5 16T359-655q-7 12-4.5 25.5T368-609q14 8 29 5t25-17q11-15 27.5-23t34.5-8Z" />
+                                    </svg></div>
+                                <div class="wtext">This shows the volume of disrupted flights and the percentage accounted for by Low Cost Carriers and Full Service Carriers.</div>
+                            </div>
+                            <div class="number">592,591 <span>51.3% LCC | 47.7% FSC</span></div>
+                            <div class="text">Disrupted Flights</div>
+                        </div>
+                        <div class="statsBox">
+                            <div class="wisdom">
+                                <div class="wicon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                        <path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm2 160q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm4-172q25 0 43.5 16t18.5 40q0 22-13.5 39T502-525q-23 20-40.5 44T444-427q0 14 10.5 23.5T479-394q15 0 25.5-10t13.5-25q4-21 18-37.5t30-31.5q23-22 39.5-48t16.5-58q0-51-41.5-83.5T484-720q-38 0-72.5 16T359-655q-7 12-4.5 25.5T368-609q14 8 29 5t25-17q11-15 27.5-23t34.5-8Z" />
+                                    </svg></div>
+                                <div class="wtext">This shows the average percentage of flights which experienced some sort of delay - including minor delays. The average varies for only LCCs or FSCs.</div>
+                            </div>
+                            <div class="number">21.6% <span>22.8% LCC | 20.2% FSC</span></div>
+                            <div class="text">Total Disruption Avg</div>
+                        </div>
+                        <div class="statsBox impaxStatsBox">
+                            <div class="wisdom">
+                                <div class="wicon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                        <path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm2 160q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm4-172q25 0 43.5 16t18.5 40q0 22-13.5 39T502-525q-23 20-40.5 44T444-427q0 14 10.5 23.5T479-394q15 0 25.5-10t13.5-25q4-21 18-37.5t30-31.5q23-22 39.5-48t16.5-58q0-51-41.5-83.5T484-720q-38 0-72.5 16T359-655q-7 12-4.5 25.5T368-609q14 8 29 5t25-17q11-15 27.5-23t34.5-8Z" />
+                                    </svg></div>
+                                <div class="wtext">This is the global average ImPax Percentage, and the average if only LCCs or FSCs were analysed.</div>
+                            </div>
+                            <div class="number">6.4% <span>6.9% LCC | 5.7% FSC</span></div>
+                            <div class="text">Average ImPax</div>
+                        </div>
+                        <div class="statsBox">
+                            <div class="wisdom">
+                                <div class="wicon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                        <path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm2 160q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm4-172q25 0 43.5 16t18.5 40q0 22-13.5 39T502-525q-23 20-40.5 44T444-427q0 14 10.5 23.5T479-394q15 0 25.5-10t13.5-25q4-21 18-37.5t30-31.5q23-22 39.5-48t16.5-58q0-51-41.5-83.5T484-720q-38 0-72.5 16T359-655q-7 12-4.5 25.5T368-609q14 8 29 5t25-17q11-15 27.5-23t34.5-8Z" />
+                                    </svg></div>
+                                <div class="wtext">This is a conservative estimate of the volume of passengers that were impacted by medium and major delays, and cancellations, this month.</div>
+                            </div>
+                            <div class="number">25.3m</div>
+                            <div class="text">Estimated Disrupted Pax</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="col">
+                        <h4>Airlines Vs. Global Disruptions</h4>
+                        <p>This is a comparative view of the percentage of airlines by Region and Tier, and the percentage of global disruption they contributed.</p>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="flex charts">
+                    <div class="col">
+                        <div class="chartBox">
+                            <div id="chart1"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="chart9"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mainTable breakMe">
+                <h4>Global | All Carriers <span>Filter by tiers:</span></h4>
+                <table class="data-table nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Tier</th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>Pax Est. 1000s</th>
+                            <th>Total % Disruption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>CQN</td><td>Chongqing</td><td>T 4</td><td>FSC</td><td>APAC</td><td>0.1%</td><td>0.2</td><td>0.4%</td></tr><tr><td>2</td><td>SNJ</td><td>Solaseed Air</td><td>T 3</td><td>FSC</td><td>APAC</td><td>0.2%</td><td>0.4</td><td>10.0%</td></tr><tr><td>3</td><td>SFJ</td><td>StarFlyer</td><td>T 3</td><td>FSC</td><td>APAC</td><td>0.3%</td><td>1.4</td><td>5.4%</td></tr><tr><td>4</td><td>AEZ</td><td>Aeroitalia</td><td>T 4</td><td>LCC</td><td>Europe</td><td>0.4%</td><td>2.6</td><td>3.4%</td></tr><tr><td>5</td><td>CCM</td><td>Air Corsica</td><td>T 3</td><td>FSC</td><td>Europe</td><td>0.4%</td><td>1.2</td><td>5.5%</td></tr><tr><td>6</td><td>SEH</td><td>Sky Express</td><td>T 4</td><td>LCC</td><td>Europe</td><td>0.6%</td><td>5.2</td><td>8.4%</td></tr><tr><td>7</td><td>GBB</td><td>Global Aviation</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>0.9%</td><td>2.0</td><td>3.9%</td></tr><tr><td>8</td><td>LNK</td><td>South African Airlink</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>0.9%</td><td>19.1</td><td>6.0%</td></tr><tr><td>9</td><td>GLO</td><td>Gol Transportes Aereos</td><td>T 1</td><td>LCC</td><td>LATAM</td><td>1.0%</td><td>32.7</td><td>3.3%</td></tr><tr><td>10</td><td>FHY</td><td>Freebird</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>1.0%</td><td>1.2</td><td>2.5%</td></tr><tr><td>11</td><td>ITY</td><td>ITA Airways</td><td>T 2</td><td>FSC</td><td>Europe</td><td>1.0%</td><td>16.1</td><td>12.0%</td></tr><tr><td>12</td><td>PTB</td><td>Voepass Linhas A√©reas</td><td>T 4</td><td>FSC</td><td>LATAM</td><td>1.1%</td><td>1.6</td><td>4.9%</td></tr><tr><td>13</td><td>SJX</td><td>StarLux</td><td>T 4</td><td>FSC</td><td>APAC</td><td>1.2%</td><td>5.0</td><td>17.9%</td></tr><tr><td>14</td><td>ANA</td><td>All Nippon</td><td>T 1</td><td>FSC</td><td>APAC</td><td>1.2%</td><td>41.0</td><td>14.2%</td></tr><tr><td>15</td><td>CMP</td><td>Copa Airlines</td><td>T 2</td><td>FSC</td><td>LATAM</td><td>1.3%</td><td>25.5</td><td>10.2%</td></tr><tr><td>16</td><td>MDA</td><td>Mandarin</td><td>T 3</td><td>FSC</td><td>APAC</td><td>1.3%</td><td>6.6</td><td>19.8%</td></tr><tr><td>17</td><td>FPY</td><td>PLAY Airlines</td><td>T 4</td><td>LCC</td><td>Europe</td><td>1.3%</td><td>3.0</td><td>6.0%</td></tr><tr><td>18</td><td>AEE</td><td>Aegean Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>1.4%</td><td>12.9</td><td>11.6%</td></tr><tr><td>19</td><td>DVR</td><td>Divi Divi Air</td><td>T 4</td><td>FSC</td><td>North America</td><td>1.4%</td><td>0.4</td><td>14.3%</td></tr><tr><td>20</td><td>SKY</td><td>Skymark</td><td>T 3</td><td>LCC</td><td>APAC</td><td>1.4%</td><td>9.7</td><td>11.7%</td></tr><tr><td>21</td><td>FDA</td><td>Fuji Dream</td><td>T 3</td><td>LCC</td><td>APAC</td><td>1.5%</td><td>4.7</td><td>7.8%</td></tr><tr><td>22</td><td>ORC</td><td>Oriental Air Bridge</td><td>T 4</td><td>LCC</td><td>APAC</td><td>1.5%</td><td>2.9</td><td>9.0%</td></tr><tr><td>23</td><td>TKJ</td><td>Ajet</td><td>T 3</td><td>LCC</td><td>Europe</td><td>1.6%</td><td>7.3</td><td>8.9%</td></tr><tr><td>24</td><td>HKE</td><td>Hong Kong Express Airways</td><td>T 4</td><td>FSC</td><td>APAC</td><td>1.6%</td><td>9.6</td><td>20.0%</td></tr><tr><td>25</td><td>QTR</td><td>Qatar Airways</td><td>T 1</td><td>FSC</td><td>ME&amp;A</td><td>1.7%</td><td>55.9</td><td>11.4%</td></tr><tr><td>26</td><td>JTA</td><td>Japan Trans Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>1.7%</td><td>6.4</td><td>15.7%</td></tr><tr><td>27</td><td>JAL</td><td>Japan Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>1.8%</td><td>69.3</td><td>17.0%</td></tr><tr><td>28</td><td>JAT</td><td>JetSmart</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>1.9%</td><td>5.9</td><td>12.7%</td></tr><tr><td>29</td><td>SZS</td><td>Scandinavian Airlines Connect</td><td>T 3</td><td>LCC</td><td>Europe</td><td>1.9%</td><td>10.7</td><td>11.4%</td></tr><tr><td>30</td><td>IBS</td><td>Iberia Express</td><td>T 4</td><td>LCC</td><td>Europe</td><td>1.9%</td><td>11.6</td><td>11.3%</td></tr><tr><td>31</td><td>KLC</td><td>KLM Cityhopper</td><td>T 2</td><td>LCC</td><td>Europe</td><td>2.0%</td><td>2.4</td><td>4.0%</td></tr><tr><td>32</td><td>AMX</td><td>AeroMexico</td><td>T 2</td><td>FSC</td><td>North America</td><td>2.1%</td><td>35.7</td><td>10.2%</td></tr><tr><td>33</td><td>FAD</td><td>Flyadeal</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>2.1%</td><td>17.9</td><td>18.7%</td></tr><tr><td>34</td><td>DLA</td><td>Air Dolomiti</td><td>T 3</td><td>LCC</td><td>Europe</td><td>2.3%</td><td>13.2</td><td>20.4%</td></tr><tr><td>35</td><td>IBE</td><td>Iberia</td><td>T 2</td><td>FSC</td><td>Europe</td><td>2.3%</td><td>41.8</td><td>14.4%</td></tr><tr><td>36</td><td>TOM</td><td>TUI Airways</td><td>T 2</td><td>LCC</td><td>Europe</td><td>2.4%</td><td>11.5</td><td>7.3%</td></tr><tr><td>37</td><td>ETH</td><td>Ethiopian Airlines</td><td>T 2</td><td>FSC</td><td>ME&amp;A</td><td>2.4%</td><td>54.9</td><td>18.6%</td></tr><tr><td>38</td><td>TVF</td><td>Transavia France</td><td>T 2</td><td>LCC</td><td>Europe</td><td>2.4%</td><td>28.0</td><td>13.8%</td></tr><tr><td>39</td><td>SAA</td><td>South African Airways</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>2.4%</td><td>2.3</td><td>13.8%</td></tr><tr><td>40</td><td>AEA</td><td>Air Europa</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.4%</td><td>20.5</td><td>12.1%</td></tr><tr><td>41</td><td>CCD</td><td>Dalian Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>2.5%</td><td>14.8</td><td>5.9%</td></tr><tr><td>42</td><td>OVA</td><td>Air Europa Express</td><td>T 3</td><td>LCC</td><td>Europe</td><td>2.5%</td><td>5.6</td><td>14.5%</td></tr><tr><td>43</td><td>ETD</td><td>Etihad Airways</td><td>T 2</td><td>FSC</td><td>ME&amp;A</td><td>2.5%</td><td>42.6</td><td>16.1%</td></tr><tr><td>44</td><td>TTW</td><td>Tigerair Taiwan</td><td>T 4</td><td>FSC</td><td>APAC</td><td>2.5%</td><td>5.9</td><td>27.2%</td></tr><tr><td>45</td><td>CGN</td><td>Air Changan</td><td>T 3</td><td>LCC</td><td>APAC</td><td>2.5%</td><td>14.7</td><td>9.5%</td></tr><tr><td>46</td><td>JES</td><td>JetSMART</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>2.6%</td><td>8.9</td><td>14.5%</td></tr><tr><td>47</td><td>ROT</td><td>TAROM</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.6%</td><td>8.5</td><td>13.7%</td></tr><tr><td>48</td><td>AUA</td><td>Austrian Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>2.6%</td><td>28.7</td><td>13.8%</td></tr><tr><td>49</td><td>AKX</td><td>ANA Wings</td><td>T 2</td><td>FSC</td><td>APAC</td><td>2.6%</td><td>46.2</td><td>14.2%</td></tr><tr><td>50</td><td>CTN</td><td>Croatia Airlines</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.7%</td><td>6.2</td><td>18.5%</td></tr><tr><td>51</td><td>APJ</td><td>Peach Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>2.7%</td><td>20.8</td><td>21.9%</td></tr><tr><td>52</td><td>BRX</td><td>Braathens Regional Airways</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.7%</td><td>8.7</td><td>9.7%</td></tr><tr><td>53</td><td>SXS</td><td>Sun Express</td><td>T 3</td><td>LCC</td><td>Europe</td><td>2.7%</td><td>34.2</td><td>13.8%</td></tr><tr><td>54</td><td>FZA</td><td>Fuzhou Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>2.7%</td><td>7.6</td><td>16.7%</td></tr><tr><td>55</td><td>ARG</td><td>Aerolineas Argentinas</td><td>T 2</td><td>FSC</td><td>LATAM</td><td>2.8%</td><td>38.1</td><td>13.0%</td></tr><tr><td>56</td><td>GFA</td><td>Gulf Air</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>2.8%</td><td>13.9</td><td>14.2%</td></tr><tr><td>57</td><td>OAL</td><td>Olympic Air</td><td>T 4</td><td>LCC</td><td>Europe</td><td>2.8%</td><td>8.8</td><td>10.8%</td></tr><tr><td>58</td><td>VTA</td><td>Air Tahiti</td><td>T 4</td><td>FSC</td><td>APAC</td><td>2.8%</td><td>8.0</td><td>10.9%</td></tr><tr><td>59</td><td>THY</td><td>Turkish Airlines</td><td>T 1</td><td>FSC</td><td>Europe</td><td>2.9%</td><td>176.5</td><td>12.8%</td></tr><tr><td>60</td><td>OMA</td><td>Oman Air</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>2.9%</td><td>17.4</td><td>12.8%</td></tr><tr><td>61</td><td>LNE</td><td>Latam Ecuador</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>2.9%</td><td>7.4</td><td>8.2%</td></tr><tr><td>62</td><td>SKU</td><td>Sky Airlines</td><td>T 3</td><td>LCC</td><td>LATAM</td><td>3.0%</td><td>19.5</td><td>16.4%</td></tr><tr><td>63</td><td>CAI</td><td>Corendon Airlines</td><td>T 3</td><td>FSC</td><td>Europe</td><td>3.0%</td><td>2.3</td><td>10.3%</td></tr><tr><td>64</td><td>OTC</td><td>Air Travel</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.0%</td><td>8.4</td><td>13.2%</td></tr><tr><td>65</td><td>CEB</td><td>Cebu Pacific</td><td>T 2</td><td>LCC</td><td>APAC</td><td>3.0%</td><td>67.9</td><td>19.5%</td></tr><tr><td>66</td><td>WMT</td><td>Wizz Air Malta</td><td>T 2</td><td>LCC</td><td>Europe</td><td>3.0%</td><td>69.7</td><td>13.3%</td></tr><tr><td>67</td><td>CGZ</td><td>Colorful Guizhou</td><td>T 3</td><td>LCC</td><td>APAC</td><td>3.1%</td><td>11.7</td><td>15.6%</td></tr><tr><td>68</td><td>TVS</td><td>Smartwings</td><td>T 4</td><td>LCC</td><td>Europe</td><td>3.1%</td><td>6.8</td><td>13.6%</td></tr><tr><td>69</td><td>VLG</td><td>Vueling Airlines</td><td>T 2</td><td>LCC</td><td>Europe</td><td>3.1%</td><td>70.7</td><td>15.1%</td></tr><tr><td>70</td><td>UAE</td><td>Emirates</td><td>T 1</td><td>FSC</td><td>ME&amp;A</td><td>3.1%</td><td>139.3</td><td>21.1%</td></tr><tr><td>71</td><td>LAN</td><td>Latam</td><td>T 1</td><td>FSC</td><td>LATAM</td><td>3.2%</td><td>47.2</td><td>16.3%</td></tr><tr><td>72</td><td>GIA</td><td>Garuda Indonesia</td><td>T 4</td><td>FSC</td><td>APAC</td><td>3.2%</td><td>47.6</td><td>15.8%</td></tr><tr><td>73</td><td>TAM</td><td>Latam Brasil</td><td>T 1</td><td>FSC</td><td>LATAM</td><td>3.2%</td><td>123.1</td><td>15.0%</td></tr><tr><td>74</td><td>ABY</td><td>Air Arabia</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>3.2%</td><td>32.1</td><td>30.1%</td></tr><tr><td>75</td><td>LPE</td><td>Latam Perú</td><td>T 3</td><td>LCC</td><td>LATAM</td><td>3.2%</td><td>61.0</td><td>11.3%</td></tr><tr><td>76</td><td>SKK</td><td>ASKY Airlines</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>3.3%</td><td>3.9</td><td>15.8%</td></tr><tr><td>77</td><td>AHY</td><td>Azerbaijan Airlines</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>3.3%</td><td>10.9</td><td>10.5%</td></tr><tr><td>78</td><td>RAM</td><td>Royal Air Maroc</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>3.3%</td><td>42.1</td><td>17.8%</td></tr><tr><td>79</td><td>VOE</td><td>Volotea</td><td>T 2</td><td>LCC</td><td>Europe</td><td>3.3%</td><td>12.5</td><td>16.0%</td></tr><tr><td>80</td><td>HAL</td><td>Hawaiian Airlines</td><td>T 1</td><td>FSC</td><td>North America</td><td>3.4%</td><td>45.6</td><td>11.5%</td></tr><tr><td>81</td><td>AFL</td><td>Aeroflot</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.4%</td><td>61.4</td><td>15.4%</td></tr><tr><td>82</td><td>CJX</td><td>Jiangxi</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.4%</td><td>10.5</td><td>16.0%</td></tr><tr><td>83</td><td>LOT</td><td>LOT Polish Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.4%</td><td>26.5</td><td>23.6%</td></tr><tr><td>84</td><td>JSA</td><td>Jetstar Asia</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.5%</td><td>8.6</td><td>26.8%</td></tr><tr><td>85</td><td>CLH</td><td>Lufthansa Cityline</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.5%</td><td>22.8</td><td>16.3%</td></tr><tr><td>86</td><td>CUA</td><td>China United Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>3.6%</td><td>14.5</td><td>15.4%</td></tr><tr><td>87</td><td>MMA</td><td>MAI</td><td>T 4</td><td>FSC</td><td>APAC</td><td>3.7%</td><td>7.0</td><td>20.6%</td></tr><tr><td>88</td><td>YZR</td><td>Suparna</td><td>T 4</td><td>FSC</td><td>APAC</td><td>3.7%</td><td>15.8</td><td>12.2%</td></tr><tr><td>89</td><td>AMU</td><td>Air Macau</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.8%</td><td>13.0</td><td>28.2%</td></tr><tr><td>90</td><td>JAF</td><td>Tui Fly Belgium</td><td>T 4</td><td>LCC</td><td>Europe</td><td>3.8%</td><td>8.0</td><td>11.9%</td></tr><tr><td>91</td><td>EVA</td><td>EVA Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>3.8%</td><td>57.8</td><td>26.2%</td></tr><tr><td>92</td><td>VOZ</td><td>Virgin Australia</td><td>T 2</td><td>FSC</td><td>APAC</td><td>3.9%</td><td>58.6</td><td>19.7%</td></tr><tr><td>93</td><td>DKH</td><td>Juneyao Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>3.9%</td><td>107.4</td><td>17.6%</td></tr><tr><td>94</td><td>FDB</td><td>FlyDubai</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>3.9%</td><td>59.0</td><td>27.4%</td></tr><tr><td>95</td><td>KEM</td><td>CemAir</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>3.9%</td><td>2.3</td><td>17.4%</td></tr><tr><td>96</td><td>SLI</td><td>AeroMéxico Connect</td><td>T 3</td><td>FSC</td><td>North America</td><td>3.9%</td><td>29.2</td><td>12.1%</td></tr><tr><td>97</td><td>SAS</td><td>SAS</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.9%</td><td>77.5</td><td>17.8%</td></tr><tr><td>98</td><td>EWG</td><td>Eurowings</td><td>T 2</td><td>LCC</td><td>Europe</td><td>4.0%</td><td>35.5</td><td>17.2%</td></tr><tr><td>99</td><td>CPA</td><td>Cathay Pacific</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.0%</td><td>64.9</td><td>22.0%</td></tr><tr><td>100</td><td>SIA</td><td>Singapore Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.0%</td><td>91.4</td><td>26.2%</td></tr><tr><td>101</td><td>JJP</td><td>Jetstar Japan</td><td>T 3</td><td>LCC</td><td>APAC</td><td>4.0%</td><td>17.6</td><td>30.2%</td></tr><tr><td>102</td><td>BWA</td><td>Caribbean Airlines</td><td>T 4</td><td>FSC</td><td>North America</td><td>4.1%</td><td>11.1</td><td>14.2%</td></tr><tr><td>103</td><td>SVA</td><td>Saudia</td><td>T 1</td><td>FSC</td><td>ME&amp;A</td><td>4.1%</td><td>106.8</td><td>15.1%</td></tr><tr><td>104</td><td>ICE</td><td>Icelandair</td><td>T 3</td><td>FSC</td><td>Europe</td><td>4.1%</td><td>19.2</td><td>16.9%</td></tr><tr><td>105</td><td>BCI</td><td>Blue Islands</td><td>T 4</td><td>FSC</td><td>Europe</td><td>4.1%</td><td>2.0</td><td>10.1%</td></tr><tr><td>106</td><td>ANZ</td><td>Air New Zealand</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.2%</td><td>90.7</td><td>19.6%</td></tr><tr><td>107</td><td>MWG</td><td>MASwings</td><td>T 4</td><td>LCC</td><td>APAC</td><td>4.2%</td><td>17.1</td><td>12.7%</td></tr><tr><td>108</td><td>RPB</td><td>Copa Airlines Columbia</td><td>T 4</td><td>FSC</td><td>LATAM</td><td>4.2%</td><td>10.2</td><td>13.1%</td></tr><tr><td>109</td><td>IAW</td><td>Iraqi Airways</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.2%</td><td>12.8</td><td>19.9%</td></tr><tr><td>110</td><td>DLH</td><td>Lufthansa</td><td>T 1</td><td>FSC</td><td>Europe</td><td>4.2%</td><td>175.5</td><td>20.1%</td></tr><tr><td>111</td><td>QLK</td><td>QantasLink</td><td>T 2</td><td>LCC</td><td>APAC</td><td>4.2%</td><td>35.4</td><td>12.5%</td></tr><tr><td>112</td><td>CAL</td><td>China Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>4.3%</td><td>56.5</td><td>27.2%</td></tr><tr><td>113</td><td>JJA</td><td>Jeju Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>4.3%</td><td>41.1</td><td>21.5%</td></tr><tr><td>114</td><td>WUK</td><td>Wizz Air UK</td><td>T 4</td><td>LCC</td><td>Europe</td><td>4.4%</td><td>19.7</td><td>14.0%</td></tr><tr><td>115</td><td>ALK</td><td>SriLankan Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>4.4%</td><td>10.4</td><td>30.8%</td></tr><tr><td>116</td><td>PGT</td><td>Pegasus Airlines</td><td>T 1</td><td>LCC</td><td>Europe</td><td>4.4%</td><td>129.3</td><td>21.0%</td></tr><tr><td>117</td><td>SWR</td><td>Swiss</td><td>T 2</td><td>FSC</td><td>Europe</td><td>4.4%</td><td>55.5</td><td>23.0%</td></tr><tr><td>118</td><td>UZB</td><td>Uzbekistan Airways</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>4.4%</td><td>23.9</td><td>23.9%</td></tr><tr><td>119</td><td>UTY</td><td>Alliance Airlines2</td><td>T 2</td><td>LCC</td><td>APAC</td><td>4.4%</td><td>5.9</td><td>14.5%</td></tr><tr><td>120</td><td>OCN</td><td>Discover</td><td>T 4</td><td>FSC</td><td>Europe</td><td>4.5%</td><td>6.6</td><td>20.8%</td></tr><tr><td>121</td><td>RXA</td><td>Regional Express Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>4.5%</td><td>20.7</td><td>18.3%</td></tr><tr><td>122</td><td>PAL</td><td>Philippine Air Lines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>4.5%</td><td>26.2</td><td>19.2%</td></tr><tr><td>123</td><td>CFE</td><td>BA CityFlyer</td><td>T 3</td><td>FSC</td><td>Europe</td><td>4.5%</td><td>11.1</td><td>11.4%</td></tr><tr><td>124</td><td>UEA</td><td>Chengdu Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>4.5%</td><td>54.9</td><td>16.7%</td></tr><tr><td>125</td><td>RWD</td><td>RwandAir</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.6%</td><td>6.9</td><td>13.2%</td></tr><tr><td>126</td><td>SCX</td><td>Sun Country Airlines</td><td>T 3</td><td>LCC</td><td>North America</td><td>4.6%</td><td>27.8</td><td>13.3%</td></tr><tr><td>127</td><td>CSH</td><td>Shanghai Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.6%</td><td>63.2</td><td>22.8%</td></tr><tr><td>128</td><td>IRM</td><td>Mahan Air</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.6%</td><td>14.7</td><td>7.6%</td></tr><tr><td>129</td><td>CFG</td><td>Condor</td><td>T 2</td><td>FSC</td><td>Europe</td><td>4.7%</td><td>29.1</td><td>24.3%</td></tr><tr><td>130</td><td>EIN</td><td>Aer Lingus</td><td>T 2</td><td>FSC</td><td>Europe</td><td>4.8%</td><td>38.0</td><td>15.7%</td></tr><tr><td>131</td><td>KAC</td><td>Kuwait Airways Corporation</td><td>T 3</td><td>LCC</td><td>ME&amp;A</td><td>4.8%</td><td>10.1</td><td>18.0%</td></tr><tr><td>132</td><td>CXA</td><td>XiamenAir</td><td>T 1</td><td>LCC</td><td>APAC</td><td>4.9%</td><td>157.2</td><td>21.4%</td></tr><tr><td>133</td><td>VRE</td><td>Air Cote D'Ivoire</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.9%</td><td>3.5</td><td>19.9%</td></tr><tr><td>134</td><td>TVJ</td><td>Thai Vietjet Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>5.0%</td><td>32.2</td><td>39.5%</td></tr><tr><td>135</td><td>OTT</td><td>OTT Airlines</td><td>T 4</td><td>FSC</td><td>APAC</td><td>5.0%</td><td>14.4</td><td>16.6%</td></tr><tr><td>136</td><td>ASA</td><td>Alaska Airlines</td><td>T 1</td><td>FSC</td><td>North America</td><td>5.1%</td><td>158.0</td><td>17.9%</td></tr><tr><td>137</td><td>TUI</td><td>TUI Airways</td><td>T 2</td><td>LCC</td><td>Europe</td><td>5.1%</td><td>11.8</td><td>29.4%</td></tr><tr><td>138</td><td>QDA</td><td>Qingdao Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.2%</td><td>28.5</td><td>17.4%</td></tr><tr><td>139</td><td>CSN</td><td>China Southern Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>5.2%</td><td>564.3</td><td>15.4%</td></tr><tr><td>140</td><td>AKJ</td><td>Akasa Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>5.2%</td><td>75.3</td><td>13.1%</td></tr><tr><td>141</td><td>TGU</td><td>TAG Airlines</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>5.2%</td><td>6.1</td><td>11.0%</td></tr><tr><td>142</td><td>TBA</td><td>Tibet Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.3%</td><td>17.2</td><td>19.5%</td></tr><tr><td>143</td><td>CDG</td><td>Shandong Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>137.3</td><td>17.9%</td></tr><tr><td>144</td><td>CHH</td><td>Hainan Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>5.4%</td><td>202.5</td><td>15.9%</td></tr><tr><td>145</td><td>CSC</td><td>Sichuan Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>181.7</td><td>17.5%</td></tr><tr><td>146</td><td>CBG</td><td>GX Airlines</td><td>T 3</td><td>LCC</td><td>Europe</td><td>5.4%</td><td>32.8</td><td>18.8%</td></tr><tr><td>147</td><td>IGO</td><td>IndiGO</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>482.4</td><td>23.0%</td></tr><tr><td>148</td><td>HOP</td><td>HOP!</td><td>T 2</td><td>LCC</td><td>Europe</td><td>5.5%</td><td>64.4</td><td>21.3%</td></tr><tr><td>149</td><td>AVA</td><td>Avianca</td><td>T 1</td><td>LCC</td><td>LATAM</td><td>5.5%</td><td>180.0</td><td>18.7%</td></tr><tr><td>150</td><td>LGL</td><td>Luxair</td><td>T 4</td><td>LCC</td><td>Europe</td><td>5.6%</td><td>7.2</td><td>31.8%</td></tr><tr><td>151</td><td>JYH</td><td>9 Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.7%</td><td>42.0</td><td>21.5%</td></tr><tr><td>152</td><td>CBJ</td><td>Beijing Capital Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.7%</td><td>71.4</td><td>19.9%</td></tr><tr><td>153</td><td>THA</td><td>Thai Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.7%</td><td>88.7</td><td>42.2%</td></tr><tr><td>154</td><td>CES</td><td>China Eastern</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.8%</td><td>580.5</td><td>20.5%</td></tr><tr><td>155</td><td>QXE</td><td>Horizon</td><td>T 4</td><td>LCC</td><td>North America</td><td>5.8%</td><td>28.6</td><td>17.4%</td></tr><tr><td>156</td><td>VOI</td><td>Volaris</td><td>T 1</td><td>LCC</td><td>LATAM</td><td>5.8%</td><td>35.5</td><td>18.1%</td></tr><tr><td>157</td><td>OAW</td><td>Helvetic</td><td>T 4</td><td>LCC</td><td>Europe</td><td>5.8%</td><td>12.8</td><td>22.9%</td></tr><tr><td>158</td><td>DWI</td><td>Arajet SA</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>5.9%</td><td>8.9</td><td>17.4%</td></tr><tr><td>159</td><td>SBI</td><td>S7 Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>5.9%</td><td>58.6</td><td>25.7%</td></tr><tr><td>160</td><td>TRA</td><td>Transavia</td><td>T 2</td><td>LCC</td><td>Europe</td><td>6.0%</td><td>29.7</td><td>24.3%</td></tr><tr><td>161</td><td>BAW</td><td>British Airways</td><td>T 1</td><td>FSC</td><td>Europe</td><td>6.0%</td><td>257.4</td><td>22.7%</td></tr><tr><td>162</td><td>VIV</td><td>VivaAerobus</td><td>T 2</td><td>LCC</td><td>LATAM</td><td>6.0%</td><td>129.4</td><td>21.9%</td></tr><tr><td>163</td><td>ELY</td><td>El Al</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>6.1%</td><td>32.9</td><td>33.6%</td></tr><tr><td>164</td><td>BAV</td><td>Bamboo Airways</td><td>T 4</td><td>FSC</td><td>APAC</td><td>6.1%</td><td>13.2</td><td>19.7%</td></tr><tr><td>165</td><td>JAC</td><td>Japan Air Commuter</td><td>T 3</td><td>LCC</td><td>APAC</td><td>6.3%</td><td>34.5</td><td>13.6%</td></tr><tr><td>166</td><td>AIC</td><td>Air India</td><td>T 2</td><td>FSC</td><td>APAC</td><td>6.4%</td><td>240.1</td><td>29.3%</td></tr><tr><td>167</td><td>LKE</td><td>Lucky Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>6.4%</td><td>66.7</td><td>22.3%</td></tr><tr><td>168</td><td>TSC</td><td>Air Transat</td><td>T 3</td><td>FSC</td><td>North America</td><td>6.4%</td><td>35.8</td><td>30.7%</td></tr><tr><td>169</td><td>AZU</td><td>Azul Brazilian Airlines</td><td>T 1</td><td>FSC</td><td>LATAM</td><td>6.4%</td><td>211.1</td><td>20.2%</td></tr><tr><td>170</td><td>CCA</td><td>Air China</td><td>T 1</td><td>FSC</td><td>APAC</td><td>6.5%</td><td>539.3</td><td>17.5%</td></tr><tr><td>171</td><td>AWQ</td><td>Indonesia AirAsia</td><td>T 4</td><td>LCC</td><td>APAC</td><td>6.5%</td><td>35.6</td><td>27.2%</td></tr><tr><td>172</td><td>DTA</td><td>TAAG Angola Airlines</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>6.5%</td><td>4.7</td><td>18.0%</td></tr><tr><td>173</td><td>NSZ</td><td>Norwegian Air Sweden</td><td>T 3</td><td>LCC</td><td>Europe</td><td>6.5%</td><td>28.5</td><td>22.8%</td></tr><tr><td>174</td><td>SDG</td><td>StarAir</td><td>T 4</td><td>FSC</td><td>APAC</td><td>6.6%</td><td>6.8</td><td>20.4%</td></tr><tr><td>175</td><td>RJA</td><td>Royal Jordanian</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>6.6%</td><td>26.0</td><td>13.3%</td></tr><tr><td>176</td><td>RYR</td><td>Ryanair</td><td>T 1</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>626.7</td><td>27.9%</td></tr><tr><td>177</td><td>MAU</td><td>Air Mauritius</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>6.6%</td><td>10.0</td><td>26.0%</td></tr><tr><td>178</td><td>BCY</td><td>Cityjet</td><td>T 3</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>28.4</td><td>21.3%</td></tr><tr><td>179</td><td>BTI</td><td>airBaltic</td><td>T 4</td><td>FSC</td><td>Europe</td><td>6.6%</td><td>42.8</td><td>29.0%</td></tr><tr><td>180</td><td>TAP</td><td>TAP Air Portugal</td><td>T 2</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>44.2</td><td>28.5%</td></tr><tr><td>181</td><td>ART</td><td>Smart Lynx</td><td>T 3</td><td>LCC</td><td>Europe</td><td>6.7%</td><td>50.5</td><td>29.8%</td></tr><tr><td>182</td><td>KNE</td><td>Flynas</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>6.7%</td><td>79.9</td><td>30.1%</td></tr><tr><td>183</td><td>SWA</td><td>Southwest</td><td>T 1</td><td>LCC</td><td>North America</td><td>6.8%</td><td>1177.9</td><td>18.5%</td></tr><tr><td>184</td><td>OKA</td><td>Okay Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>6.8%</td><td>33.0</td><td>22.7%</td></tr><tr><td>185</td><td>BEL</td><td>Brussels Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>6.8%</td><td>51.8</td><td>20.8%</td></tr><tr><td>186</td><td>LOG</td><td>Loganair</td><td>T 3</td><td>FSC</td><td>Europe</td><td>6.8%</td><td>31.2</td><td>18.5%</td></tr><tr><td>187</td><td>CHB</td><td>West Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>6.8%</td><td>95.7</td><td>22.4%</td></tr><tr><td>188</td><td>KZR</td><td>Air Astana</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>6.9%</td><td>31.0</td><td>30.8%</td></tr><tr><td>189</td><td>WJA</td><td>WestJet</td><td>T 2</td><td>LCC</td><td>North America</td><td>7.0%</td><td>113.5</td><td>24.6%</td></tr><tr><td>190</td><td>ASL</td><td>Air Serbia</td><td>T 3</td><td>FSC</td><td>Europe</td><td>7.0%</td><td>28.3</td><td>32.9%</td></tr><tr><td>191</td><td>HVN</td><td>Vietnam Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>7.0%</td><td>173.0</td><td>30.2%</td></tr><tr><td>192</td><td>KNA</td><td>Kunming Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.0%</td><td>63.5</td><td>22.0%</td></tr><tr><td>193</td><td>PGA</td><td>Portugalia</td><td>T 3</td><td>LCC</td><td>Europe</td><td>7.0%</td><td>20.2</td><td>27.7%</td></tr><tr><td>194</td><td>QFA</td><td>Qantas</td><td>T 1</td><td>FSC</td><td>APAC</td><td>7.1%</td><td>273.5</td><td>22.6%</td></tr><tr><td>195</td><td>CDC</td><td>Zhejiang Loong</td><td>T 2</td><td>LCC</td><td>APAC</td><td>7.1%</td><td>87.6</td><td>20.0%</td></tr><tr><td>196</td><td>PCO</td><td>Pacific Coastal Airlines</td><td>T 3</td><td>LCC</td><td>North America</td><td>7.1%</td><td>14.0</td><td>18.5%</td></tr><tr><td>197</td><td>LAO</td><td>Lao Airlines</td><td>T 4</td><td>FSC</td><td>APAC</td><td>7.2%</td><td>8.1</td><td>31.2%</td></tr><tr><td>198</td><td>AIQ</td><td>Thai AirAsia</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.2%</td><td>130.9</td><td>38.1%</td></tr><tr><td>199</td><td>CNM</td><td>Air China Inner Mongolia</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.2%</td><td>13.7</td><td>15.5%</td></tr><tr><td>200</td><td>TGW</td><td>Scoot</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.2%</td><td>88.2</td><td>40.3%</td></tr><tr><td>201</td><td>KAL</td><td>Korean Air</td><td>T 2</td><td>FSC</td><td>APAC</td><td>7.2%</td><td>70.1</td><td>30.9%</td></tr><tr><td>202</td><td>EPA</td><td>Donghai Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.3%</td><td>36.3</td><td>27.4%</td></tr><tr><td>203</td><td>FIN</td><td>Finnair</td><td>T 2</td><td>FSC</td><td>Europe</td><td>7.4%</td><td>140.0</td><td>28.8%</td></tr><tr><td>204</td><td>OMS</td><td>SalamAir</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>7.4%</td><td>24.9</td><td>24.8%</td></tr><tr><td>205</td><td>CSZ</td><td>Shenzhen Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>7.4%</td><td>176.3</td><td>24.8%</td></tr><tr><td>206</td><td>SAT</td><td>SATA Air Acores</td><td>T 4</td><td>FSC</td><td>Europe</td><td>7.4%</td><td>13.1</td><td>28.9%</td></tr><tr><td>207</td><td>FJI</td><td>Fiji Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.5%</td><td>4.8</td><td>25.1%</td></tr><tr><td>208</td><td>MAS</td><td>Malaysia Airlines</td><td>T 2</td><td>FSC</td><td>APAC</td><td>7.6%</td><td>87.4</td><td>33.3%</td></tr><tr><td>209</td><td>GAP</td><td>PAL Express</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.6%</td><td>65.3</td><td>23.3%</td></tr><tr><td>210</td><td>RLH</td><td>Ruili</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.7%</td><td>19.4</td><td>26.3%</td></tr><tr><td>211</td><td>BKP</td><td>Bangkok</td><td>T 3</td><td>FSC</td><td>APAC</td><td>7.7%</td><td>48.8</td><td>45.9%</td></tr><tr><td>212</td><td>WZZ</td><td>Wizz Air</td><td>T 2</td><td>LCC</td><td>Europe</td><td>7.7%</td><td>156.2</td><td>23.5%</td></tr><tr><td>213</td><td>HBH</td><td>Hebei Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.8%</td><td>37.9</td><td>28.9%</td></tr><tr><td>214</td><td>VIR</td><td>Virgin Atlantic</td><td>T 3</td><td>FSC</td><td>Europe</td><td>7.8%</td><td>40.5</td><td>21.6%</td></tr><tr><td>215</td><td>QJE</td><td>QantasLink</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.8%</td><td>8.1</td><td>27.0%</td></tr><tr><td>216</td><td>JST</td><td>Jetstar</td><td>T 2</td><td>LCC</td><td>APAC</td><td>7.8%</td><td>154.3</td><td>30.1%</td></tr><tr><td>217</td><td>NTH</td><td>Hokkaido Air System</td><td>T 4</td><td>FSC</td><td>APAC</td><td>7.9%</td><td>3.1</td><td>21.8%</td></tr><tr><td>218</td><td>NKS</td><td>Spirit</td><td>T 1</td><td>LCC</td><td>North America</td><td>7.9%</td><td>239.2</td><td>20.3%</td></tr><tr><td>219</td><td>NOZ</td><td>Norwegian Air Shuttle</td><td>T 2</td><td>FSC</td><td>Europe</td><td>8.2%</td><td>100.8</td><td>21.0%</td></tr><tr><td>220</td><td>UAL</td><td>United</td><td>T 1</td><td>FSC</td><td>North America</td><td>8.2%</td><td>1287.0</td><td>20.4%</td></tr><tr><td>221</td><td>CQH</td><td>Spring Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>8.3%</td><td>191.2</td><td>22.2%</td></tr><tr><td>222</td><td>IRA</td><td>IranAIR</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>8.3%</td><td>14.1</td><td>19.8%</td></tr><tr><td>223</td><td>AFR</td><td>Air France</td><td>T 1</td><td>FSC</td><td>Europe</td><td>8.3%</td><td>301.3</td><td>30.6%</td></tr><tr><td>224</td><td>RYS</td><td>Buzz</td><td>T 2</td><td>LCC</td><td>Europe</td><td>8.3%</td><td>96.3</td><td>32.9%</td></tr><tr><td>225</td><td>MSC</td><td>Air Cairo</td><td>T 3</td><td>LCC</td><td>ME&amp;A</td><td>8.4%</td><td>35.9</td><td>28.9%</td></tr><tr><td>226</td><td>JBU</td><td>JetBlue</td><td>T 1</td><td>LCC</td><td>North America</td><td>8.5%</td><td>298.5</td><td>24.6%</td></tr><tr><td>227</td><td>DAH</td><td>Air Algerie</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>8.7%</td><td>87.0</td><td>28.7%</td></tr><tr><td>228</td><td>TLM</td><td>Thai Lion Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>8.8%</td><td>56.3</td><td>42.9%</td></tr><tr><td>229</td><td>JZA</td><td>Jazz</td><td>T 2</td><td>LCC</td><td>North America</td><td>8.9%</td><td>42.7</td><td>28.4%</td></tr><tr><td>230</td><td>SDM</td><td>Rossiya Airlines</td><td>T 3</td><td>LCC</td><td>Europe</td><td>9.0%</td><td>90.5</td><td>23.1%</td></tr><tr><td>231</td><td>EFW</td><td>BA Euroflyer dba</td><td>T 4</td><td>FSC</td><td>Europe</td><td>9.2%</td><td>22.1</td><td>25.8%</td></tr><tr><td>232</td><td>JZR</td><td>Jazeera Airways</td><td>T 3</td><td>LCC</td><td>ME&amp;A</td><td>9.2%</td><td>45.2</td><td>30.4%</td></tr><tr><td>233</td><td>VXP</td><td>Avelo</td><td>T 4</td><td>LCC</td><td>North America</td><td>9.3%</td><td>25.1</td><td>21.6%</td></tr><tr><td>234</td><td>AAR</td><td>Asiana</td><td>T 2</td><td>FSC</td><td>APAC</td><td>9.4%</td><td>44.5</td><td>34.5%</td></tr><tr><td>235</td><td>PDT</td><td>Piedmont Airlines</td><td>T 4</td><td>FSC</td><td>North America</td><td>9.4%</td><td>42.6</td><td>19.9%</td></tr><tr><td>236</td><td>VSV</td><td>SCAT Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>9.4%</td><td>29.5</td><td>31.1%</td></tr><tr><td>237</td><td>BHS</td><td>Bahamasair</td><td>T 4</td><td>FSC</td><td>North America</td><td>9.5%</td><td>9.7</td><td>30.5%</td></tr><tr><td>238</td><td>AAL</td><td>American Airlines</td><td>T 1</td><td>FSC</td><td>North America</td><td>9.5%</td><td>1322.8</td><td>21.2%</td></tr><tr><td>239</td><td>AER</td><td>Aer Lingus</td><td>T 3</td><td>FSC</td><td>Europe</td><td>9.5%</td><td>26.8</td><td>24.1%</td></tr><tr><td>240</td><td>EXS</td><td>Jet2.com</td><td>T 2</td><td>LCC</td><td>Europe</td><td>9.6%</td><td>75.3</td><td>26.6%</td></tr><tr><td>241</td><td>HXA</td><td>China Express Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>9.6%</td><td>132.6</td><td>25.4%</td></tr><tr><td>242</td><td>XAX</td><td>AirAsia X</td><td>T 3</td><td>LCC</td><td>APAC</td><td>9.7%</td><td>29.3</td><td>30.9%</td></tr><tr><td>243</td><td>DAL</td><td>Delta</td><td>T 1</td><td>FSC</td><td>North America</td><td>9.7%</td><td>1427.4</td><td>21.1%</td></tr><tr><td>244</td><td>NBT</td><td>Norse Atlantic Airways</td><td>T 4</td><td>LCC</td><td>Europe</td><td>9.7%</td><td>6.0</td><td>28.8%</td></tr><tr><td>245</td><td>AAY</td><td>Allegiant Air</td><td>T 2</td><td>LCC</td><td>North America</td><td>9.8%</td><td>144.5</td><td>23.0%</td></tr><tr><td>246</td><td>AXM</td><td>AirAsia</td><td>T 1</td><td>LCC</td><td>APAC</td><td>9.8%</td><td>251.5</td><td>38.1%</td></tr><tr><td>247</td><td>POE</td><td>Porter</td><td>T 3</td><td>LCC</td><td>North America</td><td>9.9%</td><td>62.1</td><td>33.7%</td></tr><tr><td>248</td><td>GCR</td><td>Tianjin Airlines</td><td>T 2</td><td>FSC</td><td>APAC</td><td>9.9%</td><td>174.5</td><td>22.1%</td></tr><tr><td>249</td><td>EZY</td><td>easyJet</td><td>T 1</td><td>LCC</td><td>Europe</td><td>9.9%</td><td>365.2</td><td>27.2%</td></tr><tr><td>250</td><td>BBC</td><td>Biman Bangladesh</td><td>T 4</td><td>FSC</td><td>APAC</td><td>10.0%</td><td>44.1</td><td>35.4%</td></tr><tr><td>251</td><td>ENY</td><td>Envoy Air</td><td>T 3</td><td>FSC</td><td>North America</td><td>10.1%</td><td>152.5</td><td>20.6%</td></tr><tr><td>252</td><td>LAM</td><td>Lam - Linhas Aereas de Mocambique</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>10.2%</td><td>15.1</td><td>18.1%</td></tr><tr><td>253</td><td>NWS</td><td>Nordwind</td><td>T 4</td><td>FSC</td><td>Europe</td><td>10.7%</td><td>32.3</td><td>21.7%</td></tr><tr><td>254</td><td>KLM</td><td>KLM</td><td>T 1</td><td>FSC</td><td>Europe</td><td>11.0%</td><td>425.1</td><td>31.2%</td></tr><tr><td>255</td><td>SJV</td><td>Super Air Jet</td><td>T 3</td><td>LCC</td><td>APAC</td><td>11.1%</td><td>136.1</td><td>29.5%</td></tr><tr><td>256</td><td>ACA</td><td>Air Canada</td><td>T 2</td><td>FSC</td><td>North America</td><td>11.3%</td><td>287.7</td><td>32.4%</td></tr><tr><td>257</td><td>CUH</td><td>Urumqi Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>11.3%</td><td>30.1</td><td>21.6%</td></tr><tr><td>258</td><td>CTV</td><td>Citilink Indonesia</td><td>T 3</td><td>LCC</td><td>APAC</td><td>11.5%</td><td>126.3</td><td>35.0%</td></tr><tr><td>259</td><td>FFT</td><td>Frontier</td><td>T 2</td><td>LCC</td><td>North America</td><td>11.5%</td><td>121.4</td><td>26.4%</td></tr><tr><td>260</td><td>FLE</td><td>Flair</td><td>T 4</td><td>LCC</td><td>North America</td><td>11.6%</td><td>34.5</td><td>36.1%</td></tr><tr><td>261</td><td>UBG</td><td>US-Bangla Airlines</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>11.7%</td><td>28.1</td><td>42.5%</td></tr><tr><td>262</td><td>AXB</td><td>Air India Express</td><td>T 3</td><td>LCC</td><td>APAC</td><td>11.7%</td><td>225.9</td><td>35.8%</td></tr><tr><td>263</td><td>EDV</td><td>Endeavor Air</td><td>T 2</td><td>FSC</td><td>North America</td><td>11.8%</td><td>140.0</td><td>22.3%</td></tr><tr><td>264</td><td>MXY</td><td>Breeze Airways</td><td>T 3</td><td>LCC</td><td>North America</td><td>11.9%</td><td>71.7</td><td>30.3%</td></tr><tr><td>265</td><td>PVL</td><td>PAL Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>12.1%</td><td>72.2</td><td>25.5%</td></tr><tr><td>266</td><td>AUR</td><td>Aurigny Air Services Ltd.</td><td>T 4</td><td>FSC</td><td>Europe</td><td>12.3%</td><td>20.9</td><td>24.0%</td></tr><tr><td>267</td><td>RUK</td><td>Ryanair UK</td><td>T 3</td><td>LCC</td><td>Europe</td><td>12.3%</td><td>40.1</td><td>31.3%</td></tr><tr><td>268</td><td>ASH</td><td>Mesa</td><td>T 2</td><td>FSC</td><td>North America</td><td>12.4%</td><td>131.5</td><td>23.0%</td></tr><tr><td>269</td><td>JNA</td><td>Jin Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>12.5%</td><td>105.2</td><td>43.3%</td></tr><tr><td>270</td><td>PIA</td><td>Pakistan International Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>12.5%</td><td>56.7</td><td>31.9%</td></tr><tr><td>271</td><td>ROU</td><td>Air Canada Rouge</td><td>T 3</td><td>LCC</td><td>North America</td><td>12.5%</td><td>35.8</td><td>32.7%</td></tr><tr><td>272</td><td>CRK</td><td>Hong Kong Airlines</td><td>T 4</td><td>FSC</td><td>APAC</td><td>12.7%</td><td>70.9</td><td>41.5%</td></tr><tr><td>273</td><td>MXD</td><td>Malindo Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>12.8%</td><td>42.4</td><td>42.6%</td></tr><tr><td>274</td><td>ESR</td><td>Eastar Jet</td><td>T 4</td><td>LCC</td><td>APAC</td><td>13.1%</td><td>56.7</td><td>37.2%</td></tr><tr><td>275</td><td>FBZ</td><td>Flybondi</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>13.2%</td><td>80.6</td><td>21.6%</td></tr><tr><td>276</td><td>MSR</td><td>Egyptair</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>13.3%</td><td>164.1</td><td>39.9%</td></tr><tr><td>277</td><td>WEN</td><td>WestJet Encore</td><td>T 4</td><td>LCC</td><td>North America</td><td>14.5%</td><td>88.6</td><td>35.0%</td></tr><tr><td>278</td><td>BOV</td><td>Boa Boliviana</td><td>T 3</td><td>FSC</td><td>LATAM</td><td>14.8%</td><td>27.2</td><td>32.0%</td></tr><tr><td>279</td><td>TWB</td><td>T'way Air</td><td>T 4</td><td>FSC</td><td>APAC</td><td>15.4%</td><td>139.1</td><td>34.3%</td></tr><tr><td>280</td><td>ACN</td><td>Azul Conecta</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>16.1%</td><td>39.7</td><td>29.9%</td></tr><tr><td>281</td><td>BTK</td><td>Batik Air</td><td>T 2</td><td>FSC</td><td>APAC</td><td>16.4%</td><td>153.9</td><td>35.8%</td></tr><tr><td>282</td><td>JIA</td><td>PSA Airlines</td><td>T 2</td><td>FSC</td><td>North America</td><td>16.5%</td><td>210.8</td><td>29.2%</td></tr><tr><td>283</td><td>VTE</td><td>Contour Airlines</td><td>T 3</td><td>FSC</td><td>North America</td><td>17.8%</td><td>93.0</td><td>26.9%</td></tr><tr><td>284</td><td>SIL</td><td>Silver Airways</td><td>T 3</td><td>LCC</td><td>North America</td><td>19.3%</td><td>68.0</td><td>36.9%</td></tr><tr><td>285</td><td>TAR</td><td>Tunis Air</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>19.3%</td><td>43.9</td><td>44.1%</td></tr><tr><td>286</td><td>WON</td><td>Wings Abadi</td><td>T 3</td><td>LCC</td><td>APAC</td><td>19.4%</td><td>28.1</td><td>30.9%</td></tr><tr><td>287</td><td>VJC</td><td>VietJet Air</td><td>T 2</td><td>LCC</td><td>APAC</td><td>20.0%</td><td>506.9</td><td>40.4%</td></tr><tr><td>288</td><td>SEJ</td><td>SpiceJet</td><td>T 2</td><td>LCC</td><td>APAC</td><td>21.3%</td><td>165.9</td><td>39.4%</td></tr><tr><td>289</td><td>AIE</td><td>Air Inuit</td><td>T 3</td><td>LCC</td><td>North America</td><td>21.6%</td><td>108.2</td><td>38.2%</td></tr><tr><td>290</td><td>LNI</td><td>Lion Air</td><td>T 2</td><td>LCC</td><td>APAC</td><td>24.4%</td><td>360.6</td><td>36.2%</td></tr><tr><td>291</td><td>IWY</td><td>InterCaribbean Airways</td><td>T 4</td><td>LCC</td><td>North America</td><td>24.7%</td><td>28.0</td><td>44.9%</td></tr><tr><td>292</td><td>KQA</td><td>Kenya Airways</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>25.7%</td><td>167.8</td><td>36.2%</td></tr></tbody></table>
+            </div>
+            <div class="flex gap">
+                <div class="col">
+                    <h4>Average ImPax % Vs. Total Disruption %</h4>
+                    <p>This is a comparative view of the average ImPax Percentage of airlines by Region and Tier, and the average Total Percentage of disruptions, which includes minor delays.</p>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="flex charts">
+                <div class="col">
+                    <div class="chartBox">
+                        <div id="chart22"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="chartBox">
+                        <div id="chart23"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="region" id="apac">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <div>
+                            <div class="aboveText">Region</div>
+                            <h3>Asia Pacific</h3>
+                            <p>From December to January, there was a 5% increase in flight volumes but a 37% increase in flights impacted by major delays (>3hrs), resulting in 440K MORE passengers disrupted this month.</p>
+                        </div>
+                        <p class="airlines">115 Airlines | 72 LCC | 43 FSC</p>
+                    </div>
+                    <div class="col right">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+
+            <div class="stats">
+                <div class="statsBoxes">
+                    <div class="statsBox">
+                        <div class="number">23.7%</div>
+                        <div class="text">Avg Total Disruption</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">42.1%</div>
+                        <div class="text">% Global Disruption</div>
+                    </div>
+                    <div class="statsBox impaxStatsBox">
+                        <div class="number">6.5%</div>
+                        <div class="text">Average ImPax</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">9.8m</div>
+                        <div class="text">ImPax Passenger Estimation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impressions">
+                <div class="flex">
+                    <div class="col">
+                        <h4>Sentiment Analysis</h4>
+                        <p>These are the top 5 passenger classifiers and their percentage occurrence per analysing hundreds of regional airline reviews.</p>
+                        <div class="box impression">
+                            <div id="chart3"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4>Sample Reviews</h4>
+                        <div class="apacReviews">
+                            <div class="tab">
+                                <button class="tablinks1 active" onclick="openReview1(event, 'Positive1')">Positive reviews <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
+                                    </svg></button>
+                                <button class="tablinks1" onclick="openReview1(event, 'Negative1')">Negative reviews
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M120-320q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14h440v520L440-82q-15 15-35.5 17.5T365-72q-19-10-28-28t-4-37l45-183H120Zm480-34v-406H240L120-480v80h360l-54 220 174-174Zm200-486q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H680v-80h120v-360H680v-80h120Zm-200 80v406-406Z" />
+                                    </svg></button>
+                            </div>
+
+                            <div id="Positive1" class="tabcontent1" style="display: block;">
+                                <p class="review">“I initially booked a flight for 7:15 AM, but unfortunately, it was canceled. I contacted [airline] via live chat and was incredibly impressed by the service I received. The representative efficiently assisted me in rearranging my flight as per my request and provided clear details on how I could access accommodation and other services due to the airline’s cancellation. Thank you so much for the excellent service. This was our first time flying with [airline], and we are truly grateful for the care and support provided.”</p>
+                                <p class="reviewairline">[Tier 1, FSC]</p>
+                            </div>
+
+                            <div id="Negative1" class="tabcontent1">
+                                <p class="review">“Our flight back to [city] was cancelled at the last minute. We contacted the help line to reschedule and were advised that no flights were available within the two days and that we could arrange for accommodation and meals and get reimbursement. The claims were rejected. Won't be flying with [airline] any time in the future. [Destination] has given us fond memories, too bad the experience with [airline] spoiled it!”</p>
+                                <p class="reviewairline">[Tier 1, FSC]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mainTable">
+                <h4>APAC | All Carriers <span>Filter by tiers:</span></h4>
+                <table class="data-table nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Tier </th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>Pax Est. 1000s</th>
+                            <th>Total % Disruption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>CQN</td><td>Chongqing</td><td>T 4</td><td>FSC</td><td>APAC</td><td>0.1%</td><td>0.2</td><td>0.4%</td></tr><tr><td>2</td><td>SNJ</td><td>Solaseed Air</td><td>T 3</td><td>FSC</td><td>APAC</td><td>0.2%</td><td>0.4</td><td>10.0%</td></tr><tr><td>3</td><td>SFJ</td><td>StarFlyer</td><td>T 3</td><td>FSC</td><td>APAC</td><td>0.3%</td><td>1.4</td><td>5.4%</td></tr><tr><td>4</td><td>SJX</td><td>StarLux</td><td>T 4</td><td>FSC</td><td>APAC</td><td>1.2%</td><td>5.0</td><td>17.9%</td></tr><tr><td>5</td><td>ANA</td><td>All Nippon</td><td>T 1</td><td>FSC</td><td>APAC</td><td>1.2%</td><td>41.0</td><td>14.2%</td></tr><tr><td>6</td><td>MDA</td><td>Mandarin</td><td>T 3</td><td>FSC</td><td>APAC</td><td>1.3%</td><td>6.6</td><td>19.8%</td></tr><tr><td>7</td><td>SKY</td><td>Skymark</td><td>T 3</td><td>LCC</td><td>APAC</td><td>1.4%</td><td>9.7</td><td>11.7%</td></tr><tr><td>8</td><td>FDA</td><td>Fuji Dream</td><td>T 3</td><td>LCC</td><td>APAC</td><td>1.5%</td><td>4.7</td><td>7.8%</td></tr><tr><td>9</td><td>ORC</td><td>Oriental Air Bridge</td><td>T 4</td><td>LCC</td><td>APAC</td><td>1.5%</td><td>2.9</td><td>9.0%</td></tr><tr><td>10</td><td>HKE</td><td>Hong Kong Express Airways</td><td>T 4</td><td>FSC</td><td>APAC</td><td>1.6%</td><td>9.6</td><td>20.0%</td></tr><tr><td>11</td><td>JTA</td><td>Japan Trans Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>1.7%</td><td>6.4</td><td>15.7%</td></tr><tr><td>12</td><td>JAL</td><td>Japan Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>1.8%</td><td>69.3</td><td>17.0%</td></tr><tr><td>13</td><td>CCD</td><td>Dalian Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>2.5%</td><td>14.8</td><td>5.9%</td></tr><tr><td>14</td><td>TTW</td><td>Tigerair Taiwan</td><td>T 4</td><td>FSC</td><td>APAC</td><td>2.5%</td><td>5.9</td><td>27.2%</td></tr><tr><td>15</td><td>CGN</td><td>Air Changan</td><td>T 3</td><td>LCC</td><td>APAC</td><td>2.5%</td><td>14.7</td><td>9.5%</td></tr><tr><td>16</td><td>AKX</td><td>ANA Wings</td><td>T 2</td><td>FSC</td><td>APAC</td><td>2.6%</td><td>46.2</td><td>14.2%</td></tr><tr><td>17</td><td>APJ</td><td>Peach Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>2.7%</td><td>20.8</td><td>21.9%</td></tr><tr><td>18</td><td>FZA</td><td>Fuzhou Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>2.7%</td><td>7.6</td><td>16.7%</td></tr><tr><td>19</td><td>VTA</td><td>Air Tahiti</td><td>T 4</td><td>FSC</td><td>APAC</td><td>2.8%</td><td>8.0</td><td>10.9%</td></tr><tr><td>20</td><td>OTC</td><td>Air Travel</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.0%</td><td>8.4</td><td>13.2%</td></tr><tr><td>21</td><td>CEB</td><td>Cebu Pacific</td><td>T 2</td><td>LCC</td><td>APAC</td><td>3.0%</td><td>67.9</td><td>19.5%</td></tr><tr><td>22</td><td>CGZ</td><td>Colorful Guizhou</td><td>T 3</td><td>LCC</td><td>APAC</td><td>3.1%</td><td>11.7</td><td>15.6%</td></tr><tr><td>23</td><td>GIA</td><td>Garuda Indonesia</td><td>T 4</td><td>FSC</td><td>APAC</td><td>3.2%</td><td>47.6</td><td>15.8%</td></tr><tr><td>24</td><td>CJX</td><td>Jiangxi</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.4%</td><td>10.5</td><td>16.0%</td></tr><tr><td>25</td><td>JSA</td><td>Jetstar Asia</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.5%</td><td>8.6</td><td>26.8%</td></tr><tr><td>26</td><td>CUA</td><td>China United Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>3.6%</td><td>14.5</td><td>15.4%</td></tr><tr><td>27</td><td>MMA</td><td>MAI</td><td>T 4</td><td>FSC</td><td>APAC</td><td>3.7%</td><td>7.0</td><td>20.6%</td></tr><tr><td>28</td><td>YZR</td><td>Suparna</td><td>T 4</td><td>FSC</td><td>APAC</td><td>3.7%</td><td>15.8</td><td>12.2%</td></tr><tr><td>29</td><td>AMU</td><td>Air Macau</td><td>T 4</td><td>LCC</td><td>APAC</td><td>3.8%</td><td>13.0</td><td>28.2%</td></tr><tr><td>30</td><td>EVA</td><td>EVA Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>3.8%</td><td>57.8</td><td>26.2%</td></tr><tr><td>31</td><td>VOZ</td><td>Virgin Australia</td><td>T 2</td><td>FSC</td><td>APAC</td><td>3.9%</td><td>58.6</td><td>19.7%</td></tr><tr><td>32</td><td>DKH</td><td>Juneyao Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>3.9%</td><td>107.4</td><td>17.6%</td></tr><tr><td>33</td><td>CPA</td><td>Cathay Pacific</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.0%</td><td>64.9</td><td>22.0%</td></tr><tr><td>34</td><td>SIA</td><td>Singapore Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.0%</td><td>91.4</td><td>26.2%</td></tr><tr><td>35</td><td>JJP</td><td>Jetstar Japan</td><td>T 3</td><td>LCC</td><td>APAC</td><td>4.0%</td><td>17.6</td><td>30.2%</td></tr><tr><td>36</td><td>ANZ</td><td>Air New Zealand</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.2%</td><td>90.7</td><td>19.6%</td></tr><tr><td>37</td><td>MWG</td><td>MASwings</td><td>T 4</td><td>LCC</td><td>APAC</td><td>4.2%</td><td>17.1</td><td>12.7%</td></tr><tr><td>38</td><td>QLK</td><td>QantasLink</td><td>T 2</td><td>LCC</td><td>APAC</td><td>4.2%</td><td>35.4</td><td>12.5%</td></tr><tr><td>39</td><td>CAL</td><td>China Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>4.3%</td><td>56.5</td><td>27.2%</td></tr><tr><td>40</td><td>JJA</td><td>Jeju Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>4.3%</td><td>41.1</td><td>21.5%</td></tr><tr><td>41</td><td>ALK</td><td>SriLankan Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>4.4%</td><td>10.4</td><td>30.8%</td></tr><tr><td>42</td><td>UTY</td><td>Alliance Airlines2</td><td>T 2</td><td>LCC</td><td>APAC</td><td>4.4%</td><td>5.9</td><td>14.5%</td></tr><tr><td>43</td><td>RXA</td><td>Regional Express Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>4.5%</td><td>20.7</td><td>18.3%</td></tr><tr><td>44</td><td>PAL</td><td>Philippine Air Lines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>4.5%</td><td>26.2</td><td>19.2%</td></tr><tr><td>45</td><td>UEA</td><td>Chengdu Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>4.5%</td><td>54.9</td><td>16.7%</td></tr><tr><td>46</td><td>CSH</td><td>Shanghai Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>4.6%</td><td>63.2</td><td>22.8%</td></tr><tr><td>47</td><td>CXA</td><td>XiamenAir</td><td>T 1</td><td>LCC</td><td>APAC</td><td>4.9%</td><td>157.2</td><td>21.4%</td></tr><tr><td>48</td><td>TVJ</td><td>Thai Vietjet Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>5.0%</td><td>32.2</td><td>39.5%</td></tr><tr><td>49</td><td>OTT</td><td>OTT Airlines</td><td>T 4</td><td>FSC</td><td>APAC</td><td>5.0%</td><td>14.4</td><td>16.6%</td></tr><tr><td>50</td><td>QDA</td><td>Qingdao Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.2%</td><td>28.5</td><td>17.4%</td></tr><tr><td>51</td><td>CSN</td><td>China Southern Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>5.2%</td><td>564.3</td><td>15.4%</td></tr><tr><td>52</td><td>AKJ</td><td>Akasa Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>5.2%</td><td>75.3</td><td>13.1%</td></tr><tr><td>53</td><td>TBA</td><td>Tibet Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.3%</td><td>17.2</td><td>19.5%</td></tr><tr><td>54</td><td>CDG</td><td>Shandong Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>137.3</td><td>17.9%</td></tr><tr><td>55</td><td>CHH</td><td>Hainan Airlines</td><td>T 1</td><td>FSC</td><td>APAC</td><td>5.4%</td><td>202.5</td><td>15.9%</td></tr><tr><td>56</td><td>CSC</td><td>Sichuan Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>181.7</td><td>17.5%</td></tr><tr><td>57</td><td>IGO</td><td>IndiGO</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.4%</td><td>482.4</td><td>23.0%</td></tr><tr><td>58</td><td>JYH</td><td>9 Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.7%</td><td>42.0</td><td>21.5%</td></tr><tr><td>59</td><td>CBJ</td><td>Beijing Capital Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.7%</td><td>71.4</td><td>19.9%</td></tr><tr><td>60</td><td>THA</td><td>Thai Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>5.7%</td><td>88.7</td><td>42.2%</td></tr><tr><td>61</td><td>CES</td><td>China Eastern</td><td>T 1</td><td>LCC</td><td>APAC</td><td>5.8%</td><td>580.5</td><td>20.5%</td></tr><tr><td>62</td><td>BAV</td><td>Bamboo Airways</td><td>T 4</td><td>FSC</td><td>APAC</td><td>6.1%</td><td>13.2</td><td>19.7%</td></tr><tr><td>63</td><td>JAC</td><td>Japan Air Commuter</td><td>T 3</td><td>LCC</td><td>APAC</td><td>6.3%</td><td>34.5</td><td>13.6%</td></tr><tr><td>64</td><td>AIC</td><td>Air India</td><td>T 2</td><td>FSC</td><td>APAC</td><td>6.4%</td><td>240.1</td><td>29.3%</td></tr><tr><td>65</td><td>LKE</td><td>Lucky Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>6.4%</td><td>66.7</td><td>22.3%</td></tr><tr><td>66</td><td>CCA</td><td>Air China</td><td>T 1</td><td>FSC</td><td>APAC</td><td>6.5%</td><td>539.3</td><td>17.5%</td></tr><tr><td>67</td><td>AWQ</td><td>Indonesia AirAsia</td><td>T 4</td><td>LCC</td><td>APAC</td><td>6.5%</td><td>35.6</td><td>27.2%</td></tr><tr><td>68</td><td>SDG</td><td>StarAir</td><td>T 4</td><td>FSC</td><td>APAC</td><td>6.6%</td><td>6.8</td><td>20.4%</td></tr><tr><td>69</td><td>OKA</td><td>Okay Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>6.8%</td><td>33.0</td><td>22.7%</td></tr><tr><td>70</td><td>CHB</td><td>West Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>6.8%</td><td>95.7</td><td>22.4%</td></tr><tr><td>71</td><td>HVN</td><td>Vietnam Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>7.0%</td><td>173.0</td><td>30.2%</td></tr><tr><td>72</td><td>KNA</td><td>Kunming Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.0%</td><td>63.5</td><td>22.0%</td></tr><tr><td>73</td><td>QFA</td><td>Qantas</td><td>T 1</td><td>FSC</td><td>APAC</td><td>7.1%</td><td>273.5</td><td>22.6%</td></tr><tr><td>74</td><td>CDC</td><td>Zhejiang Loong</td><td>T 2</td><td>LCC</td><td>APAC</td><td>7.1%</td><td>87.6</td><td>20.0%</td></tr><tr><td>75</td><td>LAO</td><td>Lao Airlines</td><td>T 4</td><td>FSC</td><td>APAC</td><td>7.2%</td><td>8.1</td><td>31.2%</td></tr><tr><td>76</td><td>AIQ</td><td>Thai AirAsia</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.2%</td><td>130.9</td><td>38.1%</td></tr><tr><td>77</td><td>CNM</td><td>Air China Inner Mongolia</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.2%</td><td>13.7</td><td>15.5%</td></tr><tr><td>78</td><td>TGW</td><td>Scoot</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.2%</td><td>88.2</td><td>40.3%</td></tr><tr><td>79</td><td>KAL</td><td>Korean Air</td><td>T 2</td><td>FSC</td><td>APAC</td><td>7.2%</td><td>70.1</td><td>30.9%</td></tr><tr><td>80</td><td>EPA</td><td>Donghai Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.3%</td><td>36.3</td><td>27.4%</td></tr><tr><td>81</td><td>CSZ</td><td>Shenzhen Airlines</td><td>T 1</td><td>LCC</td><td>APAC</td><td>7.4%</td><td>176.3</td><td>24.8%</td></tr><tr><td>82</td><td>FJI</td><td>Fiji Airways</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.5%</td><td>4.8</td><td>25.1%</td></tr><tr><td>83</td><td>MAS</td><td>Malaysia Airlines</td><td>T 2</td><td>FSC</td><td>APAC</td><td>7.6%</td><td>87.4</td><td>33.3%</td></tr><tr><td>84</td><td>GAP</td><td>PAL Express</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.6%</td><td>65.3</td><td>23.3%</td></tr><tr><td>85</td><td>RLH</td><td>Ruili</td><td>T 3</td><td>LCC</td><td>APAC</td><td>7.7%</td><td>19.4</td><td>26.3%</td></tr><tr><td>86</td><td>BKP</td><td>Bangkok</td><td>T 3</td><td>FSC</td><td>APAC</td><td>7.7%</td><td>48.8</td><td>45.9%</td></tr><tr><td>87</td><td>HBH</td><td>Hebei Airlines</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.8%</td><td>37.9</td><td>28.9%</td></tr><tr><td>88</td><td>QJE</td><td>QantasLink</td><td>T 4</td><td>LCC</td><td>APAC</td><td>7.8%</td><td>8.1</td><td>27.0%</td></tr><tr><td>89</td><td>JST</td><td>Jetstar</td><td>T 2</td><td>LCC</td><td>APAC</td><td>7.8%</td><td>154.3</td><td>30.1%</td></tr><tr><td>90</td><td>NTH</td><td>Hokkaido Air System</td><td>T 4</td><td>FSC</td><td>APAC</td><td>7.9%</td><td>3.1</td><td>21.8%</td></tr><tr><td>91</td><td>CQH</td><td>Spring Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>8.3%</td><td>191.2</td><td>22.2%</td></tr><tr><td>92</td><td>TLM</td><td>Thai Lion Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>8.8%</td><td>56.3</td><td>42.9%</td></tr><tr><td>93</td><td>AAR</td><td>Asiana</td><td>T 2</td><td>FSC</td><td>APAC</td><td>9.4%</td><td>44.5</td><td>34.5%</td></tr><tr><td>94</td><td>VSV</td><td>SCAT Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>9.4%</td><td>29.5</td><td>31.1%</td></tr><tr><td>95</td><td>HXA</td><td>China Express Airlines</td><td>T 2</td><td>LCC</td><td>APAC</td><td>9.6%</td><td>132.6</td><td>25.4%</td></tr><tr><td>96</td><td>XAX</td><td>AirAsia X</td><td>T 3</td><td>LCC</td><td>APAC</td><td>9.7%</td><td>29.3</td><td>30.9%</td></tr><tr><td>97</td><td>AXM</td><td>AirAsia</td><td>T 1</td><td>LCC</td><td>APAC</td><td>9.8%</td><td>251.5</td><td>38.1%</td></tr><tr><td>98</td><td>GCR</td><td>Tianjin Airlines</td><td>T 2</td><td>FSC</td><td>APAC</td><td>9.9%</td><td>174.5</td><td>22.1%</td></tr><tr><td>99</td><td>BBC</td><td>Biman Bangladesh</td><td>T 4</td><td>FSC</td><td>APAC</td><td>10.0%</td><td>44.1</td><td>35.4%</td></tr><tr><td>100</td><td>SJV</td><td>Super Air Jet</td><td>T 3</td><td>LCC</td><td>APAC</td><td>11.1%</td><td>136.1</td><td>29.5%</td></tr><tr><td>101</td><td>CUH</td><td>Urumqi Air</td><td>T 4</td><td>LCC</td><td>APAC</td><td>11.3%</td><td>30.1</td><td>21.6%</td></tr><tr><td>102</td><td>CTV</td><td>Citilink Indonesia</td><td>T 3</td><td>LCC</td><td>APAC</td><td>11.5%</td><td>126.3</td><td>35.0%</td></tr><tr><td>103</td><td>AXB</td><td>Air India Express</td><td>T 3</td><td>LCC</td><td>APAC</td><td>11.7%</td><td>225.9</td><td>35.8%</td></tr><tr><td>104</td><td>PVL</td><td>PAL Airlines</td><td>T 3</td><td>LCC</td><td>APAC</td><td>12.1%</td><td>72.2</td><td>25.5%</td></tr><tr><td>105</td><td>JNA</td><td>Jin Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>12.5%</td><td>105.2</td><td>43.3%</td></tr><tr><td>106</td><td>PIA</td><td>Pakistan International Airlines</td><td>T 3</td><td>FSC</td><td>APAC</td><td>12.5%</td><td>56.7</td><td>31.9%</td></tr><tr><td>107</td><td>CRK</td><td>Hong Kong Airlines</td><td>T 4</td><td>FSC</td><td>APAC</td><td>12.7%</td><td>70.9</td><td>41.5%</td></tr><tr><td>108</td><td>MXD</td><td>Malindo Air</td><td>T 3</td><td>LCC</td><td>APAC</td><td>12.8%</td><td>42.4</td><td>42.6%</td></tr><tr><td>109</td><td>ESR</td><td>Eastar Jet</td><td>T 4</td><td>LCC</td><td>APAC</td><td>13.1%</td><td>56.7</td><td>37.2%</td></tr><tr><td>110</td><td>TWB</td><td>T'way Air</td><td>T 4</td><td>FSC</td><td>APAC</td><td>15.4%</td><td>139.1</td><td>34.3%</td></tr><tr><td>111</td><td>BTK</td><td>Batik Air</td><td>T 2</td><td>FSC</td><td>APAC</td><td>16.4%</td><td>153.9</td><td>35.8%</td></tr><tr><td>112</td><td>WON</td><td>Wings Abadi</td><td>T 3</td><td>LCC</td><td>APAC</td><td>19.4%</td><td>28.1</td><td>30.9%</td></tr><tr><td>113</td><td>VJC</td><td>VietJet Air</td><td>T 2</td><td>LCC</td><td>APAC</td><td>20.0%</td><td>506.9</td><td>40.4%</td></tr><tr><td>114</td><td>SEJ</td><td>SpiceJet</td><td>T 2</td><td>LCC</td><td>APAC</td><td>21.3%</td><td>165.9</td><td>39.4%</td></tr><tr><td>115</td><td>LNI</td><td>Lion Air</td><td>T 2</td><td>LCC</td><td>APAC</td><td>24.4%</td><td>360.6</td><td>36.2%</td></tr></tbody></table>
+            </div>
+        </section>
+    </div>
+
+    <div class="region" id="europe">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <div>
+                            <div class="aboveText">Region</div>
+                            <h3>Europe</h3>
+                            <p>While overall disruption metrics were relatively stable (MoM), there was a >10% increase in flights impacted by major delays (+3hrs) and cancellations, resulting in 125K MORE impacted passengers compared to December.</p>
+                        </div>
+                        <p class="airlines">79 Airlines | 40 LCC | 39 FSC</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <div class="stats">
+                <div class="statsBoxes">
+                    <div class="statsBox">
+                        <div class="number">19.1%</div>
+                        <div class="text">Avg Total Disruption</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">27.1%</div>
+                        <div class="text">% Global Disruption</div>
+                    </div>
+                    <div class="statsBox impaxStatsBox">
+                        <div class="number">5%</div>
+                        <div class="text">Average ImPax</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">4.7m</div>
+                        <div class="text">ImPax Passenger Estimation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impressions">
+                <div class="flex">
+                    <div class="col">
+                        <h4>Sentiment Analysis</h4>
+                        <p>These are the top 5 passenger classifiers and their percentage occurrence per analysing hundreds of regional airline reviews.</p>
+                        <div class="box impression">
+                            <div id="chart4"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4>Sample Reviews</h4>
+                        <div class="europeReviews">
+                            <div class="tab">
+                                <button class="tablinks2 active" onclick="openReview2(event, 'Positive2')">Positive reviews <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
+                                    </svg></button>
+                                <button class="tablinks2" onclick="openReview2(event, 'Negative2')">Negative reviews
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M120-320q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14h440v520L440-82q-15 15-35.5 17.5T365-72q-19-10-28-28t-4-37l45-183H120Zm480-34v-406H240L120-480v80h360l-54 220 174-174Zm200-486q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H680v-80h120v-360H680v-80h120Zm-200 80v406-406Z" />
+                                    </svg></button>
+                            </div>
+
+                            <div id="Positive2" class="tabcontent2" style="display: block;">
+                                <p class="review">“Recently got caught up in the bad weather and flight cancellation from [city]. The level of support and quality of information from [airline] was excellent, we ended up staying in [city] for an additional 3 days, the experience was stress free and didn't cost us any additional money, the new flight information was readily available, accommodation provided and expenses have already been paid back within 5 days. I cannot fault the service received.”</p>
+                                <p class="reviewairline">[Tier 2, FSC]</p>
+                            </div>
+
+                            <div id="Negative2" class="tabcontent2">
+                                <p class="review">“Absolute joke. Booked a package and [airline] changed my flight. Usually this would not be an issue but they changed it to a different day altogether. No refund policy, I either had to pay out extra to change my whole holiday, book a different hotel for the earlier arrival and then move hotels (which means my transfers were useless), or sit in the airport for 36 hours in Naples.”</p>
+                                <p class="reviewairline">[Tier 1, LCC]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mainTable">
+                <h4>Europe | All Carriers <span>Filter by tiers:</span></h4>
+                <table class="data-table nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Tier </th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>Pax Est. 1000s</th>
+                            <th>Total % Disruption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>AEZ</td><td>Aeroitalia</td><td>T 4</td><td>LCC</td><td>Europe</td><td>0.4%</td><td>2.6</td><td>3.4%</td></tr><tr><td>2</td><td>CCM</td><td>Air Corsica</td><td>T 3</td><td>FSC</td><td>Europe</td><td>0.4%</td><td>1.2</td><td>5.5%</td></tr><tr><td>3</td><td>SEH</td><td>Sky Express</td><td>T 4</td><td>LCC</td><td>Europe</td><td>0.6%</td><td>5.2</td><td>8.4%</td></tr><tr><td>4</td><td>ITY</td><td>ITA Airways</td><td>T 2</td><td>FSC</td><td>Europe</td><td>1.0%</td><td>16.1</td><td>12.0%</td></tr><tr><td>5</td><td>FPY</td><td>PLAY Airlines</td><td>T 4</td><td>LCC</td><td>Europe</td><td>1.3%</td><td>3.0</td><td>6.0%</td></tr><tr><td>6</td><td>AEE</td><td>Aegean Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>1.4%</td><td>12.9</td><td>11.6%</td></tr><tr><td>7</td><td>TKJ</td><td>Ajet</td><td>T 3</td><td>LCC</td><td>Europe</td><td>1.6%</td><td>7.3</td><td>8.9%</td></tr><tr><td>8</td><td>SZS</td><td>Scandinavian Airlines Connect</td><td>T 3</td><td>LCC</td><td>Europe</td><td>1.9%</td><td>10.7</td><td>11.4%</td></tr><tr><td>9</td><td>IBS</td><td>Iberia Express</td><td>T 4</td><td>LCC</td><td>Europe</td><td>1.9%</td><td>11.6</td><td>11.3%</td></tr><tr><td>10</td><td>KLC</td><td>KLM Cityhopper</td><td>T 2</td><td>LCC</td><td>Europe</td><td>2.0%</td><td>2.4</td><td>4.0%</td></tr><tr><td>11</td><td>DLA</td><td>Air Dolomiti</td><td>T 3</td><td>LCC</td><td>Europe</td><td>2.3%</td><td>13.2</td><td>20.4%</td></tr><tr><td>12</td><td>IBE</td><td>Iberia</td><td>T 2</td><td>FSC</td><td>Europe</td><td>2.3%</td><td>41.8</td><td>14.4%</td></tr><tr><td>13</td><td>TOM</td><td>TUI Airways</td><td>T 2</td><td>LCC</td><td>Europe</td><td>2.4%</td><td>11.5</td><td>7.3%</td></tr><tr><td>14</td><td>TVF</td><td>Transavia France</td><td>T 2</td><td>LCC</td><td>Europe</td><td>2.4%</td><td>28.0</td><td>13.8%</td></tr><tr><td>15</td><td>AEA</td><td>Air Europa</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.4%</td><td>20.5</td><td>12.1%</td></tr><tr><td>16</td><td>OVA</td><td>Air Europa Express</td><td>T 3</td><td>LCC</td><td>Europe</td><td>2.5%</td><td>5.6</td><td>14.5%</td></tr><tr><td>17</td><td>ROT</td><td>TAROM</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.6%</td><td>8.5</td><td>13.7%</td></tr><tr><td>18</td><td>AUA</td><td>Austrian Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>2.6%</td><td>28.7</td><td>13.8%</td></tr><tr><td>19</td><td>CTN</td><td>Croatia Airlines</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.7%</td><td>6.2</td><td>18.5%</td></tr><tr><td>20</td><td>BRX</td><td>Braathens Regional Airways</td><td>T 3</td><td>FSC</td><td>Europe</td><td>2.7%</td><td>8.7</td><td>9.7%</td></tr><tr><td>21</td><td>SXS</td><td>Sun Express</td><td>T 3</td><td>LCC</td><td>Europe</td><td>2.7%</td><td>34.2</td><td>13.8%</td></tr><tr><td>22</td><td>OAL</td><td>Olympic Air</td><td>T 4</td><td>LCC</td><td>Europe</td><td>2.8%</td><td>8.8</td><td>10.8%</td></tr><tr><td>23</td><td>THY</td><td>Turkish Airlines</td><td>T 1</td><td>FSC</td><td>Europe</td><td>2.9%</td><td>176.5</td><td>12.8%</td></tr><tr><td>24</td><td>CAI</td><td>Corendon Airlines</td><td>T 3</td><td>FSC</td><td>Europe</td><td>3.0%</td><td>2.3</td><td>10.3%</td></tr><tr><td>25</td><td>WMT</td><td>Wizz Air Malta</td><td>T 2</td><td>LCC</td><td>Europe</td><td>3.0%</td><td>69.7</td><td>13.3%</td></tr><tr><td>26</td><td>TVS</td><td>Smartwings</td><td>T 4</td><td>LCC</td><td>Europe</td><td>3.1%</td><td>6.8</td><td>13.6%</td></tr><tr><td>27</td><td>VLG</td><td>Vueling Airlines</td><td>T 2</td><td>LCC</td><td>Europe</td><td>3.1%</td><td>70.7</td><td>15.1%</td></tr><tr><td>28</td><td>VOE</td><td>Volotea</td><td>T 2</td><td>LCC</td><td>Europe</td><td>3.3%</td><td>12.5</td><td>16.0%</td></tr><tr><td>29</td><td>AFL</td><td>Aeroflot</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.4%</td><td>61.4</td><td>15.4%</td></tr><tr><td>30</td><td>LOT</td><td>LOT Polish Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.4%</td><td>26.5</td><td>23.6%</td></tr><tr><td>31</td><td>CLH</td><td>Lufthansa Cityline</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.5%</td><td>22.8</td><td>16.3%</td></tr><tr><td>32</td><td>JAF</td><td>Tui Fly Belgium</td><td>T 4</td><td>LCC</td><td>Europe</td><td>3.8%</td><td>8.0</td><td>11.9%</td></tr><tr><td>33</td><td>SAS</td><td>SAS</td><td>T 2</td><td>FSC</td><td>Europe</td><td>3.9%</td><td>77.5</td><td>17.8%</td></tr><tr><td>34</td><td>EWG</td><td>Eurowings</td><td>T 2</td><td>LCC</td><td>Europe</td><td>4.0%</td><td>35.5</td><td>17.2%</td></tr><tr><td>35</td><td>ICE</td><td>Icelandair</td><td>T 3</td><td>FSC</td><td>Europe</td><td>4.1%</td><td>19.2</td><td>16.9%</td></tr><tr><td>36</td><td>BCI</td><td>Blue Islands</td><td>T 4</td><td>FSC</td><td>Europe</td><td>4.1%</td><td>2.0</td><td>10.1%</td></tr><tr><td>37</td><td>DLH</td><td>Lufthansa</td><td>T 1</td><td>FSC</td><td>Europe</td><td>4.2%</td><td>175.5</td><td>20.1%</td></tr><tr><td>38</td><td>WUK</td><td>Wizz Air UK</td><td>T 4</td><td>LCC</td><td>Europe</td><td>4.4%</td><td>19.7</td><td>14.0%</td></tr><tr><td>39</td><td>PGT</td><td>Pegasus Airlines</td><td>T 1</td><td>LCC</td><td>Europe</td><td>4.4%</td><td>129.3</td><td>21.0%</td></tr><tr><td>40</td><td>SWR</td><td>Swiss</td><td>T 2</td><td>FSC</td><td>Europe</td><td>4.4%</td><td>55.5</td><td>23.0%</td></tr><tr><td>41</td><td>OCN</td><td>Discover</td><td>T 4</td><td>FSC</td><td>Europe</td><td>4.5%</td><td>6.6</td><td>20.8%</td></tr><tr><td>42</td><td>CFE</td><td>BA CityFlyer</td><td>T 3</td><td>FSC</td><td>Europe</td><td>4.5%</td><td>11.1</td><td>11.4%</td></tr><tr><td>43</td><td>CFG</td><td>Condor</td><td>T 2</td><td>FSC</td><td>Europe</td><td>4.7%</td><td>29.1</td><td>24.3%</td></tr><tr><td>44</td><td>EIN</td><td>Aer Lingus</td><td>T 2</td><td>FSC</td><td>Europe</td><td>4.8%</td><td>38.0</td><td>15.7%</td></tr><tr><td>45</td><td>TUI</td><td>TUI Airways</td><td>T 2</td><td>LCC</td><td>Europe</td><td>5.1%</td><td>11.8</td><td>29.4%</td></tr><tr><td>46</td><td>CBG</td><td>GX Airlines</td><td>T 3</td><td>LCC</td><td>Europe</td><td>5.4%</td><td>32.8</td><td>18.8%</td></tr><tr><td>47</td><td>HOP</td><td>HOP!</td><td>T 2</td><td>LCC</td><td>Europe</td><td>5.5%</td><td>64.4</td><td>21.3%</td></tr><tr><td>48</td><td>LGL</td><td>Luxair</td><td>T 4</td><td>LCC</td><td>Europe</td><td>5.6%</td><td>7.2</td><td>31.8%</td></tr><tr><td>49</td><td>OAW</td><td>Helvetic</td><td>T 4</td><td>LCC</td><td>Europe</td><td>5.8%</td><td>12.8</td><td>22.9%</td></tr><tr><td>50</td><td>SBI</td><td>S7 Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>5.9%</td><td>58.6</td><td>25.7%</td></tr><tr><td>51</td><td>TRA</td><td>Transavia</td><td>T 2</td><td>LCC</td><td>Europe</td><td>6.0%</td><td>29.7</td><td>24.3%</td></tr><tr><td>52</td><td>BAW</td><td>British Airways</td><td>T 1</td><td>FSC</td><td>Europe</td><td>6.0%</td><td>257.4</td><td>22.7%</td></tr><tr><td>53</td><td>NSZ</td><td>Norwegian Air Sweden</td><td>T 3</td><td>LCC</td><td>Europe</td><td>6.5%</td><td>28.5</td><td>22.8%</td></tr><tr><td>54</td><td>RYR</td><td>Ryanair</td><td>T 1</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>626.7</td><td>27.9%</td></tr><tr><td>55</td><td>BCY</td><td>Cityjet</td><td>T 3</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>28.4</td><td>21.3%</td></tr><tr><td>56</td><td>BTI</td><td>airBaltic</td><td>T 4</td><td>FSC</td><td>Europe</td><td>6.6%</td><td>42.8</td><td>29.0%</td></tr><tr><td>57</td><td>TAP</td><td>TAP Air Portugal</td><td>T 2</td><td>LCC</td><td>Europe</td><td>6.6%</td><td>44.2</td><td>28.5%</td></tr><tr><td>58</td><td>ART</td><td>Smart Lynx</td><td>T 3</td><td>LCC</td><td>Europe</td><td>6.7%</td><td>50.5</td><td>29.8%</td></tr><tr><td>59</td><td>BEL</td><td>Brussels Airlines</td><td>T 2</td><td>FSC</td><td>Europe</td><td>6.8%</td><td>51.8</td><td>20.8%</td></tr><tr><td>60</td><td>LOG</td><td>Loganair</td><td>T 3</td><td>FSC</td><td>Europe</td><td>6.8%</td><td>31.2</td><td>18.5%</td></tr><tr><td>61</td><td>ASL</td><td>Air Serbia</td><td>T 3</td><td>FSC</td><td>Europe</td><td>7.0%</td><td>28.3</td><td>32.9%</td></tr><tr><td>62</td><td>PGA</td><td>Portugalia</td><td>T 3</td><td>LCC</td><td>Europe</td><td>7.0%</td><td>20.2</td><td>27.7%</td></tr><tr><td>63</td><td>FIN</td><td>Finnair</td><td>T 2</td><td>FSC</td><td>Europe</td><td>7.4%</td><td>140.0</td><td>28.8%</td></tr><tr><td>64</td><td>SAT</td><td>SATA Air Acores</td><td>T 4</td><td>FSC</td><td>Europe</td><td>7.4%</td><td>13.1</td><td>28.9%</td></tr><tr><td>65</td><td>WZZ</td><td>Wizz Air</td><td>T 2</td><td>LCC</td><td>Europe</td><td>7.7%</td><td>156.2</td><td>23.5%</td></tr><tr><td>66</td><td>VIR</td><td>Virgin Atlantic</td><td>T 3</td><td>FSC</td><td>Europe</td><td>7.8%</td><td>40.5</td><td>21.6%</td></tr><tr><td>67</td><td>NOZ</td><td>Norwegian Air Shuttle</td><td>T 2</td><td>FSC</td><td>Europe</td><td>8.2%</td><td>100.8</td><td>21.0%</td></tr><tr><td>68</td><td>AFR</td><td>Air France</td><td>T 1</td><td>FSC</td><td>Europe</td><td>8.3%</td><td>301.3</td><td>30.6%</td></tr><tr><td>69</td><td>RYS</td><td>Buzz</td><td>T 2</td><td>LCC</td><td>Europe</td><td>8.3%</td><td>96.3</td><td>32.9%</td></tr><tr><td>70</td><td>SDM</td><td>Rossiya Airlines</td><td>T 3</td><td>LCC</td><td>Europe</td><td>9.0%</td><td>90.5</td><td>23.1%</td></tr><tr><td>71</td><td>EFW</td><td>BA Euroflyer dba</td><td>T 4</td><td>FSC</td><td>Europe</td><td>9.2%</td><td>22.1</td><td>25.8%</td></tr><tr><td>72</td><td>AER</td><td>Aer Lingus</td><td>T 3</td><td>FSC</td><td>Europe</td><td>9.5%</td><td>26.8</td><td>24.1%</td></tr><tr><td>73</td><td>EXS</td><td>Jet2.com</td><td>T 2</td><td>LCC</td><td>Europe</td><td>9.6%</td><td>75.3</td><td>26.6%</td></tr><tr><td>74</td><td>NBT</td><td>Norse Atlantic Airways</td><td>T 4</td><td>LCC</td><td>Europe</td><td>9.7%</td><td>6.0</td><td>28.8%</td></tr><tr><td>75</td><td>EZY</td><td>easyJet</td><td>T 1</td><td>LCC</td><td>Europe</td><td>9.9%</td><td>365.2</td><td>27.2%</td></tr><tr><td>76</td><td>NWS</td><td>Nordwind</td><td>T 4</td><td>FSC</td><td>Europe</td><td>10.7%</td><td>32.3</td><td>21.7%</td></tr><tr><td>77</td><td>KLM</td><td>KLM</td><td>T 1</td><td>FSC</td><td>Europe</td><td>11.0%</td><td>425.1</td><td>31.2%</td></tr><tr><td>78</td><td>AUR</td><td>Aurigny Air Services Ltd.</td><td>T 4</td><td>FSC</td><td>Europe</td><td>12.3%</td><td>20.9</td><td>24.0%</td></tr><tr><td>79</td><td>RUK</td><td>Ryanair UK</td><td>T 3</td><td>LCC</td><td>Europe</td><td>12.3%</td><td>40.1</td><td>31.3%</td></tr></tbody></table>
+            </div>
+        </section>
+    </div>
+
+
+    <div class="region" id="northamerica">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <div>
+                            <div class="aboveText">Region</div>
+                            <h3>North America</h3>
+                            <p>Volume of flights decreased by >5% (MoM) and overall disruption numbers remained stable. However, the nature of passenger disruptions changed with a 65% increase in cancellations compared to December 2024, resulting in 1.6m MORE passengers.</p>
+                        </div>
+                        <p class="airlines">37 Airlines | 19 LCC | 18 FSC</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <div class="stats">
+                <div class="statsBoxes">
+                    <div class="statsBox">
+                        <div class="number">24.4%</div>
+                        <div class="text">Avg Total Disruption</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">24.9%</div>
+                        <div class="text">% Global Disruption</div>
+                    </div>
+                    <div class="statsBox impaxStatsBox">
+                        <div class="number">9.9%</div>
+                        <div class="text">ImPax</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">8.2m</div>
+                        <div class="text">ImPax Passenger Estimation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impressions">
+                <div class="flex">
+                    <div class="col">
+                        <h4>Sentiment Analysis</h4>
+                        <p>These are the top 5 passenger classifiers and their percentage occurrence per analysing hundreds of regional airline reviews.</p>
+                        <div class="box impression">
+                            <div id="chart5"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4>Sample Reviews</h4>
+                        <div class="northamericaReviews">
+                            <div class="tab">
+                                <button class="tablinks3 active" onclick="openReview3(event, 'Positive3')">Positive reviews <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
+                                    </svg></button>
+                                <button class="tablinks3" onclick="openReview3(event, 'Negative3')">Negative reviews
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M120-320q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14h440v520L440-82q-15 15-35.5 17.5T365-72q-19-10-28-28t-4-37l45-183H120Zm480-34v-406H240L120-480v80h360l-54 220 174-174Zm200-486q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H680v-80h120v-360H680v-80h120Zm-200 80v406-406Z" />
+                                    </svg></button>
+                            </div>
+
+                            <div id="Positive3" class="tabcontent3" style="display: block;">
+                                <p class="review">“Been in [airport] since 9.30am now it is 5:30. The flight was delayed several times. When we were asked to get off the plain due to mechanical reasons there was one ground stewardess at the desk helping disembarked passengers. One by one she helped us. Patiently and calmly. Literally hours!! Not once did she lose her cool. She was helpful and she could be and still be pleasant.”</p>
+                                <p class="reviewairline">[Tier 1, LCC]</p>
+                            </div>
+
+                            <div id="Negative3" class="tabcontent3">
+                                <p class="review">“I used to love flying [airline] but this trip has me reconsidering my [airline] loyalty. [airline] changed our flights multiple times. Each time they separated my wife and I, then put us on a very old plane that 1st class was more like economy. If this is the way [airline] is going to start doing business then I will start looking at other airlines. Over 15 years of loyalty with [airline] is about to go out the window.”</p>
+                                <p class="reviewairline">[Tier 1, FSC]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mainTable">
+                <h4>North America | All Carriers <span>Filter by tiers:</span></h4>
+                <table class="data-table nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Tier </th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>Pax Est. 1000s</th>
+                            <th>Total % Disruption</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr><td>1</td><td>DVR</td><td>Divi Divi Air</td><td>T 4</td><td>FSC</td><td>North America</td><td>1.4%</td><td>0.4</td><td>14.3%</td></tr><tr><td>2</td><td>AMX</td><td>AeroMexico</td><td>T 2</td><td>FSC</td><td>North America</td><td>2.1%</td><td>35.7</td><td>10.2%</td></tr><tr><td>3</td><td>HAL</td><td>Hawaiian Airlines</td><td>T 1</td><td>FSC</td><td>North America</td><td>3.4%</td><td>45.6</td><td>11.5%</td></tr><tr><td>4</td><td>SLI</td><td>AeroMéxico Connect</td><td>T 3</td><td>FSC</td><td>North America</td><td>3.9%</td><td>29.2</td><td>12.1%</td></tr><tr><td>5</td><td>BWA</td><td>Caribbean Airlines</td><td>T 4</td><td>FSC</td><td>North America</td><td>4.1%</td><td>11.1</td><td>14.2%</td></tr><tr><td>6</td><td>SCX</td><td>Sun Country Airlines</td><td>T 3</td><td>LCC</td><td>North America</td><td>4.6%</td><td>27.8</td><td>13.3%</td></tr><tr><td>7</td><td>ASA</td><td>Alaska Airlines</td><td>T 1</td><td>FSC</td><td>North America</td><td>5.1%</td><td>158.0</td><td>17.9%</td></tr><tr><td>8</td><td>QXE</td><td>Horizon</td><td>T 4</td><td>LCC</td><td>North America</td><td>5.8%</td><td>28.6</td><td>17.4%</td></tr><tr><td>9</td><td>TSC</td><td>Air Transat</td><td>T 3</td><td>FSC</td><td>North America</td><td>6.4%</td><td>35.8</td><td>30.7%</td></tr><tr><td>10</td><td>SWA</td><td>Southwest</td><td>T 1</td><td>LCC</td><td>North America</td><td>6.8%</td><td>1177.9</td><td>18.5%</td></tr><tr><td>11</td><td>WJA</td><td>WestJet</td><td>T 2</td><td>LCC</td><td>North America</td><td>7.0%</td><td>113.5</td><td>24.6%</td></tr><tr><td>12</td><td>PCO</td><td>Pacific Coastal Airlines</td><td>T 3</td><td>LCC</td><td>North America</td><td>7.1%</td><td>14.0</td><td>18.5%</td></tr><tr><td>13</td><td>NKS</td><td>Spirit</td><td>T 1</td><td>LCC</td><td>North America</td><td>7.9%</td><td>239.2</td><td>20.3%</td></tr><tr><td>14</td><td>UAL</td><td>United</td><td>T 1</td><td>FSC</td><td>North America</td><td>8.2%</td><td>1287.0</td><td>20.4%</td></tr><tr><td>15</td><td>JBU</td><td>JetBlue</td><td>T 1</td><td>LCC</td><td>North America</td><td>8.5%</td><td>298.5</td><td>24.6%</td></tr><tr><td>16</td><td>JZA</td><td>Jazz</td><td>T 2</td><td>LCC</td><td>North America</td><td>8.9%</td><td>42.7</td><td>28.4%</td></tr><tr><td>17</td><td>VXP</td><td>Avelo</td><td>T 4</td><td>LCC</td><td>North America</td><td>9.3%</td><td>25.1</td><td>21.6%</td></tr><tr><td>18</td><td>PDT</td><td>Piedmont Airlines</td><td>T 4</td><td>FSC</td><td>North America</td><td>9.4%</td><td>42.6</td><td>19.9%</td></tr><tr><td>19</td><td>BHS</td><td>Bahamasair</td><td>T 4</td><td>FSC</td><td>North America</td><td>9.5%</td><td>9.7</td><td>30.5%</td></tr><tr><td>20</td><td>AAL</td><td>American Airlines</td><td>T 1</td><td>FSC</td><td>North America</td><td>9.5%</td><td>1322.8</td><td>21.2%</td></tr><tr><td>21</td><td>DAL</td><td>Delta</td><td>T 1</td><td>FSC</td><td>North America</td><td>9.7%</td><td>1427.4</td><td>21.1%</td></tr><tr><td>22</td><td>AAY</td><td>Allegiant Air</td><td>T 2</td><td>LCC</td><td>North America</td><td>9.8%</td><td>144.5</td><td>23.0%</td></tr><tr><td>23</td><td>POE</td><td>Porter</td><td>T 3</td><td>LCC</td><td>North America</td><td>9.9%</td><td>62.1</td><td>33.7%</td></tr><tr><td>24</td><td>ENY</td><td>Envoy Air</td><td>T 3</td><td>FSC</td><td>North America</td><td>10.1%</td><td>152.5</td><td>20.6%</td></tr><tr><td>25</td><td>ACA</td><td>Air Canada</td><td>T 2</td><td>FSC</td><td>North America</td><td>11.3%</td><td>287.7</td><td>32.4%</td></tr><tr><td>26</td><td>FFT</td><td>Frontier</td><td>T 2</td><td>LCC</td><td>North America</td><td>11.5%</td><td>121.4</td><td>26.4%</td></tr><tr><td>27</td><td>FLE</td><td>Flair</td><td>T 4</td><td>LCC</td><td>North America</td><td>11.6%</td><td>34.5</td><td>36.1%</td></tr><tr><td>28</td><td>EDV</td><td>Endeavor Air</td><td>T 2</td><td>FSC</td><td>North America</td><td>11.8%</td><td>140.0</td><td>22.3%</td></tr><tr><td>29</td><td>MXY</td><td>Breeze Airways</td><td>T 3</td><td>LCC</td><td>North America</td><td>11.9%</td><td>71.7</td><td>30.3%</td></tr><tr><td>30</td><td>ASH</td><td>Mesa</td><td>T 2</td><td>FSC</td><td>North America</td><td>12.4%</td><td>131.5</td><td>23.0%</td></tr><tr><td>31</td><td>ROU</td><td>Air Canada Rouge</td><td>T 3</td><td>LCC</td><td>North America</td><td>12.5%</td><td>35.8</td><td>32.7%</td></tr><tr><td>32</td><td>WEN</td><td>WestJet Encore</td><td>T 4</td><td>LCC</td><td>North America</td><td>14.5%</td><td>88.6</td><td>35.0%</td></tr><tr><td>33</td><td>JIA</td><td>PSA Airlines</td><td>T 2</td><td>FSC</td><td>North America</td><td>16.5%</td><td>210.8</td><td>29.2%</td></tr><tr><td>34</td><td>VTE</td><td>Contour Airlines</td><td>T 3</td><td>FSC</td><td>North America</td><td>17.8%</td><td>93.0</td><td>26.9%</td></tr><tr><td>35</td><td>SIL</td><td>Silver Airways</td><td>T 3</td><td>LCC</td><td>North America</td><td>19.3%</td><td>68.0</td><td>36.9%</td></tr><tr><td>36</td><td>AIE</td><td>Air Inuit</td><td>T 3</td><td>LCC</td><td>North America</td><td>21.6%</td><td>108.2</td><td>38.2%</td></tr><tr><td>37</td><td>IWY</td><td>InterCaribbean Airways</td><td>T 4</td><td>LCC</td><td>North America</td><td>24.7%</td><td>28.0</td><td>44.9%</td></tr></tbody></table>
+            </div>
+        </section>
+    </div>
+
+    <div class="region" id="middleeastandafrica">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <div>
+                            <div class="aboveText">Region</div>
+                            <h3>Middle East and Africa</h3>
+                            <p>While overall disruption metrics decreased since December, major delays (>3hrs) rose by 41%, impacting 120K MORE passengers (MoM).</p>
+                        </div>
+                        <p class="airlines">40 Airlines | 14 LCC | 26 FSC</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <div class="stats">
+                <div class="statsBoxes">
+                    <div class="statsBox">
+                        <div class="number">21%</div>
+                        <div class="text">Avg Total Disruption</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">7.3%</div>
+                        <div class="text">% Global Disruption</div>
+                    </div>
+                    <div class="statsBox impaxStatsBox">
+                        <div class="number">5.9%</div>
+                        <div class="text">Average ImPax</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">1.5m</div>
+                        <div class="text">ImPax Passenger Estimation</div>
+                    </div>
+                </div>
+            </div>
+            <div class="impressions">
+                <div class="flex">
+                    <div class="col">
+                        <h4>Sentiment Analysis</h4>
+                        <p>These are the top 5 passenger classifiers and their percentage occurrence per analysing hundreds of regional airline reviews.</p>
+                        <div class="box impression">
+                            <div id="chart6"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4>Sample Reviews</h4>
+                        <div class="middleeastandafricaReviews">
+                            <div class="tab">
+                                <button class="tablinks4 active" onclick="openReview4(event, 'Positive4')">Positive reviews <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
+                                    </svg></button>
+                                <button class="tablinks4" onclick="openReview4(event, 'Negative4')">Negative reviews<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M120-320q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14h440v520L440-82q-15 15-35.5 17.5T365-72q-19-10-28-28t-4-37l45-183H120Zm480-34v-406H240L120-480v80h360l-54 220 174-174Zm200-486q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H680v-80h120v-360H680v-80h120Zm-200 80v406-406Z" />
+                                    </svg></button>
+                            </div>
+
+                            <div id="Positive4" class="tabcontent4" style="display: block;">
+                                <p class="review">“I’m a regular flyer with [airline] and find their in person staff very helpful. This was no exception. The flight was delayed by bad weather at [city], the staff were so lovely bringing drinks and snacks and the captain updated frequently. I was so impressed by the service waiting us at [airline], a literal army at staff with signs were waiting with boarding passes for anyone who missed the connection. They are definitely my preferred airline.”</p>
+                                <p class="reviewairline">[Tier 1, LCC]</p>
+                            </div>
+
+                            <div id="Negative4" class="tabcontent4">
+                                <p class="review">“I thought booking directly on [airline] website will be the safest option. Big MISTAKE. They quarantined my money for the tickets and never released the reservation. I checked my membership account and it showed I never made a reservation, not even pending . I even gave them the receipt with their logo and their phone number when I called and emailed to inquire and they were incapable of honouring the reservation . I am now left without tickets and without money .Never again [airline]. Very, very disappointing.”</p>
+                                <p class="reviewairline">[Tier 1, LCC]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mainTable">
+                <h4>Middle East and Africa | All Carriers <span>Filter by tiers:</span></h4>
+                <table class="data-table nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Tier </th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>Pax Est. 1000s</th>
+                            <th>Total % Disruption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>GBB</td><td>Global Aviation</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>0.9%</td><td>2.0</td><td>3.9%</td></tr><tr><td>2</td><td>LNK</td><td>South African Airlink</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>0.9%</td><td>19.1</td><td>6.0%</td></tr><tr><td>3</td><td>FHY</td><td>Freebird</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>1.0%</td><td>1.2</td><td>2.5%</td></tr><tr><td>4</td><td>QTR</td><td>Qatar Airways</td><td>T 1</td><td>FSC</td><td>ME&amp;A</td><td>1.7%</td><td>55.9</td><td>11.4%</td></tr><tr><td>5</td><td>FAD</td><td>Flyadeal</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>2.1%</td><td>17.9</td><td>18.7%</td></tr><tr><td>6</td><td>ETH</td><td>Ethiopian Airlines</td><td>T 2</td><td>FSC</td><td>ME&amp;A</td><td>2.4%</td><td>54.9</td><td>18.6%</td></tr><tr><td>7</td><td>SAA</td><td>South African Airways</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>2.4%</td><td>2.3</td><td>13.8%</td></tr><tr><td>8</td><td>ETD</td><td>Etihad Airways</td><td>T 2</td><td>FSC</td><td>ME&amp;A</td><td>2.5%</td><td>42.6</td><td>16.1%</td></tr><tr><td>9</td><td>GFA</td><td>Gulf Air</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>2.8%</td><td>13.9</td><td>14.2%</td></tr><tr><td>10</td><td>OMA</td><td>Oman Air</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>2.9%</td><td>17.4</td><td>12.8%</td></tr><tr><td>11</td><td>UAE</td><td>Emirates</td><td>T 1</td><td>FSC</td><td>ME&amp;A</td><td>3.1%</td><td>139.3</td><td>21.1%</td></tr><tr><td>12</td><td>ABY</td><td>Air Arabia</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>3.2%</td><td>32.1</td><td>30.1%</td></tr><tr><td>13</td><td>SKK</td><td>ASKY Airlines</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>3.3%</td><td>3.9</td><td>15.8%</td></tr><tr><td>14</td><td>AHY</td><td>Azerbaijan Airlines</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>3.3%</td><td>10.9</td><td>10.5%</td></tr><tr><td>15</td><td>RAM</td><td>Royal Air Maroc</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>3.3%</td><td>42.1</td><td>17.8%</td></tr><tr><td>16</td><td>FDB</td><td>FlyDubai</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>3.9%</td><td>59.0</td><td>27.4%</td></tr><tr><td>17</td><td>KEM</td><td>CemAir</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>3.9%</td><td>2.3</td><td>17.4%</td></tr><tr><td>18</td><td>SVA</td><td>Saudia</td><td>T 1</td><td>FSC</td><td>ME&amp;A</td><td>4.1%</td><td>106.8</td><td>15.1%</td></tr><tr><td>19</td><td>IAW</td><td>Iraqi Airways</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.2%</td><td>12.8</td><td>19.9%</td></tr><tr><td>20</td><td>UZB</td><td>Uzbekistan Airways</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>4.4%</td><td>23.9</td><td>23.9%</td></tr><tr><td>21</td><td>RWD</td><td>RwandAir</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.6%</td><td>6.9</td><td>13.2%</td></tr><tr><td>22</td><td>IRM</td><td>Mahan Air</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.6%</td><td>14.7</td><td>7.6%</td></tr><tr><td>23</td><td>KAC</td><td>Kuwait Airways Corporation</td><td>T 3</td><td>LCC</td><td>ME&amp;A</td><td>4.8%</td><td>10.1</td><td>18.0%</td></tr><tr><td>24</td><td>VRE</td><td>Air Cote D'Ivoire</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>4.9%</td><td>3.5</td><td>19.9%</td></tr><tr><td>25</td><td>ELY</td><td>El Al</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>6.1%</td><td>32.9</td><td>33.6%</td></tr><tr><td>26</td><td>DTA</td><td>TAAG Angola Airlines</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>6.5%</td><td>4.7</td><td>18.0%</td></tr><tr><td>27</td><td>RJA</td><td>Royal Jordanian</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>6.6%</td><td>26.0</td><td>13.3%</td></tr><tr><td>28</td><td>MAU</td><td>Air Mauritius</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>6.6%</td><td>10.0</td><td>26.0%</td></tr><tr><td>29</td><td>KNE</td><td>Flynas</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>6.7%</td><td>79.9</td><td>30.1%</td></tr><tr><td>30</td><td>KZR</td><td>Air Astana</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>6.9%</td><td>31.0</td><td>30.8%</td></tr><tr><td>31</td><td>OMS</td><td>SalamAir</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>7.4%</td><td>24.9</td><td>24.8%</td></tr><tr><td>32</td><td>IRA</td><td>IranAIR</td><td>T 4</td><td>FSC</td><td>ME&amp;A</td><td>8.3%</td><td>14.1</td><td>19.8%</td></tr><tr><td>33</td><td>MSC</td><td>Air Cairo</td><td>T 3</td><td>LCC</td><td>ME&amp;A</td><td>8.4%</td><td>35.9</td><td>28.9%</td></tr><tr><td>34</td><td>DAH</td><td>Air Algerie</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>8.7%</td><td>87.0</td><td>28.7%</td></tr><tr><td>35</td><td>JZR</td><td>Jazeera Airways</td><td>T 3</td><td>LCC</td><td>ME&amp;A</td><td>9.2%</td><td>45.2</td><td>30.4%</td></tr><tr><td>36</td><td>LAM</td><td>Lam - Linhas Aereas de Mocambique</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>10.2%</td><td>15.1</td><td>18.1%</td></tr><tr><td>37</td><td>UBG</td><td>US-Bangla Airlines</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>11.7%</td><td>28.1</td><td>42.5%</td></tr><tr><td>38</td><td>MSR</td><td>Egyptair</td><td>T 2</td><td>LCC</td><td>ME&amp;A</td><td>13.3%</td><td>164.1</td><td>39.9%</td></tr><tr><td>39</td><td>TAR</td><td>Tunis Air</td><td>T 4</td><td>LCC</td><td>ME&amp;A</td><td>19.3%</td><td>43.9</td><td>44.1%</td></tr><tr><td>40</td><td>KQA</td><td>Kenya Airways</td><td>T 3</td><td>FSC</td><td>ME&amp;A</td><td>25.7%</td><td>167.8</td><td>36.2%</td></tr></tbody></table>
+            </div>
+        </section>
+    </div>
+
+    <div class="region" id="latinaamerica">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <div>
+                            <div class="aboveText">Region</div>
+                            <h3>Latin America</h3>
+                            <p>While flight volumes slightly increased since December, all disruption metrics decreased, including cancellations which dropped by >20% MoM, impacting 60K LESS passengers.</p>
+                        </div>
+                        <p class="airlines">21 Airlines | 13 LCC | 8 FSC</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <div class="stats">
+                <div class="statsBoxes">
+                    <div class="statsBox">
+                        <div class="number">15.7%</div>
+                        <div class="text">Avg Total Disruption</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">5.1%</div>
+                        <div class="text">% Global Disruption</div>
+                    </div>
+                    <div class="statsBox impaxStatsBox">
+                        <div class="number">5.2%</div>
+                        <div class="text">Average ImPax</div>
+                    </div>
+                    <div class="statsBox">
+                        <div class="number">1.1m</div>
+                        <div class="text">ImPax Passenger Estimation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impressions">
+                <div class="flex">
+                    <div class="col">
+                        <h4>Sentiment Analysis</h4>
+                        <p>These are the top 5 passenger classifiers and their percentage occurrence per analysing hundreds of regional airline reviews.</p>
+                        <div class="box impression">
+                            <div id="chart7"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4>Sample Reviews</h4>
+                        <div class="latinaamerica">
+                            <div class="tab">
+                                <button class="tablinks5 active" onclick="openReview5(event, 'Positive5')">Positive reviews <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M840-640q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14H280v-520l240-238q15-15 35.5-17.5T595-888q19 10 28 28t4 37l-45 183h258Zm-480 34v406h360l120-280v-80H480l54-220-174 174ZM160-120q-33 0-56.5-23.5T80-200v-360q0-33 23.5-56.5T160-640h120v80H160v360h120v80H160Zm200-80v-406 406Z" />
+                                    </svg></button>
+                                <button class="tablinks5" onclick="openReview5(event, 'Negative5')">Negative reviews<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                        <path d="M120-320q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14h440v520L440-82q-15 15-35.5 17.5T365-72q-19-10-28-28t-4-37l45-183H120Zm480-34v-406H240L120-480v80h360l-54 220 174-174Zm200-486q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H680v-80h120v-360H680v-80h120Zm-200 80v406-406Z" />
+                                    </svg></button>
+                            </div>
+
+                            <div id="Positive5" class="tabcontent5" style="display: block;">
+                                <p class="review">“After reading horrible reviews, I was so nervous to fly [airline] and even called to try switching flights but was unable. To our surprise, the customer service was as it should be with most airlines and whatever we asked for they tried to accommodate. We were able to switch seats on the plane and even had a steward helping us.”</p>
+                                <p class="reviewairline">[Tier 1, LCC]</p>
+                            </div>
+
+                            <div id="Negative5" class="tabcontent5">
+                                <p class="review">“My mom’s flight at [airport] was delayed by 2.5 hours, supposedly because the staff hadn’t arrived. I kept receiving email updates about her connection in [city], but now she’ll have to spend the entire day there and won’t arrive in California until almost 11 PM. I tried contacting customer service to find an earlier flight, but the calls kept dropping, and the virtual assistant chat was completely useless. Honestly, this airline is the worst.”</p>
+                                <p class="reviewairline">[Tier 1, LCC]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mainTable">
+                <h4>Latin America | All Carriers <span>Filter by tiers:</span></h4>
+                <table class="data-table nowrap hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Tier </th>
+                            <th>Class</th>
+                            <th>Region</th>
+                            <th>ImPax %</th>
+                            <th>Pax Est. 1000s</th>
+                            <th>Total % Disruption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>GLO</td><td>Gol Transportes Aereos</td><td>T 1</td><td>LCC</td><td>LATAM</td><td>1.0%</td><td>32.7</td><td>3.3%</td></tr><tr><td>2</td><td>PTB</td><td>Voepass Linhas A√©reas</td><td>T 4</td><td>FSC</td><td>LATAM</td><td>1.1%</td><td>1.6</td><td>4.9%</td></tr><tr><td>3</td><td>CMP</td><td>Copa Airlines</td><td>T 2</td><td>FSC</td><td>LATAM</td><td>1.3%</td><td>25.5</td><td>10.2%</td></tr><tr><td>4</td><td>JAT</td><td>JetSmart</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>1.9%</td><td>5.9</td><td>12.7%</td></tr><tr><td>5</td><td>JES</td><td>JetSMART</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>2.6%</td><td>8.9</td><td>14.5%</td></tr><tr><td>6</td><td>ARG</td><td>Aerolineas Argentinas</td><td>T 2</td><td>FSC</td><td>LATAM</td><td>2.8%</td><td>38.1</td><td>13.0%</td></tr><tr><td>7</td><td>LNE</td><td>Latam Ecuador</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>2.9%</td><td>7.4</td><td>8.2%</td></tr><tr><td>8</td><td>SKU</td><td>Sky Airlines</td><td>T 3</td><td>LCC</td><td>LATAM</td><td>3.0%</td><td>19.5</td><td>16.4%</td></tr><tr><td>9</td><td>LAN</td><td>Latam</td><td>T 1</td><td>FSC</td><td>LATAM</td><td>3.2%</td><td>47.2</td><td>16.3%</td></tr><tr><td>10</td><td>TAM</td><td>Latam Brasil</td><td>T 1</td><td>FSC</td><td>LATAM</td><td>3.2%</td><td>123.1</td><td>15.0%</td></tr><tr><td>11</td><td>LPE</td><td>Latam Perú</td><td>T 3</td><td>LCC</td><td>LATAM</td><td>3.2%</td><td>61.0</td><td>11.3%</td></tr><tr><td>12</td><td>RPB</td><td>Copa Airlines Columbia</td><td>T 4</td><td>FSC</td><td>LATAM</td><td>4.2%</td><td>10.2</td><td>13.1%</td></tr><tr><td>13</td><td>TGU</td><td>TAG Airlines</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>5.2%</td><td>6.1</td><td>11.0%</td></tr><tr><td>14</td><td>AVA</td><td>Avianca</td><td>T 1</td><td>LCC</td><td>LATAM</td><td>5.5%</td><td>180.0</td><td>18.7%</td></tr><tr><td>15</td><td>VOI</td><td>Volaris</td><td>T 1</td><td>LCC</td><td>LATAM</td><td>5.8%</td><td>35.5</td><td>18.1%</td></tr><tr><td>16</td><td>DWI</td><td>Arajet SA</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>5.9%</td><td>8.9</td><td>17.4%</td></tr><tr><td>17</td><td>VIV</td><td>VivaAerobus</td><td>T 2</td><td>LCC</td><td>LATAM</td><td>6.0%</td><td>129.4</td><td>21.9%</td></tr><tr><td>18</td><td>AZU</td><td>Azul Brazilian Airlines</td><td>T 1</td><td>FSC</td><td>LATAM</td><td>6.4%</td><td>211.1</td><td>20.2%</td></tr><tr><td>19</td><td>FBZ</td><td>Flybondi</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>13.2%</td><td>80.6</td><td>21.6%</td></tr><tr><td>20</td><td>BOV</td><td>Boa Boliviana</td><td>T 3</td><td>FSC</td><td>LATAM</td><td>14.8%</td><td>27.2</td><td>32.0%</td></tr><tr><td>21</td><td>ACN</td><td>Azul Conecta</td><td>T 4</td><td>LCC</td><td>LATAM</td><td>16.1%</td><td>39.7</td><td>29.9%</td></tr></tbody></table>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+
+        <section class="ad">
+            <a aria-label="Read more about Plan3 - Passenger Disruption Management"
+               href="https://www.plan3.aero/request-demo" target="_blank">
+                <img src="img/plan3ad.svg" alt="">
+            </a>
+        </section>
+
+    </div>
+
+    <div class="container">
+        <section class="footer">
+            &copy; 2024 AviLabs | All Rights Reserved
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/searchpanes/2.3.1/js/dataTables.searchPanes.js"></script>
+    <script src="https://cdn.datatables.net/select/2.0.3/js/dataTables.select.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="src/chartsJanuary25.js"></script>
+    <script src="src/bigChart25.js"></script>
+    <script src="src/tables.js"></script>
+    <script src="src/tabs.js"></script>
+    <script src="src/buttons.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2W8LE0HJV4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W8LE0HJV4');
+    </script>
+
+</body>
+
+</html>

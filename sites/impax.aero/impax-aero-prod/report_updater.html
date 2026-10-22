@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Report HTML Updater</title>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111a2b;
+      --panel-2: #17233a;
+      --text: #e8edf7;
+      --muted: #a8b3c7;
+      --accent: #79b8ff;
+      --ok: #58c27d;
+      --warn: #ffcc66;
+      --border: #25334d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #0b1220 0%, #10192b 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+    p.lead {
+      margin: 0 0 28px;
+      color: var(--muted);
+      max-width: 850px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+    }
+    .panel {
+      background: rgba(17, 26, 43, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+    }
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 1.15rem;
+    }
+    .upload {
+      border: 1.5px dashed #3b4e75;
+      background: var(--panel-2);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .upload label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .upload small {
+      display: block;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    input[type="file"] {
+      width: 100%;
+      color: var(--text);
+      background: transparent;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+    }
+    button, select {
+      border: 1px solid var(--border);
+      background: #1c2c49;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font: inherit;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button.primary {
+      background: linear-gradient(180deg, #3484ff 0%, #2c67f3 100%);
+      border-color: #2d67ed;
+    }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .status {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: none;
+      white-space: pre-wrap;
+    }
+    .status.show { display: block; }
+    .status.ok { background: rgba(88,194,125,0.12); border: 1px solid rgba(88,194,125,0.35); }
+    .status.warn { background: rgba(255,204,102,0.12); border: 1px solid rgba(255,204,102,0.35); }
+    .status.err { background: rgba(255,110,110,0.12); border: 1px solid rgba(255,110,110,0.35); }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.95rem;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .meta .item {
+      background: #14203a;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .meta .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+    .list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .mapping {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+    .mapping th, .mapping td {
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      padding: 9px 8px;
+      vertical-align: top;
+    }
+    .mapping th { color: var(--muted); font-weight: 600; }
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(121,184,255,0.12);
+      color: var(--accent);
+      font-size: 0.82rem;
+      border: 1px solid rgba(121,184,255,0.28);
+    }
+    .note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 12px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Report HTML Updater</h1>
+    <p class="lead">Upload the monthly <span class="mono">GLOBAL MASTER.xlsx</span> workbook and your existing <span class="mono">report.html</span>. The page rebuilds the report tables from the latest month in the workbook and downloads an updated HTML file.</p>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>Files</h2>
+        <div class="upload">
+          <label for="xlsxFile">1. Excel workbook</label>
+          <input id="xlsxFile" type="file" accept=".xlsx,.xlsm,.xls" />
+          <small>Expected sheets: GLOBAL, APAC, EUROPE, North America, ME&amp;A, LATAM, TOP 10.</small>
+        </div>
+        <div class="upload">
+          <label for="htmlFile">2. Existing report HTML</label>
+          <input id="htmlFile" type="file" accept=".html,.htm" />
+          <small>The page updates the existing table bodies in your report file.</small>
+        </div>
+        <div class="controls">
+          <label>
+            <span class="pill">Month to use</span>
+            <select id="monthSelect"></select>
+          </label>
+          <button id="previewBtn">Preview mapping</button>
+          <button id="updateBtn" class="primary" disabled>Update and download HTML</button>
+        </div>
+        <div id="status" class="status mono"></div>
+
+        <div class="meta">
+          <div class="item">
+            <span class="label">Detected workbook period range</span>
+            <div id="workbookRange">Waiting for workbook...</div>
+          </div>
+          <div class="item">
+            <span class="label">Selected month</span>
+            <div id="selectedMonth">Not selected</div>
+          </div>
+          <div class="item">
+            <span class="label">Report file</span>
+            <div id="reportFileName">Waiting for HTML...</div>
+          </div>
+          <div class="item">
+            <span class="label">Updated tables</span>
+            <div id="tableCount">0</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Table mapping</h2>
+        <table class="mapping">
+          <thead>
+            <tr>
+              <th>Report table</th>
+              <th>Workbook sheet</th>
+              <th>Rows used</th>
+            </tr>
+          </thead>
+          <tbody id="mappingBody">
+            <tr><td>Top 10 Carriers</td><td>TOP 10</td><td id="map-top10">-</td></tr>
+            <tr><td>Global | All Carriers</td><td>GLOBAL</td><td id="map-global">-</td></tr>
+            <tr><td>APAC | All Carriers</td><td>APAC</td><td id="map-apac">-</td></tr>
+            <tr><td>Europe | All Carriers</td><td>EUROPE</td><td id="map-europe">-</td></tr>
+            <tr><td>North America | All Carriers</td><td>North America</td><td id="map-na">-</td></tr>
+            <tr><td>ME&amp;A | All Carriers</td><td>ME&amp;A</td><td id="map-mea">-</td></tr>
+            <tr><td>LATAM | All Carriers</td><td>LATAM</td><td id="map-latam">-</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">This updater targets the seven existing tables already present in the uploaded report. It updates only the table bodies, leaving the rest of the layout and copy intact.</div>
+
+        <ul class="list">
+          <li>Percent columns are converted to values like <span class="mono">7.3%</span>.</li>
+          <li>Pax estimates are formatted with one decimal place.</li>
+          <li>The latest available month is preselected automatically.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      workbook: null,
+      workbookFileName: "",
+      htmlText: "",
+      htmlFileName: "",
+      periods: [],
+      sheetCache: {}
+    };
+
+    const SHEET_MAP = {
+      top10: "TOP 10",
+      global: "GLOBAL",
+      apac: "APAC",
+      europe: "EUROPE",
+      na: "North America",
+      mea: "ME&A",
+      latam: "LATAM"
+    };
+
+    const REGION_HEADINGS = {
+      global: "Global | All Carriers",
+      apac: "APAC | All Carriers",
+      europe: "Europe | All Carriers",
+      na: "North America | All Carriers",
+      mea: "Middle East and Africa | All Carriers",
+      latam: "Latin America | All Carriers"
+    };
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    const xlsxInput = document.getElementById("xlsxFile");
+    const htmlInput = document.getElementById("htmlFile");
+    const monthSelect = document.getElementById("monthSelect");
+    const previewBtn = document.getElementById("previewBtn");
+    const updateBtn = document.getElementById("updateBtn");
+    const statusBox = document.getElementById("status");
+
+    xlsxInput.addEventListener("change", handleWorkbookUpload);
+    htmlInput.addEventListener("change", handleHtmlUpload);
+    monthSelect.addEventListener("change", refreshSummary);
+    previewBtn.addEventListener("click", handlePreview);
+    updateBtn.addEventListener("click", handleUpdate);
+
+    function setStatus(message, type = "ok") {
+      statusBox.className = `status show ${type} mono`;
+      statusBox.textContent = message;
+    }
+
+    function clearStatus() {
+      statusBox.className = "status mono";
+      statusBox.textContent = "";
+    }
+
+    function normalizeMonth(value) {
+      if (value == null) return "";
+      return String(value).replace(/\s+/g, " ").trim();
+    }
+
+    function periodKey(year, month) {
+      const monthIndex = monthNames.findIndex(m => m.toLowerCase() === normalizeMonth(month).toLowerCase());
+      return `${year}-${String(monthIndex + 1).padStart(2, "0")}`;
+    }
+
+    function formatPeriodLabel(year, month) {
+      return `${normalizeMonth(month)} ${year}`;
+    }
+
+    function comparePeriods(a, b) {
+      return a.key.localeCompare(b.key);
+    }
+
+    function formatPercent(value, decimals = 1) {
+      const num = Number(value) || 0;
+      return `${(num * 100).toFixed(decimals)}%`;
+    }
+
+    function formatOneDecimal(value) {
+      const num = Number(value) || 0;
+      return num.toFixed(1);
+    }
+
+    function parseSheetRows(sheetName) {
+      if (state.sheetCache[sheetName]) return state.sheetCache[sheetName];
+      const ws = state.workbook.Sheets[sheetName];
+      if (!ws) throw new Error(`Missing required sheet: ${sheetName}`);
+      const rows = XLSX.utils.sheet_to_json(ws, { defval: null });
+      state.sheetCache[sheetName] = rows;
+      return rows;
+    }
+
+    function buildPeriods() {
+      const rows = parseSheetRows(SHEET_MAP.global);
+      const map = new Map();
+      rows.forEach(row => {
+        const year = row["Year "] ?? row["Year"];
+        const month = row["Month"] ?? row["Months"];
+        if (!year || !month) return;
+        const key = periodKey(year, month);
+        if (!map.has(key)) {
+          map.set(key, { key, year, month: normalizeMonth(month), label: formatPeriodLabel(year, month) });
+        }
+      });
+      return Array.from(map.values()).sort(comparePeriods);
+    }
+
+    function populateMonthSelect() {
+      monthSelect.innerHTML = "";
+      state.periods.forEach(period => {
+        const option = document.createElement("option");
+        option.value = period.key;
+        option.textContent = period.label;
+        monthSelect.appendChild(option);
+      });
+      if (state.periods.length) {
+        monthSelect.value = state.periods[state.periods.length - 1].key;
+      }
+    }
+
+    function getSelectedPeriod() {
+      return state.periods.find(p => p.key === monthSelect.value) || null;
+    }
+
+    function filterRowsForPeriod(sheetName, period, limit = null) {
+      const rows = parseSheetRows(sheetName);
+      const filtered = rows.filter(row => {
+        const year = row["Year "] ?? row["Year"];
+        const month = row["Month"] ?? row["Months"];
+        return Number(year) === Number(period.year) && normalizeMonth(month).toLowerCase() === period.month.toLowerCase();
+      });
+      return limit ? filtered.slice(0, limit) : filtered;
+    }
+
+    function buildTop10TableRows(rows) {
+      return rows.map(row => {
+        const tr = document.createElement("tr");
+        const cells = [
+          row["Rank [ImPax]"] ?? row["Rank (ImPax)"] ?? "",
+          row["Code"] ?? "",
+          row["Airline"] ?? row["Name"] ?? "",
+          row["Class"] ?? "",
+          row["Region"] ?? "",
+          formatPercent(row["ImPax"] ?? row["ImPax %"]),
+          formatPercent(row["% Glob Dis"] ?? row["% of Global Disruptions"]),
+          row["Rank By Size"] ?? ""
+        ];
+        cells.forEach(value => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tr.appendChild(td);
+        });
+        return tr;
+      });
+    }
+
+    function buildCarrierTableRows(rows) {
+      return rows.map(row => {
+        const tr = document.createElement("tr");
+        const cells = [
+          row["Rank (ImPax)"] ?? row["Rank [ImPax]"] ?? "",
+          row["Code"] ?? "",
+          row["Name"] ?? row["Airline"] ?? "",
+          row["Tier"] ?? "",
+          row["Class"] ?? "",
+          row["Region"] ?? "",
+          formatPercent(row["ImPax %"] ?? row["ImPax"]),
+          formatOneDecimal(row["Pax Est. 1000s"]),
+          formatPercent(row["Total % Disruption"], 1)
+        ];
+        cells.forEach(value => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tr.appendChild(td);
+        });
+        return tr;
+      });
+    }
+
+    function findTableByHeading(documentNode, headingText, occurrence = 1) {
+      const headings = Array.from(documentNode.querySelectorAll("h4"));
+      let seen = 0;
+      for (const heading of headings) {
+        const text = heading.textContent.replace(/\s+/g, " ").trim();
+        if (text.includes(headingText)) {
+          seen += 1;
+          if (seen === occurrence) {
+            const container = heading.closest(".mainTable") || heading.parentElement;
+            if (!container) continue;
+            const table = container.querySelector("table");
+            if (table) return table;
+          }
+        }
+      }
+      return null;
+    }
+
+    function findRegionTable(documentNode, regionKey) {
+      const headingText = REGION_HEADINGS[regionKey];
+      return findTableByHeading(documentNode, headingText, 1);
+    }
+
+    function updateTableBody(table, newRows) {
+      let tbody = table.querySelector("tbody");
+      if (!tbody) {
+        tbody = document.createElement("tbody");
+        table.appendChild(tbody);
+      }
+      tbody.innerHTML = "";
+      newRows.forEach(tr => tbody.appendChild(tr));
+    }
+
+    function refreshSummary() {
+      const period = getSelectedPeriod();
+      document.getElementById("selectedMonth").textContent = period ? period.label : "Not selected";
+      if (!period || !state.workbook) return;
+
+      const counts = {
+        top10: filterRowsForPeriod(SHEET_MAP.top10, period, 10).length,
+        global: filterRowsForPeriod(SHEET_MAP.global, period).length,
+        apac: filterRowsForPeriod(SHEET_MAP.apac, period).length,
+        europe: filterRowsForPeriod(SHEET_MAP.europe, period).length,
+        na: filterRowsForPeriod(SHEET_MAP.na, period).length,
+        mea: filterRowsForPeriod(SHEET_MAP.mea, period).length,
+        latam: filterRowsForPeriod(SHEET_MAP.latam, period).length
+      };
+
+      document.getElementById("map-top10").textContent = `${counts.top10} rows`;
+      document.getElementById("map-global").textContent = `${counts.global} rows`;
+      document.getElementById("map-apac").textContent = `${counts.apac} rows`;
+      document.getElementById("map-europe").textContent = `${counts.europe} rows`;
+      document.getElementById("map-na").textContent = `${counts.na} rows`;
+      document.getElementById("map-mea").textContent = `${counts.mea} rows`;
+      document.getElementById("map-latam").textContent = `${counts.latam} rows`;
+      document.getElementById("tableCount").textContent = Object.values(counts).filter(v => v > 0).length;
+    }
+
+    async function handleWorkbookUpload(event) {
+      clearStatus();
+      const file = event.target.files[0];
+      if (!file) return;
+      const data = await file.arrayBuffer();
+      state.workbook = XLSX.read(data, { type: "array" });
+      state.workbookFileName = file.name;
+      state.sheetCache = {};
+      state.periods = buildPeriods();
+      populateMonthSelect();
+      refreshSummary();
+
+      const first = state.periods[0];
+      const last = state.periods[state.periods.length - 1];
+      document.getElementById("workbookRange").textContent = first && last ? `${first.label} → ${last.label}` : "No month data found";
+      setStatus(`Workbook loaded: ${file.name}\nDetected ${state.periods.length} monthly periods.`, "ok");
+      enableUpdateIfReady();
+    }
+
+    async function handleHtmlUpload(event) {
+      clearStatus();
+      const file = event.target.files[0];
+      if (!file) return;
+      state.htmlText = await file.text();
+      state.htmlFileName = file.name;
+      document.getElementById("reportFileName").textContent = file.name;
+      setStatus(`HTML loaded: ${file.name}`, "ok");
+      enableUpdateIfReady();
+    }
+
+    function enableUpdateIfReady() {
+      updateBtn.disabled = !(state.workbook && state.htmlText && getSelectedPeriod());
+    }
+
+    function handlePreview() {
+      if (!state.workbook) {
+        setStatus("Upload the workbook first.", "warn");
+        return;
+      }
+      const period = getSelectedPeriod();
+      refreshSummary();
+      setStatus(`Preview ready for ${period.label}.\nReview the row counts in the mapping panel, then click “Update and download HTML”.`, "ok");
+    }
+
+    function handleUpdate() {
+      try {
+        if (!state.workbook || !state.htmlText) {
+          setStatus("Upload both files before updating.", "warn");
+          return;
+        }
+        const period = getSelectedPeriod();
+        if (!period) {
+          setStatus("No month is selected.", "warn");
+          return;
+        }
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(state.htmlText, "text/html");
+
+        const top10Table = findTableByHeading(doc, "Top 10 Carriers", 1);
+        const globalTable = findRegionTable(doc, "global");
+        const apacTable = findRegionTable(doc, "apac");
+        const europeTable = findRegionTable(doc, "europe");
+        const naTable = findRegionTable(doc, "na");
+        const meaTable = findRegionTable(doc, "mea");
+        const latamTable = findRegionTable(doc, "latam");
+
+        const required = [
+          ["Top 10", top10Table],
+          ["Global", globalTable],
+          ["APAC", apacTable],
+          ["Europe", europeTable],
+          ["North America", naTable],
+          ["ME&A", meaTable],
+          ["LATAM", latamTable]
+        ];
+
+        const missing = required.filter(([, table]) => !table).map(([name]) => name);
+        if (missing.length) {
+          throw new Error(`Could not find these report tables in the HTML: ${missing.join(", ")}`);
+        }
+
+        updateTableBody(top10Table, buildTop10TableRows(filterRowsForPeriod(SHEET_MAP.top10, period, 10)));
+        updateTableBody(globalTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.global, period)));
+        updateTableBody(apacTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.apac, period)));
+        updateTableBody(europeTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.europe, period)));
+        updateTableBody(naTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.na, period)));
+        updateTableBody(meaTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.mea, period)));
+        updateTableBody(latamTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.latam, period)));
+
+        const serializer = new XMLSerializer();
+        const updatedHtml = '<!doctype html>\n' + serializer.serializeToString(doc);
+        const safeBase = (state.htmlFileName || 'report').replace(/\.html?$/i, '');
+        const outName = `${safeBase}-${period.key}.html`;
+        const blob = new Blob([updatedHtml], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = outName;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+
+        setStatus(`Success. Updated 7 report tables for ${period.label}.\nDownloaded file: ${outName}`, 'ok');
+      } catch (error) {
+        console.error(error);
+        setStatus(`Update failed: ${error.message}`, 'err');
+      }
+    }
+
+    monthSelect.innerHTML = '<option value="">Upload workbook first</option>';
+  </script>
+</body>
+</html>

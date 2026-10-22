@@ -1,0 +1,817 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+:root {
+    --background: #F6F5FF;
+    --backgroundCarribien: #F2FCFC;
+    --backgroundDark: #D9D7FE;
+    --text: #0B037D;
+    --blue: #1005B2;
+    --blueBG: #DDF8F7;
+    --blueBtnText: #ABEDEC;
+    --paris: #ED1C9B;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Onest", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 40px;
+    color: var(--text);
+    padding: 0;
+    border: 0;
+    margin: 0;
+    vertical-align: baseline;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1440px;
+    padding: 0 80px;
+    margin: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap80 {
+    gap: 80px;
+}
+
+.gap40 {
+    gap: 40px;
+}
+
+.gap24 {
+    gap: 24px;
+}
+
+.ac {
+    align-items: center;
+}
+
+.as {
+    align-items: start;
+}
+
+.jce {
+    justify-content: end;
+}
+
+.sbw {
+    justify-content: space-between;
+}
+
+.jcs {
+    justify-content: start;
+}
+
+.full {
+    width: 100%;
+}
+
+.col75 {
+    flex-basis: 75%;
+}
+
+.col50 {
+    flex-basis: 50%;
+}
+
+.col25 {
+    flex-basis: 25%;
+}
+
+
+.mainMenu {
+    background-color: #fff;
+    transition: top 0.3s ease;
+    z-index: 1000;
+}
+
+.title {
+    background-color: var(--background);
+    transition: top 0.3s ease;
+    line-height: 40px;
+    font-weight: 500;
+    padding: 20px 0;
+    margin-bottom: 40px;
+    z-index: 999;
+}
+
+.topMenu {
+    display: flex;
+    justify-content: end;
+    gap: 40px;
+    align-items: center;
+}
+
+.topMenu:hover a {
+    opacity: 0.5;
+}
+
+.topMenu a {
+    display: block;
+    line-height: 32px;
+    padding: 24px 0;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.topMenu a:hover {
+    opacity: 1;
+}
+
+.subMenu {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: var(--backgroundDark);
+    border-radius: 4px;
+}
+
+.subMenu a {
+    display: block;
+    padding: 8px 24px;
+    line-height: 24px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.subMenu a:hover,
+.subMenu:hover a.subMenuActive:hover {
+    background-color: var(--blue);
+    color: #fff;
+    border-radius: 4px;
+}
+
+a.subMenuActive {
+    border-radius: 4px;
+    color: #fff;
+    background-color: var(--blue);
+}
+
+.subMenu:hover a.subMenuActive {
+    background-color: var(--backgroundDark);
+    color: var(--blue);
+}
+
+a.logo {
+    display: block;
+    line-height: 24px;
+    text-decoration: none;
+    padding: 21px 0;
+}
+
+a.logo img {
+    width: 116px;
+    height: 32px;
+}
+
+h1 {
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.title span {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 24px;
+    line-height: 48px;
+    font-weight: 500;
+    padding: 0;
+}
+
+h2.top {
+    margin-bottom: 40px;
+}
+
+.box {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    line-height: 32px;
+}
+
+.box .number {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.box .text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.box .note {
+    display: flex;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+.box .note svg {
+    fill: #fff;
+    margin-right: 8px;
+}
+
+.box .note span {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+}
+
+.boxDark {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.boxLight {
+    background-color: var(--blueBG);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.responsiveTable {
+    overflow-x: auto;
+}
+
+table tr {
+    border-bottom: 1px dashed var(--backgroundDark);
+}
+
+table tbody tr:hover {
+    background-color: var(--background);
+}
+
+table th {
+    font-size: 16px;
+    font-weight: 300;
+    text-align: left;
+    vertical-align: middle;
+    text-transform: capitalize;
+}
+
+table th,
+table td {
+    padding: 4px;
+}
+
+table td:first-child {
+    font-weight: 500;
+}
+
+table svg {
+    margin-right: 8px;
+}
+
+table tr.bold td {
+    font-weight: 700;
+}
+
+a.openNewWindow {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a.openNewWindow svg {
+    fill: var(--blue);
+    height: 16px;
+}
+
+.footer {
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.divider {
+    width: 100%;
+    height: 128px;
+}
+
+.dividerSmall {
+    width: 100%;
+    height: 40px;
+}
+
+tr.totalRow {
+    background-color: var(--text);
+    color: #fff;
+    font-weight: 500;
+}
+
+tr.totalRow td:first-child {
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+tr.totalRow td:last-child {
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.totalRow:hover {
+    background-color: var(--text);
+}
+
+table a {
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+table a:hover {
+    cursor: pointer;
+}
+
+table a svg {
+    fill: var(--text);
+    opacity: 0;
+    transition: opacity .2s ease-in;
+}
+
+table a:hover svg {
+    opacity: 1;
+}
+
+.airlinePage table th {
+    font-weight: 500;
+}
+
+.saveButton {
+    padding: 4px 24px;
+    border: none;
+    border-radius: 4px;
+    background: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    font-family: "Onest", sans-serif;
+}
+
+.saveButton:hover {
+    background: #382AFA;
+}
+
+select {
+    padding: 16px;
+    border-radius: 4px;
+    border: none;
+    border-right: 16px solid transparent;
+    font-family: "Onest", sans-serif;
+    background: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.editorTable tr td:last-child {
+    text-align: right;
+}
+
+.editorTable tr:first-child {
+    border: none;
+}
+
+.checkSVG {
+    fill: var(--text);
+    display: block;
+    margin: auto;
+}
+
+.xSVG {
+    fill: var(--paris);
+    display: block;
+    margin: auto;
+}
+
+a.button {
+    padding: 8px 16px 8px 24px;
+    border-radius: 4px;
+    border: none;
+    background: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+a.button:hover {
+    background-color: #382AFA;
+}
+
+.financeTable tr:first-child {
+    border: none;
+}
+
+tr.totalRow {
+    background-color: var(--text);
+    color: #fff;
+    font-weight: 500;
+}
+
+tr.totalRow td:first-child {
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+tr.totalRow td:last-child {
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.totalRow:hover {
+    background-color: var(--text);
+}
+
+.airlineLogo img {
+    width: 100%;
+}
+
+.airlineImg img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.airlineDetailTable {
+    margin: 0;
+}
+
+.airlineDetailTable td:last-child {
+    text-align: right;
+}
+
+.featuresTable td,
+.featuresTable th {
+    text-align: center;
+}
+
+.featuresTable td:first-child,
+.featuresTable th:first-child {
+    text-align: left;
+}
+
+input {
+    border: none;
+    font-size: 16px;
+    width: 100%;
+    color: var(--text);
+    padding: 8px;
+    background: none;
+}
+
+.insights {
+    background-color: var(--blue);
+    border-radius: 8px;
+    color: #fff;
+    padding: 24px 40px;
+    display: flex;
+    gap: 40px;
+}
+
+.insights p:not(:last-child) {
+    padding-right: 40px;
+    border-right: 1px solid #fff;
+}
+
+.insights span {
+    display: block;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.stickUse {
+    position: fixed;
+    top: 70px;
+    right: 80px;
+    display: flex;
+    justify-content: end;
+    padding: 16px 0;
+    background: #fff;
+    z-index: 999;
+    gap: 16px;
+}
+
+.h3Editor {
+    margin-top: 80px;
+}
+
+.editorCSS {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.editorCSS table td,
+.editorCSS table th {
+    padding: 0;
+}
+
+textarea {
+    font-size: 16px;
+    color: var(--text);
+    font-family: 'Onest';
+    min-width: 800px;
+    min-height: 120px;
+    border: 1px solid var(--backgroundDark);
+    padding: 24px 24px 0px 24px;
+    border-radius: 4px;
+    line-height: 24px;
+}
+
+.snackBar {
+    position: fixed;
+    top: 157px;
+    right: 80px;
+    background-color: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.title.screen {
+    margin-bottom: 0;
+}
+
+.statsBoxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.statsBox {
+    position: relative;
+    flex: 1;
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+
+.statsBox .number {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.statsBox .text {
+    color: var(--blue);
+    text-align: center;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.statsBox.mainStat {
+    background: var(--blue);
+    color: #fff;
+}
+
+.statsBox.mainStat .text {
+    color: #fff;
+}
+
+.statsBox .change {
+    padding: 0;
+    margin: 0;
+    line-height: 24px;
+}
+
+.selectorLine {
+    padding: 16px;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .container {
+        padding: 0 24px;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .mainMenu .flex {
+        display: flex;
+    }
+
+    .subMenu {
+        justify-content: start;
+    }
+
+    .col50 {
+        width: 100%;
+    }
+
+    table .flex {
+        display: flexx;
+    }
+
+    .mainMenu,
+    .title {
+        position: relative;
+        top: 0 !important;
+    }
+
+    .title {
+        margin-bottom: 40px;
+    }
+
+}
+/* Added for the Next.js app */
+
+.login {
+    max-width: 320px;
+    margin: 80px auto;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.loginForm label {
+    display: flex;
+    flex-direction: column;
+    line-height: 24px;
+}
+
+.loginForm input {
+    margin-top: 4px;
+    padding: 10px;
+    font: inherit;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+}
+
+.error {
+    color: #c00;
+    line-height: 24px;
+}
+
+.userMenu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.userMenu button {
+    font: inherit;
+    color: var(--blue);
+    background: none;
+    border: 1px solid var(--backgroundDark);
+    border-radius: 4px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.roleBadge {
+    background: var(--backgroundDark);
+    border-radius: 4px;
+    padding: 0 8px;
+    line-height: 24px;
+}
+
+.barChart {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.barChart rect {
+    fill: var(--blue);
+}
+
+.barChart rect:hover {
+    fill: #382AFA;
+}
+
+.barChart text {
+    fill: var(--text);
+    font-size: 14px;
+}
+
+.barChart .grid {
+    stroke: #e7e7e7;
+}
+
+.refLine line {
+    stroke: var(--paris);
+    stroke-dasharray: 6 4;
+}
+
+.barChart .refLine text {
+    fill: var(--paris);
+    font-weight: 500;
+    paint-order: stroke;
+    stroke: #fff;
+    stroke-width: 4px;
+}
+
+.snapshotsTable td {
+    line-height: 24px;
+    padding: 8px 4px;
+    white-space: pre-line;
+}
+
+@media only screen and (max-width: 1024px) {
+    .insights {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .insights p:not(:last-child) {
+        border-right: none;
+    }
+}
+
+.editorCSS h3 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.infoEdit th {
+    font-weight: 500;
+    width: 30%;
+}
+
+.editorCSS input {
+    border-bottom: 1px solid var(--backgroundDark);
+    box-sizing: border-box;
+    font-family: "Onest", sans-serif;
+}
+
+.editorCSS input:focus {
+    outline: none;
+    border-bottom-color: var(--blue);
+}
+
+.editorCSS textarea {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+}
+
+.editorCSS .saveButton:disabled {
+    opacity: 0.6;
+}
+
+.editorCSS .error {
+    padding-left: 20px;
+}
+
+.savedNote {
+    color: var(--blue);
+    font-weight: 500;
+}

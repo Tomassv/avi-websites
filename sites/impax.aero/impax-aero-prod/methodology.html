@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="Airline ImPax report is here to help airlines identify which disruptions impact the passenger experience most. This will enable airlines to prioritise solutions to mitigate the negative effect on the passenger experience.">
+
+    <link rel="stylesheet" href="src/style10.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    <title>Airline ImPax Report</title>
+</head>
+
+<body>
+    <div class="container">
+        <section class="topMenu">
+            <div class="flex">
+                <div class="col">
+                    <a class="home" href="index.html"><img src="img/impaxLogo.svg" alt=""></a>
+                </div>
+                <div class="col topMenuMenu">
+                    <a href="index.html">All&nbsp;Reports</a>
+                    <a href="whyImpax.html">Why&nbsp;ImPax?</a>
+                    <a class="button" href="intro.html">Subscribe</a>
+                </div>
+                <div class="menuIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                        <path d="M160-240q-17 0-28.5-11.5T120-280q0-17 11.5-28.5T160-320h640q17 0 28.5 11.5T840-280q0 17-11.5 28.5T800-240H160Zm0-200q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-200q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h640q17 0 28.5 11.5T840-680q0 17-11.5 28.5T800-640H160Z" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="bgwide bgHero method">
+        <div class="container">
+            <section>
+                <div class="flex">
+                    <div class="col">
+                        <h1>Methodology</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="container method">
+        <section class="content">
+            <div class="flex">
+                <div class="col">
+                    <p>The aim of this report is to help airlines focus their recovery operations by providing a benchmark [ImPax %] in the context of competitor airlines, passenger estimates, region, tier, class and the customer’s voice (sentiment analysis).</p>
+                </div>
+                <div class="col">
+                    <p>In creating this report, we have tried to be as transparent as possible, showing where discrepancies can occur often due to regulations within regions or definitional inconsistencies.</p>
+                </div>
+            </div>
+            <hr>
+            <h3>Airline Data | Delays & Cancellations</h3>
+            <div class="flex">
+                <div class="col">
+                    <p>All airline data is provided by FlightAware and focuses on arrival time in destination. It is compiled on a daily, weekly and monthly basis focusing on cancellations and delays, and origin/destination disruption data for airports.</p>
+                    <p>FlightAware uses the US Bureau of Transportation Statistics’ definition for a delay as any flight that exceeds scheduled time of arrival at the gate by more than 14 minutes.</p>
+                    <br>
+                    <h4>Delays are segmented by time</h4>
+                    <ul>
+                        <li><span class="bold">Minor</span> = <1 hour (>14m - <60m) </li>
+                        <li><span class="bold">Medium</span> = 1-3 hours (>60m - <180m) </li>
+                        <li><span class="bold">Major</span> = >3 hours (>180m)</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <p>FlightAware defines a true cancellation as when a cancellation is confirmed by the airline via some data sharing method. FlightAware will also synthetically cancel flights where flight plan information exists, but cannot be linked to actual aircraft movement.</p>
+                    <p>All metrics are based on a North America standard, including estimating total planned flights per airline.</p>
+                </div>
+            </div>
+            <hr>
+            <h3>Airline Tiers and Classification</h3>
+            <div class="flex">
+                <div class="col">
+                    <p>This report focuses on airlines with flight volumes that exceed 1200 per month (>1 million passengers per year). We track 600+ airlines but focus on the top 290 [approx.] by size.</p>
+                    <p>For Global percentages we use total volume of flights and disruptions for the featured dataset (approx. 290 airlines).</p>
+                    <p><span class="bold">Tier 1:</span> >17K flights/month | >25 million pax/year</p>
+                    <p><span class="bold">Tier 2:</span> 6.5K - 17K flights/month | 10-25 million pax/year</p>
+                    <p><span class="bold">Tier 3:</span> 2K - 6.5K flights/month | 3-10 million pax/year</p>
+                    <p><span class="bold">Tier 4:</span> 1.2K - 2K flights/month | 1-3 million pax/year</p>
+                </div>
+                <div class="col">
+                    <p>For airline classification, ICAO and IATA databases were consulted, alongside an airline’s own documentation. An airline’s approach to ancillaries and seating class were also considered. That said, there is no consensus in the industry around airline classification; often it is used more as a branding exercise rather than informative.</p>
+                    <p>To keep it simple we differentiate using Full Service Carrier [FSC] and Low Cost Carrier [LCC].</p>
+                </div>
+            </div>
+            <hr>
+            <video width="500" autoplay muted loop >
+                <source  src="img/impax.mp4" type="video/mp4">
+            </video>
+            <br><br>
+            <div class="flex">
+                <div class="col">
+                    <h4>ImPax Percentage</h4>
+                    <p>The ImPax Percentage identifies the segment of airline’s disrupted flights where – in addition to timely notifications – greater proactive measures are required to offset the negative impact of the disruption on the passenger experience.</p>
+                    <a href="whyImpax.html">See the full explanation here.</a>
+                    <p>The ImPax Percentage is the sum of an airline's medium delays (1–3 hours), major delays (>3hours), and cancellations calculated as a percentage of an airline’s total planned flights.</p>
+                    <br>
+                    <img src="img/impax.svg" alt="">
+                </div>
+
+                <div class="col">
+                    <h4>Estimated Disrupted Passengerss</h4>
+                    <p>We use the ImPax Percentage to make a conservative estimation of the number of disrupted passengers that requires some form of action by the airline - anything from simple updates to full rebookings and accommodation.</p>
+                    <p>This is based on an average airline flight at 80% capacity. Average flight is calculated by total passengers divided by total flights for a given time period. The idea is to show all disruptions at a passenger level and to encourage airlines that prioritising solutions begins with a much smaller cohort of disrupted passengers than one might think.</p>
+                </div>
+            </div>
+            <hr>
+            <h3>Sentiment Analysis | Reviews</h3>
+            <div class="flex">
+                <div class="col">
+                    <p>For sentiment analysis, TripAdvisor, TrustPilot, Social, and Skytrax are used for airline source reviews. Each month, the report focuses on a selection of airlines (8–10) across each tier and region, using a sample size of >200 reviews.</p>
+                    <p>The idea is simply to close-the-feedback-loop for airlines, and get a sense on any given month what are the dominant classifiers used in passenger reviews.</p>
+                </div>
+                <div class="col">
+                    <p>The impetus to write a review is driven by exceptionality of consumer experience – when the experience either exceeds expectations or does not meet expectations. When travel operates smoothly, it is unexceptionable; the customer gets what they have paid for: on-time flight, baggage arriving on time, in-flight entertainment to be working, etc.,. Due to the complexity of operations, the likelihood is for travel to not meet customer expectations. For this reason, reviews heavily skew toward the negative.</p>
+                </div>
+                <div class="col">
+                    <p>The most insightful reviews [and the ones we try to surface] are those that outline something negative but share how the airline responded and mitigated the negative impact.</p>
+                </div>
+            </div>
+            <hr>
+            <h3>Disclaimer</h3>
+            <p>We have spoken to >150 airlines in the last 24 months and all of them are pursuing new IROPS solutions to an industry-wide problem that is largely driven by factors – namely weather – out of their control. In no way does this report seek to negatively highlight an airline’s efforts, that is why the reviews are kept anonymous. Using sentiment analysis is simply another way to learn from the passenger experience.</p>
+            <br>
+            <div class="author">
+                <h3>About Author</h3>
+                <div class="flex">
+                    <div class="col-n">
+                        <img src="img/matthew.jpg" alt="Matthew Walker">
+                    </div>
+                    <div class="col">
+                        <p><span class="bold">Matthew Walker</span> heads up marketing and research at Plan3. He has worked
+                            in
+                            travel technology since 2014.</p>
+                        <p>For all inquiries about the Airline ImPax Report, email: impax@plan3.aero</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <div class="container">
+        <section class="footer">
+            &copy; 2024 AviLabs | All Rights Reserved
+        </section>
+    </div>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2W8LE0HJV4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2W8LE0HJV4');
+    </script>
+
+</body>
+
+</html>
