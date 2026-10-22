@@ -1,0 +1,2 @@
+# The report app is its own Vercel project (report.avilabs); keep its source out of the static site.
+report
