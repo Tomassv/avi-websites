@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { supabasePublishableKey, supabaseUrl } from "./lib/env.ts";
+import { cookieOptions } from "./lib/supabase/server.ts";
 
 /**
  * Refreshes the Supabase session cookie and sends anyone without a valid session to /login.
@@ -17,6 +18,7 @@ export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(supabaseUrl, supabasePublishableKey, {
+    cookieOptions,
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll(cookiesToSet, headers) {
@@ -40,7 +42,10 @@ export async function proxy(request: NextRequest) {
     return withHeaders(redirectKeepingCookies(url, response));
   }
   if (loggedIn && isPublic) {
-    return withHeaders(redirectKeepingCookies(new URL("/", request.url), response));
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    url.search = "";
+    return withHeaders(redirectKeepingCookies(url, response));
   }
   return withHeaders(response);
 }

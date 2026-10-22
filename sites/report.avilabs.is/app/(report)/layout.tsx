@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getViewer } from "@/lib/auth.ts";
 import { signOut } from "../actions.ts";
+import { basePath } from "@/lib/base-path.ts";
 
 export default async function ReportLayout({ children }: { children: React.ReactNode }) {
   const { profile } = await getViewer();
@@ -10,7 +11,7 @@ export default async function ReportLayout({ children }: { children: React.React
         <div className="container">
           <div className="flex ac sbw">
             <div className="col50">
-              <Link className="logo" href="/"><img src="/plan3logo.svg" alt="Plan3 Logo" /></Link>
+              <Link className="logo" href="/"><img src={`${basePath}/plan3logo.svg`} alt="Plan3 Logo" /></Link>
             </div>
             <div className="col50 flex ac jce gap24">
               <form action={signOut} className="userMenu">
