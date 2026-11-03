@@ -163,6 +163,21 @@
       font-size: 0.82rem;
       border: 1px solid rgba(121,184,255,0.28);
     }
+    label.check {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+    .seoPreview {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      white-space: pre-wrap;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
     .note {
       color: var(--muted);
       font-size: 0.92rem;
@@ -177,7 +192,7 @@
 <body>
   <div class="wrap">
     <h1>Report HTML Updater</h1>
-    <p class="lead">Upload the monthly <span class="mono">GLOBAL MASTER.xlsx</span> workbook and your existing <span class="mono">report.html</span>. The page rebuilds the report tables from the latest month in the workbook and downloads an updated HTML file.</p>
+    <p class="lead">Upload the monthly <span class="mono">GLOBAL MASTER.xlsx</span> workbook and your existing <span class="mono">report.html</span>. The page rebuilds the report tables from the selected month, refreshes the SEO metadata from the figures on the page, and downloads an updated HTML file. To archive last month's report, upload just the HTML and choose <em>Archive copy</em>.</p>
 
     <div class="grid">
       <section class="panel">
@@ -197,8 +212,21 @@
             <span class="pill">Month to use</span>
             <select id="monthSelect"></select>
           </label>
-          <button id="previewBtn">Preview mapping</button>
-          <button id="updateBtn" class="primary" disabled>Update and download HTML</button>
+          <label>
+            <span class="pill">Page type</span>
+            <select id="pageMode">
+              <option value="current">Current report (report.html)</option>
+              <option value="archive">Archive copy (e.g. october26.html)</option>
+            </select>
+          </label>
+        </div>
+        <div class="controls">
+          <label class="check"><input id="seoToggle" type="checkbox" checked /> Refresh SEO metadata</label>
+          <label class="check"><input id="monthLabelsToggle" type="checkbox" checked /> Update month labels on the page</label>
+        </div>
+        <div class="controls">
+          <button id="previewBtn" type="button">Preview</button>
+          <button id="updateBtn" type="button" class="primary" disabled>Update and download HTML</button>
         </div>
         <div id="status" class="status mono"></div>
 
@@ -243,18 +271,313 @@
           </tbody>
         </table>
 
-        <div class="note">This updater targets the seven existing tables already present in the uploaded report. It updates only the table bodies, leaving the rest of the layout and copy intact.</div>
+        <div class="note">With a workbook, the updater replaces the bodies of the seven tables above. Without one, it leaves the tables alone and only refreshes the SEO metadata, for example when archiving last month's report.</div>
 
         <ul class="list">
           <li>Percent columns are converted to values like <span class="mono">7.3%</span>.</li>
           <li>Pax estimates are formatted with one decimal place.</li>
           <li>The latest available month is preselected automatically.</li>
+          <li><strong>SEO:</strong> title, description, canonical URL, social sharing tags and structured data (Report, Dataset, breadcrumb) are rebuilt from the month and the key figures already on the page. Update the page copy and stat boxes first.</li>
+          <li><strong>Current report</strong> points the canonical URL at <span class="mono">report.html</span>. <strong>Archive copy</strong> points it at the month's own file (for example <span class="mono">october26.html</span>) and downloads under that name.</li>
         </ul>
+
+        <h2 style="margin-top:20px">SEO preview</h2>
+        <div id="seoPreview" class="mono seoPreview">Upload the report HTML to see the title and description.</div>
       </section>
     </div>
   </div>
 
   <script>
+    // ==== IMPAX SEO START ====
+    // Rebuilds the report page's SEO metadata (title, description, canonical, social tags,
+    // structured data) from the figures already on the page. Pure DOM code: no workbook needed.
+    const IMPAX_SEO = (() => {
+      const BASE = "https://impax.aero/";
+      const ORG_ID = "https://avilabs.is/#organization";
+      const OG_IMAGE = BASE + "img/og.jpg";
+      const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const REGIONS = [
+        { id: "apac", name: "Asia Pacific" },
+        { id: "europe", name: "Europe" },
+        { id: "northamerica", name: "North America" },
+        { id: "middleeastandafrica", name: "Middle East and Africa" },
+        { id: "latinaamerica", name: "Latin America" }
+      ];
+      const IMPAX_DEF = "The ImPax Percentage is the sum of an airline's medium delays (1–3 hours), major delays (more than 3 hours) and cancellations, calculated as a percentage of the airline's total planned flights.";
+
+      const clean = (s) => String(s || "").replace(/\s+/g, " ").trim();
+      const ownText = (el) => el ? clean(Array.from(el.childNodes).filter(n => n.nodeType === 3).map(n => n.textContent).join(" ")) : "";
+      const num = (s) => {
+        const m = String(s || "").replace(/,/g, "").match(/-?\d+(\.\d+)?/);
+        return m ? Number(m[0]) : null;
+      };
+      const millions = (s) => {
+        const n = num(s);
+        if (n == null) return null;
+        return /m\b/i.test(s) ? Math.round(n * 1e6) : n;
+      };
+
+      function parseMonth(label) {
+        const m = clean(label).match(/^([A-Za-z]+)\s+(\d{4})$/);
+        if (!m) return null;
+        const index = MONTHS.findIndex(x => x.toLowerCase() === m[1].toLowerCase());
+        if (index < 0) return null;
+        return { label: `${MONTHS[index]} ${m[2]}`, month: MONTHS[index], year: Number(m[2]), iso: `${m[2]}-${String(index + 1).padStart(2, "0")}` };
+      }
+
+      // e.g. "October 2026" -> "october26.html", matching the existing archive names.
+      function archiveFileName(monthLabel) {
+        const p = parseMonth(monthLabel);
+        return p ? `${p.month.toLowerCase()}${String(p.year).slice(-2)}.html` : null;
+      }
+
+      function readStats(container) {
+        const stats = {};
+        if (!container) return stats;
+        container.querySelectorAll(".statsBox").forEach(box => {
+          const label = clean(box.querySelector(".text")?.textContent);
+          const numberEl = box.querySelector(".number");
+          if (!label || !numberEl) return;
+          const split = numberEl.querySelector("span");
+          stats[label] = { value: ownText(numberEl), split: split ? clean(split.textContent) : "" };
+        });
+        return stats;
+      }
+
+      const pick = (stats, ...labels) => {
+        for (const l of labels) if (stats[l]) return stats[l];
+        return null;
+      };
+
+      function readFacts(doc) {
+        const facts = { warnings: [] };
+        const monthEl = doc.querySelector("#report h3");
+        facts.pageMonth = monthEl ? clean(monthEl.textContent) : "";
+
+        const global = doc.getElementById("global");
+        const paras = global ? Array.from(global.querySelectorAll("p:not(.airlines)")).map(p => clean(p.textContent)) : [];
+        facts.globalIntro = paras[0] || "";
+        facts.globalBody = paras[1] || "";
+        const airlinesLine = global?.querySelector("p.airlines");
+        facts.airlinesLine = airlinesLine ? clean(airlinesLine.textContent) : "";
+        facts.airlines = num(facts.airlinesLine);
+        const planned = facts.globalIntro.match(/across ([\d,]+) planned flights/i);
+        facts.plannedFlights = planned ? num(planned[1]) : null;
+
+        const g = readStats(doc.querySelector(".globalStats"));
+        const disrupted = pick(g, "Disrupted Flights");
+        const total = pick(g, "Total Disruption Avg", "Avg Total Disruption");
+        const impax = pick(g, "Average ImPax", "ImPax");
+        const pax = pick(g, "Estimated Disrupted Pax");
+        facts.global = {
+          disruptedFlights: disrupted ? disrupted.value : "", disruptedSplit: disrupted ? disrupted.split : "",
+          totalDisruption: total ? total.value : "", totalSplit: total ? total.split : "",
+          impax: impax ? impax.value : "", impaxSplit: impax ? impax.split : "",
+          pax: pax ? pax.value : ""
+        };
+        if (!facts.global.disruptedFlights || !facts.global.impax) facts.warnings.push("Global key metrics not found on the page.");
+
+        facts.regions = REGIONS.map(r => {
+          const header = doc.getElementById(r.id);
+          if (!header) { facts.warnings.push(`Region section #${r.id} not found.`); return null; }
+          let statsHost = header.nextElementSibling;
+          while (statsHost && !statsHost.querySelector(".statsBoxes")) statsHost = statsHost.nextElementSibling;
+          const s = readStats(statsHost);
+          const val = (...labels) => { const x = pick(s, ...labels); return x ? x.value : ""; };
+          const airlines = header.querySelector("p.airlines");
+          return {
+            ...r,
+            airlinesLine: airlines ? clean(airlines.textContent) : "",
+            totalDisruption: val("Avg Total Disruption", "Total Disruption Avg"),
+            globalShare: val("% Global Disruption"),
+            impax: val("Average ImPax", "ImPax"),
+            pax: val("ImPax Passenger Estimation")
+          };
+        }).filter(Boolean);
+        return facts;
+      }
+
+      function upsert(doc, selector, tag, attrs) {
+        let el = doc.head.querySelector(selector);
+        if (!el) { el = doc.createElement(tag); doc.head.appendChild(el); }
+        for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+        return el;
+      }
+      const meta = (doc, key, value, attr = "name") => upsert(doc, `meta[${attr}="${key}"]`, "meta", { [attr]: key, content: value });
+      const link = (doc, rel, href, extra = {}) => upsert(doc, `link[rel="${rel}"]`, "link", { rel, href, ...extra });
+
+      const prop = (name, value, unitText) => {
+        if (value == null || value === "" || Number.isNaN(value)) return null;
+        const p = { "@type": "PropertyValue", name, value };
+        if (unitText) p.unitText = unitText;
+        return p;
+      };
+      const pct = (s) => num(s);
+
+      // options: { monthLabel, mode: "current" | "archive", today: "YYYY-MM-DD", updateMonthLabels: bool }
+      function apply(doc, options) {
+        const facts = readFacts(doc);
+        const warnings = facts.warnings.slice();
+        const month = parseMonth(options.monthLabel || facts.pageMonth);
+        if (!month) throw new Error(`Could not work out the report month (got "${options.monthLabel || facts.pageMonth}").`);
+
+        // Month labels on the page itself.
+        if (options.updateMonthLabels) {
+          const date = doc.querySelector(".hero .date");
+          if (date) {
+            const textNode = Array.from(date.childNodes).reverse().find(n => n.nodeType === 3 && n.textContent.trim());
+            if (textNode) textNode.textContent = ` ${month.label}\n                        `;
+          }
+          const h3 = doc.querySelector("#report h3");
+          if (h3) h3.textContent = month.label;
+          const top10 = doc.querySelector("h4.top10");
+          if (top10) top10.textContent = `Top 10 Carriers | ${month.label}`;
+        } else if (facts.pageMonth && facts.pageMonth !== month.label) {
+          warnings.push(`The page says "${facts.pageMonth}" but the selected month is ${month.label}.`);
+        }
+
+        // Main heading: keep the visible text, add the month for search engines and screen readers.
+        const h1 = doc.querySelector(".hero h1") || doc.querySelector("h1");
+        if (h1) {
+          let span = h1.querySelector("span.seoMonth");
+          if (!span) {
+            span = doc.createElement("span");
+            span.className = "visually-hidden seoMonth";
+            h1.appendChild(span);
+          }
+          span.textContent = ` – ${month.label}`;
+        }
+
+        const fileName = options.mode === "archive" ? archiveFileName(month.label) : "report.html";
+        const url = BASE + fileName;
+        const g = facts.global;
+        const title = `Airline ImPax Report – ${month.label} | Airline Disruption Data`;
+        let description = `${month.label} airline disruption data for ${facts.airlines || "almost 300"} airlines: ${g.disruptedFlights || "disrupted flights"} disrupted flights, ${g.impax || ""} average ImPax, with benchmarks by region, tier and carrier.`.replace(/, {2,}/g, ", ").replace(/ ,/g, ",");
+        if (!g.disruptedFlights || !g.impax) description = `${month.label} airline disruption data: ImPax Percentage, delays and cancellations, with benchmarks by region, tier and carrier.`;
+        if (description.length > 160) description = description.slice(0, 157).replace(/\s+\S*$/, "") + "…";
+
+        // <head>
+        const viewport = doc.head.querySelector('meta[name="viewport"]');
+        if (viewport) viewport.setAttribute("content", "width=device-width, initial-scale=1");
+        let titleEl = doc.head.querySelector("title");
+        if (!titleEl) { titleEl = doc.createElement("title"); doc.head.appendChild(titleEl); }
+        titleEl.textContent = title;
+        meta(doc, "description", description);
+        meta(doc, "robots", "index, follow, max-image-preview:large, max-snippet:-1");
+        link(doc, "canonical", url);
+        meta(doc, "theme-color", "#0B037D");
+        meta(doc, "author", "AviLabs");
+        meta(doc, "og:type", "article", "property");
+        meta(doc, "og:site_name", "Airline ImPax Report", "property");
+        meta(doc, "og:title", title, "property");
+        meta(doc, "og:description", description, "property");
+        meta(doc, "og:url", url, "property");
+        meta(doc, "og:image", OG_IMAGE, "property");
+        meta(doc, "og:image:width", "1200", "property");
+        meta(doc, "og:image:height", "630", "property");
+        meta(doc, "og:image:alt", "Airline ImPax Report: Analysing Airline IROPS and the Impact on the Passenger Experience", "property");
+        meta(doc, "og:locale", "en_US", "property");
+        meta(doc, "article:modified_time", options.today, "property");
+        meta(doc, "twitter:card", "summary_large_image");
+        meta(doc, "twitter:title", title);
+        meta(doc, "twitter:description", description);
+        meta(doc, "twitter:image", OG_IMAGE);
+        link(doc, "sitemap", "sitemap.xml", { type: "application/xml" });
+        link(doc, "alternate", "llms.txt", { type: "text/plain", title: "LLM summary" });
+
+        // Structured data
+        const variables = [
+          prop("Airlines analysed", facts.airlines),
+          prop("Planned flights", facts.plannedFlights, "flights"),
+          prop("Disrupted flights", num(g.disruptedFlights), "flights"),
+          prop("Average total disruption", pct(g.totalDisruption), "percent"),
+          prop("Average ImPax Percentage", pct(g.impax), "percent"),
+          prop("Estimated disrupted passengers", millions(g.pax), "passengers")
+        ];
+        facts.regions.forEach(r => {
+          variables.push(
+            prop(`${r.name}: average ImPax Percentage`, pct(r.impax), "percent"),
+            prop(`${r.name}: average total disruption`, pct(r.totalDisruption), "percent"),
+            prop(`${r.name}: share of global disruption`, pct(r.globalShare), "percent"),
+            prop(`${r.name}: estimated disrupted passengers (ImPax)`, millions(r.pax), "passengers")
+          );
+        });
+
+        const reportName = `Airline ImPax Report – ${month.label}`;
+        const graph = [
+          {
+            "@type": "Organization", "@id": ORG_ID, name: "AviLabs", url: "https://avilabs.is/",
+            logo: { "@type": "ImageObject", url: "https://avilabs.is/logo/avilabslightbg.png" },
+            sameAs: ["https://www.linkedin.com/company/avilabs/"]
+          },
+          { "@type": "WebSite", "@id": BASE + "#website", url: BASE, name: "Airline ImPax Report", publisher: { "@id": ORG_ID }, inLanguage: "en" },
+          {
+            "@type": "WebPage", "@id": url + "#webpage", url, name: title, description,
+            isPartOf: { "@id": BASE + "#website" }, breadcrumb: { "@id": url + "#breadcrumb" },
+            mainEntity: { "@id": url + "#report" },
+            primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE, width: 1200, height: 630 },
+            dateModified: options.today, inLanguage: "en"
+          },
+          {
+            "@type": "BreadcrumbList", "@id": url + "#breadcrumb",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Airline ImPax Reports", item: BASE },
+              { "@type": "ListItem", position: 2, name: reportName, item: url }
+            ]
+          },
+          {
+            "@type": "Report", "@id": url + "#report", name: reportName, headline: reportName, url,
+            description: facts.globalBody || description,
+            abstract: facts.globalIntro || undefined,
+            temporalCoverage: month.iso,
+            dateModified: options.today,
+            image: OG_IMAGE,
+            inLanguage: "en",
+            author: { "@type": "Person", name: "Matthew Walker" },
+            publisher: { "@id": ORG_ID },
+            isPartOf: { "@type": "CreativeWorkSeries", "@id": BASE + "#series", name: "Airline ImPax Report", url: BASE },
+            about: [
+              { "@type": "DefinedTerm", name: "ImPax Percentage", description: IMPAX_DEF, url: BASE + "methodology.html" },
+              { "@type": "Thing", name: "Airline irregular operations (IROPS)" },
+              { "@type": "Thing", name: "Flight delays and cancellations" }
+            ],
+            hasPart: { "@id": url + "#dataset" }
+          },
+          {
+            "@type": "Dataset", "@id": url + "#dataset",
+            name: `Airline ImPax disruption data – ${month.label}`,
+            description: `${facts.globalIntro || reportName} The dataset covers ImPax Percentage, total disruption and estimated disrupted passengers by region, tier and class (FSC and LCC).`,
+            url,
+            temporalCoverage: month.iso,
+            spatialCoverage: { "@type": "Place", name: "Worldwide" },
+            creator: { "@id": ORG_ID },
+            publisher: { "@id": ORG_ID },
+            isAccessibleForFree: true,
+            isPartOf: { "@id": url + "#report" },
+            measurementTechnique: "Flight arrival data from FlightAware. A delay is an arrival more than 14 minutes after schedule (US Bureau of Transportation Statistics definition); medium delays are 1–3 hours and major delays more than 3 hours.",
+            variableMeasured: variables.filter(Boolean)
+          }
+        ];
+
+        // Escape <, > and & so the JSON can never end the script early, whatever serializer is used.
+        const json = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2)
+          .replace(/[<>&]/g, c => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0"));
+        let ld = doc.head.querySelector('script[type="application/ld+json"]#impax-seo');
+        if (!ld) {
+          ld = doc.createElement("script");
+          ld.setAttribute("type", "application/ld+json");
+          ld.id = "impax-seo";
+          doc.head.appendChild(ld);
+        }
+        ld.textContent = "\n" + json + "\n    ";
+
+        return { title, description, url, fileName, month: month.label, warnings, variables: variables.filter(Boolean).length };
+      }
+
+      return { apply, readFacts, archiveFileName, parseMonth };
+    })();
+    // ==== IMPAX SEO END ====
+
     const state = {
       workbook: null,
       workbookFileName: "",
@@ -462,7 +785,7 @@
         table.appendChild(tbody);
       }
       tbody.innerHTML = "";
-      newRows.forEach(tr => tbody.appendChild(tr));
+      for (const tr of newRows) tbody.appendChild(tr);
     }
 
     function refreshSummary() {
@@ -507,6 +830,7 @@
       document.getElementById("workbookRange").textContent = first && last ? `${first.label} → ${last.label}` : "No month data found";
       setStatus(`Workbook loaded: ${file.name}\nDetected ${state.periods.length} monthly periods.`, "ok");
       enableUpdateIfReady();
+      showSeoPreview();
     }
 
     async function handleHtmlUpload(event) {
@@ -518,88 +842,157 @@
       document.getElementById("reportFileName").textContent = file.name;
       setStatus(`HTML loaded: ${file.name}`, "ok");
       enableUpdateIfReady();
+      showSeoPreview();
     }
 
     function enableUpdateIfReady() {
-      updateBtn.disabled = !(state.workbook && state.htmlText && getSelectedPeriod());
+      updateBtn.disabled = !state.htmlText;
+      updateBtn.textContent = state.workbook ? "Update and download HTML" : "Refresh SEO and download HTML";
+    }
+
+    function todayIso() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function currentOptions() {
+      return {
+        period: state.workbook ? getSelectedPeriod() : null,
+        mode: document.getElementById("pageMode").value,
+        seo: document.getElementById("seoToggle").checked,
+        monthLabels: document.getElementById("monthLabelsToggle").checked,
+        today: todayIso()
+      };
+    }
+
+    function updateTables(doc, period) {
+      const tables = {
+        top10: findTableByHeading(doc, "Top 10 Carriers", 1),
+        global: findRegionTable(doc, "global"),
+        apac: findRegionTable(doc, "apac"),
+        europe: findRegionTable(doc, "europe"),
+        na: findRegionTable(doc, "na"),
+        mea: findRegionTable(doc, "mea"),
+        latam: findRegionTable(doc, "latam")
+      };
+      const names = { top10: "Top 10", global: "Global", apac: "APAC", europe: "Europe", na: "North America", mea: "ME&A", latam: "LATAM" };
+      const missing = Object.keys(tables).filter(key => !tables[key]).map(key => names[key]);
+      if (missing.length) {
+        throw new Error(`Could not find these report tables in the HTML: ${missing.join(", ")}`);
+      }
+      updateTableBody(tables.top10, buildTop10TableRows(filterRowsForPeriod(SHEET_MAP.top10, period, 10)));
+      ["global", "apac", "europe", "na", "mea", "latam"].forEach(key => {
+        updateTableBody(tables[key], buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP[key], period)));
+      });
+    }
+
+    // Pure: takes the report HTML text and options, returns the updated HTML. No downloads, no UI.
+    function processReport(htmlText, options) {
+      const doc = new DOMParser().parseFromString(htmlText, "text/html");
+      const messages = [];
+      const warnings = [];
+
+      if (options.period) {
+        updateTables(doc, options.period);
+        messages.push(`Updated 7 report tables for ${options.period.label}.`);
+      } else {
+        messages.push("No workbook loaded: tables left unchanged.");
+      }
+
+      let seo = null;
+      if (options.seo) {
+        seo = IMPAX_SEO.apply(doc, {
+          monthLabel: options.period ? options.period.label : "",
+          mode: options.mode,
+          today: options.today,
+          updateMonthLabels: options.monthLabels && Boolean(options.period)
+        });
+        messages.push(`SEO metadata refreshed for ${seo.month} (${seo.variables} data points).`);
+        warnings.push(...seo.warnings);
+      }
+
+      const pageMonth = IMPAX_SEO.readFacts(doc).pageMonth;
+      const outName = options.mode === "archive"
+        ? (seo ? seo.fileName : IMPAX_SEO.archiveFileName(options.period ? options.period.label : pageMonth)) || "report-archive.html"
+        : "report.html";
+
+      // HTML serialization: keeps <script> contents (structured data, analytics) intact.
+      const html = `<!doctype html>\n${doc.documentElement.outerHTML}\n`;
+      return { html, outName, seo, messages, warnings };
+    }
+
+    function showSeoPreview() {
+      const box = document.getElementById("seoPreview");
+      if (!state.htmlText) return;
+      try {
+        const options = { ...currentOptions(), period: null };
+        const pageMonth = IMPAX_SEO.readFacts(new DOMParser().parseFromString(state.htmlText, "text/html")).pageMonth;
+        const period = state.workbook ? getSelectedPeriod() : null;
+        const result = processReport(state.htmlText, { ...options, period: null, seo: true, monthLabels: false });
+        const month = period ? period.label : pageMonth;
+        const lines = [
+          `Title:        ${result.seo.title.replace(pageMonth, month)}`,
+          `Description:  ${result.seo.description.replace(pageMonth, month)}`,
+          `Canonical:    ${options.mode === "archive" ? `https://impax.aero/${IMPAX_SEO.archiveFileName(month)}` : result.seo.url}`,
+          `Download as:  ${options.mode === "archive" ? IMPAX_SEO.archiveFileName(month) : "report.html"}`
+        ];
+        if (period && pageMonth && period.label !== pageMonth) {
+          lines.push(`\nNote: the page currently says ${pageMonth}; month labels will be changed to ${period.label}.`);
+        }
+        if (result.warnings.length) lines.push(`\nWarnings:\n- ${result.warnings.join("\n- ")}`);
+        box.textContent = lines.join("\n");
+      } catch (error) {
+        box.textContent = `Could not read the report: ${error.message}`;
+      }
     }
 
     function handlePreview() {
-      if (!state.workbook) {
-        setStatus("Upload the workbook first.", "warn");
+      if (!state.htmlText && !state.workbook) {
+        setStatus("Upload the report HTML (and the workbook to update tables).", "warn");
         return;
       }
+      if (state.workbook) refreshSummary();
+      showSeoPreview();
       const period = getSelectedPeriod();
-      refreshSummary();
-      setStatus(`Preview ready for ${period.label}.\nReview the row counts in the mapping panel, then click “Update and download HTML”.`, "ok");
+      setStatus(state.workbook
+        ? `Preview ready for ${period.label}.\nReview the row counts and the SEO preview, then click “Update and download HTML”.`
+        : "No workbook loaded: only the SEO metadata will be refreshed. Check the SEO preview.", "ok");
     }
 
     function handleUpdate() {
       try {
-        if (!state.workbook || !state.htmlText) {
-          setStatus("Upload both files before updating.", "warn");
+        if (!state.htmlText) {
+          setStatus("Upload the report HTML first.", "warn");
           return;
         }
-        const period = getSelectedPeriod();
-        if (!period) {
+        const options = currentOptions();
+        if (state.workbook && !options.period) {
           setStatus("No month is selected.", "warn");
           return;
         }
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(state.htmlText, "text/html");
-
-        const top10Table = findTableByHeading(doc, "Top 10 Carriers", 1);
-        const globalTable = findRegionTable(doc, "global");
-        const apacTable = findRegionTable(doc, "apac");
-        const europeTable = findRegionTable(doc, "europe");
-        const naTable = findRegionTable(doc, "na");
-        const meaTable = findRegionTable(doc, "mea");
-        const latamTable = findRegionTable(doc, "latam");
-
-        const required = [
-          ["Top 10", top10Table],
-          ["Global", globalTable],
-          ["APAC", apacTable],
-          ["Europe", europeTable],
-          ["North America", naTable],
-          ["ME&A", meaTable],
-          ["LATAM", latamTable]
-        ];
-
-        const missing = required.filter(([, table]) => !table).map(([name]) => name);
-        if (missing.length) {
-          throw new Error(`Could not find these report tables in the HTML: ${missing.join(", ")}`);
-        }
-
-        updateTableBody(top10Table, buildTop10TableRows(filterRowsForPeriod(SHEET_MAP.top10, period, 10)));
-        updateTableBody(globalTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.global, period)));
-        updateTableBody(apacTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.apac, period)));
-        updateTableBody(europeTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.europe, period)));
-        updateTableBody(naTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.na, period)));
-        updateTableBody(meaTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.mea, period)));
-        updateTableBody(latamTable, buildCarrierTableRows(filterRowsForPeriod(SHEET_MAP.latam, period)));
-
-        const serializer = new XMLSerializer();
-        const updatedHtml = '<!doctype html>\n' + serializer.serializeToString(doc);
-        const safeBase = (state.htmlFileName || 'report').replace(/\.html?$/i, '');
-        const outName = `${safeBase}-${period.key}.html`;
-        const blob = new Blob([updatedHtml], { type: 'text/html;charset=utf-8' });
+        const result = processReport(state.htmlText, options);
+        const blob = new Blob([result.html], { type: "text/html;charset=utf-8" });
         const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = url;
-        a.download = outName;
+        a.download = result.outName;
         document.body.appendChild(a);
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
 
-        setStatus(`Success. Updated 7 report tables for ${period.label}.\nDownloaded file: ${outName}`, 'ok');
+        const warn = result.warnings.length ? `\n\nWarnings:\n- ${result.warnings.join("\n- ")}` : "";
+        setStatus(`Success. ${result.messages.join(" ")}\nDownloaded file: ${result.outName}${warn}`, result.warnings.length ? "warn" : "ok");
       } catch (error) {
         console.error(error);
-        setStatus(`Update failed: ${error.message}`, 'err');
+        setStatus(`Update failed: ${error.message}`, "err");
       }
     }
+
+    ["pageMode", "seoToggle", "monthLabelsToggle"].forEach(id => {
+      document.getElementById(id).addEventListener("change", showSeoPreview);
+    });
+    monthSelect.addEventListener("change", showSeoPreview);
 
     monthSelect.innerHTML = '<option value="">Upload workbook first</option>';
   </script>
