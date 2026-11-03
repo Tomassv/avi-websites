@@ -18,34 +18,22 @@ function copyUrl(button, hash) {
     });
 }
 
-// Global button
-document.getElementById('copyGlobal').addEventListener('click', function () {
-    copyUrl(this, '#global');
-});
-
-// Asia Pacific button
-document.getElementById('copyAPAC').addEventListener('click', function () {
-    copyUrl(this, '#apac');
-});
-
-// Europe button
-document.getElementById('copyEurope').addEventListener('click', function () {
-    copyUrl(this, '#europe');
-});
-
-// North America button
-document.getElementById('copyNA').addEventListener('click', function () {
-    copyUrl(this, '#northamerica');
-});
-
-// Middle East and Africa button
-document.getElementById('copyMEA').addEventListener('click', function () {
-    copyUrl(this, '#middleeastandafrica');
-});
-
-// Latin America button
-document.getElementById('copyLA').addEventListener('click', function () {
-    copyUrl(this, '#latinaamerica');
+// Copy-link buttons. Most report pages don't have them, so skip any that are missing
+// (a missing one used to throw and stop the sticky region menu below from running).
+[
+    ['copyGlobal', '#global'],
+    ['copyAPAC', '#apac'],
+    ['copyEurope', '#europe'],
+    ['copyNA', '#northamerica'],
+    ['copyMEA', '#middleeastandafrica'],
+    ['copyLA', '#latinaamerica']
+].forEach(function (pair) {
+    var button = document.getElementById(pair[0]);
+    if (button) {
+        button.addEventListener('click', function () {
+            copyUrl(this, pair[1]);
+        });
+    }
 });
 
 window.addEventListener('scroll', function () {
@@ -53,6 +41,7 @@ window.addEventListener('scroll', function () {
 
     triggerDivs.forEach(function (triggerDiv, index) {
         var targetDiv = document.querySelector('.regionMenu:nth-of-type(' + (index + 1) + ')');
+        if (!targetDiv) return;
         var triggerDivRect = triggerDiv.getBoundingClientRect();
 
         if (triggerDivRect.top < window.innerHeight && triggerDivRect.bottom >= 0) {
@@ -69,13 +58,15 @@ var prevScrollPos = window.pageYOffset;
 
 function handleScroll() {
     var currentScrollPos = window.pageYOffset;
+    var stickyDiv = document.getElementById('stickyDiv');
+    if (!stickyDiv) return;
 
     if (prevScrollPos > currentScrollPos) {
 
-        document.getElementById('stickyDiv').classList.add('visible');
+        stickyDiv.classList.add('visible');
     } else {
 
-        document.getElementById('stickyDiv').classList.remove('visible');
+        stickyDiv.classList.remove('visible');
     }
 
     prevScrollPos = currentScrollPos;
