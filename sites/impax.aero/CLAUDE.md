@@ -24,7 +24,8 @@ do, and reads the output the user pastes back.
 2. **Dry run.** `./deploy.sh` lists what would be uploaded and changes nothing. Show the user that list.
 3. **Upload only after the user says yes** to that list: `./deploy.sh --go`. Publishing is public and
    immediate, so a yes for an earlier deploy doesn't cover a new one.
-4. **Clear the CloudFront cache** (see below), otherwise visitors can get the old pages for up to a day.
+4. **Wait for CloudFront.** Pages refresh within about 5 minutes and CSS/JS within an hour, thanks to the
+   cache headers (see below). We can't clear the cache ourselves.
 5. **Check it's live:** `curl -sI https://impax.aero/report.html` (look at `last-modified`), and open the
    page.
 
@@ -43,14 +44,20 @@ objects without the user's explicit OK for those specific files.
 - `.DS_Store` was uploaded by a bare sync and then deleted.
 
 **CloudFront sits in front of the bucket** (confirmed 3 November 2026: `via: … cloudfront.net`, `x-cache`).
-Objects have no `Cache-Control`, so CloudFront keeps them for its default time (usually 24 hours).
-**After every deploy, clear the cache.** The user runs:
-```sh
-aws cloudfront list-distributions --profile avilabs-prod --query "DistributionList.Items[].{id:Id,aliases:Aliases.Items}" --output table
-aws cloudfront create-invalidation --profile avilabs-prod --distribution-id <ID> --paths "/*"
-```
-(Distribution ID: not recorded yet. Add it here once known.) `/*` counts as one invalidation path.
-Check with `curl -sI https://impax.aero/report.html`: `last-modified` should match the upload time.
+**We can't invalidate it:** the `Webmaster` SSO role has no CloudFront permissions (`AccessDenied` on
+`cloudfront:ListDistributions`). Instead, `deploy.sh` sets `Cache-Control` on every upload: pages
+(`.html/.xml/.txt`) `max-age=300`, CSS/JS `max-age=3600`, everything else `max-age=86400`. So a deploy
+shows up within about 5 minutes for pages and an hour for CSS/JS. This only holds if the CloudFront cache
+policy's minimum TTL is lower; an admin with CloudFront access can check.
+- `aws s3 sync` doesn't notice header-only changes. To apply new headers to files that are already in the
+  bucket, run `./deploy.sh --refresh-headers` (dry run), then `./deploy.sh --refresh-headers --go`. That
+  re-uploads every public file.
+- **Because CSS/JS is cached for an hour,** give a JS file a new name when its change must show at once.
+  The monthly `charts<Month><yy>.js` files already work this way.
+- If something must be gone from the cache immediately, ask an AWS admin to invalidate `/*` on the
+  impax.aero distribution.
+- Check with `curl -sI https://impax.aero/report.html`: `last-modified` should match the upload time,
+  and `cache-control` should be `public, max-age=300`.
 
 **Versioning is on** (responses carry `x-amz-version-id`), so an overwritten file can be restored from an
 earlier version: `aws s3api list-object-versions --bucket impax-aero-prod --prefix report.html`, then
